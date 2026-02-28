@@ -1,3 +1,4 @@
+````markdown
 # memx
 
 Local-first personal memory & knowledge store for LLM agents.
@@ -114,3 +115,110 @@ mem in short \
   --file ./note.txt \
   --source-type web \
   --origin "https://example.com/article"
+````
+
+オプション例:
+
+* `--no-llm`
+
+  * タグ付け・スコアリング・埋め込み生成を行わず、「生ノート」として保存
+  * 後からバッチで LLM を流す運用も想定
+
+### 検索例（mem out recall）
+
+```bash
+mem out recall "Qwen3.5-27B ベンチマーク" \
+  --scope self \
+  --stores short,chronicle,memopedia \
+  --top-k 8 \
+  --range 3
+```
+
+* クエリを embed → 類似ノート上位 `top-k` を anchor 取得
+* 各 anchor の前後 `range` 件を同ストアから連結して返す
+* 将来的には Working Memory（pinned ノート）を常に先頭に含める予定
+
+---
+
+## Status
+
+* [x] 要件定義・アーキテクチャ設計（v1.2）
+* [x] `short.db` 用のスキーマ (`schema/short.sql`)
+* [x] Go 側の骨組み (`db.Conn`, `MustOpenAll`, migrate, LLM/Gatekeeper interface)
+* [ ] CLI 実装（`mem in/out/gc`）
+* [ ] Semantic Recall 実装（Recall API）
+* [ ] GC（Observer / Reflector）の実装
+* [ ] chronicle / memopedia / archive 向けスキーマ・実装
+
+まだ「動くソフトウェア」というより、
+**仕様とスケルトンが整った状態** です。
+
+---
+
+## Tech Stack
+
+* Language: Go
+* Storage: SQLite3
+
+  * WAL モード／foreign_keys ON
+  * FTS5（content table モード）
+* Interface: CLI（単一バイナリ）
+* 外部ベクターDBには依存せず、SQLite＋BLOB＋将来の拡張（`sqlite-vec` 等）で済ませる方針。
+
+---
+
+## Inspirations / Acknowledgements
+
+このプロジェクトは、いくつかの既存アイデア・OSSに強く影響を受けています。
+コードはゼロから書いていますが、コンセプト面で多くのヒントをもらっているので、ここで明示的に感謝します。
+
+* SAIVerse
+
+  * エージェント指向の設計や、長期メモリの扱い方に関する議論・実装から、「人間の記憶構造を意識したエージェント設計」という発想をかなり借りています。
+* Mastra
+
+  * Semantic Recall / Working Memory / Observational Memory といった概念と、その実装方針から強い影響を受けています。
+    `memx` の設計は、これらのアイデアをローカル・CLI・Go/SQLite 文脈に落とし込んだ「別物」ですが、発想の出発点として大きく参考にしています。
+
+また、
+
+* 各種 LLM 長期記憶論文・ブログポスト
+* 人間の記憶モデル（短期記憶／ワーキングメモリ／長期記憶など）に関する一般的な知見
+
+からも、間接的にインスピレーションを受けています。
+
+※もし将来的に、具体的な論文名・記事名・リポジトリ名を明示したくなったら、ここに追記していく予定です。
+
+---
+
+## License
+
+TBD（候補: Apache-2.0）
+
+このリポジトリに `LICENSE` ファイルが追加され次第、その内容に従います。
+
+---
+
+## Roadmap (rough)
+
+1. `mem in short --no-llm` / `mem out search` の実装
+2. EmbeddingClient を繋いで `mem out recall` を実装
+3. GC の Phase 0（トリガ判定）だけ実装
+4. Observer → Reflector の順に GC を拡張
+5. chronicle / memopedia / archive のスキーマ・マイグレーション実装
+6. `mem lineage` / `mem working` など、日常利用で欲しくなったものから順次追加
+
+---
+
+## Contributing
+
+現時点では個人用プロジェクトとしてスタートしていますが、
+アイデア・Issue・PR などのフィードバックは歓迎です。
+
+* 「こういう検索フローが欲しい」
+* 「このタグ設計だとこういうケースで詰まる」
+* 「この論文・OSSのアイデアも組み込めるのでは？」
+
+といった提案があれば、Issue で教えてもらえると助かります。
+
+```
