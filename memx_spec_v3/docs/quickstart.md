@@ -1,0 +1,41 @@
+# memx v1.3 Quickstart（最小）
+
+> この ZIP は「要件＋参照実装の骨格」です。
+> `short.db` の ingest/search/get が最小で動くようにしてあります。
+
+## 1) API サーバー起動
+
+```bash
+cd go
+
+go run ./cmd/mem api serve --addr 127.0.0.1:7766 --short ./short.db
+```
+
+## 2) ノート投入
+
+```bash
+cd go
+
+echo "hello memx" | go run ./cmd/mem in short --title "test" --stdin --api-url http://127.0.0.1:7766
+```
+
+## 3) 検索
+
+```bash
+cd go
+
+go run ./cmd/mem out search "hello" --api-url http://127.0.0.1:7766
+```
+
+## 4) 単体表示
+
+```bash
+cd go
+
+go run ./cmd/mem out show <NOTE_ID> --api-url http://127.0.0.1:7766
+```
+
+## 補足
+
+- `--api-url` を省略すると CLI は in-proc で Service を呼びます（HTTP を経由しない）。
+- SQLite ドライバは `modernc.org/sqlite` を想定しています。環境に合わせて差し替えてください。
