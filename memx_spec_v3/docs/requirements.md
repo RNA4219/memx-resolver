@@ -6,68 +6,27 @@ next_review_due: 2026-06-03
 priority: high
 ---
 
-# memx 要件定義（v1.3）
+# memx 要求事項（MUST / SHOULD / FUTURE）
 
-## 0-0. 変更管理
+設計詳細は `design.md`、I/F 詳細は `interfaces.md`、契約詳細は `CONTRACTS.md` を正本とする。
 
-### 0-0-1. 役割と承認最小人数
+## 1. MUST（v1）
+- CLI: `mem in short` / `mem out search` / `mem out show` を提供する。
+- API: `POST /v1/notes:ingest` / `POST /v1/notes:search` / `GET /v1/notes/{id}` を提供する。
+- CLI `--json` は API レスポンスと同型を維持する。
+- 入力不備は 400 系、内部障害は 500 系で返す。
+- fail-closed 方針で機密入力を拒否できること。
+- ingest/search/show の最小性能目標を満たすこと。
 
-- 変更オーナー（owner）は `memx-core` とし、要件・運用ルール更新の最終責任を持つ。
-- レビュアー（reviewer）は owner 以外を 1 名以上必須とする。
-- 承認最小人数は **2 名（owner を含む）** とし、1 名承認ではマージ不可とする。
+## 2. SHOULD（v1.x）
+- `mem.features.gc_short=true` 時のみ `mem gc short` / `POST /v1/gc:run` を有効化する。
+- SHOULD 機能は feature flag 既定 OFF で提供し、既定挙動を壊さない。
 
-### 0-0-2. 変更履歴の正本と同期手順（唯一手順）
+## 3. FUTURE（v2+）
+- Recall/Working/Tag/Meta/Lineage/Distill 系 CLI/API の正式導入。
+- 破壊変更を伴う再設計（段階移行前提）。
 
-- 変更履歴の正本（canonical source）はリポジトリルートの `CHANGELOG.md` とする。
-- `memx_spec_v3/CHANGES.md` は仕様補助台帳（v3 文脈・互換性破壊テンプレート管理）として扱う。
-- 同期は次の 4 ステップのみを許可する。
-  1. Task Seed が `Status: done` になった時点で `Release Note Draft` を確定する。
-  2. `CHANGELOG.md` に利用者影響を 1〜3 行で追記する（正本更新）。
-  3. 同内容を `memx_spec_v3/CHANGES.md` の該当節へ転記する（補助台帳更新）。
-  4. Task Seed に `Moved-to-CHANGES: YYYY-MM-DD` を追記して完了とする。
-
-### 0-0-3. 変更要求から Task Seed 自動生成までの最短手順（5 ステップ）
-
-1. 変更要求を受領し、`Source`（`path#Section`）を確定する。
-2. 変更タイプを `互換維持` / `破壊変更` / `実験機能` のいずれかに分類する。
-3. `docs/TASKS.md` の必須項目テンプレートに `Objective` / `Requirements` / `Commands` / `Dependencies` を埋める。
-4. 変更タイプ別チェックリスト（本書 0-0-4）を Task Seed へ自動挿入する。
-5. ファイル名規則 `TASK.<slug>-<MM-DD-YYYY>.md` で保存し、`reviewing` へ投入する。
-
-### 0-0-4. 変更タイプ別 必須チェックリスト（`docs/TASKS.md` 整合）
-
-- **互換維持変更**（既存 I/F を壊さない拡張）
-  - [ ] `Requirements` に「後方互換維持（CLI/API/--json 同型）」を明記
-  - [ ] `Commands` に最低 1 つの `lint` / `type` / `test` を記載
-  - [ ] `Release Note Draft` を記載
-- **破壊変更**（必須フィールド削除・型/意味変更・削除系）
-  - [ ] `docs/TASKS.md#2-1` の破壊変更チェックリストを全件追記
-  - [ ] 対象 I/F、移行先、移行期限、移行手順（2 ステップ以上）を記載
-  - [ ] `CHANGELOG.md` と `memx_spec_v3/CHANGES.md` の双方へ同日反映
-- **実験機能**（feature flag 既定 OFF）
-  - [ ] feature flag 名、既定値 `OFF`、有効化条件を `Requirements` に明記
-  - [ ] 既定動作へ影響しないことを `Requirements` に明記
-  - [ ] 廃止/昇格条件（次マイナー or 次メジャー）を記載
-
-## 0. 目的とスコープ
-
-### 目的
-
-- 個人用・ローカル運用の「知識＋記憶」管理システムを提供する。
-- LLM／エージェントが利用しやすい形で、
-  - 短期メモ（ログ）
-  - 時系列の出来事（Chronicle）
-  - 抽象化された知識ベース（Memopedia）
-  - 歴史的ログ（Archive）
-  を分離・格納し、検索・蒸留・昇格できるようにする。
-- CLI + API + SQLite ベースで、言語や実行環境に強く依存しない「知識 OS の下層」を構成する。
-
-### 非ゴール
-
-- Web UI の提供。
-- マルチユーザー運用やリモート公開を前提にしたサーバー運用（認証・権限・監査などを含む）。
-- 「常駐が必須」なプロセス設計（API サーバーは任意で起動できればよい）。
-- 完全自動運転のエージェントフレームワーク。あくまで「記憶と知識の基盤」。
+## 4. ID 定義
 
 ## 0-1. Release Scope Matrix
 
