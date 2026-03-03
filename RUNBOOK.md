@@ -37,3 +37,8 @@ next_review_due: 2026-06-03
 - `MiniLLMClient`: タグ・スコア・機密度推定。
 - `ReflectLLMClient`: Observer/Reflector 要約更新。
 - タイムアウト 15 秒、最大 2 回リトライ（指数バックオフ）、再試行可/不可を区別して実装する。
+
+## Observability / 確認手順
+1. 必須指標の定義は `governance/metrics.yaml` を唯一の参照元として確認する。
+2. 日次確認では `response_time` / `compatibility` / `error_classification` / `recall_threshold` の breach 有無を確認する。
+3. breach 発生時は `governance/metrics.yaml` の `action_on_breach` に従ってインシデントを起票する。
