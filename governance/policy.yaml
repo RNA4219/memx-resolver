@@ -1,0 +1,27 @@
+self_modification:
+  forbidden_paths:
+    - "/core/schema/**"
+    - "/auth/**"
+  require_human_approval:
+    - "/governance/**"
+
+fail_closed:
+  enabled: true
+  conditions:
+    - gate: gatekeeper
+      event: deny
+      action: block_merge
+      rollback_required: true
+    - gate: governance-gate
+      event: failed
+      action: block_deploy
+      rollback_required: true
+
+qa_boundary:
+  required_for_merge:
+    - unit_tests
+    - integration_tests
+    - security_scan
+  production_deploy_requires:
+    - qa_signoff
+    - governance_gate_passed

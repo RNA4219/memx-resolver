@@ -1,0 +1,42 @@
+name: Bug Report
+description: 不具合報告テンプレート
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: input
+    id: intent_id
+    attributes:
+      label: 関連 Intent ID
+      description: 例: IN-20250303-001
+      placeholder: IN-YYYYMMDD-XXX
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: 再現可能な最小手順を箇条書きで記載してください。
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待値
+      description: 本来の挙動を記載してください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 実測値
+      description: 実際の挙動・ログ・エラーを記載してください。
+    validations:
+      required: true
