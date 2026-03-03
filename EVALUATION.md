@@ -19,7 +19,7 @@ next_review_due: 2026-06-03
   - `POST /v1/notes:search`: P50 <= 80ms, P95 <= 180ms
   - `GET /v1/notes/{id}`: P50 <= 40ms, P95 <= 90ms
 
-## 要件IDトレーサビリティ（判定基準との相互参照）
+## 要件IDトレーサビリティ（pass/fail 条件への REQ-* 紐付け）
 | Requirement ID | 判定基準 | 判定ルール参照 | requirements.md 相互参照 |
 | --- | --- | --- | --- |
 | <a id="req-cli-001-passfail"></a>`REQ-CLI-001` | pass/fail | 本書「v1 受け入れ基準（Release Scope Matrix 準拠）」・`RUNBOOK.md` の `trace-req-cli-001` | [requirements: REQ-CLI-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
