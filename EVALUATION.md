@@ -18,15 +18,15 @@ next_review_due: 2026-06-03
   - `GET /v1/notes/{id}`: P50 <= 40ms, P95 <= 90ms
 
 ## 要件IDトレーサビリティ（判定基準との相互参照）
-| Requirement ID | 判定基準 | 判定ルール参照 |
-| --- | --- | --- |
-| `REQ-CLI-001` | pass/fail | 本書「v1 受け入れ基準（Release Scope Matrix 準拠）」・`RUNBOOK.md` manual 手順 |
-| `REQ-API-001` | pass/fail | 本書「v1 受け入れ基準（Release Scope Matrix 準拠）」・`RUNBOOK.md` manual 手順 |
-| `REQ-GC-001` | pass/fail | `RUNBOOK.md` の `mem gc short` 手順および manual コマンド |
-| `REQ-SEC-001` | pass/fail | `requirements.md` 2-7-1 の `sensitivity` 契約 |
-| `REQ-RET-001` | pass/fail/waiver | 本書「性能合否基準（fail / waiver）」の運用を準用し、保持期限逸脱は waiver 記録必須 |
-| `REQ-ERR-001` | pass/fail | 本書「エラーコード整合」および `requirements.md` 6-4 |
-| `REQ-NFR-001` | pass/fail/waiver | 本書「性能合否基準（fail / waiver）」および「REQ-NFR-001 合否判定ルール」 |
+| Requirement ID | 判定基準 | 判定ルール参照 | requirements.md 相互参照 |
+| --- | --- | --- | --- |
+| <a id="req-cli-001-passfail"></a>`REQ-CLI-001` | pass/fail | 本書「v1 受け入れ基準（Release Scope Matrix 準拠）」・`RUNBOOK.md` manual 手順 | [requirements: REQ-CLI-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-api-001-passfail"></a>`REQ-API-001` | pass/fail | 本書「v1 受け入れ基準（Release Scope Matrix 準拠）」・`RUNBOOK.md` manual 手順 | [requirements: REQ-API-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-gc-001-passfail"></a>`REQ-GC-001` | pass/fail | `RUNBOOK.md` の `mem gc short` 手順および manual コマンド | [requirements: REQ-GC-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-sec-001-passfail"></a>`REQ-SEC-001` | pass/fail | `requirements.md` 2-7-1 の `sensitivity` 契約 | [requirements: REQ-SEC-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-ret-001-passfail-waiver"></a>`REQ-RET-001` | pass/fail/waiver | 本書「性能合否基準（fail / waiver）」の運用を準用し、保持期限逸脱は waiver 記録必須 | [requirements: REQ-RET-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-err-001-passfail"></a>`REQ-ERR-001` | pass/fail | 本書「エラーコード整合」および `requirements.md` 6-4 | [requirements: REQ-ERR-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-nfr-001-passfail-waiver"></a>`REQ-NFR-001` | pass/fail/waiver | 本書「性能合否基準（fail / waiver）」および「REQ-NFR-001 合否判定ルール」 | [requirements: REQ-NFR-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
 
 ## 性能合否基準（fail / waiver）
 - 判定対象データセットは `short` 10,000 件 / 1件 約500文字（UTF-8）、ローカル単体（4 vCPU / 16GB RAM / NVMe SSD / Linux x86_64）、ウォームアップ20回、本計測200回で固定する。
