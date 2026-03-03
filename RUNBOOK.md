@@ -130,7 +130,7 @@ node --test
 
 <a id="trace-manual"></a>
 
-### manual（CLI/API/GC/Error）
+### manual（CLI/API/GC/Security/Error）
 ```bash
 # CLI/API ingest
 printf '%s' 'traceability-sample' | go run ./memx_spec_v3/go/cmd/mem in short --stdin --title traceability --api-url http://127.0.0.1:7766
@@ -143,6 +143,41 @@ go run ./memx_spec_v3/go/cmd/mem out show 1 --api-url http://127.0.0.1:7766
 
 # GC dry-run
 go run ./memx_spec_v3/go/cmd/mem gc short --dry-run --api-url http://127.0.0.1:7766
+```
+
+<a id="trace-req-cli-001"></a>
+
+### REQ-CLI-001 検証コマンド
+```bash
+go run ./memx_spec_v3/go/cmd/mem out search 'traceability' --api-url http://127.0.0.1:7766
+```
+
+<a id="trace-req-api-001"></a>
+
+### REQ-API-001 検証コマンド
+```bash
+go run ./memx_spec_v3/go/cmd/mem in short --stdin --title traceability --api-url http://127.0.0.1:7766
+```
+
+<a id="trace-req-gc-001"></a>
+
+### REQ-GC-001 検証コマンド
+```bash
+go run ./memx_spec_v3/go/cmd/mem gc short --dry-run --api-url http://127.0.0.1:7766
+```
+
+<a id="trace-req-sec-001"></a>
+
+### REQ-SEC-001 検証コマンド
+```bash
+printf '%s' 'secret-token-for-trace' | go run ./memx_spec_v3/go/cmd/mem in short --stdin --title trace-sec --api-url http://127.0.0.1:7766
+```
+
+<a id="trace-req-err-001"></a>
+
+### REQ-ERR-001 検証コマンド
+```bash
+go run ./memx_spec_v3/go/cmd/mem out show 999999 --api-url http://127.0.0.1:7766
 ```
 
 <a id="trace-perf"></a>
