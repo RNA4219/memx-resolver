@@ -11,6 +11,7 @@ next_review_due: 2026-06-03
 ## v1 受け入れ基準
 - 入出力互換: CLI→API の入出力マッピングが保持される。
 - エラーコード整合: 入力不備は 400 系、内部障害は 500 系を返す。
+- 代表エラーの分類一致: 入力不備 / DB ロック / LLM タイムアウト / Gatekeeper deny が requirements のエラーモデル分類・再試行可否表と一致する。
 - 最小性能目標（同一計測条件）:
   - `POST /v1/notes:ingest`: P50 <= 120ms, P95 <= 250ms
   - `POST /v1/notes:search`: P50 <= 80ms, P95 <= 180ms
