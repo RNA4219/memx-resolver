@@ -132,29 +132,25 @@ priority: high
 
 ## 0-2. 要件トレーサビリティ
 
-### 主要要件ID（固定）
+### 主要要件ID（CLI/API/GC/Security/Error 固定）
 
-| 要件領域 | Requirement ID | 受入条件（要約） | 判定基準（pass/fail） | 検証コマンド（RUNBOOK） | EVALUATION 相互参照 |
-| --- | --- | --- | --- | --- | --- |
-| CLI | `REQ-CLI-001` | `mem in short` / `mem out search` / `mem out show` の `--json` 出力が API 契約と一致する。 | pass: 3コマンドが契約一致 / fail: いずれか不一致。 | `go run ./memx_spec_v3/go/cmd/mem in short ...` / `go run ./memx_spec_v3/go/cmd/mem out search ...` / `go run ./memx_spec_v3/go/cmd/mem out show ...`（[trace-manual](../../RUNBOOK.md#trace-manual)） | [EVALUATION: REQ-CLI-001](../../EVALUATION.md#req-cli-001-passfail) |
-| API | `REQ-API-001` | `POST /v1/notes:ingest` / `POST /v1/notes:search` / `GET /v1/notes/{id}` が v1 契約を維持する。 | pass: 3エンドポイントがv1契約一致 / fail: いずれか逸脱。 | `go run ./memx_spec_v3/go/cmd/mem in short ...` / `go run ./memx_spec_v3/go/cmd/mem out search ...` / `go run ./memx_spec_v3/go/cmd/mem out show ...`（[trace-manual](../../RUNBOOK.md#trace-manual)） | [EVALUATION: REQ-API-001](../../EVALUATION.md#req-api-001-passfail) |
-| GC | `REQ-GC-001` | `mem gc short --dry-run` が DB 非更新で予定操作を返し、閾値判定を満たす場合のみ実行対象を出力する。 | pass: dry-runでDB非更新かつ判定整合 / fail: 更新発生または判定不整合。 | `go run ./memx_spec_v3/go/cmd/mem gc short --dry-run --api-url http://127.0.0.1:7766`（[trace-manual](../../RUNBOOK.md#trace-manual)） | [EVALUATION: REQ-GC-001](../../EVALUATION.md#req-gc-001-passfail) |
-| Security | `REQ-SEC-001` | `sensitivity` 判定で `secret` を fail-closed（保存禁止＋マスク）とし、`public/internal` は定義どおりに扱う。 | pass: `secret` 保存禁止+マスク成立 / fail: fail-closed違反。 | `go run ./memx_spec_v3/go/cmd/mem in short ...` と `go run ./memx_spec_v3/go/cmd/mem out search ...`（[trace-manual](../../RUNBOOK.md#trace-manual)） | [EVALUATION: REQ-SEC-001](../../EVALUATION.md#req-sec-001-passfail) |
-| Retention | `REQ-RET-001` | `archive` の退避・物理削除が保持期限と hold 条件を満たす場合にのみ実行され、監査ログ必須項目を記録する。 | pass: 保持期限/hold/監査ログ要件を満たす / fail: いずれか欠落（必要時 waiver）。 | `go run ./memx_spec_v3/go/cmd/mem gc short --dry-run --api-url http://127.0.0.1:7766`（[trace-manual](../../RUNBOOK.md#trace-manual)） | [EVALUATION: REQ-RET-001](../../EVALUATION.md#req-ret-001-passfail-waiver) |
-| Error | `REQ-ERR-001` | `INVALID_ARGUMENT/NOT_FOUND/INTERNAL` を v1 MUST とし、再試行可否ルールと整合する。 | pass: 3コード+再試行可否整合 / fail: コード欠落または可否不整合。 | `go run ./memx_spec_v3/go/cmd/mem in short ...` / `go run ./memx_spec_v3/go/cmd/mem out show ...`（[trace-manual](../../RUNBOOK.md#trace-manual)） | [EVALUATION: REQ-ERR-001](../../EVALUATION.md#req-err-001-passfail) |
-| Performance | `REQ-NFR-001` | `ingest/search/show` の p50/p95 が閾値以内。 | pass: 6指標すべて閾値以内 / fail: 1指標超過または条件不一致（必要時 waiver）。 | `python3 -m pytest -q`（[trace-test-pytest](../../RUNBOOK.md#trace-test-pytest)）, `node --test`（[trace-test-node](../../RUNBOOK.md#trace-test-node)）, `go run ./memx_spec_v3/go/cmd/mem ...`（[trace-perf](../../RUNBOOK.md#trace-perf)） | [EVALUATION: REQ-NFR-001](../../EVALUATION.md#req-nfr-001-passfail-waiver) |
+| 要件領域 | Requirement ID | 受入基準（期待結果） | 検証コマンド（RUNBOOK 1:1） | EVALUATION 相互参照 |
+| --- | --- | --- | --- | --- |
+| CLI | `REQ-CLI-001` | `mem out search` の `--json` 出力が API 契約と同型で返る。 | [`trace-req-cli-001`](../../RUNBOOK.md#trace-req-cli-001) | [REQ-CLI-001](../../EVALUATION.md#req-cli-001-passfail) |
+| API | `REQ-API-001` | `POST /v1/notes:ingest` が v1 契約（入力/出力/HTTP）を維持する。 | [`trace-req-api-001`](../../RUNBOOK.md#trace-req-api-001) | [REQ-API-001](../../EVALUATION.md#req-api-001-passfail) |
+| GC | `REQ-GC-001` | `mem gc short --dry-run` が DB 非更新で判定結果のみ返す。 | [`trace-req-gc-001`](../../RUNBOOK.md#trace-req-gc-001) | [REQ-GC-001](../../EVALUATION.md#req-gc-001-passfail) |
+| Security | `REQ-SEC-001` | `sensitivity=secret` 相当入力を fail-closed（保存禁止）で拒否する。 | [`trace-req-sec-001`](../../RUNBOOK.md#trace-req-sec-001) | [REQ-SEC-001](../../EVALUATION.md#req-sec-001-passfail) |
+| Error | `REQ-ERR-001` | `NOT_FOUND`/`INVALID_ARGUMENT`/`INTERNAL` の契約と再試行可否が整合する。 | [`trace-req-err-001`](../../RUNBOOK.md#trace-req-err-001) | [REQ-ERR-001](../../EVALUATION.md#req-err-001-passfail) |
 
-### Task Seed 転記用固定表（Source / Requirements）
+### Task Seed 転記用固定表（Source / Requirements 直接引用用）
 
-| Requirement ID | Source（転記用） | Requirements（転記用） |
+| Requirement ID | Source（引用用） | Requirements（引用用） |
 | --- | --- | --- |
-| `REQ-CLI-001` | `memx_spec_v3/docs/requirements.md#3-cli-要件` | `CLI v1必須3コマンドのJSON互換を維持する` |
-| `REQ-API-001` | `memx_spec_v3/docs/requirements.md#6-api-要件v13-追加` | `API v1必須3エンドポイント契約を維持する` |
-| `REQ-GC-001` | `memx_spec_v3/docs/requirements.md#3-5-mem-gc-shortobserver--reflector` | `GC dry-run/閾値判定/DB非更新契約を満たす` |
-| `REQ-SEC-001` | `memx_spec_v3/docs/requirements.md#2-7-security--retention-requirements` | `sensitivity判定をfail-closedで適用する` |
-| `REQ-RET-001` | `memx_spec_v3/docs/requirements.md#2-7-security--retention-requirements` | `archive退避/削除と監査ログ要件を満たす` |
-| `REQ-ERR-001` | `memx_spec_v3/docs/requirements.md#6-4-エラーモデル` | `ErrorCode契約と再試行可否を維持する` |
-| `REQ-NFR-001` | `memx_spec_v3/docs/requirements.md#5-1-性能目標v1必須3エンドポイント` | `性能閾値（ingest/search/show）を満たす` |
+| `REQ-CLI-001` | `memx_spec_v3/docs/requirements.md#3-cli-要件` | `mem out search の --json 出力は API 契約と同型を維持する。` |
+| `REQ-API-001` | `memx_spec_v3/docs/requirements.md#6-api-要件v13-追加` | `POST /v1/notes:ingest は v1 契約を維持する。` |
+| `REQ-GC-001` | `memx_spec_v3/docs/requirements.md#3-5-mem-gc-shortobserver--reflector` | `mem gc short --dry-run は DB を更新せず判定結果のみ返す。` |
+| `REQ-SEC-001` | `memx_spec_v3/docs/requirements.md#2-7-security--retention-requirements` | `sensitivity 判定は secret を fail-closed で拒否する。` |
+| `REQ-ERR-001` | `memx_spec_v3/docs/requirements.md#6-4-エラーモデル` | `ErrorCode 契約と retryable ルールを維持する。` |
 
 ---
 
