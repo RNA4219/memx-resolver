@@ -7,6 +7,12 @@ status: planned
 
 # TASK.memx-bootstrap-03-03-2026
 
+## Source
+| Source | Purpose |
+| --- | --- |
+| `memx_spec_v3/docs/requirements.md#task-seed-source-fixed` | Task Seed の Source/Requirements 直接参照の固定表（REQ-*） |
+| `docs/TASKS.md#2-task-seed-必須項目` | Task Seed 必須項目の運用基準 |
+
 ## Objective
 - memx リポジトリに Task Seed 運用の最小テンプレートを導入し、命名規則と記載要件を固定化する。
 

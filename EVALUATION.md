@@ -20,15 +20,15 @@ next_review_due: 2026-06-03
   - `GET /v1/notes/{id}`: P50 <= 40ms, P95 <= 90ms
 
 ## 要件IDトレーサビリティ（pass/fail 条件への REQ-* 紐付け）
-| Requirement ID | 判定基準 | 判定ルール参照 | requirements.md 相互参照 |
+| Requirement ID | 判定基準 | pass 条件 | fail 条件 | 判定ルール参照 | requirements.md 相互参照 |
 | --- | --- | --- | --- |
-| <a id="req-cli-001-passfail"></a>`REQ-CLI-001` | pass/fail | 本書「v1 受け入れ基準（Release Scope Matrix 準拠）」・`RUNBOOK.md` の `trace-req-cli-001` | [requirements: REQ-CLI-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
-| <a id="req-api-001-passfail"></a>`REQ-API-001` | pass/fail | 本書「v1 受け入れ基準（Release Scope Matrix 準拠）」・`RUNBOOK.md` の `trace-req-api-001` | [requirements: REQ-API-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
-| <a id="req-gc-001-passfail"></a>`REQ-GC-001` | pass/fail | `RUNBOOK.md` の `trace-req-gc-001` | [requirements: REQ-GC-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
-| <a id="req-sec-001-passfail"></a>`REQ-SEC-001` | pass/fail | `RUNBOOK.md` の `trace-req-sec-001` | [requirements: REQ-SEC-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
-| <a id="req-ret-001-passfail-waiver"></a>`REQ-RET-001` | pass/fail/waiver | 本書「性能合否基準（fail / waiver）」の運用を準用し、保持期限逸脱は waiver 記録必須 | [requirements: REQ-RET-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
-| <a id="req-err-001-passfail"></a>`REQ-ERR-001` | pass/fail | `RUNBOOK.md` の `trace-req-err-001` と `requirements.md` 6-4 | [requirements: REQ-ERR-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
-| <a id="req-nfr-001-passfail-waiver"></a>`REQ-NFR-001` | pass/fail/waiver | 本書「性能合否基準（fail / waiver）」および「REQ-NFR-001 合否判定ルール」 | [requirements: REQ-NFR-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-cli-001-passfail"></a>`REQ-CLI-001` | pass/fail | `mem out search --json` 出力が API 応答と同型。 | JSON キー/型/意味のいずれかが API 契約から逸脱。 | 本書「v1 受け入れ基準（Release Scope Matrix 準拠）」・`RUNBOOK.md` の `trace-req-cli-001` | [requirements: REQ-CLI-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-api-001-passfail"></a>`REQ-API-001` | pass/fail | `POST /v1/notes:ingest` が v1 契約（入力/出力/HTTP）を維持。 | HTTP/JSON 契約が v1 から逸脱。 | 本書「v1 受け入れ基準（Release Scope Matrix 準拠）」・`RUNBOOK.md` の `trace-req-api-001` | [requirements: REQ-API-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-gc-001-passfail"></a>`REQ-GC-001` | pass/fail | `mem gc short --dry-run` が DB 非更新で判定結果のみ返却。 | dry-run 実行で DB 更新/削除等の副作用が発生。 | `RUNBOOK.md` の `trace-req-gc-001` | [requirements: REQ-GC-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-sec-001-passfail"></a>`REQ-SEC-001` | pass/fail | `sensitivity=secret` 相当入力を fail-closed で拒否。 | `secret` 入力が保存される、または fail-open 挙動。 | `RUNBOOK.md` の `trace-req-sec-001` | [requirements: REQ-SEC-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-ret-001-passfail-waiver"></a>`REQ-RET-001` | pass/fail/waiver | 保持期限/退避・削除・監査ログ要件を満たす。 | 保持期限逸脱または監査証跡欠損（waiver 未記録）。 | 本書「性能合否基準（fail / waiver）」の運用を準用し、保持期限逸脱は waiver 記録必須 | [requirements: REQ-RET-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-err-001-passfail"></a>`REQ-ERR-001` | pass/fail | `NOT_FOUND`/`INVALID_ARGUMENT`/`INTERNAL` と retryable が契約通り。 | ErrorCode または retryable が契約から逸脱。 | `RUNBOOK.md` の `trace-req-err-001` と `requirements.md` 6-4 | [requirements: REQ-ERR-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
+| <a id="req-nfr-001-passfail-waiver"></a>`REQ-NFR-001` | pass/fail/waiver | `ingest/search/show` の p50/p95 が全閾値以内。 | 1 指標でも閾値超過、欠損、計測条件不一致。 | 本書「性能合否基準（fail / waiver）」および「REQ-NFR-001 合否判定ルール」 | [requirements: REQ-NFR-001](./memx_spec_v3/docs/requirements.md#主要要件id固定) |
 
 ## 性能合否基準（fail / waiver）
 - 判定対象データセットは `short` 10,000 件 / 1件 約500文字（UTF-8）、ローカル単体（4 vCPU / 16GB RAM / NVMe SSD / Linux x86_64）、ウォームアップ20回、本計測200回で固定する。

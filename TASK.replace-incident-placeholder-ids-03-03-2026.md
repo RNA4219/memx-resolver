@@ -8,8 +8,11 @@ status: planned
 # TASK.replace-incident-placeholder-ids-03-03-2026
 
 ## Source
-- HUB.codex.md#自動タスク分割フロー
-- docs/TASKS.md#2-Task-Seed-必須項目
+| Source | Purpose |
+| --- | --- |
+| `HUB.codex.md#自動タスク分割フロー` | タスク分割フロー準拠 |
+| `docs/TASKS.md#2-task-seed-必須項目` | Task Seed 必須項目の運用基準 |
+| `memx_spec_v3/docs/requirements.md#task-seed-source-fixed` | REQ-* の直接参照固定表 |
 
 ## Objective
 - 既存 Task Seed（`TASK.memx-bootstrap-03-03-2026.md` ほか）に残る `docs/IN-202603xx-001.md` 参照を、実在するインシデントIDへ置換する。
