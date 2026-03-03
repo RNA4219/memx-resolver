@@ -33,6 +33,7 @@
 - 満たすべき要件を箇条書きで記載する。
 - 互換性や非機能制約がある場合はここに明記する。
 - エラーコードを新規追加・変更するタスクでは、`memx_spec_v3/docs/requirements.md` の「6-4. エラーモデル」と `memx_spec_v3/docs/error-contract.md` を同時更新対象に含める。
+- API/CLI の契約（request/response/error/`--json`）を変更するタスクでは、`memx_spec_v3/docs/contracts/openapi.yaml` と `memx_spec_v3/docs/contracts/cli-json.schema.json` の更新を必須とする。
 
 ### Commands
 - 実行・検証コマンドを列挙する。
@@ -64,10 +65,29 @@ CLI/API の既存必須フィールド削除、型変更、意味変更、既存
 - [ ] `Node IDs` を記載済み（依存照合対象なら必須）
 - [ ] `Requirements` に後方互換/非機能制約を明記済み
 - [ ] エラーコード変更時は `memx_spec_v3/docs/requirements.md` と `memx_spec_v3/docs/error-contract.md` を更新対象に含めた
+- [ ] 契約変更時は `memx_spec_v3/docs/contracts/openapi.yaml` と `memx_spec_v3/docs/contracts/cli-json.schema.json` を更新した
 - [ ] `Commands` に検証コマンドを順序付きで記載済み
 - [ ] `Release Note Draft` を記載済み
 - [ ] `memx_spec_v3/CHANGES.md` と `CHANGELOG.md` への反映項目を記載済み
 - [ ] `Status: done` 前に `Moved-to-CHANGES: YYYY-MM-DD` を追記する
+
+
+## 2-2. 変更タイプ別チェックリスト（requirements 0-0-4 整合）
+
+### 互換維持変更
+- [ ] `Requirements` に後方互換維持（CLI/API/`--json` 同型）を明記する
+- [ ] `Commands` に最低 1 つの `lint` / `type` / `test` を記載する
+- [ ] `Release Note Draft` を記載する
+
+### 破壊変更
+- [ ] 本書「2-1. 破壊変更時の追記チェックリスト」を全件追記する
+- [ ] 対象 I/F・移行先・移行期限・移行手順（2ステップ以上）を記載する
+- [ ] `CHANGELOG.md` と `memx_spec_v3/CHANGES.md` の双方へ同日反映する
+
+### 実験機能（feature flag 既定 OFF）
+- [ ] feature flag 名・既定値 OFF・有効化条件を `Requirements` に明記する
+- [ ] 既定挙動に影響しないことを `Requirements` に明記する
+- [ ] 廃止/昇格条件（次マイナー or 次メジャー）を記載する
 
 ## 3. CHANGES 連携ルール（memx_spec_v3/CHANGES.md / CHANGELOG.md）
 - 正本（canonical source）はリポジトリルートの `CHANGELOG.md` とする。
