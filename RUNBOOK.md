@@ -58,9 +58,15 @@ next_review_due: 2026-06-03
 
 | 手順 | 主対象NFR-ID | 判定に使う主要証跡 |
 | --- | --- | --- |
+| 検知・初期化（Detect） | `REQ-NFR-002`, `REQ-NFR-003` | `incident-summary.json.detected_at`, `recovery-log.ndjson.detect` |
 | 再試行（Retry） | `REQ-NFR-003`, `REQ-NFR-004` | `recovery-log.ndjson.retry_count`, `incident-summary.json.mitigated_at` |
 | ロールバック（Rollback） | `REQ-NFR-002`, `REQ-NFR-005` | `incident-summary.json.rto_minutes/rpo_minutes`, `recovery-log.ndjson.pending_compensation_count` |
 | 再計画（Re-plan） | `REQ-NFR-003`, `REQ-NFR-005`, `REQ-NFR-006` | `docs/IN-*.md`, `recovery-log.ndjson.replan_ticket_id` |
+
+### 0) 検知・初期化（Detect）
+- 要件紐付け: `REQ-NFR-002`, `REQ-NFR-003`
+- 障害検知時点を `incident-summary.json.detected_at` と `recovery-log.ndjson` の `detect` イベントで固定記録する。
+- 後続の RTO/RPO 判定、15分暫定復旧判定はこの `detected_at` を起点に算出する。
 
 ### 1) 再試行（Retry）
 - 要件紐付け: `REQ-NFR-003`, `REQ-NFR-004`
