@@ -4,8 +4,10 @@
 
 ## 構成
 
-- `docs/requirements.md`  
-  システム全体の要件定義（目的・アーキテクチャ・CLI・GC・LLM役割など、レビュー内容を反映）。
+- `docs/spec.md`
+  仕様インデックス（正本/補助の役割分担、API/CLI/エラー/NFR/運用要件の参照導線）。
+- `docs/requirements.md`
+  システム全体の要件定義の正本（目的・アーキテクチャ・CLI・GC・LLM役割など、レビュー内容を反映）。
 - `schema/short.sql`  
   `short.db` 用の CREATE TABLE スキーマ（FTS5 トリガ修正・カラム制約調整・user_version 追加済み）。
 
