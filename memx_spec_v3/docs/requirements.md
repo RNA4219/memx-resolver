@@ -137,7 +137,11 @@ priority: high
 
 ---
 
+<a id="requirements-traceability"></a>
+
 ## 0-2. 要件トレーサビリティ
+
+<a id="主要要件id固定"></a>
 
 ### 主要要件ID（CLI/API/GC/Security/Error 固定）
 
@@ -149,9 +153,11 @@ priority: high
 | Security | `REQ-SEC-001` | `sensitivity=secret` 相当入力を fail-closed（保存禁止）で拒否する。 | [`trace-req-sec-001`](../../RUNBOOK.md#trace-req-sec-001) | [REQ-SEC-001](../../EVALUATION.md#req-sec-001-passfail) |
 | Error | `REQ-ERR-001` | `NOT_FOUND`/`INVALID_ARGUMENT`/`INTERNAL` の契約と再試行可否が整合する。 | [`trace-req-err-001`](../../RUNBOOK.md#trace-req-err-001) | [REQ-ERR-001](../../EVALUATION.md#req-err-001-passfail) |
 
-### Task Seed 転記用固定表（Source / Requirements 直接引用用）
+<a id="task-seed-source-fixed"></a>
 
-| Requirement ID | Source（引用用） | Requirements（引用用） |
+### Task Seed 転記用固定表（Source / Requirements 直接引用用・表形式固定）
+
+| Requirement ID | Source（Task Seed で直接参照する固定値） | Requirements（引用用） |
 | --- | --- | --- |
 | `REQ-CLI-001` | `memx_spec_v3/docs/requirements.md#3-cli-要件` | `CLI v1必須3コマンドのJSON互換を維持し、mem out search の --json 出力は API 契約と同型を維持する。` |
 | `REQ-API-001` | `memx_spec_v3/docs/requirements.md#6-api-要件v13-追加` | `API v1必須3エンドポイント契約を維持し、POST /v1/notes:ingest は v1 契約を維持する。` |
