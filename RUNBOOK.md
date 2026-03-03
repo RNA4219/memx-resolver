@@ -55,6 +55,16 @@ next_review_due: 2026-06-03
 - `ReflectLLMClient`: Observer/Reflector 要約更新。
 - タイムアウト 15 秒、最大 2 回リトライ（指数バックオフ）、再試行可/不可を区別して実装する。
 
+## エラーコード別 再試行戦略（運用）
+- 即時再試行（1 回のみ）:
+  - 直前の接続瞬断や軽微なネットワーク揺らぎで、`INTERNAL` かつ一時障害と判定できる場合。
+- 指数バックオフ再試行（最大 2 回）:
+  - `INTERNAL` で原因が DB ロック、LLM タイムアウト、HTTP 429/502/503/504 の場合。
+  - 推奨待機: 1s → 2s（ジッタ許容）。
+- 再試行禁止:
+  - `INVALID_ARGUMENT`（入力不備）、`NOT_FOUND`（対象不存在）、`GATEKEEP_DENY`（ポリシー deny）。
+  - 恒久的な `INTERNAL`（設定不備・スキーマ不整合等）は再試行せず原因修正を優先。
+
 ## 関連ドキュメント
 - エラー契約: `memx_spec_v3/docs/error-contract.md`
 
@@ -208,6 +218,8 @@ python workflow-cookbook/tools/codemap/update.py --targets docs/birdseye/caps --
 ```bash
 python workflow-cookbook/tools/codemap/update.py --targets docs/birdseye/index.json,docs/birdseye/caps --emit index+caps
 ```
+
+鮮度更新時に `memx_spec_v3/docs/requirements.md` の節構成・Requirement ID（例: `REQ-CLI-001`）を変更した場合は、`docs/birdseye/index.json` の `nodes[].node_id=requirements` と `docs/birdseye/caps/requirements.json`（必要に応じて `docs/birdseye/caps/memx_spec_v3__docs__requirements.md.json`）の `summary`/`depends_on` を同一コミットで更新し、`python workflow-cookbook/tools/codemap/update.py --targets docs/birdseye/index.json,docs/birdseye/caps --emit index+caps` を再実行して要件ノード紐付けを鮮度管理フローへ組み込む。
 
 ## Observability / 確認手順
 1. 性能閾値の正本は `EVALUATION.md` とし、`governance/metrics.yaml` の `ingest` / `search` / `show` の項目名・閾値を完全一致で同期維持する。
