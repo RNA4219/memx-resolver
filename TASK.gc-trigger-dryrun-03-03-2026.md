@@ -8,7 +8,10 @@ status: planned
 # TASK.gc-trigger-dryrun-03-03-2026
 
 ## Source
-- orchestration/memx-v1-bootstrap.md#Phase 2
+| Source | Purpose |
+| --- | --- |
+| `orchestration/memx-v1-bootstrap.md#phase-2` | 実装対象フェーズの起点 |
+| `memx_spec_v3/docs/requirements.md#task-seed-source-fixed` | REQ-* の直接参照固定表 |
 
 ## Node IDs
 - requirements: 仕様出典（requirements ノード）
