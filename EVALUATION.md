@@ -53,6 +53,16 @@ next_review_due: 2026-06-03
 
 - 対象要件: `REQ-NFR-002` / `REQ-NFR-003` / `REQ-NFR-004` / `REQ-NFR-005` / `REQ-NFR-006`
 
+### 運用NFR 合否マトリクス（必要証跡 / fail条件）
+
+| NFR-ID | 必要証跡（最低限） | fail 条件 |
+| --- | --- | --- |
+| `REQ-NFR-002` | `incident-summary.json.rto_minutes`, `incident-summary.json.rpo_minutes` | `rto_minutes > 30` または `rpo_minutes > 5`、値欠損 |
+| `REQ-NFR-003` | `incident-summary.json.detected_at`, `incident-summary.json.mitigated_at` | `mitigated_at - detected_at > 15分`、時刻欠損/逆転 |
+| `REQ-NFR-004` | `incident-summary.json.retry_count`, `recovery-log.ndjson` の retry イベント | `retry_count > 2`、回数不整合 |
+| `REQ-NFR-005` | `recovery-log.ndjson.pending_compensation_count`, `short_delete_ready_ratio`, `rollback/replan` イベント | `pending_compensation_count != 0`、`short_delete_ready_ratio != 1.0`、30分以内の収束/起票未達 |
+| `REQ-NFR-006` | 対応する `docs/IN-*.md`（最小監査項目 + waiver 必須項目） | 必須項目欠落、waiver 期限切れ、再計画チケット未記録 |
+
 ### 証跡ファイル（必須）
 - `artifacts/ops/incident-summary.json`
   - 必須キー: `incident_id`, `detected_at`, `mitigated_at`, `resolved_at`, `rto_minutes`, `rpo_minutes`, `retry_count`
