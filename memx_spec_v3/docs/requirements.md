@@ -619,6 +619,24 @@ gc:
 | show | `GET /v1/notes/{id}` | `<= 40ms` | `<= 90ms` |
 - Requirement ID: `REQ-NFR-001`
 
+#### 計測プロトコル
+
+- データ生成条件（固定）:
+  - 対象ストアは `short` 固定。
+  - 事前投入データは 10,000 件固定。
+  - 各ノート本文は約 500 文字（UTF-8 プレーンテキスト）固定。
+- 計測回数（固定）:
+  - 各エンドポイントごとにウォームアップ 20 回を先に実行。
+  - 本計測は各エンドポイント 200 回で固定し、ウォームアップを集計から除外する。
+- 除外条件（固定）:
+  - ウォームアップ 20 回は母集団に含めない。
+  - `REQ-NFR-001` 判定では `ingest` / `search` / `show` の 3 エンドポイント以外を除外する。
+  - ローカル単体（4 vCPU / 16GB RAM / NVMe SSD / Linux x86_64）以外の環境で得た計測値は正式判定から除外する。
+- 集計方法（固定）:
+  - 本計測 200 回のレイテンシ分布から `p50` と `p95` を算出する。
+  - 合否判定値は `p50_ms` / `p95_ms` のみとし、平均値や最大値は参考情報として扱う。
+  - 出力フォーマットは `RUNBOOK.md` の `artifacts/perf/perf-result.json` に定義されたキーを正本とする。
+
 ### Dependencies
 
 - `BLUEPRINT.md`
@@ -681,7 +699,9 @@ gc:
   - request: `{target, options?}`
   - response: `{status}`
 
-`POST /v1/gc:run` は v1 MUST には含めない。feature flag 無効時は 404（未提供）または 409（feature disabled）のいずれかを返し、デプロイ単位で挙動を固定する。
+`POST /v1/gc:run` は v1 MUST には含めない。`mem.features.gc_short=false` の場合、全環境で **HTTP 409 + `{ "code": "FEATURE_DISABLED", "message": "gc_short feature is disabled" }`** を固定で返す（404 へのフォールバック禁止）。
+
+この無効時挙動は「デプロイ単位で選択」ではなく **全環境共通固定** とし、クライアントは `FEATURE_DISABLED` を恒久エラーとして扱う（同一条件での自動リトライ不可、運用者による feature flag 変更後のみ再試行可）。
 
 ### 6-3-1. v1必須3エンドポイント契約（`requirements.md` × `go/api/types.go` 照合）
 
