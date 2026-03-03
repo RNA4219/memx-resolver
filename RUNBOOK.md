@@ -38,6 +38,8 @@ next_review_due: 2026-06-03
 - `ReflectLLMClient`: Observer/Reflector 要約更新。
 - タイムアウト 15 秒、最大 2 回リトライ（指数バックオフ）、再試行可/不可を区別して実装する。
 
+## 関連ドキュメント
+- エラー契約: `memx_spec_v3/docs/error-contract.md`
 
 ## 性能再計測手順（EVALUATION.md 同条件）
 1. テストデータ投入（10,000 件 / 1件 約500文字）を実施。
