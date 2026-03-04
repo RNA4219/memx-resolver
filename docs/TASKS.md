@@ -120,6 +120,7 @@
 - `Status: done` へ遷移する条件として、移送後に `Moved-to-CHANGES: YYYY-MM-DD` を追記済みであること。
 - `Status: done` へ遷移する条件として、Phase 2〜4 対象タスクは最新の `memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-<実日付>.md` が更新済みで、対象章の `req_coverage` が 0% ではなく `mapping_match_check` が `pass` であること。
 - `docs/birdseye/index.json` と `nodes[].capsule` 実体の不整合を検知した場合は、対象 Task Seed の `Status` を `blocked` へ遷移し、欠落 capsule のパス・検知コマンド・暫定対処を Task Seed に記録する。
+- Birdseye Readiness Check の `ready/degraded/blocked` は入力健全性の判定語彙であり、Task Seed `Status` には使用しない（`degraded` は不可）。
 
 ### 完了前チェック（`Release Note Draft` / `Status` / `Moved-to-CHANGES`）
 - [ ] `Release Note Draft` を 1〜3 行で記載済み（`CHANGELOG.md` 反映内容と一致）
