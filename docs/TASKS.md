@@ -176,3 +176,8 @@ CLI/API の既存必須フィールド削除、型変更、意味変更、既存
 - [ ] Task A: `docs/TASKS.md` の `Requirements` 節（Phase 2〜4 ルール）に `memx_spec_v3/docs/design-doc-dod-spec.md` の正本参照必須を追加する。
 - [ ] Task B: `orchestration/memx-design-docs-authoring.md` の Phase 3/4 Done Criteria を本仕様参照へ置換する差分タスクを起票する（本文置換は別PR）。
 - [ ] Task C: `memx_spec_v3/docs/design-acceptance-report-spec.md` / `memx_spec_v3/docs/design-review-spec.md` へ「最終判定の正本」相互参照を維持する運用チェックを Task Seed の `Requirements` に追加する。
+
+## 5. Phase 1 抽出表の転記手順（Source/Requirements/Dependencies）
+1. `memx_spec_v3/docs/reviews/inventory/DESIGN-SOURCE-INVENTORY-YYYYMMDD.md` から `blocked=0` 行のみ抽出する。
+2. `source_path#section` を `Source`、`req_id` を `Requirements`、`depends_on` を `Dependencies` に 1:1 で転記する。
+3. 転記時は `memx_spec_v3/docs/design-reference-resolution-spec.md` に従い、正規パス以外を差し戻す。
