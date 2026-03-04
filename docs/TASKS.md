@@ -30,6 +30,19 @@
   - `owner`: 担当チームまたは担当者（例: `memx-core`）。
   - `deadline`: 期日を `YYYY-MM-DD` 形式で記載する。
 
+### priority 記載ガイド（設計書作成タスク）
+- `docs/design-docs-prioritization-spec.md` を正本として、次の4軸で判定する。
+  - Blocker有無
+  - REQ網羅率への影響
+  - 契約差分 high 件数
+  - Birdseye issue の有無
+- 判定ルール:
+  - `high`: 4軸のいずれかが high。
+  - `medium`: high なし、かつ 1軸以上が medium。
+  - `low`: 4軸すべて low。
+- Task Seed には `Requirements` または `Dependencies` に判定根拠を1行で残す。
+- 章別再評価（Phase完了時）で軸が変化した場合は `priority` を更新する。
+
 ## 2. Task Seed 必須項目
 各 Task Seed には次の6項目を必須で含める。
 
