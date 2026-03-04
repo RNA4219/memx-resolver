@@ -125,6 +125,17 @@ CLI/API の既存必須フィールド削除、型変更、意味変更、既存
 - [ ] 相対名・曖昧名・複数候補解決が 0 件（1件でもあれば fail し、`reviewing` で差し戻し）
 - [ ] Phase 1 抽出表（Design Source Inventory）の `source_path#section` にも、上記 3 チェックを同一条件で適用済み
 
+## 2-1-2. Task Seed 起票時のトリガー判定チェック（変更案）
+
+- [ ] `memx_spec_v3/docs/design-update-trigger-spec.md` のトリガー種別（TRG-REQ / TRG-OAS / TRG-CLI-SCHEMA / TRG-RUNBOOK / TRG-IN-PREVENTIVE）から該当IDを記載した
+- [ ] トリガーごとの必須更新先（design/interfaces/traceability/EVALUATION/operations/レビュー記録）をチェックし、非該当は理由付きで明記した
+- [ ] `CHANGELOG.md` / `memx_spec_v3/CHANGES.md` の反映要否を判定し、`Release Note Draft` と矛盾がない
+- [ ] `Status: done` 遷移前チェックとして `Moved-to-CHANGES: YYYY-MM-DD` 要否を確定した
+
+### 起票時タスク化提案（競合回避のため分離）
+- 提案1: 「Trigger 判定のみ」を行う 0.5d Task Seed を先行起票し、該当 Trigger IDs と必須更新先を固定する。
+- 提案2: 「文書反映 + レビュー記録 + CHANGES 転記」を行う後続 Task Seed を分離し、`done` 条件を満たした時点で統合する。
+
 
 ## 2-2. 変更タイプ別チェックリスト（requirements 0-0-4 整合）
 

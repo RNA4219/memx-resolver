@@ -11,6 +11,11 @@ status: planned
 # memx Design Docs Authoring Orchestration
 
 ## Phase 1: 情報収集
+### Preprocessing: トリガー判定
+- [ ] `memx_spec_v3/docs/design-update-trigger-spec.md` を参照し、今回変更の Trigger IDs（TRG-REQ / TRG-OAS / TRG-CLI-SCHEMA / TRG-RUNBOOK / TRG-IN-PREVENTIVE）を先に確定する（Task Seed 1件、<=0.5d）
+- [ ] Trigger IDs に対応する必須更新先（design/interfaces/traceability/EVALUATION/operations/レビュー記録）を Phase 1 で更新対象として固定する（Task Seed 1件、<=0.5d）
+- [ ] `CHANGELOG.md` / `memx_spec_v3/CHANGES.md` の反映要否を前処理で判定し、Task Seed の `Release Note Draft` / `Status: done` 条件へ反映する（Task Seed 1件、<=0.5d）
+
 ### Priority Label Rule
 - Phase 1 の各チェック項目は `docs/design-docs-prioritization-spec.md` の4軸で判定する。
 - `high`: Blocker発生、REQ網羅率100%未達確定、Birdseye issue（caps欠落/node_id参照切れ）あり。
