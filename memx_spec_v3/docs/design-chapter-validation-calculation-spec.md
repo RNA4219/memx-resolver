@@ -27,6 +27,23 @@
 | `node_id` | `docs/birdseye/index.json` | `memx_spec_v3/docs/design-chapter-node-mapping-spec.md` | 章対応ノード一致判定 |
 | `evidence_paths` | `memx_spec_v3/docs/reviews/` 配下のレビュー/受入レポート | - | 必須証跡の存在確認 |
 
+
+## 3.3 `DESIGN-CHAPTER-VALIDATION-<実日付>.md` 列別入力ソース固定
+`memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-<実日付>.md` の列は、以下の入力元以外を使用してはならない。
+
+| 列 | 入力ソース（固定） | 参照節（固定） |
+| --- | --- | --- |
+| `chapter_id` | `memx_spec_v3/docs/design.md` / `memx_spec_v3/docs/interfaces.md` | 章見出し（`path#section`） |
+| `req_coverage` | `memx_spec_v3/docs/traceability.md` | 対象 `REQ-ID` の設計反映状態行 |
+| `contract_alignment_high_count` | `memx_spec_v3/docs/reviews/CONTRACT-ALIGN-<実日付>-<連番>.md` または `LATEST.md` | `severity: high` 一覧 |
+| `link_broken_count` | `memx_spec_v3/docs/reviews/DESIGN-REVIEW-<実日付>-<連番>.md` | リンク検証結果節（broken一覧） |
+| `birdseye_issue_count` | `docs/birdseye/index.json` | 対象 `node_id` の unresolved issue 一覧 |
+| `evidence_paths` | `memx_spec_v3/docs/reviews/DESIGN-REVIEW-<実日付>-<連番>.md` / `memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-<実日付>.md` | ファイル実体 |
+| `mapping_spec_ref` | `memx_spec_v3/docs/design-chapter-node-mapping-spec.md` | 章対応表定義 |
+| `mapping_match_check` | `memx_spec_v3/docs/design-chapter-node-mapping-spec.md` + `docs/birdseye/index.json` | 章対応表行 / node解決結果 |
+| `updated_at` | 当日更新ログ | レポートヘッダ時刻 |
+| `calculation_basis` | 当日計算根拠 | 実行コミットIDまたは実行時刻 |
+
 ## 4. 列ごとの算出式
 
 ### 4.1 `req_coverage`
@@ -103,3 +120,16 @@
   - `evidence_paths` が実在ファイルを参照していること。
 - 対応表整合:
   - `mapping_spec_ref` が固定値 `memx_spec_v3/docs/design-chapter-node-mapping-spec.md` であること。
+
+
+## 7. `0%` / `fail` のまま完了できない条件（close禁止）
+以下のいずれかに該当する場合、`DESIGN-CHAPTER-VALIDATION-<実日付>.md` は完了扱いにしてはならず、Task Seed の `Status: done` への遷移を禁止する。
+
+1. `req_coverage = 0%` かつ `chapter_req_total > 0`。
+2. `mapping_match_check = fail`。
+3. `contract_alignment_high_count > 0`。
+4. `link_broken_count > 0`。
+5. `birdseye_issue_count > 0`。
+6. `evidence_paths` が 2 件未満、または実在しないファイルを含む。
+
+差し戻し時は、未充足列・入力元ファイル・再計算日時を `memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-<実日付>.md` に追記する。

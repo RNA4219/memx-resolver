@@ -42,6 +42,22 @@
 - `evidence_paths` は実在ファイルのみを許可し、テンプレートパスや `TBD` を禁止する。
 - `mapping_match_check` の判定ログ（比較日時/比較対象）をレビュー記録または受け入れレポートへ残す。
 
+## 4.1 `req_coverage` / `mapping_match_check` 算出手順（算出元の固定）
+`req_coverage` と `mapping_match_check` は、以下の算出元を固定して記録する。
+
+1. `req_coverage` の算出元
+   - 要件トレース: `memx_spec_v3/docs/traceability.md`
+   - 章定義: `memx_spec_v3/docs/design.md` / `memx_spec_v3/docs/interfaces.md`
+   - 受け入れ・レビュー根拠: `memx_spec_v3/docs/reviews/` 配下の `DESIGN-REVIEW-<実日付>-<連番>.md` / `DESIGN-ACCEPTANCE-<実日付>.md`
+2. `mapping_match_check` の算出元
+   - 章対応表: `memx_spec_v3/docs/design-chapter-node-mapping-spec.md`
+   - Birdseye ノード実体: `docs/birdseye/index.json`
+   - 実施ログ: `memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-<実日付>.md`
+3. 実施順序（必須）
+   - 先に `traceability.md` を使って章ごとの `REQ-ID` カバレッジを再計算し、`req_coverage` を更新する。
+   - 次に章対応表と Birdseye index を突合して `mapping_match_check` を更新する。
+   - 最後に契約整合レポート（`CONTRACT-ALIGN-<実日付>-<連番>.md` / `LATEST.md`）と章別検証レポートの整合を確認し、`evidence_paths` を確定する。
+
 ## 5. Phase 判定での利用ルール
 - **Phase 2**: 章別ドラフト完成時に、初期値として章別検証サマリを作成する。
 - **Phase 3**: 契約整合・リンク健全性・Birdseye 修正結果を章別検証サマリへ反映する。
