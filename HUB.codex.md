@@ -131,6 +131,29 @@ status: planned
 - 判定時刻から **7日以内** なら鮮度 OK、**7日超** は鮮度不足として扱う。
 - 鮮度不足時は `RUNBOOK.md` の「Birdseye 鮮度不足時の復旧手順」を実施する。
 
+## Birdseyeアクセス異常時の再生成依頼テンプレート
+
+復旧手順本文は `RUNBOOK.md` の「Birdseye 鮮度不足時の復旧手順」と
+`workflow-cookbook/tools/codemap/README.md`（`tools/codemap/README.md`）の「Birdseyeアクセス異常時の復旧手順」を正本とし、
+本節は依頼フォーマットのみを定義する。
+
+```yaml
+birdseye_regen_request:
+  requested_to_role: "<依頼先ロール>"
+  execute_emit: "index|caps|hot"
+  post_checks:
+    generated_files:
+      - "docs/birdseye/index.json"
+      - "docs/birdseye/hot.json"
+      - "docs/birdseye/caps/*.json"
+    missing_resolved: true
+    generated_at_updated: true
+  re_escalation_if:
+    - "実行コマンドが非ゼロ終了した"
+    - "必要成果物が生成されない、またはJSONパースに失敗した"
+    - "欠損が解消しない、または generated_at が更新されない"
+```
+
 ## ノード抽出ルール
 - ノード抽出単位は `##` 見出しとし、`###` 以下は同一ノード内の補足情報として扱う。
 - ノード内の `- [ ]` チェック項目はタスク分解対象とし、各項目を独立した実行タスクとして展開する。

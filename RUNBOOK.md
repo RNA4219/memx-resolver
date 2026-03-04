@@ -388,7 +388,7 @@ python workflow-cookbook/tools/codemap/update.py --targets docs/birdseye/index.j
 
 
 ## Birdseye 鮮度不足時の復旧手順
-`docs/birdseye/index.json.generated_at` が判定時刻から7日を超える場合は、以下を順に実行する。
+`docs/birdseye/index.json.generated_at` が判定時刻から7日を超える場合に実施する。詳細は `workflow-cookbook/tools/codemap/README.md`（`tools/codemap/README.md`）の「Birdseyeアクセス異常時の復旧手順」を正本とし、ここでは実行順のみ示す。
 
 1. index を更新する。
 ```bash
