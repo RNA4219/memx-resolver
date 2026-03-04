@@ -165,9 +165,9 @@ status: planned
 - 鮮度不足時は [`RUNBOOK.md` の「Birdseye 鮮度不足時の復旧手順」](RUNBOOK.md#birdseye-鮮度不足時の復旧手順) を実施する（遷移先は本リンクに統一）。
 
 ## Birdseye Access Preflight（開始前チェック）
-Birdseye 入力の健全性を事前判定し、`ready | degraded | blocked` の 3 値で `notes.readiness_status` を必ず記録する。
+Birdseye 入力の健全性を事前判定し、`notes.readiness_status` を必ず記録する（語彙定義は本節の「readiness_status 語彙定義（正本）」を参照）。
 
-### Birdseye Readiness Preflight
+### Birdseye Readiness Check
 
 本節は **判定のみ** を扱う。復旧コマンド列は [`RUNBOOK.md` の「Birdseye 鮮度不足時の復旧手順」](RUNBOOK.md#birdseye-鮮度不足時の復旧手順) を正本とし、HUB には重複掲載しない。
 
@@ -279,6 +279,7 @@ notes:
   regen_request_to: unassigned
 ```
 
+#### readiness_status 語彙定義（正本）
 - `ready | degraded | blocked` は Birdseye 入力健全性専用語彙として `notes.readiness_status` に限定して使用する。
 - Task Seed の `Status` は `docs/TASKS.md` 許可語彙（`planned/active/in_progress/reviewing/blocked/done`）のみを使用する。
 - 語彙衝突回避のため、`degraded` は `notes.readiness_status` のみに限定し、Task Seed `Status` に流用しない。
