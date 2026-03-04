@@ -64,7 +64,7 @@ next_review_due: 2026-06-03
 2. `docs/birdseye/index.json`
 3. 必要最小限の `docs/birdseye/caps/*.json`
 4. `docs/birdseye/hot.json`
-5. 不足時のみ `tools/codemap/update.py`
+5. 不足時のみ `workflow-cookbook/tools/codemap/update.py`（別名パス `tools/codemap/update.py` は注記扱い）
 
 この順序を満たさない場合はタスク化を開始しない。
 Birdseye 復旧が必要な場合の遷移先は [`RUNBOOK.md` の「Birdseye 鮮度不足時の復旧手順」](RUNBOOK.md#birdseye-鮮度不足時の復旧手順) のみとする。
@@ -199,13 +199,18 @@ Birdseye 入力の健全性を事前判定し、`ready | degraded | blocked` の
 ## Birdseyeアクセス異常時の再生成依頼テンプレート
 
 復旧手順本文は `RUNBOOK.md` の「Birdseye 鮮度不足時の復旧手順」と
-`workflow-cookbook/tools/codemap/README.md`（`tools/codemap/README.md`）の「Birdseyeアクセス異常時の復旧手順」を正本とし、
-本節は依頼フォーマットのみを定義する。
+`./workflow-cookbook/tools/codemap/README.md`（別名パス `tools/codemap/README.md` は注記扱い）の「Birdseyeアクセス異常時の復旧手順」を正本とし、
+実行コマンドの canonical path は `workflow-cookbook/tools/codemap/update.py` に固定する。本節は依頼フォーマットのみを定義する。
 
 ```yaml
 birdseye_regen_request:
   requested_to_role: "<依頼先ロール>"
   execute_emit: "index|caps|hot"
+  execute_command_canonical:
+    - "python workflow-cookbook/tools/codemap/update.py --targets docs/birdseye/index.json --emit index"
+    - "python workflow-cookbook/tools/codemap/update.py --targets docs/birdseye/caps --emit caps"
+    - "python workflow-cookbook/tools/codemap/update.py --targets docs/birdseye/index.json,docs/birdseye/caps --emit index+caps"
+  execute_command_alias_note: "`tools/codemap/update.py` は別名パス（注記扱い）"
   post_checks:
     generated_files:
       - "docs/birdseye/index.json"
