@@ -11,6 +11,11 @@ status: planned
 # memx Design Docs Authoring Orchestration
 
 ## Phase 1: 情報収集
+### Priority Label Rule
+- Phase 1 の各チェック項目は `docs/design-docs-prioritization-spec.md` の4軸で判定する。
+- `high`: Blocker発生、REQ網羅率100%未達確定、Birdseye issue（caps欠落/node_id参照切れ）あり。
+- `medium`: Blockerなしだが REQ網羅率低下の可能性または軽微 Birdseye issue がある。
+- `low`: 4軸すべて低リスクで、情報整理のみ。
 ### Dependencies
 - `requirements.md`
 - `traceability.md`
@@ -43,6 +48,11 @@ status: planned
 - [ ] Phase 1 Done Criteria の判定時に、上記仕様書への準拠確認をチェック項目として記録する
 
 ## Phase 2: 章別ドラフト
+### Priority Label Rule
+- Phase 2 の各チェック項目は章ごとに4軸判定し、Task Seed の front matter `priority` へ反映する。
+- `high`: 当該章の未作成により Phase 3 で Blocker 化する、または REQ網羅率100%未達が確定する。
+- `medium`: 章ドラフトはあるが契約差分 high 予兆や軽微 Birdseye issue が残る。
+- `low`: 追記のみで REQ網羅率・契約差分・Birdseye issue に影響しない。
 ### Dependencies
 - `requirements.md`
 - `design.md`
@@ -65,6 +75,11 @@ status: planned
 - 章ごとの未解決事項が 0.5d 以内の追加タスクへ分解済みである
 
 ## Phase 3: 契約整合
+### Priority Label Rule
+- Phase 3 の各チェック項目は契約差分 high 件数を最優先軸として判定する。
+- `high`: 契約差分 high が1件以上、REQ網羅率100%未達、または Birdseye issue 未解消。
+- `medium`: high差分はないが medium/low差分またはリンク修正が残る。
+- `low`: 差分なしで確認作業のみ。
 ### Dependencies
 - `requirements.md`
 - `traceability.md`
@@ -94,6 +109,11 @@ status: planned
 - 各章の検証結果を `memx_spec_v3/docs/design-chapter-validation-spec.md` 準拠の章別検証サマリとして作成済みである
 
 ## Phase 4: 受け入れレビュー
+### Priority Label Rule
+- Phase 4 の各チェック項目は最終判定阻害の有無で付与する。
+- `high`: `Status: done` への遷移を阻害する欠落（REQ網羅率<100%、high差分>0、Birdseye issue>0）がある。
+- `medium`: 判定阻害はないがレビュー指摘反映や記録不足が残る。
+- `low`: 記録整備・移送準備のみ。
 ### Dependencies
 - `requirements.md`
 - `design.md`
