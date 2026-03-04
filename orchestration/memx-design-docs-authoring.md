@@ -35,6 +35,7 @@ status: planned
 - 情報源7ファイルの抽出結果が要件ID/契約ID/node_id単位で一覧化されている（参照仕様: `../memx_spec_v3/docs/design-source-inventory-spec.md`）
 - 抽出結果を Task Seed 化可能な粒度（1項目=1タスク、<=0.5d）で分割している
 - `docs/TASKS.md` 必須項目のうち `Source` / `Node IDs` / `Requirements` へ直接転記できる状態になっている
+- 抽出表運用が `../memx_spec_v3/docs/design-source-inventory-operations-spec.md` に準拠し、保存先/命名規則/更新粒度/承認条件（blocked 行 0 件）を満たしている
 
 ### Phase 1 参照先追記計画（情報源7ファイルの抽出結果）
 - [ ] `design-source-inventory-spec.md` の必須列（`source_path#section`, `req_id`, `contract_ref`, `node_id`, `depends_on`, `owner`, `reviewed_at`）で抽出表を作成する
