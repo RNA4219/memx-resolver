@@ -7,7 +7,7 @@
 
 ## 1. 対象章
 
-章別検証サマリ（2026-03-04）に存在する全14章を対象とし、欠落章なし（14/14）を確認。
+章別検証サマリ（Recalculated-002）に存在する全14章を対象とし、欠落章なし（14/14）を確認。
 
 | chapter_id | req_coverage | contract_alignment_high_count | link_broken_count | birdseye_issue_count | evidence_paths |
 | --- | --- | --- | --- | --- | --- |
@@ -27,7 +27,7 @@
 | `memx_spec_v3/docs/interfaces.md#6. 付録: RUNBOOK連携 I/F ID（v1運用）` | `100%` | `0` | `0` | `0` | [`memx_spec_v3/docs/reviews/DESIGN-REVIEW-20260304-001.md`, `TASK-ACCEPTANCE-20260304-14`] |
 
 ## 2. REQ網羅率
-- `coverage_rate`: `100%`（`chapter_req_total > 0` の8章を集計対象として再計算）
+- `coverage_rate`: `100%`（`chapter_req_total > 0` の章のみを集計対象として再計算）
 
 ## 3. high差分件数
 - `contract_alignment_high_count`: `0`
@@ -40,6 +40,14 @@
 
 ## 6. 最終判定
 - 判定: `pass`
+- 参照元固定: `memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-20260304-002.md`（最新 validation 実体）
+
+- `mapping_match_check` 比較ログ:
+  - comparison_at: `2026-03-04T08:40:55Z`
+  - comparison_targets:
+    - `memx_spec_v3/docs/design-chapter-node-mapping-spec.md`（4.3 章対応表）
+    - `docs/birdseye/index.json`（`node_id: design` / `node_id: interfaces`）
+
 - 根拠（`memx_spec_v3/docs/design-doc-dod-spec.md` 正本条件との差分確認結果）:
   - REQ網羅率は集計対象章で `100%`。
   - 章別検証サマリの `mapping_match_check` は全章 `pass`。
