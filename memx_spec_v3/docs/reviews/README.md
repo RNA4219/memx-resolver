@@ -43,6 +43,8 @@
 ## 受け入れレポート運用ルール（必須）
 - テンプレート/実体の責務分離・命名規則・作成タイミング・差戻し条件は `memx_spec_v3/docs/design-acceptance-lifecycle-spec.md` を正本として運用する。
 - 本READMEでは受け入れレポートの個別ルールを重複定義せず、参照先仕様のチェックID（DA-LC-01〜05）に従う。
+- 差戻し条件: テンプレート `DESIGN-ACCEPTANCE-YYYYMMDD.md` の実体利用は禁止（検出時は差し戻し）。
+- 差戻し条件: `DESIGN-ACCEPTANCE-<実日付>.md` の実体未作成時は `Status: reviewing` を維持し、`done` へ遷移しない。
 
 ## クローズ条件
 - 記録クローズは以下を全て満たした時点とする。

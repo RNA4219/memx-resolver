@@ -187,10 +187,18 @@ CLI/API の既存必須フィールド削除、型変更、意味変更、既存
 
 ## 2-1-4. 受け入れレポート定型チェック（必須）
 
+- [ ] DA-LC-03/04 手順確認: `memx_spec_v3/docs/design-acceptance-lifecycle-spec.md` の命名・作成タイミングに従い、`memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-<実日付>.md` を新規作成した
+- [ ] DA-LC-01/02 手順確認: テンプレート `DESIGN-ACCEPTANCE-YYYYMMDD.md` を実体として流用せず、既存実体の上書き/改名をしていない
 - [ ] 作成済みチェック: `memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-<実日付>.md` が存在する
 - [ ] 命名正当性チェック: 実体ファイル名が `DESIGN-ACCEPTANCE-<実日付>.md` に一致する（テンプレート `DESIGN-ACCEPTANCE-YYYYMMDD.md` を実体として利用していない）
+- [ ] DA-LC-05 必須6項目チェック: 実体に「対象章/REQ網羅率/high差分件数/リンク不達件数/Birdseye issue件数/最終判定」が全て記載されている
 - [ ] 最終判定一致チェック: 受け入れレポートの最終判定が `memx_spec_v3/docs/design-doc-dod-spec.md` の判定結果と一致する
 - [ ] 証跡仕様準拠確認: Phase 対象の証跡（lint/type/test/link/contract/birdseye/coverage）が `memx_spec_v3/docs/design-gate-evidence-spec.md` の保存先・命名規則・最小記録粒度（実行日時・コマンド・結果・判定）に準拠している
+
+### 2-1-4-1. design-doc-dod-spec 判定一致チェック手順（完了条件）
+- [ ] `memx_spec_v3/docs/design-doc-dod-spec.md` の 6 条件（REQ網羅率/high差分/リンク不達/Birdseye issue/レビュー記録完備/参照解決適合率）を入力証跡で照合した
+- [ ] `memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-<実日付>.md` の「6. 最終判定」が上記照合結果と一致することを記録した
+- [ ] 不一致時は `Status: reviewing` を維持し、差戻し理由を Task Seed に追記した
 
 ### 起票時タスク化提案（競合回避のため分離）
 - 提案1: 「受け入れレポート作成/命名検証」を行う Task Seed を先行起票し、DA-LC-03/04 を固定する。

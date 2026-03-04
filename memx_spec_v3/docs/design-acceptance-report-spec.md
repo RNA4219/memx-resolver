@@ -48,6 +48,18 @@
 2. 各検証成果物テンプレートへ共通キーを追記し、サンプルを更新する。
 3. Phase 4 統合時に、入力エビデンスのキー存在チェックを必須ゲート化する。
 
+## 3.4 実体ファイル記載テンプレート（必須6項目固定）
+`memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-<実日付>.md` の実体は、次の6項目をこの順序で必須記載とする。
+
+1. 対象章
+2. REQ網羅率
+3. high差分件数
+4. リンク不達件数
+5. Birdseye issue件数
+6. 最終判定
+
+上記6項目はテンプレート実体（`memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-YYYYMMDD.md`）の章見出しとして固定し、名称変更・省略・順序入替を禁止する。
+
 ## 4. 判定規則（固定）
 - `memx_spec_v3/docs/design-review-spec.md` と合わせて、最終判定の正本は `memx_spec_v3/docs/design-doc-dod-spec.md` とする。
 

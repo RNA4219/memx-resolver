@@ -1,7 +1,9 @@
 # DESIGN ACCEPTANCE REPORT: DESIGN-ACCEPTANCE-YYYYMMDD
 
 - Report ID: DESIGN-ACCEPTANCE-YYYYMMDD
+- 用途: 実体 `memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-<実日付>.md` を新規作成する際の記載テンプレート
 - 判定ロジック正本: `memx_spec_v3/docs/design-doc-dod-spec.md`（本レポートでは重複定義しない）
+- 必須6項目（固定順）: 対象章 / REQ網羅率 / high差分件数 / リンク不達件数 / Birdseye issue件数 / 最終判定
 
 ## 1. 対象章
 - `memx_spec_v3/docs/design.md#<section>`
