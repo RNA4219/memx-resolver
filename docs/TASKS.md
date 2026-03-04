@@ -186,3 +186,8 @@ CLI/API の既存必須フィールド削除、型変更、意味変更、既存
     - `DESIGN-ACCEPTANCE-YYYYMMDD.md` に必須6項目章立てが存在する。
     - 入力元6仕様（requirements-coverage / contract-alignment / link-integrity / birdseye / design-review / chapter-validation）の参照リンクが記載されている。
     - 判定ロジックの記述は `memx_spec_v3/docs/design-doc-dod-spec.md` 参照のみに統一され、重複ロジックを含まない。
+
+## 5. Phase 1 抽出表の転記手順（Source/Requirements/Dependencies）
+1. `memx_spec_v3/docs/reviews/inventory/DESIGN-SOURCE-INVENTORY-YYYYMMDD.md` から `blocked=0` 行のみ抽出する。
+2. `source_path#section` を `Source`、`req_id` を `Requirements`、`depends_on` を `Dependencies` に 1:1 で転記する。
+3. 転記時は `memx_spec_v3/docs/design-reference-resolution-spec.md` に従い、正規パス以外を差し戻す。
