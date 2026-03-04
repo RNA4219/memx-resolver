@@ -163,38 +163,31 @@ status: planned
 - 判定時刻から **7日以内** なら鮮度 OK、**7日超** は鮮度不足として扱う。
 - 鮮度不足時は [`RUNBOOK.md` の「Birdseye 鮮度不足時の復旧手順」](RUNBOOK.md#birdseye-鮮度不足時の復旧手順) を実施する（遷移先は本リンクに統一）。
 
-## Birdseye Readiness Check
+## Birdseye Access Preflight（開始前チェック）
 Birdseye 入力の健全性を事前判定し、`ready | degraded | blocked` の 3 値で `notes.readiness_status` を必ず記録する。
 
-### 判定観点（必須）
-1. `docs/birdseye/index.json` の存在と JSON 妥当性。
-2. `index.nodes` 形式妥当性（`object` / `array` の互換入力を許容）。
-3. 各ノードの `caps` 参照先ファイルの存在。
-4. `generated_at` 鮮度（本ファイル「運用メモ（Birdseye 鮮度判定）」に従う）。
+### チェック項目（固定順）
+1. `docs/birdseye/index.json` 存在確認。
+2. JSON パース可否（`docs/birdseye/index.json`）。
+3. `generated_at` の7日以内判定（本ファイル「運用メモ（Birdseye 鮮度判定）」に従う）。
+4. `nodes[].capsule` 実体存在確認。
 
-### ケース別ハンドリング
-- ケースA: `index.json` 欠損/破損
-  - 判定: `blocked`
-  - 処置: 新規タスク生成を停止し、復旧完了まで Task Seed の `Status` を `planned/active` へ進めない。
-- ケースB: `caps` 部分欠損
-  - 判定: `degraded`
-  - 処置: 既知ノードのみ処理継続し、欠損 `caps` 依存ノードは Task Seed の `Status: blocked` で分離管理する。
-- ケースC: `hot.json` 欠損
-  - 判定: `ready`（警告付き）
-  - 処置: 継続実行可。`notes.missing_files` に欠損を記録する。
+### 失敗時 `notes` 記載テンプレート（必須）
+いずれかのチェックが失敗した場合、`notes` には以下キーを必須で記載する。
+- `readiness_status`: `blocked`（`index.json` 欠損 / JSON パース失敗）または `degraded`（鮮度不足 / `nodes[].capsule` 欠損）。
+- `missing_files`: 欠損ファイルの実パス配列（例: `docs/birdseye/index.json`, `docs/birdseye/caps/<node>.json`）。
+- `impacted_node_ids`: 影響ノード ID 配列（特定不能時は `all`）。
+- `provisional_decision`: `RUNBOOK.md#birdseye-鮮度不足時の復旧手順` を実施し、復旧完了まで Task Seed を `planned/active` に進めない旨。
+- `regen_request_to`: 再生成依頼先ロール（未確定時は `unassigned`）。
 
-### 欠損時 `notes` 必須キー
-欠損または劣化を検知した場合、`notes` に以下キーを必須で記載する。
-- `readiness_status`
-- `missing_files`
-- `impacted_node_ids`
-- `provisional_decision`
-- `regen_request_to`
+### 失敗時の遷移先と進行停止条件
+- 失敗時の遷移先は [`RUNBOOK.md` の「Birdseye 鮮度不足時の復旧手順」](RUNBOOK.md#birdseye-鮮度不足時の復旧手順) のみに固定する。
+- 復旧完了まで新規タスク生成を停止し、Task Seed の `Status` を `planned/active` へ進めない。
 
-### `docs/TASKS.md` ステータス語彙との整合
+### `docs/TASKS.md` ステータス語彙との整合（再掲）
 - `ready | degraded | blocked` は Birdseye 入力健全性専用語彙として `notes.readiness_status` に限定して使用する。
 - Task Seed の `Status` は `docs/TASKS.md` 許可語彙（`planned/active/in_progress/reviewing/blocked/done`）のみを使用する。
-- 語彙衝突回避のため、`degraded` を Task Seed `Status` に流用しない。
+- 語彙衝突回避のため、`degraded` は `notes.readiness_status` のみに限定し、Task Seed `Status` に流用しない。
 
 ## Birdseyeアクセス異常時の再生成依頼テンプレート
 
