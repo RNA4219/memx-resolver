@@ -19,6 +19,8 @@ next_review_due: 2026-06-03
 1. `plan`
    - 実施方針を箇条書きで記載。
    - 変更対象・非対象を明記。
+   - 各タスクに `node_id` / `role` / `source_caps` を必須で含める。
+   - `source_caps` は `docs/birdseye/caps/*.json` の参照パスを保持する。
 2. `patch`
    - 変更ファイルと要点差分を記載。
    - 実変更がない場合は `no-op` と明記。
@@ -92,11 +94,28 @@ next_review_due: 2026-06-03
    - 出力: `CHANGELOG.md`（正本）更新と Task Seed への `Moved-to-CHANGES: YYYY-MM-DD` 記録。
 
 ## 出力例（YAML）
+### 最小 YAML スキーマ（Output Contract 準拠）
+```yaml
+plan:
+  - task_id: string
+    source: string
+    objective: string
+    node_id: string
+    role: string
+    source_caps:
+      - string
+```
+
+### Task Seed 例
 ```yaml
 task_id: TASK.normalize-hub-yaml-03-03-2026
 source:
   - orchestration/plan.md#Phase1
   - orchestration/implementation.md#Phase2
+birdseye:
+  node_id: node-orchestration-plan-phase1
+  role: orchestrator
+  caps_ref: docs/birdseye/caps/requirements.json
 objective: docs/TASKS.md 準拠の Task Seed 生成規約を固定化する
 requirements:
   - source は orchestration/...#Phase... の追跡可能形式を使う
