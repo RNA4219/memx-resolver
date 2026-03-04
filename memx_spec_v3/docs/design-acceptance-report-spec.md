@@ -17,22 +17,9 @@
 5. `memx_spec_v3/docs/design-review-spec.md`
 6. `memx_spec_v3/docs/design-chapter-validation-spec.md`
 
-## 3. 統合レポート必須項目
-統合レポート（`DESIGN-ACCEPTANCE-YYYYMMDD.md`）には以下 6 項目を必須で含める。
-
-1. **対象章**
-   - 受け入れ対象の章一覧（`path#section` 形式）
-2. **REQ網羅率**
-   - `coverage_rate`（%）
-3. **high差分件数**
-   - 契約同期結果の `severity: high` 件数
-4. **リンク不達件数**
-   - `link_unreachable_count`
-5. **Birdseye issue件数**
-   - `memx-birdseye-validation-spec.md` に基づく未解決 issue 件数
-6. **最終判定**
-   - `pass` または `fail`
-
+## 3. 統合レポートのテンプレート定義（正本参照）
+- 統合レポート（`DESIGN-ACCEPTANCE-YYYYMMDD.md`）の必須セクション・必須キー・許可値・命名規則・保存先は `memx_spec_v3/docs/design-evidence-template-spec.md` を正本とする。
+- 本仕様は Phase 4 の判定規則と入力要件のみを定義する。
 
 ## 3.1 章別検証サマリ参照（必須）
 - 統合レポートは、対象章ごとに `memx_spec_v3/docs/design-chapter-validation-spec.md` の章別検証サマリ参照を必須で含める。
@@ -69,32 +56,5 @@
 - `Birdseye issue件数 > 0` の場合は `fail`
 - 上記いずれにも該当しない場合のみ `pass`
 
-## 5. 保存場所・命名規則（必須）
-- 保存先は `memx_spec_v3/docs/reviews/` に固定する。
-- ファイル名は `DESIGN-ACCEPTANCE-YYYYMMDD.md` とする。
-- 例: `memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-20260304.md`
-
-## 6. 記録テンプレート（最小）
-```md
-# DESIGN ACCEPTANCE REPORT: <title>
-- Report ID: DESIGN-ACCEPTANCE-YYYYMMDD
-- 対象章:
-  - memx_spec_v3/docs/design.md#...
-  - memx_spec_v3/docs/interfaces.md#...
-
-## メトリクス
-- REQ網羅率: 100%
-- high差分件数: 0
-- リンク不達件数: 0
-- Birdseye issue件数: 0
-
-## 最終判定
-- 判定: pass|fail
-- 根拠:
-  - requirements-coverage: <artifact/path>
-  - contract-alignment: <artifact/path>
-  - link-integrity: <artifact/path>
-  - birdseye-validation: <artifact/path>
-  - design-review: <artifact/path>
-  - chapter-validation: <artifact/path>
-```
+## 5. 保存場所・命名規則・テンプレート
+- `DESIGN-ACCEPTANCE-YYYYMMDD.md` の保存場所・命名規則・テンプレート本文は `memx_spec_v3/docs/design-evidence-template-spec.md` を参照する。
