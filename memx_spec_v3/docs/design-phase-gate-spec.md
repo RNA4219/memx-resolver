@@ -91,6 +91,7 @@
 ### Entry criteria
 - Phase 2 gate `pass`。
 - 章別ドラフトに契約参照（OpenAPI/CLI schema/requirements）が付与済み。
+- `memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-<実日付>.md` が最新化され、章別結果（REQ網羅率/契約差分high/リンク不達/Birdseye issue/mapping一致）が gate 列へ反映可能である。
 
 ### 入力成果物
 - Phase 2 の章別 Task Seed
@@ -148,3 +149,22 @@
 ### 次Phase遷移条件
 - 最終 gate 判定 `pass`。
 - `docs/TASKS.md` の完了条件（Release Note Draft / Moved-to-CHANGES）を満たす。
+
+
+## 4. 章別検証結果→gate列（5軸）連携手順
+`memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-<実日付>.md` の章別結果は、以下の手順で gate 列へ反映する。
+
+1. 入力固定
+   - 章別入力は `chapter_id/req_coverage/contract_alignment_high_count/link_broken_count/birdseye_issue_count/mapping_match_check` のみを使用する。
+2. 5軸への写像
+   - `gate_req_coverage`: 章内で `req_coverage < 100` が1件でもあれば `high`、低下リスクのみなら `medium`、全章100%なら `low`。
+   - `gate_contract_high`: `contract_alignment_high_count > 0` が1件でもあれば `high`、`high` なしで差分ありは `medium`、差分なしは `low`。
+   - `gate_birdseye_issue`: `birdseye_issue_count > 0` または `mapping_match_check = fail` が1件でもあれば `high`、軽微issueのみは `medium`、問題なしは `low`。
+   - `gate_blocker`: 上記3列のいずれかが `high` の章がある場合は `high`、解消計画のみ未完は `medium`、阻害なしは `low`。
+   - `gate_hub_source_coverage`: `memx_spec_v3/docs/design-hub-source-coverage-spec.md` の判定をそのまま転記する。
+3. 集約規則
+   - 章別で最悪値（`high > medium > low`）を Phase 判定値として採用する。
+4. 記録先
+   - Task Seed の gate 列、`DESIGN-REVIEW-<実日付>-<連番>.md`、`DESIGN-ACCEPTANCE-<実日付>.md` に同一値を記録する。
+5. close 制約
+   - 5軸のいずれかが `high` の場合は gate `fail` とし、`Status: done` を禁止する。
