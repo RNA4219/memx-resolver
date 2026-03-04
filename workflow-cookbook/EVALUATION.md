@@ -15,6 +15,7 @@ next_review_due: 2025-11-14
 - governance/policy.yaml の forbidden_paths を変更しないこと。
 - インシデント発生時は docs/IN-YYYYMMDD-XXX.md を作成し、該当PRおよびRUNBOOKから相互リンクする
 - 要件カバレッジが `req_coverage=100%` を満たすこと（[docs/qa/req_coverage_report.md](docs/qa/req_coverage_report.md)）。
+- 検収時は [docs/qa/contract_align_report.md](docs/qa/contract_align_report.md) を必須参照とし、契約整合（aligned / mismatch）と是正タスクの最新化を確認する。
 
 ## KPIs
 
