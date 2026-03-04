@@ -12,6 +12,9 @@
 - `RUNBOOK.md`
 - `docs/birdseye/index.json`
 
+## 関連仕様
+- 運用ルールは `design-source-inventory-operations-spec.md` を参照する。
+
 ## インベントリ行フォーマット
 抽出結果は 1 行 1 項目で記録し、以下の必須列をすべて持つこと。
 

@@ -62,6 +62,12 @@
   - lint/type/test の基準は `docs/QUALITY_GATES.md` に従う。
   - 現行の必須最小構成は `go test ./...`（Go）で、Python/Node は対象外として扱う。
   - 仕様書作成・更新タスクでも同じ判定基準（`docs/QUALITY_GATES.md`）を `Commands` に記載し、Task 起票時の誤記載を防止する。
+- Source/Commands の記載例（抽出表作成・検証の最小セット）
+  - `mkdir -p memx_spec_v3/docs/reviews/inventory`
+  - `date +%Y%m%d`
+  - `test -f memx_spec_v3/docs/reviews/inventory/DESIGN-SOURCE-INVENTORY-$(date +%Y%m%d).md`
+  - `rg -n "^\| .* \| REQ-" memx_spec_v3/docs/reviews/inventory/DESIGN-SOURCE-INVENTORY-$(date +%Y%m%d).md`
+  - `rg -n "\| blocked \|" memx_spec_v3/docs/reviews/inventory/DESIGN-SOURCE-INVENTORY-$(date +%Y%m%d).md`
 - 品質ゲート参照スコープは「memx 本体（`memx_spec_v3/`）は `docs/QUALITY_GATES.md`、`workflow-cookbook/` は `workflow-cookbook/docs/QUALITY_GATES.md`」と明記する。
 
 ### Dependencies
