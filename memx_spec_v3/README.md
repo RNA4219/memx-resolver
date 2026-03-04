@@ -4,15 +4,18 @@
 
 ## 構成
 
+正本は `docs/spec.md` の役割分担に従って参照してください。
+
 - `docs/spec.md`
   仕様インデックス（正本/補助の役割分担、API/CLI/エラー/NFR/運用要件の参照導線）。
 - `docs/requirements.md`
   システム全体の要件定義の正本（目的・アーキテクチャ・CLI・GC・LLM役割など、レビュー内容を反映）。
-- `schema/short.sql`  
-- `docs/requirements.md`
-  要求事項（MUST/SHOULD/FUTURE）と ID 定義の正本。
-- `docs/spec.md`
-  仕様（ユースケース、スコープ境界、非ゴール、受け入れ観点）。
+- `docs/contracts/openapi.yaml`
+  API 契約の正本。
+- `docs/contracts/cli-json.schema.json`
+  CLI `--json` 契約の正本。
+- `docs/traceability.md`
+  要求・契約・実装の対応関係（トレーサビリティ）の正本。
 - `docs/design.md`
   設計（レイヤ構成、DB責務分割、移行戦略）。
 - `docs/interfaces.md`
