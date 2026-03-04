@@ -177,9 +177,16 @@ CLI/API の既存必須フィールド削除、型変更、意味変更、既存
 - [ ] `memx_spec_v3/docs/contracts/reports/` 配下に `CONTRACT-ALIGN-YYYYMMDD-###.md` と `LATEST.md` が存在することを確認した
 - [ ] 更新順序を `CONTRACT-ALIGN作成 -> LATEST更新 -> EVALUATION照合` で実施し、逆順更新がないことを確認した
 - [ ] `memx_spec_v3/docs/contracts/reports/LATEST.md` の必須キー（`report_id/report_path/decision_date/high_count/phase3_status`）を schema 固定として全件記載されていることを確認した（1件でも欠落なら fail）
+- [ ] `LATEST.md` は当該判定のたびに毎回更新し、`report_id/report_path/decision_date/high_count/phase3_status` の5キーを前回値のまま残置していないことを確認した
 - [ ] `memx_spec_v3/docs/contracts/reports/LATEST.md` の必須キー値が最新レポートと整合していることを確認した
-- [ ] `EVALUATION.md` のレポートID参照と、`memx_spec_v3/docs/contracts/reports/LATEST.md` の `report_id` が一致することを確認した
-- [ ] レポートID不一致時は Phase 3 の `Status` を `reviewing` 固定にし、`done` / `blocked` へ遷移していないことを確認した
+- [ ] `EVALUATION.md` の `report_id/report_path` 参照と、`memx_spec_v3/docs/contracts/reports/LATEST.md` の `report_id/report_path` が一致することを確認した
+- [ ] `high_count > 0` またはレポートID不一致時は Phase 3 の `Status` を `reviewing/blocked` に固定し、`done` へ遷移していないことを確認した
+
+### 2-1-3-0. Task Seed 分岐ルール（Phase 3 固定）
+
+- `high_count = 0` かつ `LATEST.md` と `EVALUATION.md` の `report_id/report_path` 一致時のみ `Status: done` へ遷移可能。
+- `high_count > 0` の場合は `Status: blocked` を基本とし、レビュー再判定中のみ `Status: reviewing` を許可する。
+- `report_id` または `report_path` が不一致の場合は `Status: reviewing` 固定とし、`done` / `blocked` へ遷移しない。
 
 ## 2-1-3-1. レビュー実体ファイルSLAチェック（Task Seed close 条件連動・必須）
 
@@ -195,9 +202,9 @@ CLI/API の既存必須フィールド削除、型変更、意味変更、既存
 ## 2-1-4. 受け入れレポート定型チェック（必須）
 
 - [ ] DA-LC-03/04 手順確認: `memx_spec_v3/docs/design-acceptance-lifecycle-spec.md` の命名・作成タイミングに従い、`memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-<実日付>.md` を新規作成した
-- [ ] DA-LC-01/02 手順確認: テンプレート `DESIGN-ACCEPTANCE-YYYYMMDD.md` を実体として流用せず、既存実体の上書き/改名をしていない
+- [ ] DA-LC-01/02 手順確認: テンプレート `DESIGN-ACCEPTANCE-YYYYMMDD.md` はテンプレート専用として扱い、実体判定・Status遷移・Release判定の証跡に使用せず、既存実体の上書き/改名もしていない
 - [ ] 作成済みチェック: `memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-<実日付>.md` が存在する
-- [ ] 命名正当性チェック: 実体ファイル名が `DESIGN-ACCEPTANCE-<実日付>.md` に一致する（テンプレート `DESIGN-ACCEPTANCE-YYYYMMDD.md` を実体として利用していない）
+- [ ] 命名正当性チェック: 実体ファイル名が `DESIGN-ACCEPTANCE-<実日付>.md` に一致し、`DESIGN-ACCEPTANCE-YYYYMMDD.md` はテンプレート専用として保持されている
 - [ ] DA-LC-05 必須6項目チェック: 実体に「対象章/REQ網羅率/high差分件数/リンク不達件数/Birdseye issue件数/最終判定」が全て記載されている
 - [ ] 最終判定一致チェック: 受け入れレポートの最終判定が `memx_spec_v3/docs/design-doc-dod-spec.md` の判定結果と一致する
 - [ ] 証跡仕様準拠確認: Phase 対象の証跡（lint/type/test/link/contract/birdseye/coverage）が `memx_spec_v3/docs/design-gate-evidence-spec.md` の保存先・命名規則・最小記録粒度（実行日時・コマンド・結果・判定）に準拠している
@@ -215,8 +222,13 @@ CLI/API の既存必須フィールド削除、型変更、意味変更、既存
 - 提案1: 「Trigger 判定のみ」を行う 0.5d Task Seed を先行起票し、該当 Trigger IDs と必須更新先を固定する。
 - 提案2: 「文書反映 + レビュー記録 + CHANGES 転記」を行う後続 Task Seed を分離し、`done` 条件を満たした時点で統合する。
 
+## 2-2. 共通チェックリスト
 
-## 2-2. 変更タイプ別チェックリスト（requirements 0-0-4 整合）
+- [ ] `memx_spec_v3/go/go.mod` を変更した場合は、`memx_spec_v3/go/go.sum` を同一コミットで同時更新している
+- [ ] 差分に `memx_spec_v3/go/go.mod` または `memx_spec_v3/go/go.sum` が含まれる場合、`git diff --name-only` で両方が差分に含まれていることを確認している
+
+
+## 2-3. 変更タイプ別チェックリスト（requirements 0-0-4 整合）
 
 ### 互換維持変更
 - [ ] `Requirements` に後方互換維持（CLI/API/`--json` 同型）を明記する
@@ -254,12 +266,12 @@ CLI/API の既存必須フィールド削除、型変更、意味変更、既存
 - [ ] Task C: `memx_spec_v3/docs/design-acceptance-report-spec.md` / `memx_spec_v3/docs/design-review-spec.md` へ「最終判定の正本」相互参照を維持する運用チェックを Task Seed の `Requirements` に追加する。
   - Commands:
     - `date +%Y%m%d`
-    - `test -f memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-YYYYMMDD.md`
+    - `test -f memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-YYYYMMDD.md` （テンプレート専用ファイルの存在確認のみ）
     - `rg -n "^## 1\. 対象章|^## 2\. REQ網羅率|^## 3\. high差分件数|^## 4\. リンク不達件数|^## 5\. Birdseye issue件数|^## 6\. 最終判定" memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-YYYYMMDD.md`
     - `rg -n "design-doc-dod-spec\.md" memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-YYYYMMDD.md`
     - `go test ./...`
   - 完了条件:
-    - `DESIGN-ACCEPTANCE-YYYYMMDD.md` に必須6項目章立てが存在する。
+    - `DESIGN-ACCEPTANCE-YYYYMMDD.md` はテンプレート専用として必須6項目章立てのみを保持し、実体判定には使用しない。
     - 入力元6仕様（requirements-coverage / contract-alignment / link-integrity / birdseye / design-review / chapter-validation）の参照リンクが記載されている。
     - 判定ロジックの記述は `memx_spec_v3/docs/design-doc-dod-spec.md` 参照のみに統一され、重複ロジックを含まない。
 
