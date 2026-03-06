@@ -30,4 +30,4 @@ Local-first personal memory & knowledge store for LLM agents.
 - [CHECKLISTS.md](./CHECKLISTS.md)
 
 ## License
-Apache-2.0
+MIT
