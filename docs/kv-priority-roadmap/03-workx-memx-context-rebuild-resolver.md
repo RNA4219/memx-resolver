@@ -1,4 +1,4 @@
-# Priority 3: workx x memx-core の context rebuild resolver
+# Priority 4: workx x memx-core の context rebuild resolver
 
 ## 目的
 
@@ -141,5 +141,6 @@ LoadSelectedRaw(ref, selector) -> RawPayload
 
 ## 依存
 
-- P1 完了が必須
-- P2 の bundle/source 構造が先に必要
+- P1（`kv-cache-independence-amendments.md`）完了が必須
+- P2（`01-typed-ref-unification.md`）完了が必須
+- P3（`02-workx-state-history-and-bundle-audit.md`）の bundle/source 構造が先に必要

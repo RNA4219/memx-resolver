@@ -1,4 +1,4 @@
-# Priority 1: typed_ref 統一
+# Priority 2: typed_ref 統一
 
 ## 目的
 
@@ -100,4 +100,8 @@ canonical format は以下で固定する。
 
 - typed_ref に関する仕様差分がなくなる
 - 4 セグメント canonical format が docs と code の両方で一致する
-- 以後の P2-P4 がこの契約の上で進められる
+- 以後の P3-P5 がこの契約の上で進められる
+
+## 依存
+
+- P1（`kv-cache-independence-amendments.md`）完了後に着手する

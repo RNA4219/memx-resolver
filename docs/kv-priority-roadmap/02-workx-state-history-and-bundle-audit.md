@@ -1,4 +1,4 @@
-# Priority 2: workx の state history と bundle 監査面の実装
+# Priority 3: workx の state history と bundle 監査面の実装
 
 ## 目的
 
@@ -164,4 +164,5 @@ bundle body に ref を埋めるだけでは監査しづらい。
 
 ## 依存
 
-- P1 完了後に着手する
+- P1（`kv-cache-independence-amendments.md`）完了後に着手する
+- P2（`01-typed-ref-unification.md`）完了後に着手する

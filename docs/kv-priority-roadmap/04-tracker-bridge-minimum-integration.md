@@ -1,4 +1,4 @@
-# Priority 4: tracker-bridge の最小統合
+# Priority 5: tracker-bridge の最小統合
 
 ## 目的
 
@@ -120,5 +120,7 @@ tracker 更新を見て、いきなり `workx task.status` を書き換えない
 
 ## 依存
 
-- P1 完了が必須
-- P2, P3 完了後に進めるのが安全
+- P1（`kv-cache-independence-amendments.md`）完了が必須
+- P2（`01-typed-ref-unification.md`）完了が必須
+- P3（`02-workx-state-history-and-bundle-audit.md`）完了後に進めるのが安全
+- P4（`03-workx-memx-context-rebuild-resolver.md`）完了後に進めるのが安全
