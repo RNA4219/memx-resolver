@@ -43,8 +43,12 @@ mem out show <NOTE_ID>
 
 | 機能 | コマンド | 説明 |
 |------|----------|------|
-| 保存 | `mem in short` | メモを短期ストアに保存 |
-| 検索 | `mem out search` | キーワードでメモを検索 |
+| 保存（short） | `mem in short` | メモを短期ストアに保存 |
+| 保存（journal） | `mem in journal --scope <scope>` | ログをjournalストアに保存 |
+| 保存（knowledge） | `mem in knowledge --scope <scope>` | 知識をknowledgeストアに保存 |
+| 検索（short） | `mem out search` | キーワードでメモを検索 |
+| 検索（journal） | `mem out journal search` | journalを検索 |
+| 検索（knowledge） | `mem out knowledge search` | knowledgeを検索 |
 | 表示 | `mem out show` | メモの詳細を表示 |
 | 要約 | `mem summarize` | LLMでメモを要約 |
 | GC | `mem gc short --dry-run` | 古いメモの整理（確認のみ） |
@@ -56,14 +60,14 @@ mem out show <NOTE_ID>
 
 4つのストア構成：
 
-```
-short.db       短期記憶（作業メモ）
-journal.db   長期記憶（重要な履歴）
-knowledge.db   知識ベース（永続情報）
-archive.db     アーカイブ
-```
+| ストア | DB | 用途 | typed_ref |
+|--------|-----|------|-----------|
+| short | `short.db` | 短期記憶（作業メモ） | evidence |
+| journal | `journal.db` | 長期記憶（時系列ログ） | evidence |
+| knowledge | `knowledge.db` | 知識ベース（永続情報） | knowledge |
+| archive | `archive.db` | アーカイブ（検索対象外） | evidence |
 
-**v1 では `short` ストアを実装済み。**
+**v1.3 では全ストアの CRUD を実装済み。**
 
 ---
 
@@ -98,7 +102,7 @@ archive.db     アーカイブ
 
 ## 開発状況
 
-### v1 完了済み
+### v1.3 完了済み
 
 - [x] CLI基本コマンド (in/out/search/show)
 - [x] HTTP API サーバー
@@ -106,20 +110,21 @@ archive.db     アーカイブ
 - [x] 入力バリデーション
 - [x] LLM要約機能
 - [x] 全ストアのスキーマ定義（short/journal/knowledge/archive）
-
-### v1.x 完了済み
-
 - [x] GC（ガベージコレクション）機能
-  - Phase0: トリガ判定（soft_limit/hard_limit）
-  - Phase3: Archive退避
-  - Feature flag対応
-  - dry-run モード
+- [x] **journal ストアの CRUD実装**（Ingest, Get, Search, ListByScope）
+- [x] **knowledge ストアの CRUD実装**（Ingest, Get, Search, ListByScope, Pin/Unpin）
+- [x] **archive ストアの CRUD実装**（Get, List, ArchiveFromShort, Restore, Lineage）
+- [x] Claude Code スキル（/remember, /recall, /journal, /knowledge, /show）
 
-### v1.x 予定
+### 次期ロードマップ
 
-- [ ] journal ストアの CRUD実装
-- [ ] knowledge ストアの CRUD実装
-- [ ] archive ストアの CRUD実装
+KV優先ロードマップに従って以下を順次実装：
+
+1. P1: KVキャッシュ独立化
+2. P2: typed_ref 統一
+3. P3: WorkX 状態履歴・バンドル監査
+4. P4: WorkX/MemX コンテキスト再構築リゾルバ
+5. P5: Tracker Bridge 最小統合
 
 ---
 
