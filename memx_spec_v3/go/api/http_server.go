@@ -9,7 +9,6 @@ import (
 )
 
 // HTTPServer は /v1/* の JSON API を提供する。
-// ローカル利用が前提（127.0.0.1 / unix socket）。
 type HTTPServer struct {
 	InProc *InProcClient
 }
@@ -20,10 +19,9 @@ func NewHTTPServer(svc *service.Service) *HTTPServer {
 
 func (s *HTTPServer) Handler() http.Handler {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte("ok"))
-	})
+
+	// Health
+	mux.HandleFunc("/healthz", s.handleHealthz)
 
 	// Short store
 	mux.HandleFunc("/v1/notes:ingest", s.handleNotesIngest)
@@ -53,113 +51,11 @@ func (s *HTTPServer) Handler() http.Handler {
 	return mux
 }
 
-func (s *HTTPServer) handleNotesIngest(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	var req NotesIngestRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
-		return
-	}
-	resp, apiErr := s.InProc.NotesIngest(r.Context(), req)
-	if apiErr != nil {
-		writeErr(w, apiErr)
-		return
-	}
-	writeOK(w, resp)
-}
+// -------------------- Common Helpers --------------------
 
-func (s *HTTPServer) handleNotesSearch(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	var req NotesSearchRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
-		return
-	}
-	resp, apiErr := s.InProc.NotesSearch(r.Context(), req)
-	if apiErr != nil {
-		writeErr(w, apiErr)
-		return
-	}
-	writeOK(w, resp)
-}
-
-func (s *HTTPServer) handleNotesGet(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	id := strings.TrimPrefix(r.URL.Path, "/v1/notes/")
-	id = strings.TrimSpace(id)
-	if id == "" {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "id is required"})
-		return
-	}
-	n, apiErr := s.InProc.NotesGet(r.Context(), id)
-	if apiErr != nil {
-		writeErr(w, apiErr)
-		return
-	}
-	writeOK(w, n)
-}
-
-func (s *HTTPServer) handleGCRun(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	var req GCRunRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
-		return
-	}
-	resp, apiErr := s.InProc.GCRun(r.Context(), req)
-	if apiErr != nil {
-		writeErr(w, apiErr)
-		return
-	}
-	writeOK(w, resp)
-}
-
-func (s *HTTPServer) handleSummarize(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	var req SummarizeRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
-		return
-	}
-	resp, apiErr := s.InProc.Summarize(r.Context(), req.ID)
-	if apiErr != nil {
-		writeErr(w, apiErr)
-		return
-	}
-	writeOK(w, resp)
-}
-
-func (s *HTTPServer) handleSummarizeBatch(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	var req SummarizeBatchRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
-		return
-	}
-	resp, apiErr := s.InProc.SummarizeBatch(r.Context(), req)
-	if apiErr != nil {
-		writeErr(w, apiErr)
-		return
-	}
-	writeOK(w, resp)
+func (s *HTTPServer) handleHealthz(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte("ok"))
 }
 
 func writeOK(w http.ResponseWriter, v interface{}) {
@@ -179,8 +75,6 @@ func writeErr(w http.ResponseWriter, e *Error) {
 			status = http.StatusConflict
 		case CodeGatekeepDeny:
 			status = http.StatusForbidden
-		default:
-			status = http.StatusInternalServerError
 		}
 	}
 	w.Header().Set("Content-Type", "application/json")
@@ -188,7 +82,133 @@ func writeErr(w http.ResponseWriter, e *Error) {
 	_ = json.NewEncoder(w).Encode(e)
 }
 
-// -------------------- Chronicle --------------------
+func decodeJSON(w http.ResponseWriter, r *http.Request, v interface{}) *Error {
+	if err := json.NewDecoder(r.Body).Decode(v); err != nil {
+		return &Error{Code: CodeInvalidArgument, Message: "invalid json"}
+	}
+	return nil
+}
+
+func extractID(w http.ResponseWriter, r *http.Request, prefix string) (string, bool) {
+	id := strings.TrimPrefix(r.URL.Path, prefix)
+	id = strings.TrimSpace(id)
+	if id == "" {
+		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "id is required"})
+		return "", false
+	}
+	return id, true
+}
+
+// -------------------- Short Store --------------------
+
+func (s *HTTPServer) handleNotesIngest(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	var req NotesIngestRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
+		return
+	}
+	resp, apiErr := s.InProc.NotesIngest(r.Context(), req)
+	if apiErr != nil {
+		writeErr(w, apiErr)
+		return
+	}
+	writeOK(w, resp)
+}
+
+func (s *HTTPServer) handleNotesSearch(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	var req NotesSearchRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
+		return
+	}
+	resp, apiErr := s.InProc.NotesSearch(r.Context(), req)
+	if apiErr != nil {
+		writeErr(w, apiErr)
+		return
+	}
+	writeOK(w, resp)
+}
+
+func (s *HTTPServer) handleNotesGet(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	id, ok := extractID(w, r, "/v1/notes/")
+	if !ok {
+		return
+	}
+	n, apiErr := s.InProc.NotesGet(r.Context(), id)
+	if apiErr != nil {
+		writeErr(w, apiErr)
+		return
+	}
+	writeOK(w, n)
+}
+
+func (s *HTTPServer) handleGCRun(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	var req GCRunRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
+		return
+	}
+	resp, apiErr := s.InProc.GCRun(r.Context(), req)
+	if apiErr != nil {
+		writeErr(w, apiErr)
+		return
+	}
+	writeOK(w, resp)
+}
+
+func (s *HTTPServer) handleSummarize(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	var req SummarizeRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
+		return
+	}
+	resp, apiErr := s.InProc.Summarize(r.Context(), req.ID)
+	if apiErr != nil {
+		writeErr(w, apiErr)
+		return
+	}
+	writeOK(w, resp)
+}
+
+func (s *HTTPServer) handleSummarizeBatch(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	var req SummarizeBatchRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
+		return
+	}
+	resp, apiErr := s.InProc.SummarizeBatch(r.Context(), req)
+	if apiErr != nil {
+		writeErr(w, apiErr)
+		return
+	}
+	writeOK(w, resp)
+}
+
+// -------------------- Chronicle Store --------------------
 
 func (s *HTTPServer) handleChronicleIngest(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -196,8 +216,8 @@ func (s *HTTPServer) handleChronicleIngest(w http.ResponseWriter, r *http.Reques
 		return
 	}
 	var req ChronicleIngestRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
 		return
 	}
 	resp, apiErr := s.InProc.ChronicleIngest(r.Context(), req)
@@ -214,8 +234,8 @@ func (s *HTTPServer) handleChronicleSearch(w http.ResponseWriter, r *http.Reques
 		return
 	}
 	var req ChronicleSearchRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
 		return
 	}
 	resp, apiErr := s.InProc.ChronicleSearch(r.Context(), req)
@@ -231,10 +251,8 @@ func (s *HTTPServer) handleChronicleGet(w http.ResponseWriter, r *http.Request) 
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	id := strings.TrimPrefix(r.URL.Path, "/v1/chronicle/")
-	id = strings.TrimSpace(id)
-	if id == "" {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "id is required"})
+	id, ok := extractID(w, r, "/v1/chronicle/")
+	if !ok {
 		return
 	}
 	n, apiErr := s.InProc.ChronicleGet(r.Context(), id)
@@ -251,8 +269,8 @@ func (s *HTTPServer) handleChronicleListByScope(w http.ResponseWriter, r *http.R
 		return
 	}
 	var req ChronicleListByScopeRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
 		return
 	}
 	resp, apiErr := s.InProc.ChronicleListByScope(r.Context(), req)
@@ -263,7 +281,7 @@ func (s *HTTPServer) handleChronicleListByScope(w http.ResponseWriter, r *http.R
 	writeOK(w, resp)
 }
 
-// -------------------- Memopedia --------------------
+// -------------------- Memopedia Store --------------------
 
 func (s *HTTPServer) handleMemopediaIngest(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -271,8 +289,8 @@ func (s *HTTPServer) handleMemopediaIngest(w http.ResponseWriter, r *http.Reques
 		return
 	}
 	var req MemopediaIngestRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
 		return
 	}
 	resp, apiErr := s.InProc.MemopediaIngest(r.Context(), req)
@@ -289,8 +307,8 @@ func (s *HTTPServer) handleMemopediaSearch(w http.ResponseWriter, r *http.Reques
 		return
 	}
 	var req MemopediaSearchRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
 		return
 	}
 	resp, apiErr := s.InProc.MemopediaSearch(r.Context(), req)
@@ -306,10 +324,8 @@ func (s *HTTPServer) handleMemopediaGet(w http.ResponseWriter, r *http.Request) 
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	id := strings.TrimPrefix(r.URL.Path, "/v1/memopedia/")
-	id = strings.TrimSpace(id)
-	if id == "" {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "id is required"})
+	id, ok := extractID(w, r, "/v1/memopedia/")
+	if !ok {
 		return
 	}
 	// Check for pin/unpin actions
@@ -361,8 +377,8 @@ func (s *HTTPServer) handleMemopediaListByScope(w http.ResponseWriter, r *http.R
 		return
 	}
 	var req MemopediaListByScopeRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
 		return
 	}
 	resp, apiErr := s.InProc.MemopediaListByScope(r.Context(), req)
@@ -379,8 +395,8 @@ func (s *HTTPServer) handleMemopediaListPinned(w http.ResponseWriter, r *http.Re
 		return
 	}
 	var req MemopediaListPinnedRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "invalid json"})
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
 		return
 	}
 	resp, apiErr := s.InProc.MemopediaListPinned(r.Context(), req)
@@ -391,7 +407,7 @@ func (s *HTTPServer) handleMemopediaListPinned(w http.ResponseWriter, r *http.Re
 	writeOK(w, resp)
 }
 
-// -------------------- Archive --------------------
+// -------------------- Archive Store --------------------
 
 func (s *HTTPServer) handleArchiveList(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -400,12 +416,8 @@ func (s *HTTPServer) handleArchiveList(w http.ResponseWriter, r *http.Request) {
 	}
 	limit := 20
 	if l := r.URL.Query().Get("limit"); l != "" {
-		var lim int
-		if val, err := json.Number(l).Int64(); err == nil {
-			lim = int(val)
-			if lim > 0 {
-				limit = lim
-			}
+		if val, err := json.Number(l).Int64(); err == nil && val > 0 {
+			limit = int(val)
 		}
 	}
 	resp, apiErr := s.InProc.ArchiveList(r.Context(), ArchiveListRequest{Limit: limit})
@@ -417,24 +429,18 @@ func (s *HTTPServer) handleArchiveList(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *HTTPServer) handleArchiveGetOrRestore(w http.ResponseWriter, r *http.Request) {
-	id := strings.TrimPrefix(r.URL.Path, "/v1/archive/")
-	id = strings.TrimSpace(id)
-	if id == "" {
-		writeErr(w, &Error{Code: CodeInvalidArgument, Message: "id is required"})
+	id, ok := extractID(w, r, "/v1/archive/")
+	if !ok {
 		return
 	}
-
-	// Check for restore action
 	if strings.HasSuffix(id, ":restore") {
 		s.handleArchiveRestore(w, r, strings.TrimSuffix(id, ":restore"))
 		return
 	}
-
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-
 	n, apiErr := s.InProc.ArchiveGet(r.Context(), id)
 	if apiErr != nil {
 		writeErr(w, apiErr)

@@ -14,6 +14,86 @@ func NewInProcClient(svc *service.Service) *InProcClient {
 	return &InProcClient{Svc: svc}
 }
 
+// -------------------- Helpers --------------------
+
+func fromServiceNote(n service.Note) Note {
+	return Note{
+		ID:             n.ID,
+		Title:          n.Title,
+		Summary:        n.Summary,
+		Body:           n.Body,
+		CreatedAt:      n.CreatedAt,
+		UpdatedAt:      n.UpdatedAt,
+		LastAccessedAt: n.LastAccessedAt,
+		AccessCount:    n.AccessCount,
+		SourceType:     n.SourceType,
+		Origin:         n.Origin,
+		SourceTrust:    n.SourceTrust,
+		Sensitivity:    n.Sensitivity,
+	}
+}
+
+func fromServiceChronicleNote(n service.ChronicleNote) ChronicleNote {
+	return ChronicleNote{
+		NoteBase: NoteBase{
+			ID:             n.ID,
+			Title:          n.Title,
+			Summary:        n.Summary,
+			Body:           n.Body,
+			CreatedAt:      n.CreatedAt,
+			UpdatedAt:       n.UpdatedAt,
+			LastAccessedAt:  n.LastAccessedAt,
+			AccessCount:     n.AccessCount,
+			SourceType:      n.SourceType,
+			Origin:          n.Origin,
+			SourceTrust:     n.SourceTrust,
+			Sensitivity:     n.Sensitivity,
+		},
+		WorkingScope: n.WorkingScope,
+		IsPinned:     n.IsPinned,
+	}
+}
+
+func fromServiceMemopediaNote(n service.MemopediaNote) MemopediaNote {
+	return MemopediaNote{
+		NoteBase: NoteBase{
+			ID:             n.ID,
+			Title:          n.Title,
+			Summary:        n.Summary,
+			Body:           n.Body,
+			CreatedAt:      n.CreatedAt,
+			UpdatedAt:       n.UpdatedAt,
+			LastAccessedAt:  n.LastAccessedAt,
+			AccessCount:     n.AccessCount,
+			SourceType:      n.SourceType,
+			Origin:          n.Origin,
+			SourceTrust:     n.SourceTrust,
+			Sensitivity:     n.Sensitivity,
+		},
+		WorkingScope: n.WorkingScope,
+		IsPinned:     n.IsPinned,
+	}
+}
+
+func fromServiceArchiveNote(n service.ArchiveNote) ArchiveNote {
+	return ArchiveNote{
+		ID:             n.ID,
+		Title:          n.Title,
+		Summary:        n.Summary,
+		Body:           n.Body,
+		CreatedAt:      n.CreatedAt,
+		UpdatedAt:       n.UpdatedAt,
+		LastAccessedAt:  n.LastAccessedAt,
+		AccessCount:     n.AccessCount,
+		SourceType:      n.SourceType,
+		Origin:          n.Origin,
+		SourceTrust:     n.SourceTrust,
+		Sensitivity:     n.Sensitivity,
+	}
+}
+
+// -------------------- Short Store --------------------
+
 func (c *InProcClient) NotesIngest(ctx context.Context, req NotesIngestRequest) (NotesIngestResponse, *Error) {
 	n, err := c.Svc.IngestShort(ctx, service.IngestNoteRequest{
 		Title:       req.Title,
@@ -36,11 +116,7 @@ func (c *InProcClient) NotesSearch(ctx context.Context, req NotesSearchRequest) 
 	if err != nil {
 		return NotesSearchResponse{}, mapError(err)
 	}
-	out := make([]Note, 0, len(ns))
-	for _, n := range ns {
-		out = append(out, fromServiceNote(n))
-	}
-	return NotesSearchResponse{Notes: out}, nil
+	return NotesSearchResponse{Notes: mapNotes(ns)}, nil
 }
 
 func (c *InProcClient) NotesGet(ctx context.Context, id string) (Note, *Error) {
@@ -55,19 +131,14 @@ func (c *InProcClient) GCRun(ctx context.Context, req GCRunRequest) (GCRunRespon
 	result, err := c.Svc.GCShort(ctx, service.GCRequest{
 		Target:  req.Target,
 		DryRun:  req.Options.DryRun,
-		Enabled: true, // in-proc は常に有効（CLI側で制御）
+		Enabled: true,
 	})
 	if err != nil {
 		return GCRunResponse{}, mapError(err)
 	}
-
-	// dry-run の場合は詳細を含める
 	if result.DryRun && result.DryRunResult != nil {
-		return GCRunResponse{
-			Status: result.DryRunResult.ToJSON(),
-		}, nil
+		return GCRunResponse{Status: result.DryRunResult.ToJSON()}, nil
 	}
-
 	return GCRunResponse{Status: result.Status}, nil
 }
 
@@ -84,30 +155,10 @@ func (c *InProcClient) SummarizeBatch(ctx context.Context, req SummarizeBatchReq
 	if err != nil {
 		return SummarizeBatchResponse{}, mapError(err)
 	}
-	return SummarizeBatchResponse{
-		Summary:   result.Summary,
-		NoteCount: result.NoteCount,
-	}, nil
+	return SummarizeBatchResponse{Summary: result.Summary, NoteCount: result.NoteCount}, nil
 }
 
-func fromServiceNote(n service.Note) Note {
-	return Note{
-		ID:             n.ID,
-		Title:          n.Title,
-		Summary:        n.Summary,
-		Body:           n.Body,
-		CreatedAt:      n.CreatedAt,
-		UpdatedAt:      n.UpdatedAt,
-		LastAccessedAt: n.LastAccessedAt,
-		AccessCount:    n.AccessCount,
-		SourceType:     n.SourceType,
-		Origin:         n.Origin,
-		SourceTrust:    n.SourceTrust,
-		Sensitivity:    n.Sensitivity,
-	}
-}
-
-// -------------------- Chronicle --------------------
+// -------------------- Chronicle Store --------------------
 
 func (c *InProcClient) ChronicleIngest(ctx context.Context, req ChronicleIngestRequest) (ChronicleIngestResponse, *Error) {
 	n, err := c.Svc.IngestChronicle(ctx, service.IngestChronicleRequest{
@@ -133,11 +184,7 @@ func (c *InProcClient) ChronicleSearch(ctx context.Context, req ChronicleSearchR
 	if err != nil {
 		return ChronicleSearchResponse{}, mapError(err)
 	}
-	out := make([]ChronicleNote, 0, len(ns))
-	for _, n := range ns {
-		out = append(out, fromServiceChronicleNote(n))
-	}
-	return ChronicleSearchResponse{Notes: out}, nil
+	return ChronicleSearchResponse{Notes: mapChronicleNotes(ns)}, nil
 }
 
 func (c *InProcClient) ChronicleGet(ctx context.Context, id string) (ChronicleNote, *Error) {
@@ -153,33 +200,10 @@ func (c *InProcClient) ChronicleListByScope(ctx context.Context, req ChronicleLi
 	if err != nil {
 		return ChronicleListByScopeResponse{}, mapError(err)
 	}
-	out := make([]ChronicleNote, 0, len(ns))
-	for _, n := range ns {
-		out = append(out, fromServiceChronicleNote(n))
-	}
-	return ChronicleListByScopeResponse{Notes: out}, nil
+	return ChronicleListByScopeResponse{Notes: mapChronicleNotes(ns)}, nil
 }
 
-func fromServiceChronicleNote(n service.ChronicleNote) ChronicleNote {
-	return ChronicleNote{
-		ID:             n.ID,
-		Title:          n.Title,
-		Summary:        n.Summary,
-		Body:           n.Body,
-		CreatedAt:      n.CreatedAt,
-		UpdatedAt:      n.UpdatedAt,
-		LastAccessedAt: n.LastAccessedAt,
-		AccessCount:    n.AccessCount,
-		SourceType:     n.SourceType,
-		Origin:         n.Origin,
-		SourceTrust:    n.SourceTrust,
-		Sensitivity:    n.Sensitivity,
-		WorkingScope:   n.WorkingScope,
-		IsPinned:       n.IsPinned,
-	}
-}
-
-// -------------------- Memopedia --------------------
+// -------------------- Memopedia Store --------------------
 
 func (c *InProcClient) MemopediaIngest(ctx context.Context, req MemopediaIngestRequest) (MemopediaIngestResponse, *Error) {
 	n, err := c.Svc.IngestMemopedia(ctx, service.IngestMemopediaRequest{
@@ -205,11 +229,7 @@ func (c *InProcClient) MemopediaSearch(ctx context.Context, req MemopediaSearchR
 	if err != nil {
 		return MemopediaSearchResponse{}, mapError(err)
 	}
-	out := make([]MemopediaNote, 0, len(ns))
-	for _, n := range ns {
-		out = append(out, fromServiceMemopediaNote(n))
-	}
-	return MemopediaSearchResponse{Notes: out}, nil
+	return MemopediaSearchResponse{Notes: mapMemopediaNotes(ns)}, nil
 }
 
 func (c *InProcClient) MemopediaGet(ctx context.Context, id string) (MemopediaNote, *Error) {
@@ -225,11 +245,7 @@ func (c *InProcClient) MemopediaListByScope(ctx context.Context, req MemopediaLi
 	if err != nil {
 		return MemopediaListByScopeResponse{}, mapError(err)
 	}
-	out := make([]MemopediaNote, 0, len(ns))
-	for _, n := range ns {
-		out = append(out, fromServiceMemopediaNote(n))
-	}
-	return MemopediaListByScopeResponse{Notes: out}, nil
+	return MemopediaListByScopeResponse{Notes: mapMemopediaNotes(ns)}, nil
 }
 
 func (c *InProcClient) MemopediaListPinned(ctx context.Context, req MemopediaListPinnedRequest) (MemopediaListPinnedResponse, *Error) {
@@ -237,11 +253,7 @@ func (c *InProcClient) MemopediaListPinned(ctx context.Context, req MemopediaLis
 	if err != nil {
 		return MemopediaListPinnedResponse{}, mapError(err)
 	}
-	out := make([]MemopediaNote, 0, len(ns))
-	for _, n := range ns {
-		out = append(out, fromServiceMemopediaNote(n))
-	}
-	return MemopediaListPinnedResponse{Notes: out}, nil
+	return MemopediaListPinnedResponse{Notes: mapMemopediaNotes(ns)}, nil
 }
 
 func (c *InProcClient) MemopediaPin(ctx context.Context, id string) (PinResponse, *Error) {
@@ -258,26 +270,7 @@ func (c *InProcClient) MemopediaUnpin(ctx context.Context, id string) (UnpinResp
 	return UnpinResponse{Success: true}, nil
 }
 
-func fromServiceMemopediaNote(n service.MemopediaNote) MemopediaNote {
-	return MemopediaNote{
-		ID:             n.ID,
-		Title:          n.Title,
-		Summary:        n.Summary,
-		Body:           n.Body,
-		CreatedAt:      n.CreatedAt,
-		UpdatedAt:      n.UpdatedAt,
-		LastAccessedAt: n.LastAccessedAt,
-		AccessCount:    n.AccessCount,
-		SourceType:     n.SourceType,
-		Origin:         n.Origin,
-		SourceTrust:    n.SourceTrust,
-		Sensitivity:    n.Sensitivity,
-		WorkingScope:   n.WorkingScope,
-		IsPinned:       n.IsPinned,
-	}
-}
-
-// -------------------- Archive --------------------
+// -------------------- Archive Store --------------------
 
 func (c *InProcClient) ArchiveGet(ctx context.Context, id string) (ArchiveNote, *Error) {
 	n, err := c.Svc.GetArchive(ctx, id)
@@ -292,11 +285,7 @@ func (c *InProcClient) ArchiveList(ctx context.Context, req ArchiveListRequest) 
 	if err != nil {
 		return ArchiveListResponse{}, mapError(err)
 	}
-	out := make([]ArchiveNote, 0, len(ns))
-	for _, n := range ns {
-		out = append(out, fromServiceArchiveNote(n))
-	}
-	return ArchiveListResponse{Notes: out}, nil
+	return ArchiveListResponse{Notes: mapArchiveNotes(ns)}, nil
 }
 
 func (c *InProcClient) ArchiveRestore(ctx context.Context, id string) (ArchiveRestoreResponse, *Error) {
@@ -307,19 +296,36 @@ func (c *InProcClient) ArchiveRestore(ctx context.Context, id string) (ArchiveRe
 	return ArchiveRestoreResponse{Note: fromServiceNote(n)}, nil
 }
 
-func fromServiceArchiveNote(n service.ArchiveNote) ArchiveNote {
-	return ArchiveNote{
-		ID:             n.ID,
-		Title:          n.Title,
-		Summary:        n.Summary,
-		Body:           n.Body,
-		CreatedAt:      n.CreatedAt,
-		UpdatedAt:      n.UpdatedAt,
-		LastAccessedAt: n.LastAccessedAt,
-		AccessCount:    n.AccessCount,
-		SourceType:     n.SourceType,
-		Origin:         n.Origin,
-		SourceTrust:    n.SourceTrust,
-		Sensitivity:    n.Sensitivity,
+// -------------------- Slice Mappers --------------------
+
+func mapNotes(ns []service.Note) []Note {
+	out := make([]Note, 0, len(ns))
+	for _, n := range ns {
+		out = append(out, fromServiceNote(n))
 	}
+	return out
+}
+
+func mapChronicleNotes(ns []service.ChronicleNote) []ChronicleNote {
+	out := make([]ChronicleNote, 0, len(ns))
+	for _, n := range ns {
+		out = append(out, fromServiceChronicleNote(n))
+	}
+	return out
+}
+
+func mapMemopediaNotes(ns []service.MemopediaNote) []MemopediaNote {
+	out := make([]MemopediaNote, 0, len(ns))
+	for _, n := range ns {
+		out = append(out, fromServiceMemopediaNote(n))
+	}
+	return out
+}
+
+func mapArchiveNotes(ns []service.ArchiveNote) []ArchiveNote {
+	out := make([]ArchiveNote, 0, len(ns))
+	for _, n := range ns {
+		out = append(out, fromServiceArchiveNote(n))
+	}
+	return out
 }
