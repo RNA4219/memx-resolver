@@ -38,13 +38,13 @@ next_review_due: 2026-06-03
   - `importance_static: REAL`
 - ルーティング
   - `route_override: TEXT`
-    - `NULL` or `'chronicle' | 'memopedia' | 'both' | 'archive_only'`
+    - `NULL` or `'journal' | 'knowledge' | 'both' | 'archive_only'`
 
 ### 2-2. タグ
 
 - `tags` / `note_tags` で多対多を管理。
 - `tags.route` で昇格先のデフォルトを決める：
-  - `'chronicle' | 'memopedia' | 'both' | 'short_only'`
+  - `'journal' | 'knowledge' | 'both' | 'short_only'`
 - `tags.parent_id` によりタグ統合・エイリアス管理を可能にする。
 - 将来、タグ蒸留時に類似タグの canonicalization を行うことを想定。
 
@@ -77,9 +77,9 @@ next_review_due: 2026-06-03
 
 - `lineage`：
   - `id: INTEGER PRIMARY KEY AUTOINCREMENT`
-  - `src_store: TEXT` … `'short' / 'chronicle' / 'memopedia'`
+  - `src_store: TEXT` … `'short' / 'journal' / 'knowledge'`
   - `src_note_id: TEXT`
-  - `dest_store: TEXT` … `'chronicle' / 'memopedia' / 'archive'`
+  - `dest_store: TEXT` … `'journal' / 'knowledge' / 'archive'`
   - `dest_note_id: TEXT`
   - `relation: TEXT` … `'distilled_to' | 'merged_into' | 'observed' | 'reflected' | 'archived_from'` 等
   - `created_at: TEXT`
@@ -104,8 +104,8 @@ next_review_due: 2026-06-03
 
 | sensitivity | 永続保存可否 | マスキング要件 | 保持期間要件 |
 | --- | --- | --- | --- |
-| `public` | `short/chronicle/memopedia/archive` へ保存可 | 原則マスク不要。ただし認証情報パターン検知時は `***REDACTED***` へ置換して保存/出力 | `short` 退避後 `archive` で最大 365 日保持し、期限到達後は物理削除対象 |
-| `internal` | ローカル環境の `short/chronicle/memopedia/archive` のみ保存可（外部共有禁止） | CLI/API 出力および運用ログで識別子を部分マスク（例: `a***@example.com`） | `short` 退避後 `archive` で最大 180 日保持し、期限到達後は物理削除対象 |
+| `public` | `short/journal/knowledge/archive` へ保存可 | 原則マスク不要。ただし認証情報パターン検知時は `***REDACTED***` へ置換して保存/出力 | `short` 退避後 `archive` で最大 365 日保持し、期限到達後は物理削除対象 |
+| `internal` | ローカル環境の `short/journal/knowledge/archive` のみ保存可（外部共有禁止） | CLI/API 出力および運用ログで識別子を部分マスク（例: `a***@example.com`） | `short` 退避後 `archive` で最大 180 日保持し、期限到達後は物理削除対象 |
 | `secret` | 永続保存禁止（`memory_store` で `deny`） | 保存前・出力前とも全量マスク（`***REDACTED***`）し、原文は監査ログにも残さない | 保持対象外。検知時はイベントメタデータのみ最小 90 日保持 |
 
 - `needs_human` は v1.3 では `deny` 同等で扱う（fail-closed）。
@@ -141,7 +141,7 @@ next_review_due: 2026-06-03
 `phase3` の退避実行は、次の条件を**すべて満たす**場合のみ許可する。
 
 1. GC 候補選定済みである（`memory_policy.yaml.gc.short` の閾値判定を通過）。
-2. `route_override` やタグルーティングで `chronicle/memopedia/both` への強制昇格が指定されていない。
+2. `route_override` やタグルーティングで `journal/knowledge/both` への強制昇格が指定されていない。
 3. `sensitivity` が `public` または `internal` である（`secret` は対象外）。
 4. `archive` 側 Insert と `lineage(relation='archived_from')` の記録に成功している。
 5. 失敗時は `REQ-SEC-AUD-001` を満たし、次回再試行計画を監査ログへ残す。

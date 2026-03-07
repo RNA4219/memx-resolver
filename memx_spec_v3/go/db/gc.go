@@ -11,7 +11,7 @@ type GCOptions struct {
 // GCShort は short.db に対する GC（Observer / Reflector を含む）を実行する。
 // Phase0: トリガ判定
 // Phase1: Observer（クラスタリング & 관찰ノ트生成）
-// Phase2: Reflector（Memopedia ページ更新）
+// Phase2: Reflector（Knowledge ページ更新）
 // Phase3: Short -> Archive 退避
 // 実際の LLM 呼び出しには Conn.Mini / Conn.Reflect を利用する想定。
 func (c *Conn) GCShort(ctx context.Context, opt GCOptions) error {

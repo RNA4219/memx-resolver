@@ -16,8 +16,8 @@ type StoreKind string
 
 const (
 	StoreShort     StoreKind = "short"
-	StoreChronicle StoreKind = "chronicle"
-	StoreMemopedia StoreKind = "memopedia"
+	StoreJournal StoreKind = "journal"
+	StoreKnowledge StoreKind = "knowledge"
 	StoreArchive   StoreKind = "archive"
 )
 

@@ -5,8 +5,8 @@ import "database/sql"
 // Paths は各ストアDBファイルのパスを保持する。
 type Paths struct {
 	Short     string
-	Chronicle string
-	Memopedia string
+	Journal string
+	Knowledge string
 	Archive   string
 }
 

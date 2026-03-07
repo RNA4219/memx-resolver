@@ -8,14 +8,14 @@ import (
 	"memx/db"
 )
 
-func TestIngestChronicle(t *testing.T) {
+func TestIngestJournal(t *testing.T) {
 	ctx := context.Background()
 
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -26,13 +26,13 @@ func TestIngestChronicle(t *testing.T) {
 	defer svc.Close()
 
 	// 正常系: working_scope 必須
-	note, err := svc.IngestChronicle(ctx, IngestChronicleRequest{
+	note, err := svc.IngestJournal(ctx, IngestJournalRequest{
 		Title:        "テストノート",
 		Body:         "本文です",
 		WorkingScope: "project:memx",
 	})
 	if err != nil {
-		t.Fatalf("IngestChronicle: %v", err)
+		t.Fatalf("IngestJournal: %v", err)
 	}
 	if note.ID == "" {
 		t.Error("note.ID is empty")
@@ -42,7 +42,7 @@ func TestIngestChronicle(t *testing.T) {
 	}
 
 	// 異常系: working_scope 未指定
-	_, err = svc.IngestChronicle(ctx, IngestChronicleRequest{
+	_, err = svc.IngestJournal(ctx, IngestJournalRequest{
 		Title: "テスト",
 		Body:  "本文",
 	})
@@ -51,14 +51,14 @@ func TestIngestChronicle(t *testing.T) {
 	}
 }
 
-func TestIngestChronicle_SecretDeny(t *testing.T) {
+func TestIngestJournal_SecretDeny(t *testing.T) {
 	ctx := context.Background()
 
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -69,7 +69,7 @@ func TestIngestChronicle_SecretDeny(t *testing.T) {
 	defer svc.Close()
 
 	// secret は deny される
-	_, err = svc.IngestChronicle(ctx, IngestChronicleRequest{
+	_, err = svc.IngestJournal(ctx, IngestJournalRequest{
 		Title:        "Secret Note",
 		Body:         "This is secret",
 		Sensitivity:  "secret",
@@ -80,14 +80,14 @@ func TestIngestChronicle_SecretDeny(t *testing.T) {
 	}
 }
 
-func TestGetChronicle(t *testing.T) {
+func TestGetJournal(t *testing.T) {
 	ctx := context.Background()
 
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -98,19 +98,19 @@ func TestGetChronicle(t *testing.T) {
 	defer svc.Close()
 
 	// ノート作成
-	created, err := svc.IngestChronicle(ctx, IngestChronicleRequest{
+	created, err := svc.IngestJournal(ctx, IngestJournalRequest{
 		Title:        "Test Note",
 		Body:         "Test Body",
 		WorkingScope: "test",
 	})
 	if err != nil {
-		t.Fatalf("IngestChronicle: %v", err)
+		t.Fatalf("IngestJournal: %v", err)
 	}
 
 	// 取得
-	got, err := svc.GetChronicle(ctx, created.ID)
+	got, err := svc.GetJournal(ctx, created.ID)
 	if err != nil {
-		t.Fatalf("GetChronicle: %v", err)
+		t.Fatalf("GetJournal: %v", err)
 	}
 	if got.ID != created.ID {
 		t.Errorf("ID = %q, want %q", got.ID, created.ID)
@@ -123,20 +123,20 @@ func TestGetChronicle(t *testing.T) {
 	}
 
 	// 存在しないID（有効なhex形式）
-	_, err = svc.GetChronicle(ctx, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+	_, err = svc.GetJournal(ctx, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 	if err != ErrNotFound {
 		t.Errorf("error = %v, want ErrNotFound", err)
 	}
 }
 
-func TestSearchChronicle(t *testing.T) {
+func TestSearchJournal(t *testing.T) {
 	ctx := context.Background()
 
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -147,28 +147,28 @@ func TestSearchChronicle(t *testing.T) {
 	defer svc.Close()
 
 	// 複数ノート作成
-	_, err = svc.IngestChronicle(ctx, IngestChronicleRequest{
+	_, err = svc.IngestJournal(ctx, IngestJournalRequest{
 		Title:        "Go Programming Language",
 		Body:         "Go is a programming language developed by Google",
 		WorkingScope: "dev",
 	})
 	if err != nil {
-		t.Fatalf("IngestChronicle: %v", err)
+		t.Fatalf("IngestJournal: %v", err)
 	}
 
-	_, err = svc.IngestChronicle(ctx, IngestChronicleRequest{
+	_, err = svc.IngestJournal(ctx, IngestJournalRequest{
 		Title:        "Python Programming",
 		Body:         "Python is a popular scripting language",
 		WorkingScope: "dev",
 	})
 	if err != nil {
-		t.Fatalf("IngestChronicle: %v", err)
+		t.Fatalf("IngestJournal: %v", err)
 	}
 
 	// 検索
-	notes, err := svc.SearchChronicle(ctx, "Go", 10)
+	notes, err := svc.SearchJournal(ctx, "Go", 10)
 	if err != nil {
-		t.Fatalf("SearchChronicle: %v", err)
+		t.Fatalf("SearchJournal: %v", err)
 	}
 	if len(notes) < 1 {
 		t.Error("expected at least 1 result")
@@ -182,8 +182,8 @@ func TestFTSExistence(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -196,7 +196,7 @@ func TestFTSExistence(t *testing.T) {
 	// FTSテーブルの存在確認
 	var tableName string
 	err = svc.Conn.DB.QueryRowContext(ctx, `
-SELECT name FROM chronicle.sqlite_master WHERE type='table' AND name='notes_fts';
+SELECT name FROM journal.sqlite_master WHERE type='table' AND name='notes_fts';
 `).Scan(&tableName)
 	if err != nil {
 		t.Logf("FTS table query error: %v", err)
@@ -206,7 +206,7 @@ SELECT name FROM chronicle.sqlite_master WHERE type='table' AND name='notes_fts'
 
 	// すべてのテーブルを表示
 	rows, err := svc.Conn.DB.QueryContext(ctx, `
-SELECT name, type FROM chronicle.sqlite_master WHERE type IN ('table', 'virtual table');
+SELECT name, type FROM journal.sqlite_master WHERE type IN ('table', 'virtual table');
 `)
 	if err != nil {
 		t.Fatalf("query sqlite_master: %v", err)
@@ -217,18 +217,18 @@ SELECT name, type FROM chronicle.sqlite_master WHERE type IN ('table', 'virtual 
 		if err := rows.Scan(&name, &typ); err != nil {
 			t.Fatalf("scan: %v", err)
 		}
-		t.Logf("chronicle table: %s (%s)", name, typ)
+		t.Logf("journal table: %s (%s)", name, typ)
 	}
 }
 
-func TestListChronicleByScope(t *testing.T) {
+func TestListJournalByScope(t *testing.T) {
 	ctx := context.Background()
 
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -239,28 +239,28 @@ func TestListChronicleByScope(t *testing.T) {
 	defer svc.Close()
 
 	// 異なるスコープでノート作成
-	_, err = svc.IngestChronicle(ctx, IngestChronicleRequest{
+	_, err = svc.IngestJournal(ctx, IngestJournalRequest{
 		Title:        "Note 1",
 		Body:         "Body 1",
 		WorkingScope: "project:A",
 	})
 	if err != nil {
-		t.Fatalf("IngestChronicle: %v", err)
+		t.Fatalf("IngestJournal: %v", err)
 	}
 
-	_, err = svc.IngestChronicle(ctx, IngestChronicleRequest{
+	_, err = svc.IngestJournal(ctx, IngestJournalRequest{
 		Title:        "Note 2",
 		Body:         "Body 2",
 		WorkingScope: "project:B",
 	})
 	if err != nil {
-		t.Fatalf("IngestChronicle: %v", err)
+		t.Fatalf("IngestJournal: %v", err)
 	}
 
 	// スコープでフィルタ
-	notes, err := svc.ListChronicleByScope(ctx, "project:A", 10)
+	notes, err := svc.ListJournalByScope(ctx, "project:A", 10)
 	if err != nil {
-		t.Fatalf("ListChronicleByScope: %v", err)
+		t.Fatalf("ListJournalByScope: %v", err)
 	}
 	if len(notes) != 1 {
 		t.Errorf("expected 1 note, got %d", len(notes))

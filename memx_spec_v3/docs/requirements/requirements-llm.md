@@ -22,7 +22,7 @@ LLM は少なくとも 3 役割に分離する：
    - タグ生成・スコアリング（`relevance / quality / novelty / importance`）・`sensitivity` 推定。
    - 軽量モデル（1B〜3B）を想定。
 3. ReflectLLMClient
-   - クラスタ要約（Observer）・Memopedia ページ更新（Reflector）。
+   - クラスタ要約（Observer）・Knowledge ページ更新（Reflector）。
    - 7B〜27B クラスのモデルを想定。
 
 Go 側では `go/db/llm_client.go` に interface を定義し、`db.Conn` にこれらをフィールドとして注入して使う。

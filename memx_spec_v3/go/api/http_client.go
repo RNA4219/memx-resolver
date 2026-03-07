@@ -74,93 +74,93 @@ func (c *HTTPClient) SummarizeBatch(ctx context.Context, req SummarizeBatchReque
 	return out, nil
 }
 
-// -------------------- Chronicle --------------------
+// -------------------- Journal --------------------
 
-func (c *HTTPClient) ChronicleIngest(ctx context.Context, req ChronicleIngestRequest) (ChronicleIngestResponse, *Error) {
-	var out ChronicleIngestResponse
-	if err := c.post(ctx, "/v1/chronicle:ingest", req, &out); err != nil {
-		return ChronicleIngestResponse{}, err
+func (c *HTTPClient) JournalIngest(ctx context.Context, req JournalIngestRequest) (JournalIngestResponse, *Error) {
+	var out JournalIngestResponse
+	if err := c.post(ctx, "/v1/journal:ingest", req, &out); err != nil {
+		return JournalIngestResponse{}, err
 	}
 	return out, nil
 }
 
-func (c *HTTPClient) ChronicleSearch(ctx context.Context, req ChronicleSearchRequest) (ChronicleSearchResponse, *Error) {
-	var out ChronicleSearchResponse
-	if err := c.post(ctx, "/v1/chronicle:search", req, &out); err != nil {
-		return ChronicleSearchResponse{}, err
+func (c *HTTPClient) JournalSearch(ctx context.Context, req JournalSearchRequest) (JournalSearchResponse, *Error) {
+	var out JournalSearchResponse
+	if err := c.post(ctx, "/v1/journal:search", req, &out); err != nil {
+		return JournalSearchResponse{}, err
 	}
 	return out, nil
 }
 
-func (c *HTTPClient) ChronicleGet(ctx context.Context, id string) (ChronicleNote, *Error) {
-	var out ChronicleNote
-	if err := c.get(ctx, "/v1/chronicle/"+id, &out); err != nil {
-		return ChronicleNote{}, err
+func (c *HTTPClient) JournalGet(ctx context.Context, id string) (JournalNote, *Error) {
+	var out JournalNote
+	if err := c.get(ctx, "/v1/journal/"+id, &out); err != nil {
+		return JournalNote{}, err
 	}
 	return out, nil
 }
 
-func (c *HTTPClient) ChronicleListByScope(ctx context.Context, req ChronicleListByScopeRequest) (ChronicleListByScopeResponse, *Error) {
-	var out ChronicleListByScopeResponse
-	if err := c.post(ctx, "/v1/chronicle:list-by-scope", req, &out); err != nil {
-		return ChronicleListByScopeResponse{}, err
+func (c *HTTPClient) JournalListByScope(ctx context.Context, req JournalListByScopeRequest) (JournalListByScopeResponse, *Error) {
+	var out JournalListByScopeResponse
+	if err := c.post(ctx, "/v1/journal:list-by-scope", req, &out); err != nil {
+		return JournalListByScopeResponse{}, err
 	}
 	return out, nil
 }
 
-// -------------------- Memopedia --------------------
+// -------------------- Knowledge --------------------
 
-func (c *HTTPClient) MemopediaIngest(ctx context.Context, req MemopediaIngestRequest) (MemopediaIngestResponse, *Error) {
-	var out MemopediaIngestResponse
-	if err := c.post(ctx, "/v1/memopedia:ingest", req, &out); err != nil {
-		return MemopediaIngestResponse{}, err
+func (c *HTTPClient) KnowledgeIngest(ctx context.Context, req KnowledgeIngestRequest) (KnowledgeIngestResponse, *Error) {
+	var out KnowledgeIngestResponse
+	if err := c.post(ctx, "/v1/knowledge:ingest", req, &out); err != nil {
+		return KnowledgeIngestResponse{}, err
 	}
 	return out, nil
 }
 
-func (c *HTTPClient) MemopediaSearch(ctx context.Context, req MemopediaSearchRequest) (MemopediaSearchResponse, *Error) {
-	var out MemopediaSearchResponse
-	if err := c.post(ctx, "/v1/memopedia:search", req, &out); err != nil {
-		return MemopediaSearchResponse{}, err
+func (c *HTTPClient) KnowledgeSearch(ctx context.Context, req KnowledgeSearchRequest) (KnowledgeSearchResponse, *Error) {
+	var out KnowledgeSearchResponse
+	if err := c.post(ctx, "/v1/knowledge:search", req, &out); err != nil {
+		return KnowledgeSearchResponse{}, err
 	}
 	return out, nil
 }
 
-func (c *HTTPClient) MemopediaGet(ctx context.Context, id string) (MemopediaNote, *Error) {
-	var out MemopediaNote
-	if err := c.get(ctx, "/v1/memopedia/"+id, &out); err != nil {
-		return MemopediaNote{}, err
+func (c *HTTPClient) KnowledgeGet(ctx context.Context, id string) (KnowledgeNote, *Error) {
+	var out KnowledgeNote
+	if err := c.get(ctx, "/v1/knowledge/"+id, &out); err != nil {
+		return KnowledgeNote{}, err
 	}
 	return out, nil
 }
 
-func (c *HTTPClient) MemopediaListByScope(ctx context.Context, req MemopediaListByScopeRequest) (MemopediaListByScopeResponse, *Error) {
-	var out MemopediaListByScopeResponse
-	if err := c.post(ctx, "/v1/memopedia:list-by-scope", req, &out); err != nil {
-		return MemopediaListByScopeResponse{}, err
+func (c *HTTPClient) KnowledgeListByScope(ctx context.Context, req KnowledgeListByScopeRequest) (KnowledgeListByScopeResponse, *Error) {
+	var out KnowledgeListByScopeResponse
+	if err := c.post(ctx, "/v1/knowledge:list-by-scope", req, &out); err != nil {
+		return KnowledgeListByScopeResponse{}, err
 	}
 	return out, nil
 }
 
-func (c *HTTPClient) MemopediaListPinned(ctx context.Context, req MemopediaListPinnedRequest) (MemopediaListPinnedResponse, *Error) {
-	var out MemopediaListPinnedResponse
-	if err := c.post(ctx, "/v1/memopedia:list-pinned", req, &out); err != nil {
-		return MemopediaListPinnedResponse{}, err
+func (c *HTTPClient) KnowledgeListPinned(ctx context.Context, req KnowledgeListPinnedRequest) (KnowledgeListPinnedResponse, *Error) {
+	var out KnowledgeListPinnedResponse
+	if err := c.post(ctx, "/v1/knowledge:list-pinned", req, &out); err != nil {
+		return KnowledgeListPinnedResponse{}, err
 	}
 	return out, nil
 }
 
-func (c *HTTPClient) MemopediaPin(ctx context.Context, id string) (PinResponse, *Error) {
+func (c *HTTPClient) KnowledgePin(ctx context.Context, id string) (PinResponse, *Error) {
 	var out PinResponse
-	if err := c.post(ctx, "/v1/memopedia/"+id+":pin", nil, &out); err != nil {
+	if err := c.post(ctx, "/v1/knowledge/"+id+":pin", nil, &out); err != nil {
 		return PinResponse{}, err
 	}
 	return out, nil
 }
 
-func (c *HTTPClient) MemopediaUnpin(ctx context.Context, id string) (UnpinResponse, *Error) {
+func (c *HTTPClient) KnowledgeUnpin(ctx context.Context, id string) (UnpinResponse, *Error) {
 	var out UnpinResponse
-	if err := c.post(ctx, "/v1/memopedia/"+id+":unpin", nil, &out); err != nil {
+	if err := c.post(ctx, "/v1/knowledge/"+id+":unpin", nil, &out); err != nil {
 		return UnpinResponse{}, err
 	}
 	return out, nil

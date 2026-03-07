@@ -57,7 +57,7 @@ CREATE INDEX IF NOT EXISTS idx_notes_sensitivity
 CREATE TABLE IF NOT EXISTS tags (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
   name          TEXT NOT NULL UNIQUE,        -- 正規化タグ名
-  route         TEXT NOT NULL,               -- 'chronicle' | 'memopedia' | 'both' | 'short_only'
+  route         TEXT NOT NULL,               -- 'journal' | 'knowledge' | 'both' | 'short_only'
   parent_id     INTEGER,                     -- 代表タグ or 親タグ（NULL 許容）
   created_at    TEXT NOT NULL,
   updated_at    TEXT NOT NULL,
@@ -117,7 +117,7 @@ INSERT OR IGNORE INTO archive_meta(key, value)
 
 CREATE TABLE IF NOT EXISTS lineage (
   id             INTEGER PRIMARY KEY AUTOINCREMENT,
-  src_store      TEXT NOT NULL,      -- 'short' / 'chronicle' / 'memopedia'
+  src_store      TEXT NOT NULL,      -- 'short' / 'journal' / 'knowledge'
   src_note_id    TEXT NOT NULL,
   dest_store     TEXT NOT NULL,      -- 'archive'
   dest_note_id   TEXT NOT NULL,

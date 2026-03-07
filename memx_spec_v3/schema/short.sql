@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS notes (
   importance_static REAL,
 
   -- タグ route を上書きするための昇格先指定
-  -- null or 'chronicle' | 'memopedia' | 'both' | 'archive_only'
+  -- null or 'journal' | 'knowledge' | 'both' | 'archive_only'
   route_override    TEXT
 );
 
@@ -84,7 +84,7 @@ END;
 CREATE TABLE IF NOT EXISTS tags (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
   name          TEXT NOT NULL UNIQUE,        -- 正規化タグ名
-  route         TEXT NOT NULL,               -- 'chronicle' | 'memopedia' | 'both' | 'short_only'
+  route         TEXT NOT NULL,               -- 'journal' | 'knowledge' | 'both' | 'short_only'
   parent_id     INTEGER,                     -- 代表タグ or 親タグ（NULL 許容）
   created_at    TEXT NOT NULL,
   updated_at    TEXT NOT NULL,
@@ -160,9 +160,9 @@ INSERT OR IGNORE INTO short_meta(key, value)
 
 CREATE TABLE IF NOT EXISTS lineage (
   id             INTEGER PRIMARY KEY AUTOINCREMENT,
-  src_store      TEXT NOT NULL,      -- 'short' / 'chronicle' / 'memopedia'
+  src_store      TEXT NOT NULL,      -- 'short' / 'journal' / 'knowledge'
   src_note_id    TEXT NOT NULL,
-  dest_store     TEXT NOT NULL,      -- 'chronicle' / 'memopedia' / 'archive'
+  dest_store     TEXT NOT NULL,      -- 'journal' / 'knowledge' / 'archive'
   dest_note_id   TEXT NOT NULL,
   relation       TEXT NOT NULL,      -- 'distilled_to' / 'merged_into' / 'observed' / 'reflected' / 'archived_from' 等
   created_at     TEXT NOT NULL

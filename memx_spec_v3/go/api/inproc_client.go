@@ -34,8 +34,8 @@ func fromServiceNote(n service.Note) Note {
 	}
 }
 
-func fromServiceChronicleNote(n service.ChronicleNote) ChronicleNote {
-	return ChronicleNote{
+func fromServiceJournalNote(n service.JournalNote) JournalNote {
+	return JournalNote{
 		NoteBase: NoteBase{
 			ID:             n.ID,
 			Ref:            NewTypedRef(EntityTypeKnowledge, n.ID),
@@ -56,8 +56,8 @@ func fromServiceChronicleNote(n service.ChronicleNote) ChronicleNote {
 	}
 }
 
-func fromServiceMemopediaNote(n service.MemopediaNote) MemopediaNote {
-	return MemopediaNote{
+func fromServiceKnowledgeNote(n service.KnowledgeNote) KnowledgeNote {
+	return KnowledgeNote{
 		NoteBase: NoteBase{
 			ID:             n.ID,
 			Ref:            NewTypedRef(EntityTypeKnowledge, n.ID),
@@ -162,10 +162,10 @@ func (c *InProcClient) SummarizeBatch(ctx context.Context, req SummarizeBatchReq
 	return SummarizeBatchResponse{Summary: result.Summary, NoteCount: result.NoteCount}, nil
 }
 
-// -------------------- Chronicle Store --------------------
+// -------------------- Journal Store --------------------
 
-func (c *InProcClient) ChronicleIngest(ctx context.Context, req ChronicleIngestRequest) (ChronicleIngestResponse, *Error) {
-	n, err := c.Svc.IngestChronicle(ctx, service.IngestChronicleRequest{
+func (c *InProcClient) JournalIngest(ctx context.Context, req JournalIngestRequest) (JournalIngestResponse, *Error) {
+	n, err := c.Svc.IngestJournal(ctx, service.IngestJournalRequest{
 		Title:        req.Title,
 		Body:         req.Body,
 		Summary:      req.Summary,
@@ -178,39 +178,39 @@ func (c *InProcClient) ChronicleIngest(ctx context.Context, req ChronicleIngestR
 		IsPinned:     req.IsPinned,
 	})
 	if err != nil {
-		return ChronicleIngestResponse{}, mapError(err)
+		return JournalIngestResponse{}, mapError(err)
 	}
-	return ChronicleIngestResponse{Note: fromServiceChronicleNote(n)}, nil
+	return JournalIngestResponse{Note: fromServiceJournalNote(n)}, nil
 }
 
-func (c *InProcClient) ChronicleSearch(ctx context.Context, req ChronicleSearchRequest) (ChronicleSearchResponse, *Error) {
-	ns, err := c.Svc.SearchChronicle(ctx, req.Query, req.TopK)
+func (c *InProcClient) JournalSearch(ctx context.Context, req JournalSearchRequest) (JournalSearchResponse, *Error) {
+	ns, err := c.Svc.SearchJournal(ctx, req.Query, req.TopK)
 	if err != nil {
-		return ChronicleSearchResponse{}, mapError(err)
+		return JournalSearchResponse{}, mapError(err)
 	}
-	return ChronicleSearchResponse{Notes: mapChronicleNotes(ns)}, nil
+	return JournalSearchResponse{Notes: mapJournalNotes(ns)}, nil
 }
 
-func (c *InProcClient) ChronicleGet(ctx context.Context, id string) (ChronicleNote, *Error) {
-	n, err := c.Svc.GetChronicle(ctx, id)
+func (c *InProcClient) JournalGet(ctx context.Context, id string) (JournalNote, *Error) {
+	n, err := c.Svc.GetJournal(ctx, id)
 	if err != nil {
-		return ChronicleNote{}, mapError(err)
+		return JournalNote{}, mapError(err)
 	}
-	return fromServiceChronicleNote(n), nil
+	return fromServiceJournalNote(n), nil
 }
 
-func (c *InProcClient) ChronicleListByScope(ctx context.Context, req ChronicleListByScopeRequest) (ChronicleListByScopeResponse, *Error) {
-	ns, err := c.Svc.ListChronicleByScope(ctx, req.WorkingScope, req.Limit)
+func (c *InProcClient) JournalListByScope(ctx context.Context, req JournalListByScopeRequest) (JournalListByScopeResponse, *Error) {
+	ns, err := c.Svc.ListJournalByScope(ctx, req.WorkingScope, req.Limit)
 	if err != nil {
-		return ChronicleListByScopeResponse{}, mapError(err)
+		return JournalListByScopeResponse{}, mapError(err)
 	}
-	return ChronicleListByScopeResponse{Notes: mapChronicleNotes(ns)}, nil
+	return JournalListByScopeResponse{Notes: mapJournalNotes(ns)}, nil
 }
 
-// -------------------- Memopedia Store --------------------
+// -------------------- Knowledge Store --------------------
 
-func (c *InProcClient) MemopediaIngest(ctx context.Context, req MemopediaIngestRequest) (MemopediaIngestResponse, *Error) {
-	n, err := c.Svc.IngestMemopedia(ctx, service.IngestMemopediaRequest{
+func (c *InProcClient) KnowledgeIngest(ctx context.Context, req KnowledgeIngestRequest) (KnowledgeIngestResponse, *Error) {
+	n, err := c.Svc.IngestKnowledge(ctx, service.IngestKnowledgeRequest{
 		Title:        req.Title,
 		Body:         req.Body,
 		Summary:      req.Summary,
@@ -223,52 +223,52 @@ func (c *InProcClient) MemopediaIngest(ctx context.Context, req MemopediaIngestR
 		IsPinned:     req.IsPinned,
 	})
 	if err != nil {
-		return MemopediaIngestResponse{}, mapError(err)
+		return KnowledgeIngestResponse{}, mapError(err)
 	}
-	return MemopediaIngestResponse{Note: fromServiceMemopediaNote(n)}, nil
+	return KnowledgeIngestResponse{Note: fromServiceKnowledgeNote(n)}, nil
 }
 
-func (c *InProcClient) MemopediaSearch(ctx context.Context, req MemopediaSearchRequest) (MemopediaSearchResponse, *Error) {
-	ns, err := c.Svc.SearchMemopedia(ctx, req.Query, req.TopK)
+func (c *InProcClient) KnowledgeSearch(ctx context.Context, req KnowledgeSearchRequest) (KnowledgeSearchResponse, *Error) {
+	ns, err := c.Svc.SearchKnowledge(ctx, req.Query, req.TopK)
 	if err != nil {
-		return MemopediaSearchResponse{}, mapError(err)
+		return KnowledgeSearchResponse{}, mapError(err)
 	}
-	return MemopediaSearchResponse{Notes: mapMemopediaNotes(ns)}, nil
+	return KnowledgeSearchResponse{Notes: mapKnowledgeNotes(ns)}, nil
 }
 
-func (c *InProcClient) MemopediaGet(ctx context.Context, id string) (MemopediaNote, *Error) {
-	n, err := c.Svc.GetMemopedia(ctx, id)
+func (c *InProcClient) KnowledgeGet(ctx context.Context, id string) (KnowledgeNote, *Error) {
+	n, err := c.Svc.GetKnowledge(ctx, id)
 	if err != nil {
-		return MemopediaNote{}, mapError(err)
+		return KnowledgeNote{}, mapError(err)
 	}
-	return fromServiceMemopediaNote(n), nil
+	return fromServiceKnowledgeNote(n), nil
 }
 
-func (c *InProcClient) MemopediaListByScope(ctx context.Context, req MemopediaListByScopeRequest) (MemopediaListByScopeResponse, *Error) {
-	ns, err := c.Svc.ListMemopediaByScope(ctx, req.WorkingScope, req.Limit)
+func (c *InProcClient) KnowledgeListByScope(ctx context.Context, req KnowledgeListByScopeRequest) (KnowledgeListByScopeResponse, *Error) {
+	ns, err := c.Svc.ListKnowledgeByScope(ctx, req.WorkingScope, req.Limit)
 	if err != nil {
-		return MemopediaListByScopeResponse{}, mapError(err)
+		return KnowledgeListByScopeResponse{}, mapError(err)
 	}
-	return MemopediaListByScopeResponse{Notes: mapMemopediaNotes(ns)}, nil
+	return KnowledgeListByScopeResponse{Notes: mapKnowledgeNotes(ns)}, nil
 }
 
-func (c *InProcClient) MemopediaListPinned(ctx context.Context, req MemopediaListPinnedRequest) (MemopediaListPinnedResponse, *Error) {
-	ns, err := c.Svc.ListPinnedMemopedia(ctx, req.WorkingScope, req.Limit)
+func (c *InProcClient) KnowledgeListPinned(ctx context.Context, req KnowledgeListPinnedRequest) (KnowledgeListPinnedResponse, *Error) {
+	ns, err := c.Svc.ListPinnedKnowledge(ctx, req.WorkingScope, req.Limit)
 	if err != nil {
-		return MemopediaListPinnedResponse{}, mapError(err)
+		return KnowledgeListPinnedResponse{}, mapError(err)
 	}
-	return MemopediaListPinnedResponse{Notes: mapMemopediaNotes(ns)}, nil
+	return KnowledgeListPinnedResponse{Notes: mapKnowledgeNotes(ns)}, nil
 }
 
-func (c *InProcClient) MemopediaPin(ctx context.Context, id string) (PinResponse, *Error) {
-	if err := c.Svc.PinMemopedia(ctx, id); err != nil {
+func (c *InProcClient) KnowledgePin(ctx context.Context, id string) (PinResponse, *Error) {
+	if err := c.Svc.PinKnowledge(ctx, id); err != nil {
 		return PinResponse{}, mapError(err)
 	}
 	return PinResponse{Success: true}, nil
 }
 
-func (c *InProcClient) MemopediaUnpin(ctx context.Context, id string) (UnpinResponse, *Error) {
-	if err := c.Svc.UnpinMemopedia(ctx, id); err != nil {
+func (c *InProcClient) KnowledgeUnpin(ctx context.Context, id string) (UnpinResponse, *Error) {
+	if err := c.Svc.UnpinKnowledge(ctx, id); err != nil {
 		return UnpinResponse{}, mapError(err)
 	}
 	return UnpinResponse{Success: true}, nil
@@ -310,18 +310,18 @@ func mapNotes(ns []service.Note) []Note {
 	return out
 }
 
-func mapChronicleNotes(ns []service.ChronicleNote) []ChronicleNote {
-	out := make([]ChronicleNote, 0, len(ns))
+func mapJournalNotes(ns []service.JournalNote) []JournalNote {
+	out := make([]JournalNote, 0, len(ns))
 	for _, n := range ns {
-		out = append(out, fromServiceChronicleNote(n))
+		out = append(out, fromServiceJournalNote(n))
 	}
 	return out
 }
 
-func mapMemopediaNotes(ns []service.MemopediaNote) []MemopediaNote {
-	out := make([]MemopediaNote, 0, len(ns))
+func mapKnowledgeNotes(ns []service.KnowledgeNote) []KnowledgeNote {
+	out := make([]KnowledgeNote, 0, len(ns))
 	for _, n := range ns {
-		out = append(out, fromServiceMemopediaNote(n))
+		out = append(out, fromServiceKnowledgeNote(n))
 	}
 	return out
 }

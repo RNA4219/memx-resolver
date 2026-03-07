@@ -40,7 +40,7 @@ next_review_due: 2026-06-03
   - `mem gc` … GC／蒸留
     - `mem gc short`
   - `mem distill` … 手動蒸留（将来）
-  - `mem working` … Working Memory 操作（将来、memopedia に対して）
+  - `mem working` … Working Memory 操作（将来、knowledge に対して）
   - `mem tag` … タグ操作（将来）
   - `mem meta` … メタ情報表示（将来）
   - `mem lineage` … 系譜の可視化（将来）
@@ -90,7 +90,7 @@ Mastra の Semantic Recall 相当。
 例：
 
 ```bash
-mem out recall "Qwen3.5-27B ベンチマーク結果"   --scope self   --stores short,chronicle,memopedia   --top-k 8   --range 3
+mem out recall "Qwen3.5-27B ベンチマーク結果"   --scope self   --stores short,journal,knowledge   --top-k 8   --range 3
 ```
 
 パラメータ：
@@ -120,14 +120,14 @@ mem out recall "Qwen3.5-27B ベンチマーク結果"   --scope self   --stores 
    - 末尾ノートでは `After` は存在分のみ（0 件を許容）。
 5. `--stores` は以下で正規化する。
    - 入力文字列を `,` で分割し、前後空白を trim、空要素を除去。
-   - 小文字化して `short|chronicle|memopedia|archive` に解決する。
+   - 小文字化して `short|journal|knowledge|archive` に解決する。
    - 重複は先に出現した順で一意化する。
-   - 未指定時は `short,chronicle,memopedia`。
+   - 未指定時は `short,journal,knowledge`。
    - 不正値を含む場合は 400 系入力エラーとして失敗させる。
 6. `Conn.Embed == nil` の場合は実行モードで分岐する。
    - デフォルトはエラー（`semantic recall requires embedding client`）。
    - 明示フラグ（例: `--allow-fts-fallback`）指定時のみ FTS 限定検索へフォールバックする。
-7. Working Memory（memopedia の pinned ノート）がある場合は、結果の先頭にマージする。
+7. Working Memory（knowledge の pinned ノート）がある場合は、結果の先頭にマージする。
 
 ### 3-5. `mem gc short`（Observer / Reflector）
 
@@ -145,7 +145,7 @@ mem out recall "Qwen3.5-27B ベンチマーク結果"   --scope self   --stores 
 
 **未実装（FUTURE v2+）**:
 - Phase 1: Observer（クラスタリング、観測ノート生成）
-- Phase 2: Reflector（memopedia ページ更新）
+- Phase 2: Reflector（knowledge ページ更新）
 
 Mastra の Observational Memory を参考にした GC。
 
@@ -196,7 +196,7 @@ mem gc short --dry-run
     {
       "op": "observe_cluster",
       "src_note_ids": ["n1", "n2"],
-      "dest_store": "chronicle"
+      "dest_store": "journal"
     },
     {
       "op": "archive_move",
@@ -212,12 +212,12 @@ mem gc short --dry-run
   1. 古い／アクセスが少ない short ノートを対象集合として抽出。
   2. タグ＋embedding 類似度でクラスタリング。
   3. 各クラスタを MiniLLM/ReflectLLM に渡し、「観測ノート（Observation）」を生成。
-  4. 観測ノートは `chronicle.db` に `notes` として Insert。
+  4. 観測ノートは `journal.db` に `notes` として Insert。
   5. `lineage` に `relation='observed'` を記録。
 
 - Phase 2: Reflector
-  1. `chronicle` 側で、同一テーマ（タグ／トピック）に属する観測ノート群を抽出。
-  2. `memopedia` に既存ページがあれば：
+  1. `journal` 側で、同一テーマ（タグ／トピック）に属する観測ノート群を抽出。
+  2. `knowledge` に既存ページがあれば：
      - 既存本文 + 観測ノート群をコンテキストとして、"統合された最新版ページ" を生成（Update）。
   3. なければ：新規ページとして Insert。
   4. `lineage` に `relation='reflected'` を記録。
@@ -237,7 +237,7 @@ mem gc short --dry-run
 
 ### 3-6. `mem working`（Working Memory）※将来
 
-- `memopedia.db` の `notes` に以下の列を追加予定：
+- `knowledge.db` の `notes` に以下の列を追加予定：
   - `working_scope: TEXT` … `NULL` or `'global'` or `'session:<id>'` or `'project:<name>'`
   - `is_pinned: INTEGER` … 1 なら Working Memory として常時読み出し
 

@@ -24,7 +24,7 @@ runtime -> workx
 
 - `workx` の build は task/state/decision/question を集めるところまで
 - `memx-core` の思想は合っているが、公開面はまだ short 中心
-- lineage / chronicle / memopedia を前提にしすぎると、今すぐ動かない
+- lineage / journal / knowledge を前提にしすぎると、今すぐ動かない
 
 ## 進め方
 
@@ -112,7 +112,7 @@ LoadSelectedRaw(ref, selector) -> RawPayload
 - knowledge search
 - artifact registry
 - lineage trace
-- chronicle / memopedia
+- journal / knowledge
 
 ## Context Bundle に追加すべき内容
 

@@ -46,19 +46,19 @@ func usage() {
 Usage:
   mem api serve   [--addr 127.0.0.1:7766] [--short short.db] ...
   mem in short    --title TITLE [--body BODY | --stdin] [--tag TAG ...]
-  mem in chronicle --title TITLE --body BODY --scope SCOPE [--tag TAG ...]
-  mem in memopedia --title TITLE --body BODY --scope SCOPE [--tag TAG ...] [--pinned]
+  mem in journal --title TITLE --body BODY --scope SCOPE [--tag TAG ...]
+  mem in knowledge --title TITLE --body BODY --scope SCOPE [--tag TAG ...] [--pinned]
   mem out search  QUERY
   mem out show    NOTE_ID
-  mem out chronicle search QUERY
-  mem out chronicle show ID
-  mem out chronicle list --scope SCOPE
-  mem out memopedia search QUERY
-  mem out memopedia show ID
-  mem out memopedia list --scope SCOPE
-  mem out memopedia pinned [--scope SCOPE]
-  mem out memopedia pin ID
-  mem out memopedia unpin ID
+  mem out journal search QUERY
+  mem out journal show ID
+  mem out journal list --scope SCOPE
+  mem out knowledge search QUERY
+  mem out knowledge show ID
+  mem out knowledge list --scope SCOPE
+  mem out knowledge pinned [--scope SCOPE]
+  mem out knowledge pin ID
+  mem out knowledge unpin ID
   mem out archive list
   mem out archive show ID
   mem out archive restore ID
@@ -72,8 +72,8 @@ Global (for client-mode):
 
 DB flags (in-proc / server):
   --short short.db
-  --chronicle chronicle.db
-  --memopedia memopedia.db
+  --journal journal.db
+  --knowledge knowledge.db
   --archive archive.db
 
 GC flags:
@@ -89,8 +89,8 @@ type commonFlags struct {
 	json   bool
 
 	short     string
-	chronicle string
-	memopedia string
+	journal string
+	knowledge string
 	archive   string
 }
 
@@ -98,16 +98,16 @@ func (c *commonFlags) bind(fs *flag.FlagSet) {
 	fs.StringVar(&c.apiURL, "api-url", "", "HTTP API base URL (if set, CLI uses HTTP client)")
 	fs.BoolVar(&c.json, "json", false, "output JSON")
 	fs.StringVar(&c.short, "short", "short.db", "path to short.db")
-	fs.StringVar(&c.chronicle, "chronicle", "", "path to chronicle.db")
-	fs.StringVar(&c.memopedia, "memopedia", "", "path to memopedia.db")
+	fs.StringVar(&c.journal, "journal", "", "path to journal.db")
+	fs.StringVar(&c.knowledge, "knowledge", "", "path to knowledge.db")
 	fs.StringVar(&c.archive, "archive", "", "path to archive.db")
 }
 
 func (c *commonFlags) paths() db.Paths {
 	return db.Paths{
 		Short:     c.short,
-		Chronicle: c.chronicle,
-		Memopedia: c.memopedia,
+		Journal: c.journal,
+		Knowledge: c.knowledge,
 		Archive:   c.archive,
 	}
 }
@@ -218,8 +218,8 @@ func cmdIn(args []string) {
 		}
 		fmt.Printf("ok id=%s\n", resp.Note.ID)
 
-	case "chronicle":
-		fs := flag.NewFlagSet("mem in chronicle", flag.ExitOnError)
+	case "journal":
+		fs := flag.NewFlagSet("mem in journal", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		title := fs.String("title", "", "note title")
@@ -240,7 +240,7 @@ func cmdIn(args []string) {
 		}
 
 		if *scope == "" {
-			log.Fatal("--scope is required for chronicle")
+			log.Fatal("--scope is required for journal")
 		}
 
 		ctx := context.Background()
@@ -250,7 +250,7 @@ func cmdIn(args []string) {
 		}
 		defer cleanup()
 
-		resp, apiErr := client.ChronicleIngest(ctx, api.ChronicleIngestRequest{
+		resp, apiErr := client.JournalIngest(ctx, api.JournalIngestRequest{
 			Title:        *title,
 			Body:         b,
 			SourceType:   *sourceType,
@@ -270,8 +270,8 @@ func cmdIn(args []string) {
 		}
 		fmt.Printf("ok id=%s\n", resp.Note.ID)
 
-	case "memopedia":
-		fs := flag.NewFlagSet("mem in memopedia", flag.ExitOnError)
+	case "knowledge":
+		fs := flag.NewFlagSet("mem in knowledge", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		title := fs.String("title", "", "note title")
@@ -293,7 +293,7 @@ func cmdIn(args []string) {
 		}
 
 		if *scope == "" {
-			log.Fatal("--scope is required for memopedia")
+			log.Fatal("--scope is required for knowledge")
 		}
 
 		ctx := context.Background()
@@ -303,7 +303,7 @@ func cmdIn(args []string) {
 		}
 		defer cleanup()
 
-		resp, apiErr := client.MemopediaIngest(ctx, api.MemopediaIngestRequest{
+		resp, apiErr := client.KnowledgeIngest(ctx, api.KnowledgeIngestRequest{
 			Title:        *title,
 			Body:         b,
 			SourceType:   *sourceType,
@@ -392,11 +392,11 @@ func cmdOut(args []string) {
 		}
 		fmt.Printf("# %s\n\n%s\n", n.Title, n.Body)
 
-	case "chronicle":
-		cmdOutChronicle(args[1:])
+	case "journal":
+		cmdOutJournal(args[1:])
 
-	case "memopedia":
-		cmdOutMemopedia(args[1:])
+	case "knowledge":
+		cmdOutKnowledge(args[1:])
 
 	case "archive":
 		cmdOutArchive(args[1:])
@@ -526,16 +526,16 @@ func readAllStdin() string {
 	return b.String()
 }
 
-// -------------------- chronicle commands --------------------
+// -------------------- journal commands --------------------
 
-func cmdOutChronicle(args []string) {
+func cmdOutJournal(args []string) {
 	if len(args) < 1 {
 		usage()
 		os.Exit(2)
 	}
 	switch args[0] {
 	case "search":
-		fs := flag.NewFlagSet("mem out chronicle search", flag.ExitOnError)
+		fs := flag.NewFlagSet("mem out journal search", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		topK := fs.Int("k", 20, "top k")
@@ -549,7 +549,7 @@ func cmdOutChronicle(args []string) {
 		}
 		defer cleanup()
 
-		resp, apiErr := client.ChronicleSearch(ctx, api.ChronicleSearchRequest{Query: query, TopK: *topK})
+		resp, apiErr := client.JournalSearch(ctx, api.JournalSearchRequest{Query: query, TopK: *topK})
 		if apiErr != nil {
 			log.Fatalf("%s: %s", apiErr.Code, apiErr.Message)
 		}
@@ -562,7 +562,7 @@ func cmdOutChronicle(args []string) {
 		}
 
 	case "show":
-		fs := flag.NewFlagSet("mem out chronicle show", flag.ExitOnError)
+		fs := flag.NewFlagSet("mem out journal show", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		_ = fs.Parse(args[1:])
@@ -578,7 +578,7 @@ func cmdOutChronicle(args []string) {
 		}
 		defer cleanup()
 
-		n, apiErr := client.ChronicleGet(ctx, id)
+		n, apiErr := client.JournalGet(ctx, id)
 		if apiErr != nil {
 			log.Fatalf("%s: %s", apiErr.Code, apiErr.Message)
 		}
@@ -589,7 +589,7 @@ func cmdOutChronicle(args []string) {
 		fmt.Printf("# %s\n\nScope: %s\n\n%s\n", n.Title, n.WorkingScope, n.Body)
 
 	case "list":
-		fs := flag.NewFlagSet("mem out chronicle list", flag.ExitOnError)
+		fs := flag.NewFlagSet("mem out journal list", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		scope := fs.String("scope", "", "working scope (required)")
@@ -607,7 +607,7 @@ func cmdOutChronicle(args []string) {
 		}
 		defer cleanup()
 
-		resp, apiErr := client.ChronicleListByScope(ctx, api.ChronicleListByScopeRequest{
+		resp, apiErr := client.JournalListByScope(ctx, api.JournalListByScopeRequest{
 			WorkingScope: *scope,
 			Limit:        *limit,
 		})
@@ -628,16 +628,16 @@ func cmdOutChronicle(args []string) {
 	}
 }
 
-// -------------------- memopedia commands --------------------
+// -------------------- knowledge commands --------------------
 
-func cmdOutMemopedia(args []string) {
+func cmdOutKnowledge(args []string) {
 	if len(args) < 1 {
 		usage()
 		os.Exit(2)
 	}
 	switch args[0] {
 	case "search":
-		fs := flag.NewFlagSet("mem out memopedia search", flag.ExitOnError)
+		fs := flag.NewFlagSet("mem out knowledge search", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		topK := fs.Int("k", 20, "top k")
@@ -651,7 +651,7 @@ func cmdOutMemopedia(args []string) {
 		}
 		defer cleanup()
 
-		resp, apiErr := client.MemopediaSearch(ctx, api.MemopediaSearchRequest{Query: query, TopK: *topK})
+		resp, apiErr := client.KnowledgeSearch(ctx, api.KnowledgeSearchRequest{Query: query, TopK: *topK})
 		if apiErr != nil {
 			log.Fatalf("%s: %s", apiErr.Code, apiErr.Message)
 		}
@@ -668,7 +668,7 @@ func cmdOutMemopedia(args []string) {
 		}
 
 	case "show":
-		fs := flag.NewFlagSet("mem out memopedia show", flag.ExitOnError)
+		fs := flag.NewFlagSet("mem out knowledge show", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		_ = fs.Parse(args[1:])
@@ -684,7 +684,7 @@ func cmdOutMemopedia(args []string) {
 		}
 		defer cleanup()
 
-		n, apiErr := client.MemopediaGet(ctx, id)
+		n, apiErr := client.KnowledgeGet(ctx, id)
 		if apiErr != nil {
 			log.Fatalf("%s: %s", apiErr.Code, apiErr.Message)
 		}
@@ -699,7 +699,7 @@ func cmdOutMemopedia(args []string) {
 		fmt.Printf("# %s%s\n\nScope: %s\n\n%s\n", n.Title, pinned, n.WorkingScope, n.Body)
 
 	case "list":
-		fs := flag.NewFlagSet("mem out memopedia list", flag.ExitOnError)
+		fs := flag.NewFlagSet("mem out knowledge list", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		scope := fs.String("scope", "", "working scope (required)")
@@ -717,7 +717,7 @@ func cmdOutMemopedia(args []string) {
 		}
 		defer cleanup()
 
-		resp, apiErr := client.MemopediaListByScope(ctx, api.MemopediaListByScopeRequest{
+		resp, apiErr := client.KnowledgeListByScope(ctx, api.KnowledgeListByScopeRequest{
 			WorkingScope: *scope,
 			Limit:        *limit,
 		})
@@ -733,7 +733,7 @@ func cmdOutMemopedia(args []string) {
 		}
 
 	case "pinned":
-		fs := flag.NewFlagSet("mem out memopedia pinned", flag.ExitOnError)
+		fs := flag.NewFlagSet("mem out knowledge pinned", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		scope := fs.String("scope", "", "working scope (optional)")
@@ -747,7 +747,7 @@ func cmdOutMemopedia(args []string) {
 		}
 		defer cleanup()
 
-		resp, apiErr := client.MemopediaListPinned(ctx, api.MemopediaListPinnedRequest{
+		resp, apiErr := client.KnowledgeListPinned(ctx, api.KnowledgeListPinnedRequest{
 			WorkingScope: *scope,
 			Limit:        *limit,
 		})
@@ -763,7 +763,7 @@ func cmdOutMemopedia(args []string) {
 		}
 
 	case "pin":
-		fs := flag.NewFlagSet("mem out memopedia pin", flag.ExitOnError)
+		fs := flag.NewFlagSet("mem out knowledge pin", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		_ = fs.Parse(args[1:])
@@ -779,14 +779,14 @@ func cmdOutMemopedia(args []string) {
 		}
 		defer cleanup()
 
-		_, apiErr := client.MemopediaPin(ctx, id)
+		_, apiErr := client.KnowledgePin(ctx, id)
 		if apiErr != nil {
 			log.Fatalf("%s: %s", apiErr.Code, apiErr.Message)
 		}
 		fmt.Println("ok")
 
 	case "unpin":
-		fs := flag.NewFlagSet("mem out memopedia unpin", flag.ExitOnError)
+		fs := flag.NewFlagSet("mem out knowledge unpin", flag.ExitOnError)
 		cf := &commonFlags{}
 		cf.bind(fs)
 		_ = fs.Parse(args[1:])
@@ -802,7 +802,7 @@ func cmdOutMemopedia(args []string) {
 		}
 		defer cleanup()
 
-		_, apiErr := client.MemopediaUnpin(ctx, id)
+		_, apiErr := client.KnowledgeUnpin(ctx, id)
 		if apiErr != nil {
 			log.Fatalf("%s: %s", apiErr.Code, apiErr.Message)
 		}

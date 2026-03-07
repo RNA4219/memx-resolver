@@ -8,14 +8,14 @@ import (
 	"memx/db"
 )
 
-func TestIngestMemopedia(t *testing.T) {
+func TestIngestKnowledge(t *testing.T) {
 	ctx := context.Background()
 
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -26,13 +26,13 @@ func TestIngestMemopedia(t *testing.T) {
 	defer svc.Close()
 
 	// 正常系
-	note, err := svc.IngestMemopedia(ctx, IngestMemopediaRequest{
+	note, err := svc.IngestKnowledge(ctx, IngestKnowledgeRequest{
 		Title:        "API設計方針",
 		Body:         "RESTful APIの設計方針について",
 		WorkingScope: "knowledge",
 	})
 	if err != nil {
-		t.Fatalf("IngestMemopedia: %v", err)
+		t.Fatalf("IngestKnowledge: %v", err)
 	}
 	if note.ID == "" {
 		t.Error("note.ID is empty")
@@ -42,7 +42,7 @@ func TestIngestMemopedia(t *testing.T) {
 	}
 
 	// 異常系: working_scope 未指定
-	_, err = svc.IngestMemopedia(ctx, IngestMemopediaRequest{
+	_, err = svc.IngestKnowledge(ctx, IngestKnowledgeRequest{
 		Title: "テスト",
 		Body:  "本文",
 	})
@@ -51,14 +51,14 @@ func TestIngestMemopedia(t *testing.T) {
 	}
 }
 
-func TestGetMemopedia(t *testing.T) {
+func TestGetKnowledge(t *testing.T) {
 	ctx := context.Background()
 
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -69,33 +69,33 @@ func TestGetMemopedia(t *testing.T) {
 	defer svc.Close()
 
 	// ノート作成
-	created, err := svc.IngestMemopedia(ctx, IngestMemopediaRequest{
+	created, err := svc.IngestKnowledge(ctx, IngestKnowledgeRequest{
 		Title:        "Design Pattern",
 		Body:         "Singleton pattern description",
 		WorkingScope: "patterns",
 	})
 	if err != nil {
-		t.Fatalf("IngestMemopedia: %v", err)
+		t.Fatalf("IngestKnowledge: %v", err)
 	}
 
 	// 取得
-	got, err := svc.GetMemopedia(ctx, created.ID)
+	got, err := svc.GetKnowledge(ctx, created.ID)
 	if err != nil {
-		t.Fatalf("GetMemopedia: %v", err)
+		t.Fatalf("GetKnowledge: %v", err)
 	}
 	if got.ID != created.ID {
 		t.Errorf("ID = %q, want %q", got.ID, created.ID)
 	}
 }
 
-func TestPinUnpinMemopedia(t *testing.T) {
+func TestPinUnpinKnowledge(t *testing.T) {
 	ctx := context.Background()
 
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -106,54 +106,54 @@ func TestPinUnpinMemopedia(t *testing.T) {
 	defer svc.Close()
 
 	// ノート作成
-	created, err := svc.IngestMemopedia(ctx, IngestMemopediaRequest{
+	created, err := svc.IngestKnowledge(ctx, IngestKnowledgeRequest{
 		Title:        "Pinned Note",
 		Body:         "This should be pinned",
 		WorkingScope: "test",
 	})
 	if err != nil {
-		t.Fatalf("IngestMemopedia: %v", err)
+		t.Fatalf("IngestKnowledge: %v", err)
 	}
 
 	// ピン留め
-	err = svc.PinMemopedia(ctx, created.ID)
+	err = svc.PinKnowledge(ctx, created.ID)
 	if err != nil {
-		t.Fatalf("PinMemopedia: %v", err)
+		t.Fatalf("PinKnowledge: %v", err)
 	}
 
 	// 確認
-	got, err := svc.GetMemopedia(ctx, created.ID)
+	got, err := svc.GetKnowledge(ctx, created.ID)
 	if err != nil {
-		t.Fatalf("GetMemopedia: %v", err)
+		t.Fatalf("GetKnowledge: %v", err)
 	}
 	if !got.IsPinned {
 		t.Error("expected IsPinned = true")
 	}
 
 	// ピン留め解除
-	err = svc.UnpinMemopedia(ctx, created.ID)
+	err = svc.UnpinKnowledge(ctx, created.ID)
 	if err != nil {
-		t.Fatalf("UnpinMemopedia: %v", err)
+		t.Fatalf("UnpinKnowledge: %v", err)
 	}
 
 	// 確認
-	got, err = svc.GetMemopedia(ctx, created.ID)
+	got, err = svc.GetKnowledge(ctx, created.ID)
 	if err != nil {
-		t.Fatalf("GetMemopedia: %v", err)
+		t.Fatalf("GetKnowledge: %v", err)
 	}
 	if got.IsPinned {
 		t.Error("expected IsPinned = false")
 	}
 }
 
-func TestListPinnedMemopedia(t *testing.T) {
+func TestListPinnedKnowledge(t *testing.T) {
 	ctx := context.Background()
 
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -164,31 +164,31 @@ func TestListPinnedMemopedia(t *testing.T) {
 	defer svc.Close()
 
 	// ピン留め付きでノート作成
-	pinned, err := svc.IngestMemopedia(ctx, IngestMemopediaRequest{
+	pinned, err := svc.IngestKnowledge(ctx, IngestKnowledgeRequest{
 		Title:        "Pinned Note",
 		Body:         "Pinned content",
 		WorkingScope: "test",
 		IsPinned:     true,
 	})
 	if err != nil {
-		t.Fatalf("IngestMemopedia: %v", err)
+		t.Fatalf("IngestKnowledge: %v", err)
 	}
 
 	// ピン留めなしでノート作成
-	_, err = svc.IngestMemopedia(ctx, IngestMemopediaRequest{
+	_, err = svc.IngestKnowledge(ctx, IngestKnowledgeRequest{
 		Title:        "Unpinned Note",
 		Body:         "Unpinned content",
 		WorkingScope: "test",
 		IsPinned:     false,
 	})
 	if err != nil {
-		t.Fatalf("IngestMemopedia: %v", err)
+		t.Fatalf("IngestKnowledge: %v", err)
 	}
 
 	// ピン留め一覧取得
-	notes, err := svc.ListPinnedMemopedia(ctx, "test", 10)
+	notes, err := svc.ListPinnedKnowledge(ctx, "test", 10)
 	if err != nil {
-		t.Fatalf("ListPinnedMemopedia: %v", err)
+		t.Fatalf("ListPinnedKnowledge: %v", err)
 	}
 	if len(notes) != 1 {
 		t.Errorf("expected 1 pinned note, got %d", len(notes))
@@ -198,14 +198,14 @@ func TestListPinnedMemopedia(t *testing.T) {
 	}
 }
 
-func TestSearchMemopedia(t *testing.T) {
+func TestSearchKnowledge(t *testing.T) {
 	ctx := context.Background()
 
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -216,19 +216,19 @@ func TestSearchMemopedia(t *testing.T) {
 	defer svc.Close()
 
 	// 用語定義ノート作成
-	_, err = svc.IngestMemopedia(ctx, IngestMemopediaRequest{
+	_, err = svc.IngestKnowledge(ctx, IngestKnowledgeRequest{
 		Title:        "マイクロサービス",
 		Body:         "マイクロサービスは、アプリケーションを小さなサービスに分割するアーキテクチャパターンです",
 		WorkingScope: "glossary",
 	})
 	if err != nil {
-		t.Fatalf("IngestMemopedia: %v", err)
+		t.Fatalf("IngestKnowledge: %v", err)
 	}
 
 	// 検索
-	notes, err := svc.SearchMemopedia(ctx, "マイクロサービス", 10)
+	notes, err := svc.SearchKnowledge(ctx, "マイクロサービス", 10)
 	if err != nil {
-		t.Fatalf("SearchMemopedia: %v", err)
+		t.Fatalf("SearchKnowledge: %v", err)
 	}
 	if len(notes) < 1 {
 		t.Error("expected at least 1 result")

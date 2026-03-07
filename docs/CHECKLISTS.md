@@ -9,7 +9,7 @@ next_review_due: 2026-06-03
 # CHECKLISTS
 
 ## 仕様反映チェック
-- [ ] 4ストア（short/chronicle/memopedia/archive）の責務分離を維持している。
+- [ ] 4ストア（short/journal/knowledge/archive）の責務分離を維持している。
 - [ ] CLI は API ラッパに徹し、DB 直接アクセスを持たない。
 - [ ] Service を唯一の業務ロジック入口にしている。
 

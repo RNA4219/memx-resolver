@@ -58,8 +58,8 @@ mem out show <NOTE_ID>
 
 ```
 short.db       短期記憶（作業メモ）
-chronicle.db   長期記憶（重要な履歴）
-memopedia.db   知識ベース（永続情報）
+journal.db   長期記憶（重要な履歴）
+knowledge.db   知識ベース（永続情報）
 archive.db     アーカイブ
 ```
 
@@ -105,7 +105,7 @@ archive.db     アーカイブ
 - [x] Gatekeeper（セキュリティチェック）
 - [x] 入力バリデーション
 - [x] LLM要約機能
-- [x] 全ストアのスキーマ定義（short/chronicle/memopedia/archive）
+- [x] 全ストアのスキーマ定義（short/journal/knowledge/archive）
 
 ### v1.x 完了済み
 
@@ -117,8 +117,8 @@ archive.db     アーカイブ
 
 ### v1.x 予定
 
-- [ ] chronicle ストアの CRUD実装
-- [ ] memopedia ストアの CRUD実装
+- [ ] journal ストアの CRUD実装
+- [ ] knowledge ストアの CRUD実装
 - [ ] archive ストアの CRUD実装
 
 ---

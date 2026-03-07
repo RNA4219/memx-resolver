@@ -8,10 +8,10 @@ import (
 	_ "modernc.org/sqlite"
 )
 
-func TestMigrateChronicle(t *testing.T) {
+func TestMigrateJournal(t *testing.T) {
 	// 一時ディレクトリを作成
 	tmpDir := t.TempDir()
-	dbPath := filepath.Join(tmpDir, "chronicle.db")
+	dbPath := filepath.Join(tmpDir, "journal.db")
 
 	db, err := openDB("file:" + dbPath)
 	if err != nil {
@@ -20,8 +20,8 @@ func TestMigrateChronicle(t *testing.T) {
 	defer db.Close()
 
 	// マイグレーション実行
-	if err := migrateChronicle(db); err != nil {
-		t.Fatalf("migrateChronicle failed: %v", err)
+	if err := migrateJournal(db); err != nil {
+		t.Fatalf("migrateJournal failed: %v", err)
 	}
 
 	// user_version が設定されているか確認
@@ -53,9 +53,9 @@ func TestMigrateChronicle(t *testing.T) {
 	}
 }
 
-func TestMigrateChronicle_Idempotent(t *testing.T) {
+func TestMigrateJournal_Idempotent(t *testing.T) {
 	tmpDir := t.TempDir()
-	dbPath := filepath.Join(tmpDir, "chronicle.db")
+	dbPath := filepath.Join(tmpDir, "journal.db")
 
 	db, err := openDB("file:" + dbPath)
 	if err != nil {
@@ -64,13 +64,13 @@ func TestMigrateChronicle_Idempotent(t *testing.T) {
 	defer db.Close()
 
 	// 1回目のマイグレーション
-	if err := migrateChronicle(db); err != nil {
-		t.Fatalf("first migrateChronicle failed: %v", err)
+	if err := migrateJournal(db); err != nil {
+		t.Fatalf("first migrateJournal failed: %v", err)
 	}
 
 	// 2回目のマイグレーション（再実行安全性の確認）
-	if err := migrateChronicle(db); err != nil {
-		t.Fatalf("second migrateChronicle failed: %v", err)
+	if err := migrateJournal(db); err != nil {
+		t.Fatalf("second migrateJournal failed: %v", err)
 	}
 
 	// user_version が 1 のままであることを確認
@@ -83,9 +83,9 @@ func TestMigrateChronicle_Idempotent(t *testing.T) {
 	}
 }
 
-func TestMigrateMemopedia(t *testing.T) {
+func TestMigrateKnowledge(t *testing.T) {
 	tmpDir := t.TempDir()
-	dbPath := filepath.Join(tmpDir, "memopedia.db")
+	dbPath := filepath.Join(tmpDir, "knowledge.db")
 
 	db, err := openDB("file:" + dbPath)
 	if err != nil {
@@ -93,8 +93,8 @@ func TestMigrateMemopedia(t *testing.T) {
 	}
 	defer db.Close()
 
-	if err := migrateMemopedia(db); err != nil {
-		t.Fatalf("migrateMemopedia failed: %v", err)
+	if err := migrateKnowledge(db); err != nil {
+		t.Fatalf("migrateKnowledge failed: %v", err)
 	}
 
 	var version int
@@ -106,9 +106,9 @@ func TestMigrateMemopedia(t *testing.T) {
 	}
 }
 
-func TestMigrateMemopedia_Idempotent(t *testing.T) {
+func TestMigrateKnowledge_Idempotent(t *testing.T) {
 	tmpDir := t.TempDir()
-	dbPath := filepath.Join(tmpDir, "memopedia.db")
+	dbPath := filepath.Join(tmpDir, "knowledge.db")
 
 	db, err := openDB("file:" + dbPath)
 	if err != nil {
@@ -116,12 +116,12 @@ func TestMigrateMemopedia_Idempotent(t *testing.T) {
 	}
 	defer db.Close()
 
-	if err := migrateMemopedia(db); err != nil {
-		t.Fatalf("first migrateMemopedia failed: %v", err)
+	if err := migrateKnowledge(db); err != nil {
+		t.Fatalf("first migrateKnowledge failed: %v", err)
 	}
 
-	if err := migrateMemopedia(db); err != nil {
-		t.Fatalf("second migrateMemopedia failed: %v", err)
+	if err := migrateKnowledge(db); err != nil {
+		t.Fatalf("second migrateKnowledge failed: %v", err)
 	}
 
 	var version int
@@ -196,8 +196,8 @@ func TestOpenAll(t *testing.T) {
 
 	paths := Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
@@ -213,8 +213,8 @@ func TestOpenAll(t *testing.T) {
 		query string
 	}{
 		{"main", "PRAGMA main.user_version;"},
-		{"chronicle", "PRAGMA chronicle.user_version;"},
-		{"memopedia", "PRAGMA memopedia.user_version;"},
+		{"journal", "PRAGMA journal.user_version;"},
+		{"knowledge", "PRAGMA knowledge.user_version;"},
 		{"archive", "PRAGMA archive.user_version;"},
 	}
 

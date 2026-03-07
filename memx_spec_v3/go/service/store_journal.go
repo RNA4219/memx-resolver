@@ -10,16 +10,16 @@ import (
 	"memx/db"
 )
 
-// ChronicleNote は chronicle ストアのノート。
+// JournalNote は journal ストアのノート。
 // working_scope が必須。
-type ChronicleNote struct {
+type JournalNote struct {
 	Note
 	WorkingScope string
 	IsPinned     bool
 }
 
-// IngestChronicleRequest は chronicle への投入リクエスト。
-type IngestChronicleRequest struct {
+// IngestJournalRequest は journal への投入リクエスト。
+type IngestJournalRequest struct {
 	Title        string
 	Body         string
 	Summary      string
@@ -33,7 +33,7 @@ type IngestChronicleRequest struct {
 	NoLLM        bool
 }
 
-func (r *IngestChronicleRequest) normalize() {
+func (r *IngestJournalRequest) normalize() {
 	r.Title = strings.TrimSpace(r.Title)
 	r.Body = strings.TrimSpace(r.Body)
 	r.SourceType = strings.TrimSpace(r.SourceType)
@@ -53,7 +53,7 @@ func (r *IngestChronicleRequest) normalize() {
 	}
 }
 
-func (r *IngestChronicleRequest) validate() error {
+func (r *IngestJournalRequest) validate() error {
 	if len(r.Title) > 500 {
 		return fmt.Errorf("%w: title exceeds 500 characters", ErrInvalidArgument)
 	}
@@ -84,21 +84,21 @@ func (r *IngestChronicleRequest) validate() error {
 
 	// working_scope は必須
 	if r.WorkingScope == "" {
-		return fmt.Errorf("%w: working_scope is required for chronicle", ErrInvalidArgument)
+		return fmt.Errorf("%w: working_scope is required for journal", ErrInvalidArgument)
 	}
 
 	return nil
 }
 
-// IngestChronicle は chronicle.db にノートを保存する。
-func (s *Service) IngestChronicle(ctx context.Context, req IngestChronicleRequest) (ChronicleNote, error) {
+// IngestJournal は journal.db にノートを保存する。
+func (s *Service) IngestJournal(ctx context.Context, req IngestJournalRequest) (JournalNote, error) {
 	req.normalize()
 	if req.Title == "" || req.Body == "" {
-		return ChronicleNote{}, fmt.Errorf("%w: title/body is required", ErrInvalidArgument)
+		return JournalNote{}, fmt.Errorf("%w: title/body is required", ErrInvalidArgument)
 	}
 
 	if err := req.validate(); err != nil {
-		return ChronicleNote{}, err
+		return JournalNote{}, err
 	}
 
 	// Gatekeeper チェック
@@ -111,17 +111,17 @@ func (s *Service) IngestChronicle(ctx context.Context, req IngestChronicleReques
 				SourceType:  req.SourceType,
 				SourceTrust: req.SourceTrust,
 				Sensitivity: req.Sensitivity,
-				Store:       db.StoreChronicle,
+				Store:       db.StoreJournal,
 			},
 		})
 		if err != nil {
-			return ChronicleNote{}, fmt.Errorf("gatekeeper check: %w", err)
+			return JournalNote{}, fmt.Errorf("gatekeeper check: %w", err)
 		}
 		if decision.Decision == db.DecisionDeny {
-			return ChronicleNote{}, fmt.Errorf("%w: %s", ErrPolicyDenied, decision.Reason)
+			return JournalNote{}, fmt.Errorf("%w: %s", ErrPolicyDenied, decision.Reason)
 		}
 		if decision.Decision == db.DecisionNeedsHuman {
-			return ChronicleNote{}, fmt.Errorf("%w: %s", ErrNeedsHuman, decision.Reason)
+			return JournalNote{}, fmt.Errorf("%w: %s", ErrNeedsHuman, decision.Reason)
 		}
 	}
 
@@ -137,7 +137,7 @@ func (s *Service) IngestChronicle(ctx context.Context, req IngestChronicleReques
 
 	id, err := newUUIDLike()
 	if err != nil {
-		return ChronicleNote{}, err
+		return JournalNote{}, err
 	}
 	now := time.Now().UTC().Format(time.RFC3339Nano)
 
@@ -148,12 +148,12 @@ func (s *Service) IngestChronicle(ctx context.Context, req IngestChronicleReques
 
 	tx, err := s.Conn.DB.BeginTx(ctx, nil)
 	if err != nil {
-		return ChronicleNote{}, err
+		return JournalNote{}, err
 	}
 	defer func() { _ = tx.Rollback() }()
 
 	_, err = tx.ExecContext(ctx, `
-INSERT INTO chronicle.notes(
+INSERT INTO journal.notes(
   id, title, summary, body,
   created_at, updated_at, last_accessed_at,
   access_count,
@@ -162,7 +162,7 @@ INSERT INTO chronicle.notes(
 ) VALUES(?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?)
 `, id, req.Title, summary, req.Body, now, now, now, req.SourceType, req.Origin, req.SourceTrust, req.Sensitivity, req.WorkingScope, isPinned)
 	if err != nil {
-		return ChronicleNote{}, err
+		return JournalNote{}, err
 	}
 
 	for _, t := range req.Tags {
@@ -170,18 +170,18 @@ INSERT INTO chronicle.notes(
 		if t == "" {
 			continue
 		}
-		if err := upsertTagAndBindChronicle(ctx, tx, id, t, now); err != nil {
-			return ChronicleNote{}, err
+		if err := upsertTagAndBindJournal(ctx, tx, id, t, now); err != nil {
+			return JournalNote{}, err
 		}
 	}
 
-	_, _ = tx.ExecContext(ctx, `UPDATE chronicle.chronicle_meta SET value = CAST(CAST(value AS INTEGER) + 1 AS TEXT) WHERE key = 'note_count';`)
+	_, _ = tx.ExecContext(ctx, `UPDATE journal.journal_meta SET value = CAST(CAST(value AS INTEGER) + 1 AS TEXT) WHERE key = 'note_count';`)
 
 	if err := tx.Commit(); err != nil {
-		return ChronicleNote{}, err
+		return JournalNote{}, err
 	}
 
-	return ChronicleNote{
+	return JournalNote{
 		Note: Note{
 			ID:             id,
 			Title:          req.Title,
@@ -201,10 +201,10 @@ INSERT INTO chronicle.notes(
 	}, nil
 }
 
-func upsertTagAndBindChronicle(ctx context.Context, tx *sql.Tx, noteID, tag, now string) error {
+func upsertTagAndBindJournal(ctx context.Context, tx *sql.Tx, noteID, tag, now string) error {
 	_, err := tx.ExecContext(ctx, `
-INSERT INTO chronicle.tags(name, route, parent_id, created_at, updated_at, usage_count)
-VALUES(?, 'chronicle_only', NULL, ?, ?, 0)
+INSERT INTO journal.tags(name, route, parent_id, created_at, updated_at, usage_count)
+VALUES(?, 'journal_only', NULL, ?, ?, 0)
 ON CONFLICT(name) DO UPDATE SET updated_at = excluded.updated_at;
 `, tag, now, now)
 	if err != nil {
@@ -212,18 +212,18 @@ ON CONFLICT(name) DO UPDATE SET updated_at = excluded.updated_at;
 	}
 
 	var tagID int64
-	if err := tx.QueryRowContext(ctx, `SELECT id FROM chronicle.tags WHERE name = ?;`, tag).Scan(&tagID); err != nil {
+	if err := tx.QueryRowContext(ctx, `SELECT id FROM journal.tags WHERE name = ?;`, tag).Scan(&tagID); err != nil {
 		return err
 	}
-	if _, err := tx.ExecContext(ctx, `INSERT OR IGNORE INTO chronicle.note_tags(note_id, tag_id) VALUES(?, ?);`, noteID, tagID); err != nil {
+	if _, err := tx.ExecContext(ctx, `INSERT OR IGNORE INTO journal.note_tags(note_id, tag_id) VALUES(?, ?);`, noteID, tagID); err != nil {
 		return err
 	}
-	_, _ = tx.ExecContext(ctx, `UPDATE chronicle.tags SET usage_count = usage_count + 1 WHERE id = ?;`, tagID)
+	_, _ = tx.ExecContext(ctx, `UPDATE journal.tags SET usage_count = usage_count + 1 WHERE id = ?;`, tagID)
 	return nil
 }
 
-// SearchChronicle は chronicle ストアをFTS5で検索する。
-func (s *Service) SearchChronicle(ctx context.Context, query string, topK int) ([]ChronicleNote, error) {
+// SearchJournal は journal ストアをFTS5で検索する。
+func (s *Service) SearchJournal(ctx context.Context, query string, topK int) ([]JournalNote, error) {
 	query = strings.TrimSpace(query)
 	if query == "" {
 		return nil, fmt.Errorf("%w: query is required", ErrInvalidArgument)
@@ -245,9 +245,9 @@ SELECT n.id, n.title, n.summary, n.body,
        n.created_at, n.updated_at, n.last_accessed_at, n.access_count,
        n.source_type, n.origin, n.source_trust, n.sensitivity,
        n.working_scope, n.is_pinned
-FROM chronicle.notes n
+FROM journal.notes n
 WHERE n.rowid IN (
-  SELECT rowid FROM chronicle.notes_fts WHERE notes_fts MATCH ?
+  SELECT rowid FROM journal.notes_fts WHERE notes_fts MATCH ?
 )
 ORDER BY n.created_at DESC
 LIMIT ?;
@@ -257,9 +257,9 @@ LIMIT ?;
 	}
 	defer rows.Close()
 
-	out := make([]ChronicleNote, 0, topK)
+	out := make([]JournalNote, 0, topK)
 	for rows.Next() {
-		var n ChronicleNote
+		var n JournalNote
 		var isPinned int
 		if err := rows.Scan(
 			&n.ID, &n.Title, &n.Summary, &n.Body,
@@ -278,32 +278,32 @@ LIMIT ?;
 	return out, nil
 }
 
-// GetChronicle は id 指定で chronicle ノートを取得する。
-func (s *Service) GetChronicle(ctx context.Context, id string) (ChronicleNote, error) {
+// GetJournal は id 指定で journal ノートを取得する。
+func (s *Service) GetJournal(ctx context.Context, id string) (JournalNote, error) {
 	id = strings.TrimSpace(id)
 	if id == "" {
-		return ChronicleNote{}, fmt.Errorf("%w: id is required", ErrInvalidArgument)
+		return JournalNote{}, fmt.Errorf("%w: id is required", ErrInvalidArgument)
 	}
 	if len(id) != 32 {
-		return ChronicleNote{}, fmt.Errorf("%w: invalid id format", ErrInvalidArgument)
+		return JournalNote{}, fmt.Errorf("%w: invalid id format", ErrInvalidArgument)
 	}
 
 	now := time.Now().UTC().Format(time.RFC3339Nano)
 
 	tx, err := s.Conn.DB.BeginTx(ctx, nil)
 	if err != nil {
-		return ChronicleNote{}, err
+		return JournalNote{}, err
 	}
 	defer func() { _ = tx.Rollback() }()
 
-	var n ChronicleNote
+	var n JournalNote
 	var isPinned int
 	err = tx.QueryRowContext(ctx, `
 SELECT id, title, summary, body,
        created_at, updated_at, last_accessed_at, access_count,
        source_type, origin, source_trust, sensitivity,
        working_scope, is_pinned
-FROM chronicle.notes WHERE id = ?;
+FROM journal.notes WHERE id = ?;
 `, id).Scan(
 		&n.ID, &n.Title, &n.Summary, &n.Body,
 		&n.CreatedAt, &n.UpdatedAt, &n.LastAccessedAt, &n.AccessCount,
@@ -312,19 +312,19 @@ FROM chronicle.notes WHERE id = ?;
 	)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return ChronicleNote{}, ErrNotFound
+			return JournalNote{}, ErrNotFound
 		}
-		return ChronicleNote{}, err
+		return JournalNote{}, err
 	}
 
 	_, _ = tx.ExecContext(ctx, `
-UPDATE chronicle.notes
+UPDATE journal.notes
 SET last_accessed_at = ?, access_count = access_count + 1
 WHERE id = ?;
 `, now, id)
 
 	if err := tx.Commit(); err != nil {
-		return ChronicleNote{}, err
+		return JournalNote{}, err
 	}
 
 	n.IsPinned = isPinned == 1
@@ -333,8 +333,8 @@ WHERE id = ?;
 	return n, nil
 }
 
-// ListChronicleByScope は working_scope でフィルタしてノートを取得する。
-func (s *Service) ListChronicleByScope(ctx context.Context, workingScope string, limit int) ([]ChronicleNote, error) {
+// ListJournalByScope は working_scope でフィルタしてノートを取得する。
+func (s *Service) ListJournalByScope(ctx context.Context, workingScope string, limit int) ([]JournalNote, error) {
 	workingScope = strings.TrimSpace(workingScope)
 	if workingScope == "" {
 		return nil, fmt.Errorf("%w: working_scope is required", ErrInvalidArgument)
@@ -351,7 +351,7 @@ SELECT id, title, summary, body,
        created_at, updated_at, last_accessed_at, access_count,
        source_type, origin, source_trust, sensitivity,
        working_scope, is_pinned
-FROM chronicle.notes
+FROM journal.notes
 WHERE working_scope = ?
 ORDER BY created_at DESC
 LIMIT ?;
@@ -361,9 +361,9 @@ LIMIT ?;
 	}
 	defer rows.Close()
 
-	out := make([]ChronicleNote, 0, limit)
+	out := make([]JournalNote, 0, limit)
 	for rows.Next() {
-		var n ChronicleNote
+		var n JournalNote
 		var isPinned int
 		if err := rows.Scan(
 			&n.ID, &n.Title, &n.Summary, &n.Body,

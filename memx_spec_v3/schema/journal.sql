@@ -1,14 +1,14 @@
--- schema/memopedia.sql
--- knowledge base store
+-- schema/journal.sql
+-- long-term memory store
 -- short.sql との差分:
--- - notes.working_scope を追加（知識領域の分類キー）
--- - notes.is_pinned を追加（定義・方針の固定表示）
--- - memopedia_meta を追加（GC用メタ情報）
+-- - notes.working_scope を追加（Journal の時間軸グルーピング用）
+-- - notes.is_pinned を追加（重要ログ固定化）
+-- - journal_meta を追加（GC用メタ情報）
 
 PRAGMA foreign_keys = ON;
 
 -- =========================================
--- 1. notes（知識ベースノート）
+-- 1. notes（長期ノート本体）
 -- =========================================
 
 CREATE TABLE IF NOT EXISTS notes (
@@ -34,11 +34,12 @@ CREATE TABLE IF NOT EXISTS notes (
   importance_static REAL,
 
   -- タグ route を上書きするための昇格先指定
+  -- null or 'journal' | 'knowledge' | 'both' | 'archive_only'
   route_override    TEXT,
 
-  -- memopedia 固有列
-  working_scope     TEXT NOT NULL,         -- 'self' | 'session:<id>' | 'project:<name>' | 'global'
-  is_pinned         INTEGER NOT NULL DEFAULT 0  -- 1 なら Working Memory として固定
+  -- journal 固有列
+  working_scope     TEXT NOT NULL,         -- 'self' | 'session:<id>' | 'project:<name>'
+  is_pinned         INTEGER NOT NULL DEFAULT 0  -- 1 なら重要ログとして固定
 );
 
 CREATE INDEX IF NOT EXISTS idx_notes_created_at
@@ -73,6 +74,7 @@ CREATE VIRTUAL TABLE IF NOT EXISTS notes_fts USING fts5(
 );
 
 -- notes → notes_fts 同期用トリガ
+-- UPDATE 時は DELETE → INSERT で同期する（FTS5 の推奨パターン）。
 
 CREATE TRIGGER IF NOT EXISTS notes_ai AFTER INSERT ON notes BEGIN
   INSERT INTO notes_fts(rowid, title, body)
@@ -97,7 +99,7 @@ END;
 CREATE TABLE IF NOT EXISTS tags (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
   name          TEXT NOT NULL UNIQUE,        -- 正規化タグ名
-  route         TEXT NOT NULL,               -- 'chronicle' | 'memopedia' | 'both' | 'short_only'
+  route         TEXT NOT NULL,               -- 'journal' | 'knowledge' | 'both' | 'short_only'
   parent_id     INTEGER,                     -- 代表タグ or 親タグ（NULL 許容）
   created_at    TEXT NOT NULL,
   updated_at    TEXT NOT NULL,
@@ -147,23 +149,23 @@ CREATE INDEX IF NOT EXISTS idx_note_embeddings_dim
 
 
 -- =========================================
--- 5. memopedia_meta（GC 用メタ情報）
+-- 5. journal_meta（GC 用メタ情報）
 -- =========================================
 
-CREATE TABLE IF NOT EXISTS memopedia_meta (
+CREATE TABLE IF NOT EXISTS journal_meta (
   key   TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );
 
--- 初期値
+-- 初期値（既存行があれば無視される）
 
-INSERT OR IGNORE INTO memopedia_meta(key, value)
+INSERT OR IGNORE INTO journal_meta(key, value)
   VALUES ('note_count', '0');
 
-INSERT OR IGNORE INTO memopedia_meta(key, value)
+INSERT OR IGNORE INTO journal_meta(key, value)
   VALUES ('token_sum', '0');
 
-INSERT OR IGNORE INTO memopedia_meta(key, value)
+INSERT OR IGNORE INTO journal_meta(key, value)
   VALUES ('last_gc_at', '1970-01-01T00:00:00Z');
 
 
@@ -173,9 +175,9 @@ INSERT OR IGNORE INTO memopedia_meta(key, value)
 
 CREATE TABLE IF NOT EXISTS lineage (
   id             INTEGER PRIMARY KEY AUTOINCREMENT,
-  src_store      TEXT NOT NULL,      -- 'short' / 'chronicle' / 'memopedia'
+  src_store      TEXT NOT NULL,      -- 'short' / 'journal' / 'knowledge'
   src_note_id    TEXT NOT NULL,
-  dest_store     TEXT NOT NULL,      -- 'chronicle' / 'memopedia' / 'archive'
+  dest_store     TEXT NOT NULL,      -- 'journal' / 'knowledge' / 'archive'
   dest_note_id   TEXT NOT NULL,
   relation       TEXT NOT NULL,      -- 'distilled_to' / 'merged_into' / 'observed' / 'reflected' / 'archived_from' 等
   created_at     TEXT NOT NULL

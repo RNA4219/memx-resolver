@@ -31,18 +31,18 @@ func (s *HTTPServer) Handler() http.Handler {
 	mux.HandleFunc("/v1/gc:run", s.handleGCRun)
 	mux.HandleFunc("/v1/notes/", s.handleNotesGet)
 
-	// Chronicle store
-	mux.HandleFunc("/v1/chronicle:ingest", s.handleChronicleIngest)
-	mux.HandleFunc("/v1/chronicle:search", s.handleChronicleSearch)
-	mux.HandleFunc("/v1/chronicle:list-by-scope", s.handleChronicleListByScope)
-	mux.HandleFunc("/v1/chronicle/", s.handleChronicleGet)
+	// Journal store
+	mux.HandleFunc("/v1/journal:ingest", s.handleJournalIngest)
+	mux.HandleFunc("/v1/journal:search", s.handleJournalSearch)
+	mux.HandleFunc("/v1/journal:list-by-scope", s.handleJournalListByScope)
+	mux.HandleFunc("/v1/journal/", s.handleJournalGet)
 
-	// Memopedia store
-	mux.HandleFunc("/v1/memopedia:ingest", s.handleMemopediaIngest)
-	mux.HandleFunc("/v1/memopedia:search", s.handleMemopediaSearch)
-	mux.HandleFunc("/v1/memopedia:list-by-scope", s.handleMemopediaListByScope)
-	mux.HandleFunc("/v1/memopedia:list-pinned", s.handleMemopediaListPinned)
-	mux.HandleFunc("/v1/memopedia/", s.handleMemopediaGet)
+	// Knowledge store
+	mux.HandleFunc("/v1/knowledge:ingest", s.handleKnowledgeIngest)
+	mux.HandleFunc("/v1/knowledge:search", s.handleKnowledgeSearch)
+	mux.HandleFunc("/v1/knowledge:list-by-scope", s.handleKnowledgeListByScope)
+	mux.HandleFunc("/v1/knowledge:list-pinned", s.handleKnowledgeListPinned)
+	mux.HandleFunc("/v1/knowledge/", s.handleKnowledgeGet)
 
 	// Archive store
 	mux.HandleFunc("/v1/archive", s.handleArchiveList)
@@ -208,19 +208,19 @@ func (s *HTTPServer) handleSummarizeBatch(w http.ResponseWriter, r *http.Request
 	writeOK(w, resp)
 }
 
-// -------------------- Chronicle Store --------------------
+// -------------------- Journal Store --------------------
 
-func (s *HTTPServer) handleChronicleIngest(w http.ResponseWriter, r *http.Request) {
+func (s *HTTPServer) handleJournalIngest(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	var req ChronicleIngestRequest
+	var req JournalIngestRequest
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeErr(w, err)
 		return
 	}
-	resp, apiErr := s.InProc.ChronicleIngest(r.Context(), req)
+	resp, apiErr := s.InProc.JournalIngest(r.Context(), req)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return
@@ -228,17 +228,17 @@ func (s *HTTPServer) handleChronicleIngest(w http.ResponseWriter, r *http.Reques
 	writeOK(w, resp)
 }
 
-func (s *HTTPServer) handleChronicleSearch(w http.ResponseWriter, r *http.Request) {
+func (s *HTTPServer) handleJournalSearch(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	var req ChronicleSearchRequest
+	var req JournalSearchRequest
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeErr(w, err)
 		return
 	}
-	resp, apiErr := s.InProc.ChronicleSearch(r.Context(), req)
+	resp, apiErr := s.InProc.JournalSearch(r.Context(), req)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return
@@ -246,16 +246,16 @@ func (s *HTTPServer) handleChronicleSearch(w http.ResponseWriter, r *http.Reques
 	writeOK(w, resp)
 }
 
-func (s *HTTPServer) handleChronicleGet(w http.ResponseWriter, r *http.Request) {
+func (s *HTTPServer) handleJournalGet(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	id, ok := extractID(w, r, "/v1/chronicle/")
+	id, ok := extractID(w, r, "/v1/journal/")
 	if !ok {
 		return
 	}
-	n, apiErr := s.InProc.ChronicleGet(r.Context(), id)
+	n, apiErr := s.InProc.JournalGet(r.Context(), id)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return
@@ -263,17 +263,17 @@ func (s *HTTPServer) handleChronicleGet(w http.ResponseWriter, r *http.Request) 
 	writeOK(w, n)
 }
 
-func (s *HTTPServer) handleChronicleListByScope(w http.ResponseWriter, r *http.Request) {
+func (s *HTTPServer) handleJournalListByScope(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	var req ChronicleListByScopeRequest
+	var req JournalListByScopeRequest
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeErr(w, err)
 		return
 	}
-	resp, apiErr := s.InProc.ChronicleListByScope(r.Context(), req)
+	resp, apiErr := s.InProc.JournalListByScope(r.Context(), req)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return
@@ -281,19 +281,19 @@ func (s *HTTPServer) handleChronicleListByScope(w http.ResponseWriter, r *http.R
 	writeOK(w, resp)
 }
 
-// -------------------- Memopedia Store --------------------
+// -------------------- Knowledge Store --------------------
 
-func (s *HTTPServer) handleMemopediaIngest(w http.ResponseWriter, r *http.Request) {
+func (s *HTTPServer) handleKnowledgeIngest(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	var req MemopediaIngestRequest
+	var req KnowledgeIngestRequest
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeErr(w, err)
 		return
 	}
-	resp, apiErr := s.InProc.MemopediaIngest(r.Context(), req)
+	resp, apiErr := s.InProc.KnowledgeIngest(r.Context(), req)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return
@@ -301,17 +301,17 @@ func (s *HTTPServer) handleMemopediaIngest(w http.ResponseWriter, r *http.Reques
 	writeOK(w, resp)
 }
 
-func (s *HTTPServer) handleMemopediaSearch(w http.ResponseWriter, r *http.Request) {
+func (s *HTTPServer) handleKnowledgeSearch(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	var req MemopediaSearchRequest
+	var req KnowledgeSearchRequest
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeErr(w, err)
 		return
 	}
-	resp, apiErr := s.InProc.MemopediaSearch(r.Context(), req)
+	resp, apiErr := s.InProc.KnowledgeSearch(r.Context(), req)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return
@@ -319,25 +319,25 @@ func (s *HTTPServer) handleMemopediaSearch(w http.ResponseWriter, r *http.Reques
 	writeOK(w, resp)
 }
 
-func (s *HTTPServer) handleMemopediaGet(w http.ResponseWriter, r *http.Request) {
+func (s *HTTPServer) handleKnowledgeGet(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	id, ok := extractID(w, r, "/v1/memopedia/")
+	id, ok := extractID(w, r, "/v1/knowledge/")
 	if !ok {
 		return
 	}
 	// Check for pin/unpin actions
 	if strings.HasSuffix(id, ":pin") {
-		s.handleMemopediaPinAction(w, r, strings.TrimSuffix(id, ":pin"))
+		s.handleKnowledgePinAction(w, r, strings.TrimSuffix(id, ":pin"))
 		return
 	}
 	if strings.HasSuffix(id, ":unpin") {
-		s.handleMemopediaUnpinAction(w, r, strings.TrimSuffix(id, ":unpin"))
+		s.handleKnowledgeUnpinAction(w, r, strings.TrimSuffix(id, ":unpin"))
 		return
 	}
-	n, apiErr := s.InProc.MemopediaGet(r.Context(), id)
+	n, apiErr := s.InProc.KnowledgeGet(r.Context(), id)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return
@@ -345,12 +345,12 @@ func (s *HTTPServer) handleMemopediaGet(w http.ResponseWriter, r *http.Request) 
 	writeOK(w, n)
 }
 
-func (s *HTTPServer) handleMemopediaPinAction(w http.ResponseWriter, r *http.Request, id string) {
+func (s *HTTPServer) handleKnowledgePinAction(w http.ResponseWriter, r *http.Request, id string) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	resp, apiErr := s.InProc.MemopediaPin(r.Context(), id)
+	resp, apiErr := s.InProc.KnowledgePin(r.Context(), id)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return
@@ -358,12 +358,12 @@ func (s *HTTPServer) handleMemopediaPinAction(w http.ResponseWriter, r *http.Req
 	writeOK(w, resp)
 }
 
-func (s *HTTPServer) handleMemopediaUnpinAction(w http.ResponseWriter, r *http.Request, id string) {
+func (s *HTTPServer) handleKnowledgeUnpinAction(w http.ResponseWriter, r *http.Request, id string) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	resp, apiErr := s.InProc.MemopediaUnpin(r.Context(), id)
+	resp, apiErr := s.InProc.KnowledgeUnpin(r.Context(), id)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return
@@ -371,17 +371,17 @@ func (s *HTTPServer) handleMemopediaUnpinAction(w http.ResponseWriter, r *http.R
 	writeOK(w, resp)
 }
 
-func (s *HTTPServer) handleMemopediaListByScope(w http.ResponseWriter, r *http.Request) {
+func (s *HTTPServer) handleKnowledgeListByScope(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	var req MemopediaListByScopeRequest
+	var req KnowledgeListByScopeRequest
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeErr(w, err)
 		return
 	}
-	resp, apiErr := s.InProc.MemopediaListByScope(r.Context(), req)
+	resp, apiErr := s.InProc.KnowledgeListByScope(r.Context(), req)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return
@@ -389,17 +389,17 @@ func (s *HTTPServer) handleMemopediaListByScope(w http.ResponseWriter, r *http.R
 	writeOK(w, resp)
 }
 
-func (s *HTTPServer) handleMemopediaListPinned(w http.ResponseWriter, r *http.Request) {
+func (s *HTTPServer) handleKnowledgeListPinned(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	var req MemopediaListPinnedRequest
+	var req KnowledgeListPinnedRequest
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeErr(w, err)
 		return
 	}
-	resp, apiErr := s.InProc.MemopediaListPinned(r.Context(), req)
+	resp, apiErr := s.InProc.KnowledgeListPinned(r.Context(), req)
 	if apiErr != nil {
 		writeErr(w, apiErr)
 		return

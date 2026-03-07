@@ -34,15 +34,15 @@ type ClusterInput struct {
 	Body    string
 }
 
-// PageUpdateInput は Memopedia ページ更新時の入力。
+// PageUpdateInput は Knowledge ページ更新時の入力。
 type PageUpdateInput struct {
 	PageID          string
 	ExistingContent string
 	NewObservations []string
 }
 
-// ReflectLLMClient は観測ノート要約と Memopedia ページ更新を担当する。
+// ReflectLLMClient は観測ノート要約と Knowledge ページ更新を担当する。
 type ReflectLLMClient interface {
 	SummarizeCluster(ctx context.Context, cluster ClusterInput) (string, error)
-	UpdateMemopediaPage(ctx context.Context, input PageUpdateInput) (string, error)
+	UpdateKnowledgePage(ctx context.Context, input PageUpdateInput) (string, error)
 }

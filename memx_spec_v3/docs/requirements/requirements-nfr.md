@@ -62,7 +62,7 @@ next_review_due: 2026-06-03
 - セキュリティ：
   - APIキーや秘密情報は `memory_policy.yaml` + Gatekeeper により保存前にブロック。
 - 拡張性：
-  - `chronicle.db` / `memopedia.db` / `archive.db` のスキーマは、`short.db` と同様の `notes` / `tags` / `note_tags` / `note_embeddings` / `notes_fts` 構造をベースとする。
+  - `journal.db` / `knowledge.db` / `archive.db` のスキーマは、`short.db` と同様の `notes` / `tags` / `note_tags` / `note_embeddings` / `notes_fts` 構造をベースとする。
   - 将来、Working Memory／プロジェクトスコープ／セッションスコープを追加しても、既存の CLI と DB 構造を壊さない。
 - トランザクションと一貫性：
   - ATTACH を跨いだ完全な原子的トランザクションは SQLite の仕様上保証できない。
@@ -277,7 +277,7 @@ memx-core 依存の導入は段階的に評価してよい。
 |-------|------|--------|
 | Phase 1 | task 継続に必要な構造状態を外部化 | 必須 |
 | Phase 2 | summary-first で evidence/knowledge/artifact を再構成に利用 | 必須 |
-| Phase 3 | lineage/chronicle/distilled knowledge により根拠追跡を強化 | 推奨 |
+| Phase 3 | lineage/journal/distilled knowledge により根拠追跡を強化 | 推奨 |
 
 #### 受入条件
 

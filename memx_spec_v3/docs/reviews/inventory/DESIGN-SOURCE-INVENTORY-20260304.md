@@ -9,7 +9,7 @@
 | `memx_spec_v3/docs/interfaces.md#2.1 \`POST /v1/notes:ingest\`（IF-API-INGEST-REQ/RES）` | `REQ-API-001` | `memx_spec_v3/docs/contracts/openapi.yaml#/paths/~1v1~1notes:ingest/post` | `api` | `requirements` | `memx-core` | `2026-03-04` | `0` |
 | `memx_spec_v3/docs/requirements.md#2. SHOULD（v1.x）` | `REQ-GC-001` | `memx_spec_v3/docs/contracts/openapi.yaml#/paths/~1v1~1gc:run/post` | `requirements` | `api` | `memx-core` | `2026-03-04` | `0` |
 | `memx_spec_v3/docs/traceability.md#1. 主要 REQ-ID トレーサビリティ表` | `REQ-SEC-001` | `traceability: REQ-SEC-001 mapping` | `requirements` | `design` | `memx-core` | `2026-03-04` | `0` |
-| `memx_spec_v3/docs/design.md#2.1 store別設計詳細（short/chronicle/memopedia/archive）` | `REQ-RET-001` | `design section: retention/archive behavior` | `design` | `requirements` | `memx-core` | `2026-03-04` | `0` |
+| `memx_spec_v3/docs/design.md#2.1 store別設計詳細（short/journal/knowledge/archive）` | `REQ-RET-001` | `design section: retention/archive behavior` | `design` | `requirements` | `memx-core` | `2026-03-04` | `0` |
 | `memx_spec_v3/docs/design.md#2. DB 責務分割` | `REQ-SEC-AUD-001` | `design section: audit responsibility split` | `design` | `requirements` | `memx-core` | `2026-03-04` | `0` |
 | `memx_spec_v3/docs/interfaces.md#4.1 ErrorCode × HTTP × retryable × クライアント動作（IF-ERR-MATRIX）` | `REQ-SEC-AUD-002` | `interfaces error/audit linkage` | `api` | `requirements` | `memx-core` | `2026-03-04` | `0` |
 | `docs/birdseye/index.json#nodes[guardrails]` | `REQ-SEC-GRD-001` | `docs/birdseye/index.json#/nodes[node_id=guardrails]` | `guardrails` | `requirements` | `memx-core` | `2026-03-04` | `0` |

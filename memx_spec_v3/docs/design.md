@@ -53,7 +53,7 @@ CLI -> API -> Service(Usecase) -> DB / LLM / Gatekeeper
 ### Source
 - `memx_spec_v3/docs/design.md#2. DB 責務分割`
 - `docs/ADR/ADR-0001-4db-boundary.md#ADR-0001: 4DB分割と責務境界`
-- `memx_spec_v3/docs/requirements.md#1-2-3-store-別要求short--chronicle--memopedia--archive`
+- `memx_spec_v3/docs/requirements.md#1-2-3-store-別要求short--journal--knowledge--archive`
 
 ### Node IDs
 - `design`
@@ -71,7 +71,7 @@ CLI -> API -> Service(Usecase) -> DB / LLM / Gatekeeper
 
 ### Commands
 - 要件ID網羅: `rg -n "REQ-STORE-(SHORT|CHR|MP|ARC)-00[12]" memx_spec_v3/docs/design.md memx_spec_v3/docs/requirements.md`
-- 契約同期: `rg -n "short|chronicle|memopedia|archive" memx_spec_v3/docs/design.md memx_spec_v3/docs/interfaces.md`
+- 契約同期: `rg -n "short|journal|knowledge|archive" memx_spec_v3/docs/design.md memx_spec_v3/docs/interfaces.md`
 - リンク健全性: `python scripts/check_links.py memx_spec_v3/docs/design.md`
 
 ### Dependencies
@@ -83,8 +83,8 @@ CLI -> API -> Service(Usecase) -> DB / LLM / Gatekeeper
 
 - ADR: [ADR-0001: 4DB分割と責務境界](../../docs/ADR/ADR-0001-4db-boundary.md)
 - `short.db`: 一次投入先。短期メモ、GC 対象の起点。
-- `chronicle.db`: 時系列ログ（出来事・進捗）。
-- `memopedia.db`: 抽象知識（定義・方針）。
+- `journal.db`: 時系列ログ（出来事・進捗）。
+- `knowledge.db`: 抽象知識（定義・方針）。
 - `archive.db`: 退避保管（通常検索対象外）。
 
 共通責務:
@@ -94,14 +94,14 @@ short 固有:
 - `short_meta`: GC 判定メタ。
 - `lineage`: 蒸留/昇格/退避の系譜。
 
-## 2.1 store別設計詳細（short/chronicle/memopedia/archive）
+## 2.1 store別設計詳細（short/journal/knowledge/archive）
 
 ### Objective
 - store ごとの必須要件・禁止変更・許可変更を固定し、後方互換を維持する。
 
 ### Source
-- `memx_spec_v3/docs/design.md#2.1 store別設計詳細（short/chronicle/memopedia/archive）`
-- `memx_spec_v3/docs/requirements.md#1-2-3-store-別要求short--chronicle--memopedia--archive`
+- `memx_spec_v3/docs/design.md#2.1 store別設計詳細（short/journal/knowledge/archive）`
+- `memx_spec_v3/docs/requirements.md#1-2-3-store-別要求short--journal--knowledge--archive`
 
 ### Node IDs
 - `design`
@@ -119,7 +119,7 @@ short 固有:
 
 ### Commands
 - 要件ID網羅: `rg -n "REQ-STORE-(SHORT|CHR|MP|ARC)-00[12]" memx_spec_v3/docs/design.md memx_spec_v3/docs/requirements.md`
-- 契約同期: `rg -n "short.notes|chronicle.notes|memopedia.notes|archive.notes" memx_spec_v3/docs/design.md memx_spec_v3/docs/interfaces.md`
+- 契約同期: `rg -n "short.notes|journal.notes|knowledge.notes|archive.notes" memx_spec_v3/docs/design.md memx_spec_v3/docs/interfaces.md`
 - リンク健全性: `python scripts/check_links.py memx_spec_v3/docs/design.md`
 
 ### Dependencies
@@ -132,10 +132,10 @@ short 固有:
 
 | store | Requirement ID | DB責務 | 禁止変更 | 許可変更 |
 | --- | --- | --- | --- | --- |
-| short | [`REQ-STORE-SHORT-001`](./requirements.md#1-2-3-store-別要求short--chronicle--memopedia--archive), [`REQ-STORE-SHORT-002`](./requirements.md#1-2-3-store-別要求short--chronicle--memopedia--archive) | 一次投入先として `short.notes` 保存、GC dry-run の候補抽出（非更新） | 必須保存項目の破壊、既定挙動での自動削除、`--json` 出力キー破壊 | 任意列追加、任意 CLI オプション追加、dry-run 診断項目追加 |
-| chronicle | [`REQ-STORE-CHR-001`](./requirements.md#1-2-3-store-別要求short--chronicle--memopedia--archive), [`REQ-STORE-CHR-002`](./requirements.md#1-2-3-store-別要求short--chronicle--memopedia--archive) | 時系列ログを `working_scope` 必須で保持し、期間/タグ抽出に応答 | `working_scope` 必須性撤回、既定ソート反転、既存 ID 体系変更 | 非破壊インデックス追加、任意フィルタ追加、任意メタ列追加 |
-| memopedia | [`REQ-STORE-MP-001`](./requirements.md#1-2-3-store-別要求short--chronicle--memopedia--archive), [`REQ-STORE-MP-002`](./requirements.md#1-2-3-store-別要求short--chronicle--memopedia--archive) | 用語/方針ノート保持、reflect 時の版管理保持 | 本文自動上書き、同一 ID 再利用、必須列削除 | 任意セクション追加、参照メタ追加、互換な検索キー追加 |
-| archive | [`REQ-STORE-ARC-001`](./requirements.md#1-2-3-store-別要求short--chronicle--memopedia--archive), [`REQ-STORE-ARC-002`](./requirements.md#1-2-3-store-別要求short--chronicle--memopedia--archive) | 退避ノート保持、lineage 記録後のみ short 削除、purge dry-run 候補提示 | 監査ログなし purge、retention 無視削除、lineage 未記録削除 | 保持メタ列追加、監査ログ項目追加、dry-run 出力列追加 |
+| short | [`REQ-STORE-SHORT-001`](./requirements.md#1-2-3-store-別要求short--journal--knowledge--archive), [`REQ-STORE-SHORT-002`](./requirements.md#1-2-3-store-別要求short--journal--knowledge--archive) | 一次投入先として `short.notes` 保存、GC dry-run の候補抽出（非更新） | 必須保存項目の破壊、既定挙動での自動削除、`--json` 出力キー破壊 | 任意列追加、任意 CLI オプション追加、dry-run 診断項目追加 |
+| journal | [`REQ-STORE-CHR-001`](./requirements.md#1-2-3-store-別要求short--journal--knowledge--archive), [`REQ-STORE-CHR-002`](./requirements.md#1-2-3-store-別要求short--journal--knowledge--archive) | 時系列ログを `working_scope` 必須で保持し、期間/タグ抽出に応答 | `working_scope` 必須性撤回、既定ソート反転、既存 ID 体系変更 | 非破壊インデックス追加、任意フィルタ追加、任意メタ列追加 |
+| knowledge | [`REQ-STORE-MP-001`](./requirements.md#1-2-3-store-別要求short--journal--knowledge--archive), [`REQ-STORE-MP-002`](./requirements.md#1-2-3-store-別要求short--journal--knowledge--archive) | 用語/方針ノート保持、reflect 時の版管理保持 | 本文自動上書き、同一 ID 再利用、必須列削除 | 任意セクション追加、参照メタ追加、互換な検索キー追加 |
+| archive | [`REQ-STORE-ARC-001`](./requirements.md#1-2-3-store-別要求short--journal--knowledge--archive), [`REQ-STORE-ARC-002`](./requirements.md#1-2-3-store-別要求short--journal--knowledge--archive) | 退避ノート保持、lineage 記録後のみ short 削除、purge dry-run 候補提示 | 監査ログなし purge、retention 無視削除、lineage 未記録削除 | 保持メタ列追加、監査ログ項目追加、dry-run 出力列追加 |
 
 ## 2.2 Security/Retention 設計
 
@@ -507,7 +507,7 @@ short 固有:
 
 - [x] 1. レイヤ構成 を `memx_spec_v3/docs/design-template.md` 準拠へ移行（Objective/Source/Node IDs/Requirements/Commands/Dependencies/Status）
 - [x] 2. DB 責務分割 を `memx_spec_v3/docs/design-template.md` 準拠へ移行（Objective/Source/Node IDs/Requirements/Commands/Dependencies/Status）
-- [x] 2.1 store別設計詳細（short/chronicle/memopedia/archive） を `memx_spec_v3/docs/design-template.md` 準拠へ移行（Objective/Source/Node IDs/Requirements/Commands/Dependencies/Status）
+- [x] 2.1 store別設計詳細（short/journal/knowledge/archive） を `memx_spec_v3/docs/design-template.md` 準拠へ移行（Objective/Source/Node IDs/Requirements/Commands/Dependencies/Status）
 - [x] 2.2 Security/Retention 設計 を `memx_spec_v3/docs/design-template.md` 準拠へ移行（Objective/Source/Node IDs/Requirements/Commands/Dependencies/Status）
 - [x] 3. 移行戦略 を `memx_spec_v3/docs/design-template.md` 準拠へ移行（Objective/Source/Node IDs/Requirements/Commands/Dependencies/Status）
 - [x] 4. ユースケース設計 を `memx_spec_v3/docs/design-template.md` 準拠へ移行（Objective/Source/Node IDs/Requirements/Commands/Dependencies/Status）
@@ -521,7 +521,7 @@ short 固有:
 | ファイル | 状態 | 説明 |
 | --- | --- | --- |
 | `go/db/migrate_short.go` | 完了 | short.db スキーマ適用 |
-| `go/db/migrate_other.go` | 完了 | chronicle/memopedia/archive スキーマ適用 |
+| `go/db/migrate_other.go` | 完了 | journal/knowledge/archive スキーマ適用 |
 | `go/db/open.go` | 完了 | 4DB ATTACH + マイグレーション |
 
 **実装詳細**:
@@ -531,7 +531,7 @@ short 固有:
 
 **スキーマ構成（各ストア共通）**:
 
-| テーブル | short | chronicle | memopedia | archive |
+| テーブル | short | journal | knowledge | archive |
 | --- | :---: | :---: | :---: | :---: |
 | `notes` | ✅ | ✅ | ✅ | ✅ |
 | `notes_fts` (FTS5) | ✅ | ✅ | ✅ | ❌ |

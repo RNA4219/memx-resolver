@@ -5,8 +5,8 @@ import (
 	"fmt"
 )
 
-// migrateChronicle は chronicle.db に対してスキーマを適用する。
-func migrateChronicle(db *sql.DB) error {
+// migrateJournal は journal.db に対してスキーマを適用する。
+func migrateJournal(db *sql.DB) error {
 	// user_version をチェックして、既にマイグレーション済みならスキップ
 	var version int
 	if err := db.QueryRow("PRAGMA user_version;").Scan(&version); err != nil {
@@ -17,10 +17,10 @@ func migrateChronicle(db *sql.DB) error {
 	}
 
 	// DDL を実行
-	ddls := getChronicleDDL()
+	ddls := getJournalDDL()
 	for _, ddl := range ddls {
 		if _, err := db.Exec(ddl); err != nil {
-			return fmt.Errorf("apply chronicle schema: %w (ddl: %s)", err, truncate(ddl, 50))
+			return fmt.Errorf("apply journal schema: %w (ddl: %s)", err, truncate(ddl, 50))
 		}
 	}
 
@@ -32,8 +32,8 @@ func migrateChronicle(db *sql.DB) error {
 	return nil
 }
 
-// migrateMemopedia は memopedia.db に対してスキーマを適用する。
-func migrateMemopedia(db *sql.DB) error {
+// migrateKnowledge は knowledge.db に対してスキーマを適用する。
+func migrateKnowledge(db *sql.DB) error {
 	var version int
 	if err := db.QueryRow("PRAGMA user_version;").Scan(&version); err != nil {
 		return fmt.Errorf("check user_version: %w", err)
@@ -42,10 +42,10 @@ func migrateMemopedia(db *sql.DB) error {
 		return nil
 	}
 
-	ddls := getMemopediaDDL()
+	ddls := getKnowledgeDDL()
 	for _, ddl := range ddls {
 		if _, err := db.Exec(ddl); err != nil {
-			return fmt.Errorf("apply memopedia schema: %w (ddl: %s)", err, truncate(ddl, 50))
+			return fmt.Errorf("apply knowledge schema: %w (ddl: %s)", err, truncate(ddl, 50))
 		}
 	}
 
@@ -80,8 +80,8 @@ func migrateArchive(db *sql.DB) error {
 	return nil
 }
 
-// getChronicleDDL は chronicle 用の DDL 文を返す。
-func getChronicleDDL() []string {
+// getJournalDDL は journal 用の DDL 文を返す。
+func getJournalDDL() []string {
 	return []string{
 		`PRAGMA foreign_keys = ON;`,
 
@@ -170,14 +170,14 @@ END;`,
 );`,
 		`CREATE INDEX IF NOT EXISTS idx_note_embeddings_dim ON note_embeddings(dim);`,
 
-		// chronicle_meta テーブル
-		`CREATE TABLE IF NOT EXISTS chronicle_meta (
+		// journal_meta テーブル
+		`CREATE TABLE IF NOT EXISTS journal_meta (
   key   TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );`,
-		`INSERT OR IGNORE INTO chronicle_meta(key, value) VALUES ('note_count', '0');`,
-		`INSERT OR IGNORE INTO chronicle_meta(key, value) VALUES ('token_sum', '0');`,
-		`INSERT OR IGNORE INTO chronicle_meta(key, value) VALUES ('last_gc_at', '1970-01-01T00:00:00Z');`,
+		`INSERT OR IGNORE INTO journal_meta(key, value) VALUES ('note_count', '0');`,
+		`INSERT OR IGNORE INTO journal_meta(key, value) VALUES ('token_sum', '0');`,
+		`INSERT OR IGNORE INTO journal_meta(key, value) VALUES ('last_gc_at', '1970-01-01T00:00:00Z');`,
 
 		// lineage テーブル
 		`CREATE TABLE IF NOT EXISTS lineage (
@@ -194,8 +194,8 @@ END;`,
 	}
 }
 
-// getMemopediaDDL は memopedia 用の DDL 文を返す。
-func getMemopediaDDL() []string {
+// getKnowledgeDDL は knowledge 用の DDL 文を返す。
+func getKnowledgeDDL() []string {
 	return []string{
 		`PRAGMA foreign_keys = ON;`,
 
@@ -284,14 +284,14 @@ END;`,
 );`,
 		`CREATE INDEX IF NOT EXISTS idx_note_embeddings_dim ON note_embeddings(dim);`,
 
-		// memopedia_meta テーブル
-		`CREATE TABLE IF NOT EXISTS memopedia_meta (
+		// knowledge_meta テーブル
+		`CREATE TABLE IF NOT EXISTS knowledge_meta (
   key   TEXT PRIMARY KEY,
   value TEXT NOT NULL
 );`,
-		`INSERT OR IGNORE INTO memopedia_meta(key, value) VALUES ('note_count', '0');`,
-		`INSERT OR IGNORE INTO memopedia_meta(key, value) VALUES ('token_sum', '0');`,
-		`INSERT OR IGNORE INTO memopedia_meta(key, value) VALUES ('last_gc_at', '1970-01-01T00:00:00Z');`,
+		`INSERT OR IGNORE INTO knowledge_meta(key, value) VALUES ('note_count', '0');`,
+		`INSERT OR IGNORE INTO knowledge_meta(key, value) VALUES ('token_sum', '0');`,
+		`INSERT OR IGNORE INTO knowledge_meta(key, value) VALUES ('last_gc_at', '1970-01-01T00:00:00Z');`,
 
 		// lineage テーブル
 		`CREATE TABLE IF NOT EXISTS lineage (

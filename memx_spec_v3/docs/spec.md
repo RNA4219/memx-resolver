@@ -105,7 +105,7 @@ priority: high
 ## 1. 対象ユースケース
 - ローカル環境での個人メモ投入・検索・参照。
 - LLM/Agent からの機械呼び出し（CLI/API）での短期記憶運用。
-- 将来の蒸留・昇格・GC を見据えた 4 ストア構成（short/chronicle/memopedia/archive）。
+- 将来の蒸留・昇格・GC を見据えた 4 ストア構成（short/journal/knowledge/archive）。
 
 ## 2. スコープ境界
 ### In Scope（v1）

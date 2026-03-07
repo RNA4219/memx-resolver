@@ -11,7 +11,7 @@ import (
 )
 
 // MustOpenAll は short.db をメインとして開き、
-// chronicle / memopedia / archive を ATTACH + migrate した Conn を返す。
+// journal / knowledge / archive を ATTACH + migrate した Conn を返す。
 func MustOpenAll(paths Paths) *Conn {
 	c, err := OpenAll(paths)
 	if err != nil {
@@ -21,7 +21,7 @@ func MustOpenAll(paths Paths) *Conn {
 }
 
 // OpenAll は short.db をメインとして開き、
-// chronicle / memopedia / archive を ATTACH + migrate した Conn を返す。
+// journal / knowledge / archive を ATTACH + migrate した Conn を返す。
 //
 // v1.3 以降では、この関数を Service / API 層から呼び出し、
 // CLI は直接 DB を触らない。
@@ -48,16 +48,16 @@ func OpenAll(paths Paths) (*Conn, error) {
 	}
 
 	// 他ストアを個別に開いてマイグレーション後、ATTACH する
-	if paths.Chronicle != "" {
-		if err := migrateAndAttach(db, paths.Chronicle, "chronicle", migrateChronicle); err != nil {
+	if paths.Journal != "" {
+		if err := migrateAndAttach(db, paths.Journal, "journal", migrateJournal); err != nil {
 			_ = db.Close()
-			return nil, fmt.Errorf("migrate/attach chronicle.db: %w", err)
+			return nil, fmt.Errorf("migrate/attach journal.db: %w", err)
 		}
 	}
-	if paths.Memopedia != "" {
-		if err := migrateAndAttach(db, paths.Memopedia, "memopedia", migrateMemopedia); err != nil {
+	if paths.Knowledge != "" {
+		if err := migrateAndAttach(db, paths.Knowledge, "knowledge", migrateKnowledge); err != nil {
 			_ = db.Close()
-			return nil, fmt.Errorf("migrate/attach memopedia.db: %w", err)
+			return nil, fmt.Errorf("migrate/attach knowledge.db: %w", err)
 		}
 	}
 	if paths.Archive != "" {

@@ -10,16 +10,16 @@ import (
 	"memx/db"
 )
 
-// MemopediaNote は memopedia ストアのノート。
+// KnowledgeNote は knowledge ストアのノート。
 // working_scope が必須。知識ベース（用語定義・設計・方針）。
-type MemopediaNote struct {
+type KnowledgeNote struct {
 	Note
 	WorkingScope string
 	IsPinned     bool
 }
 
-// IngestMemopediaRequest は memopedia への投入リクエスト。
-type IngestMemopediaRequest struct {
+// IngestKnowledgeRequest は knowledge への投入リクエスト。
+type IngestKnowledgeRequest struct {
 	Title        string
 	Body         string
 	Summary      string
@@ -33,7 +33,7 @@ type IngestMemopediaRequest struct {
 	NoLLM        bool
 }
 
-func (r *IngestMemopediaRequest) normalize() {
+func (r *IngestKnowledgeRequest) normalize() {
 	r.Title = strings.TrimSpace(r.Title)
 	r.Body = strings.TrimSpace(r.Body)
 	r.SourceType = strings.TrimSpace(r.SourceType)
@@ -53,7 +53,7 @@ func (r *IngestMemopediaRequest) normalize() {
 	}
 }
 
-func (r *IngestMemopediaRequest) validate() error {
+func (r *IngestKnowledgeRequest) validate() error {
 	if len(r.Title) > 500 {
 		return fmt.Errorf("%w: title exceeds 500 characters", ErrInvalidArgument)
 	}
@@ -84,21 +84,21 @@ func (r *IngestMemopediaRequest) validate() error {
 
 	// working_scope は必須
 	if r.WorkingScope == "" {
-		return fmt.Errorf("%w: working_scope is required for memopedia", ErrInvalidArgument)
+		return fmt.Errorf("%w: working_scope is required for knowledge", ErrInvalidArgument)
 	}
 
 	return nil
 }
 
-// IngestMemopedia は memopedia.db にノートを保存する。
-func (s *Service) IngestMemopedia(ctx context.Context, req IngestMemopediaRequest) (MemopediaNote, error) {
+// IngestKnowledge は knowledge.db にノートを保存する。
+func (s *Service) IngestKnowledge(ctx context.Context, req IngestKnowledgeRequest) (KnowledgeNote, error) {
 	req.normalize()
 	if req.Title == "" || req.Body == "" {
-		return MemopediaNote{}, fmt.Errorf("%w: title/body is required", ErrInvalidArgument)
+		return KnowledgeNote{}, fmt.Errorf("%w: title/body is required", ErrInvalidArgument)
 	}
 
 	if err := req.validate(); err != nil {
-		return MemopediaNote{}, err
+		return KnowledgeNote{}, err
 	}
 
 	// Gatekeeper チェック
@@ -111,17 +111,17 @@ func (s *Service) IngestMemopedia(ctx context.Context, req IngestMemopediaReques
 				SourceType:  req.SourceType,
 				SourceTrust: req.SourceTrust,
 				Sensitivity: req.Sensitivity,
-				Store:       db.StoreMemopedia,
+				Store:       db.StoreKnowledge,
 			},
 		})
 		if err != nil {
-			return MemopediaNote{}, fmt.Errorf("gatekeeper check: %w", err)
+			return KnowledgeNote{}, fmt.Errorf("gatekeeper check: %w", err)
 		}
 		if decision.Decision == db.DecisionDeny {
-			return MemopediaNote{}, fmt.Errorf("%w: %s", ErrPolicyDenied, decision.Reason)
+			return KnowledgeNote{}, fmt.Errorf("%w: %s", ErrPolicyDenied, decision.Reason)
 		}
 		if decision.Decision == db.DecisionNeedsHuman {
-			return MemopediaNote{}, fmt.Errorf("%w: %s", ErrNeedsHuman, decision.Reason)
+			return KnowledgeNote{}, fmt.Errorf("%w: %s", ErrNeedsHuman, decision.Reason)
 		}
 	}
 
@@ -137,7 +137,7 @@ func (s *Service) IngestMemopedia(ctx context.Context, req IngestMemopediaReques
 
 	id, err := newUUIDLike()
 	if err != nil {
-		return MemopediaNote{}, err
+		return KnowledgeNote{}, err
 	}
 	now := time.Now().UTC().Format(time.RFC3339Nano)
 
@@ -148,12 +148,12 @@ func (s *Service) IngestMemopedia(ctx context.Context, req IngestMemopediaReques
 
 	tx, err := s.Conn.DB.BeginTx(ctx, nil)
 	if err != nil {
-		return MemopediaNote{}, err
+		return KnowledgeNote{}, err
 	}
 	defer func() { _ = tx.Rollback() }()
 
 	_, err = tx.ExecContext(ctx, `
-INSERT INTO memopedia.notes(
+INSERT INTO knowledge.notes(
   id, title, summary, body,
   created_at, updated_at, last_accessed_at,
   access_count,
@@ -162,7 +162,7 @@ INSERT INTO memopedia.notes(
 ) VALUES(?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?)
 `, id, req.Title, summary, req.Body, now, now, now, req.SourceType, req.Origin, req.SourceTrust, req.Sensitivity, req.WorkingScope, isPinned)
 	if err != nil {
-		return MemopediaNote{}, err
+		return KnowledgeNote{}, err
 	}
 
 	for _, t := range req.Tags {
@@ -170,18 +170,18 @@ INSERT INTO memopedia.notes(
 		if t == "" {
 			continue
 		}
-		if err := upsertTagAndBindMemopedia(ctx, tx, id, t, now); err != nil {
-			return MemopediaNote{}, err
+		if err := upsertTagAndBindKnowledge(ctx, tx, id, t, now); err != nil {
+			return KnowledgeNote{}, err
 		}
 	}
 
-	_, _ = tx.ExecContext(ctx, `UPDATE memopedia.memopedia_meta SET value = CAST(CAST(value AS INTEGER) + 1 AS TEXT) WHERE key = 'note_count';`)
+	_, _ = tx.ExecContext(ctx, `UPDATE knowledge.knowledge_meta SET value = CAST(CAST(value AS INTEGER) + 1 AS TEXT) WHERE key = 'note_count';`)
 
 	if err := tx.Commit(); err != nil {
-		return MemopediaNote{}, err
+		return KnowledgeNote{}, err
 	}
 
-	return MemopediaNote{
+	return KnowledgeNote{
 		Note: Note{
 			ID:             id,
 			Title:          req.Title,
@@ -201,10 +201,10 @@ INSERT INTO memopedia.notes(
 	}, nil
 }
 
-func upsertTagAndBindMemopedia(ctx context.Context, tx *sql.Tx, noteID, tag, now string) error {
+func upsertTagAndBindKnowledge(ctx context.Context, tx *sql.Tx, noteID, tag, now string) error {
 	_, err := tx.ExecContext(ctx, `
-INSERT INTO memopedia.tags(name, route, parent_id, created_at, updated_at, usage_count)
-VALUES(?, 'memopedia_only', NULL, ?, ?, 0)
+INSERT INTO knowledge.tags(name, route, parent_id, created_at, updated_at, usage_count)
+VALUES(?, 'knowledge_only', NULL, ?, ?, 0)
 ON CONFLICT(name) DO UPDATE SET updated_at = excluded.updated_at;
 `, tag, now, now)
 	if err != nil {
@@ -212,18 +212,18 @@ ON CONFLICT(name) DO UPDATE SET updated_at = excluded.updated_at;
 	}
 
 	var tagID int64
-	if err := tx.QueryRowContext(ctx, `SELECT id FROM memopedia.tags WHERE name = ?;`, tag).Scan(&tagID); err != nil {
+	if err := tx.QueryRowContext(ctx, `SELECT id FROM knowledge.tags WHERE name = ?;`, tag).Scan(&tagID); err != nil {
 		return err
 	}
-	if _, err := tx.ExecContext(ctx, `INSERT OR IGNORE INTO memopedia.note_tags(note_id, tag_id) VALUES(?, ?);`, noteID, tagID); err != nil {
+	if _, err := tx.ExecContext(ctx, `INSERT OR IGNORE INTO knowledge.note_tags(note_id, tag_id) VALUES(?, ?);`, noteID, tagID); err != nil {
 		return err
 	}
-	_, _ = tx.ExecContext(ctx, `UPDATE memopedia.tags SET usage_count = usage_count + 1 WHERE id = ?;`, tagID)
+	_, _ = tx.ExecContext(ctx, `UPDATE knowledge.tags SET usage_count = usage_count + 1 WHERE id = ?;`, tagID)
 	return nil
 }
 
-// SearchMemopedia は memopedia ストアをFTS5で検索する。
-func (s *Service) SearchMemopedia(ctx context.Context, query string, topK int) ([]MemopediaNote, error) {
+// SearchKnowledge は knowledge ストアをFTS5で検索する。
+func (s *Service) SearchKnowledge(ctx context.Context, query string, topK int) ([]KnowledgeNote, error) {
 	query = strings.TrimSpace(query)
 	if query == "" {
 		return nil, fmt.Errorf("%w: query is required", ErrInvalidArgument)
@@ -243,9 +243,9 @@ SELECT n.id, n.title, n.summary, n.body,
        n.created_at, n.updated_at, n.last_accessed_at, n.access_count,
        n.source_type, n.origin, n.source_trust, n.sensitivity,
        n.working_scope, n.is_pinned
-FROM memopedia.notes n
+FROM knowledge.notes n
 WHERE n.rowid IN (
-  SELECT rowid FROM memopedia.notes_fts WHERE notes_fts MATCH ?
+  SELECT rowid FROM knowledge.notes_fts WHERE notes_fts MATCH ?
 )
 ORDER BY n.created_at DESC
 LIMIT ?;
@@ -255,9 +255,9 @@ LIMIT ?;
 	}
 	defer rows.Close()
 
-	out := make([]MemopediaNote, 0, topK)
+	out := make([]KnowledgeNote, 0, topK)
 	for rows.Next() {
-		var n MemopediaNote
+		var n KnowledgeNote
 		var isPinned int
 		if err := rows.Scan(
 			&n.ID, &n.Title, &n.Summary, &n.Body,
@@ -276,32 +276,32 @@ LIMIT ?;
 	return out, nil
 }
 
-// GetMemopedia は id 指定で memopedia ノートを取得する。
-func (s *Service) GetMemopedia(ctx context.Context, id string) (MemopediaNote, error) {
+// GetKnowledge は id 指定で knowledge ノートを取得する。
+func (s *Service) GetKnowledge(ctx context.Context, id string) (KnowledgeNote, error) {
 	id = strings.TrimSpace(id)
 	if id == "" {
-		return MemopediaNote{}, fmt.Errorf("%w: id is required", ErrInvalidArgument)
+		return KnowledgeNote{}, fmt.Errorf("%w: id is required", ErrInvalidArgument)
 	}
 	if len(id) != 32 {
-		return MemopediaNote{}, fmt.Errorf("%w: invalid id format", ErrInvalidArgument)
+		return KnowledgeNote{}, fmt.Errorf("%w: invalid id format", ErrInvalidArgument)
 	}
 
 	now := time.Now().UTC().Format(time.RFC3339Nano)
 
 	tx, err := s.Conn.DB.BeginTx(ctx, nil)
 	if err != nil {
-		return MemopediaNote{}, err
+		return KnowledgeNote{}, err
 	}
 	defer func() { _ = tx.Rollback() }()
 
-	var n MemopediaNote
+	var n KnowledgeNote
 	var isPinned int
 	err = tx.QueryRowContext(ctx, `
 SELECT id, title, summary, body,
        created_at, updated_at, last_accessed_at, access_count,
        source_type, origin, source_trust, sensitivity,
        working_scope, is_pinned
-FROM memopedia.notes WHERE id = ?;
+FROM knowledge.notes WHERE id = ?;
 `, id).Scan(
 		&n.ID, &n.Title, &n.Summary, &n.Body,
 		&n.CreatedAt, &n.UpdatedAt, &n.LastAccessedAt, &n.AccessCount,
@@ -310,19 +310,19 @@ FROM memopedia.notes WHERE id = ?;
 	)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return MemopediaNote{}, ErrNotFound
+			return KnowledgeNote{}, ErrNotFound
 		}
-		return MemopediaNote{}, err
+		return KnowledgeNote{}, err
 	}
 
 	_, _ = tx.ExecContext(ctx, `
-UPDATE memopedia.notes
+UPDATE knowledge.notes
 SET last_accessed_at = ?, access_count = access_count + 1
 WHERE id = ?;
 `, now, id)
 
 	if err := tx.Commit(); err != nil {
-		return MemopediaNote{}, err
+		return KnowledgeNote{}, err
 	}
 
 	n.IsPinned = isPinned == 1
@@ -331,8 +331,8 @@ WHERE id = ?;
 	return n, nil
 }
 
-// ListMemopediaByScope は working_scope でフィルタしてノートを取得する。
-func (s *Service) ListMemopediaByScope(ctx context.Context, workingScope string, limit int) ([]MemopediaNote, error) {
+// ListKnowledgeByScope は working_scope でフィルタしてノートを取得する。
+func (s *Service) ListKnowledgeByScope(ctx context.Context, workingScope string, limit int) ([]KnowledgeNote, error) {
 	workingScope = strings.TrimSpace(workingScope)
 	if workingScope == "" {
 		return nil, fmt.Errorf("%w: working_scope is required", ErrInvalidArgument)
@@ -349,7 +349,7 @@ SELECT id, title, summary, body,
        created_at, updated_at, last_accessed_at, access_count,
        source_type, origin, source_trust, sensitivity,
        working_scope, is_pinned
-FROM memopedia.notes
+FROM knowledge.notes
 WHERE working_scope = ?
 ORDER BY created_at DESC
 LIMIT ?;
@@ -359,9 +359,9 @@ LIMIT ?;
 	}
 	defer rows.Close()
 
-	out := make([]MemopediaNote, 0, limit)
+	out := make([]KnowledgeNote, 0, limit)
 	for rows.Next() {
-		var n MemopediaNote
+		var n KnowledgeNote
 		var isPinned int
 		if err := rows.Scan(
 			&n.ID, &n.Title, &n.Summary, &n.Body,
@@ -380,8 +380,8 @@ LIMIT ?;
 	return out, nil
 }
 
-// ListPinnedMemopedia は is_pinned=1 のノートを取得する（Working Memory）。
-func (s *Service) ListPinnedMemopedia(ctx context.Context, workingScope string, limit int) ([]MemopediaNote, error) {
+// ListPinnedKnowledge は is_pinned=1 のノートを取得する（Working Memory）。
+func (s *Service) ListPinnedKnowledge(ctx context.Context, workingScope string, limit int) ([]KnowledgeNote, error) {
 	if limit <= 0 {
 		limit = 20
 	}
@@ -398,7 +398,7 @@ SELECT id, title, summary, body,
        created_at, updated_at, last_accessed_at, access_count,
        source_type, origin, source_trust, sensitivity,
        working_scope, is_pinned
-FROM memopedia.notes
+FROM knowledge.notes
 WHERE is_pinned = 1 AND working_scope = ?
 ORDER BY updated_at DESC
 LIMIT ?;
@@ -409,7 +409,7 @@ SELECT id, title, summary, body,
        created_at, updated_at, last_accessed_at, access_count,
        source_type, origin, source_trust, sensitivity,
        working_scope, is_pinned
-FROM memopedia.notes
+FROM knowledge.notes
 WHERE is_pinned = 1
 ORDER BY updated_at DESC
 LIMIT ?;
@@ -420,9 +420,9 @@ LIMIT ?;
 	}
 	defer rows.Close()
 
-	out := make([]MemopediaNote, 0, limit)
+	out := make([]KnowledgeNote, 0, limit)
 	for rows.Next() {
-		var n MemopediaNote
+		var n KnowledgeNote
 		var isPinned int
 		if err := rows.Scan(
 			&n.ID, &n.Title, &n.Summary, &n.Body,
@@ -441,15 +441,15 @@ LIMIT ?;
 	return out, nil
 }
 
-// PinMemopedia はノートをピン留めする（Working Memory化）。
-func (s *Service) PinMemopedia(ctx context.Context, id string) error {
+// PinKnowledge はノートをピン留めする（Working Memory化）。
+func (s *Service) PinKnowledge(ctx context.Context, id string) error {
 	id = strings.TrimSpace(id)
 	if id == "" {
 		return fmt.Errorf("%w: id is required", ErrInvalidArgument)
 	}
 
 	result, err := s.Conn.DB.ExecContext(ctx, `
-UPDATE memopedia.notes SET is_pinned = 1, updated_at = ? WHERE id = ?;
+UPDATE knowledge.notes SET is_pinned = 1, updated_at = ? WHERE id = ?;
 `, time.Now().UTC().Format(time.RFC3339Nano), id)
 	if err != nil {
 		return err
@@ -465,15 +465,15 @@ UPDATE memopedia.notes SET is_pinned = 1, updated_at = ? WHERE id = ?;
 	return nil
 }
 
-// UnpinMemopedia はノートのピン留めを解除する。
-func (s *Service) UnpinMemopedia(ctx context.Context, id string) error {
+// UnpinKnowledge はノートのピン留めを解除する。
+func (s *Service) UnpinKnowledge(ctx context.Context, id string) error {
 	id = strings.TrimSpace(id)
 	if id == "" {
 		return fmt.Errorf("%w: id is required", ErrInvalidArgument)
 	}
 
 	result, err := s.Conn.DB.ExecContext(ctx, `
-UPDATE memopedia.notes SET is_pinned = 0, updated_at = ? WHERE id = ?;
+UPDATE knowledge.notes SET is_pinned = 0, updated_at = ? WHERE id = ?;
 `, time.Now().UTC().Format(time.RFC3339Nano), id)
 	if err != nil {
 		return err

@@ -38,18 +38,18 @@ type NoteBase struct {
 // Note は short ストアのノート（API返却モデル）。
 type Note NoteBase
 
-// ScopedNote は working_scope を持つノート（chronicle/memopedia）。
+// ScopedNote は working_scope を持つノート（journal/knowledge）。
 type ScopedNote struct {
 	NoteBase
 	WorkingScope string `json:"working_scope"`
 	IsPinned     bool   `json:"is_pinned"`
 }
 
-// ChronicleNote は chronicle ストアのノート。
-type ChronicleNote ScopedNote
+// JournalNote は journal ストアのノート。
+type JournalNote ScopedNote
 
-// MemopediaNote は memopedia ストアのノート。
-type MemopediaNote ScopedNote
+// KnowledgeNote は knowledge ストアのノート。
+type KnowledgeNote ScopedNote
 
 // ArchiveNote は archive ストアのノート。
 type ArchiveNote NoteBase
@@ -110,9 +110,9 @@ type SummarizeBatchResponse struct {
 	NoteCount int    `json:"note_count"`
 }
 
-// -------------------- Chronicle Store --------------------
+// -------------------- Journal Store --------------------
 
-type ChronicleIngestRequest struct {
+type JournalIngestRequest struct {
 	Title        string   `json:"title"`
 	Body         string   `json:"body"`
 	Summary      string   `json:"summary,omitempty"`
@@ -125,31 +125,31 @@ type ChronicleIngestRequest struct {
 	IsPinned     bool     `json:"is_pinned,omitempty"`
 }
 
-type ChronicleIngestResponse struct {
-	Note ChronicleNote `json:"note"`
+type JournalIngestResponse struct {
+	Note JournalNote `json:"note"`
 }
 
-type ChronicleSearchRequest struct {
+type JournalSearchRequest struct {
 	Query string `json:"query"`
 	TopK  int    `json:"top_k,omitempty"`
 }
 
-type ChronicleSearchResponse struct {
-	Notes []ChronicleNote `json:"notes"`
+type JournalSearchResponse struct {
+	Notes []JournalNote `json:"notes"`
 }
 
-type ChronicleListByScopeRequest struct {
+type JournalListByScopeRequest struct {
 	WorkingScope string `json:"working_scope"`
 	Limit        int    `json:"limit,omitempty"`
 }
 
-type ChronicleListByScopeResponse struct {
-	Notes []ChronicleNote `json:"notes"`
+type JournalListByScopeResponse struct {
+	Notes []JournalNote `json:"notes"`
 }
 
-// -------------------- Memopedia Store --------------------
+// -------------------- Knowledge Store --------------------
 
-type MemopediaIngestRequest struct {
+type KnowledgeIngestRequest struct {
 	Title        string   `json:"title"`
 	Body         string   `json:"body"`
 	Summary      string   `json:"summary,omitempty"`
@@ -162,35 +162,35 @@ type MemopediaIngestRequest struct {
 	IsPinned     bool     `json:"is_pinned,omitempty"`
 }
 
-type MemopediaIngestResponse struct {
-	Note MemopediaNote `json:"note"`
+type KnowledgeIngestResponse struct {
+	Note KnowledgeNote `json:"note"`
 }
 
-type MemopediaSearchRequest struct {
+type KnowledgeSearchRequest struct {
 	Query string `json:"query"`
 	TopK  int    `json:"top_k,omitempty"`
 }
 
-type MemopediaSearchResponse struct {
-	Notes []MemopediaNote `json:"notes"`
+type KnowledgeSearchResponse struct {
+	Notes []KnowledgeNote `json:"notes"`
 }
 
-type MemopediaListByScopeRequest struct {
+type KnowledgeListByScopeRequest struct {
 	WorkingScope string `json:"working_scope"`
 	Limit        int    `json:"limit,omitempty"`
 }
 
-type MemopediaListByScopeResponse struct {
-	Notes []MemopediaNote `json:"notes"`
+type KnowledgeListByScopeResponse struct {
+	Notes []KnowledgeNote `json:"notes"`
 }
 
-type MemopediaListPinnedRequest struct {
+type KnowledgeListPinnedRequest struct {
 	WorkingScope string `json:"working_scope,omitempty"`
 	Limit        int    `json:"limit,omitempty"`
 }
 
-type MemopediaListPinnedResponse struct {
-	Notes []MemopediaNote `json:"notes"`
+type KnowledgeListPinnedResponse struct {
+	Notes []KnowledgeNote `json:"notes"`
 }
 
 type PinResponse struct {

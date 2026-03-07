@@ -231,8 +231,8 @@ func TestAPI_InProcClient_Integration(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Chronicle: filepath.Join(tmpDir, "chronicle.db"),
-		Memopedia: filepath.Join(tmpDir, "memopedia.db"),
+		Journal: filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
 
