@@ -20,18 +20,19 @@ type Error struct {
 
 // NoteBase はノートの共通フィールド。
 type NoteBase struct {
-	ID             string `json:"id"`
-	Title          string `json:"title"`
-	Summary        string `json:"summary"`
-	Body           string `json:"body"`
-	CreatedAt      string `json:"created_at"`
-	UpdatedAt      string `json:"updated_at"`
-	LastAccessedAt string `json:"last_accessed_at"`
-	AccessCount    int64  `json:"access_count"`
-	SourceType     string `json:"source_type"`
-	Origin         string `json:"origin"`
-	SourceTrust    string `json:"source_trust"`
-	Sensitivity    string `json:"sensitivity"`
+	ID             string   `json:"id"`
+	Ref            TypedRef `json:"ref"`
+	Title          string   `json:"title"`
+	Summary        string   `json:"summary"`
+	Body           string   `json:"body"`
+	CreatedAt      string   `json:"created_at"`
+	UpdatedAt      string   `json:"updated_at"`
+	LastAccessedAt string   `json:"last_accessed_at"`
+	AccessCount    int64    `json:"access_count"`
+	SourceType     string   `json:"source_type"`
+	Origin         string   `json:"origin"`
+	SourceTrust    string   `json:"source_trust"`
+	Sensitivity    string   `json:"sensitivity"`
 }
 
 // Note は short ストアのノート（API返却モデル）。

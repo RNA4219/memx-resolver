@@ -19,11 +19,12 @@ func NewInProcClient(svc *service.Service) *InProcClient {
 func fromServiceNote(n service.Note) Note {
 	return Note{
 		ID:             n.ID,
+		Ref:            NewTypedRef(EntityTypeEvidence, n.ID),
 		Title:          n.Title,
 		Summary:        n.Summary,
 		Body:           n.Body,
 		CreatedAt:      n.CreatedAt,
-		UpdatedAt:      n.UpdatedAt,
+		UpdatedAt:       n.UpdatedAt,
 		LastAccessedAt: n.LastAccessedAt,
 		AccessCount:    n.AccessCount,
 		SourceType:     n.SourceType,
@@ -37,6 +38,7 @@ func fromServiceChronicleNote(n service.ChronicleNote) ChronicleNote {
 	return ChronicleNote{
 		NoteBase: NoteBase{
 			ID:             n.ID,
+			Ref:            NewTypedRef(EntityTypeKnowledge, n.ID),
 			Title:          n.Title,
 			Summary:        n.Summary,
 			Body:           n.Body,
@@ -58,6 +60,7 @@ func fromServiceMemopediaNote(n service.MemopediaNote) MemopediaNote {
 	return MemopediaNote{
 		NoteBase: NoteBase{
 			ID:             n.ID,
+			Ref:            NewTypedRef(EntityTypeKnowledge, n.ID),
 			Title:          n.Title,
 			Summary:        n.Summary,
 			Body:           n.Body,
@@ -78,6 +81,7 @@ func fromServiceMemopediaNote(n service.MemopediaNote) MemopediaNote {
 func fromServiceArchiveNote(n service.ArchiveNote) ArchiveNote {
 	return ArchiveNote{
 		ID:             n.ID,
+		Ref:            NewTypedRef(EntityTypeEvidence, n.ID),
 		Title:          n.Title,
 		Summary:        n.Summary,
 		Body:           n.Body,
