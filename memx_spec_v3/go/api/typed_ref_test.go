@@ -9,11 +9,14 @@ func TestTypedRef_String(t *testing.T) {
 		ref      TypedRef
 		expected string
 	}{
-		{TypedRef{Type: EntityTypeEvidence, ID: "01HXXXXXXX"}, "memx:evidence:01HXXXXXXX"},
-		{TypedRef{Type: EntityTypeKnowledge, ID: "01HYYYYYYY"}, "memx:knowledge:01HYYYYYYY"},
-		{TypedRef{Type: EntityTypeArtifact, ID: "01HZZZZZZZ"}, "memx:artifact:01HZZZZZZZ"},
-		{TypedRef{Type: EntityTypeLineage, ID: "01HAAAAAAA"}, "memx:lineage:01HAAAAAAA"},
-		{TypedRef{Type: EntityTypeEvidenceChunk, ID: "01HCHUNK"}, "memx:evidence_chunk:01HCHUNK"},
+		{TypedRef{Domain: DomainMemx, Type: EntityTypeEvidence, Provider: ProviderLocal, ID: "01HXXXXXXX"}, "memx:evidence:local:01HXXXXXXX"},
+		{TypedRef{Domain: DomainMemx, Type: EntityTypeKnowledge, Provider: ProviderLocal, ID: "01HYYYYYYY"}, "memx:knowledge:local:01HYYYYYYY"},
+		{TypedRef{Domain: DomainMemx, Type: EntityTypeArtifact, Provider: ProviderLocal, ID: "01HZZZZZZZ"}, "memx:artifact:local:01HZZZZZZZ"},
+		{TypedRef{Domain: DomainMemx, Type: EntityTypeLineage, Provider: ProviderLocal, ID: "01HAAAAAAA"}, "memx:lineage:local:01HAAAAAAA"},
+		{TypedRef{Domain: DomainMemx, Type: EntityTypeEvidenceChunk, Provider: ProviderLocal, ID: "01HCHUNK"}, "memx:evidence_chunk:local:01HCHUNK"},
+		{TypedRef{Domain: DomainWorkx, Type: "task", Provider: ProviderLocal, ID: "task_01J"}, "workx:task:local:task_01J"},
+		{TypedRef{Domain: DomainTracker, Type: "issue", Provider: ProviderJira, ID: "PROJ-123"}, "tracker:issue:jira:PROJ-123"},
+		{TypedRef{Domain: DomainTracker, Type: "issue", Provider: ProviderGitHub, ID: "owner/repo#123"}, "tracker:issue:github:owner/repo#123"},
 	}
 
 	for _, tt := range tests {
@@ -29,15 +32,28 @@ func TestParseTypedRef(t *testing.T) {
 		expected TypedRef
 		hasError bool
 	}{
-		{"memx:evidence:01HXXXXXXX", TypedRef{Type: EntityTypeEvidence, ID: "01HXXXXXXX"}, false},
-		{"memx:knowledge:01HYYYYYYY", TypedRef{Type: EntityTypeKnowledge, ID: "01HYYYYYYY"}, false},
-		{"memx:artifact:01HZZZZZZZ", TypedRef{Type: EntityTypeArtifact, ID: "01HZZZZZZZ"}, false},
-		{"memx:lineage:01HAAAAAAA", TypedRef{Type: EntityTypeLineage, ID: "01HAAAAAAA"}, false},
+		// 4-segment format (canonical)
+		{"memx:evidence:local:01HXXXXXXX", TypedRef{Domain: DomainMemx, Type: EntityTypeEvidence, Provider: ProviderLocal, ID: "01HXXXXXXX"}, false},
+		{"memx:knowledge:local:01HYYYYYYY", TypedRef{Domain: DomainMemx, Type: EntityTypeKnowledge, Provider: ProviderLocal, ID: "01HYYYYYYY"}, false},
+		{"memx:artifact:local:01HZZZZZZZ", TypedRef{Domain: DomainMemx, Type: EntityTypeArtifact, Provider: ProviderLocal, ID: "01HZZZZZZZ"}, false},
+		{"memx:lineage:local:01HAAAAAAA", TypedRef{Domain: DomainMemx, Type: EntityTypeLineage, Provider: ProviderLocal, ID: "01HAAAAAAA"}, false},
+		{"workx:task:local:task_01J", TypedRef{Domain: DomainWorkx, Type: "task", Provider: ProviderLocal, ID: "task_01J"}, false},
+		{"tracker:issue:jira:PROJ-123", TypedRef{Domain: DomainTracker, Type: "issue", Provider: ProviderJira, ID: "PROJ-123"}, false},
+		{"tracker:issue:github:owner/repo#123", TypedRef{Domain: DomainTracker, Type: "issue", Provider: ProviderGitHub, ID: "owner/repo#123"}, false},
+
+		// 3-segment format (legacy, normalized to provider=local)
+		{"memx:evidence:01HXXXXXXX", TypedRef{Domain: DomainMemx, Type: EntityTypeEvidence, Provider: ProviderLocal, ID: "01HXXXXXXX"}, false},
+		{"memx:knowledge:01HYYYYYYY", TypedRef{Domain: DomainMemx, Type: EntityTypeKnowledge, Provider: ProviderLocal, ID: "01HYYYYYYY"}, false},
+		{"memx:artifact:01HZZZZZZZ", TypedRef{Domain: DomainMemx, Type: EntityTypeArtifact, Provider: ProviderLocal, ID: "01HZZZZZZZ"}, false},
+		{"memx:lineage:01HAAAAAAA", TypedRef{Domain: DomainMemx, Type: EntityTypeLineage, Provider: ProviderLocal, ID: "01HAAAAAAA"}, false},
+
+		// Error cases
 		{"", TypedRef{}, true},                          // empty
 		{"invalid", TypedRef{}, true},                   // wrong format
-		{"foo:evidence:01HXXXXXXX", TypedRef{}, true},   // wrong prefix
-		{"memx:unknown:01HXXXXXXX", TypedRef{}, true},   // unknown type
-		{"memx:evidence:", TypedRef{}, true},            // empty id
+		{"foo:evidence:local:01HXXX", TypedRef{}, true}, // wrong domain
+		{"memx:unknown:local:01HXXX", TypedRef{}, true}, // unknown type for memx
+		{"memx:evidence:local:", TypedRef{}, true},      // empty id
+		{"workx:task:01J", TypedRef{}, true},            // 3-segment only memx allowed
 	}
 
 	for _, tt := range tests {
@@ -59,10 +75,12 @@ func TestParseTypedRef(t *testing.T) {
 
 func TestTypedRef_RoundTrip(t *testing.T) {
 	refs := []TypedRef{
-		{Type: EntityTypeEvidence, ID: "01HXXXXXXX"},
-		{Type: EntityTypeKnowledge, ID: "01HYYYYYYY"},
-		{Type: EntityTypeArtifact, ID: "01HZZZZZZZ"},
-		{Type: EntityTypeLineage, ID: "01HAAAAAAA"},
+		{Domain: DomainMemx, Type: EntityTypeEvidence, Provider: ProviderLocal, ID: "01HXXXXXXX"},
+		{Domain: DomainMemx, Type: EntityTypeKnowledge, Provider: ProviderLocal, ID: "01HYYYYYYY"},
+		{Domain: DomainMemx, Type: EntityTypeArtifact, Provider: ProviderLocal, ID: "01HZZZZZZZ"},
+		{Domain: DomainMemx, Type: EntityTypeLineage, Provider: ProviderLocal, ID: "01HAAAAAAA"},
+		{Domain: DomainWorkx, Type: "task", Provider: ProviderLocal, ID: "task_01J"},
+		{Domain: DomainTracker, Type: "issue", Provider: ProviderJira, ID: "PROJ-123"},
 	}
 
 	for _, original := range refs {
@@ -78,6 +96,28 @@ func TestTypedRef_RoundTrip(t *testing.T) {
 	}
 }
 
+func TestTypedRef_ThreeToFourSegmentMigration(t *testing.T) {
+	// 3-segment input should be normalized to 4-segment with provider=local
+	input := "memx:evidence:01HXXX"
+	parsed, err := ParseTypedRef(input)
+	if err != nil {
+		t.Fatalf("ParseTypedRef(%s) error: %v", input, err)
+	}
+
+	// Should be normalized
+	expected := TypedRef{Domain: DomainMemx, Type: EntityTypeEvidence, Provider: ProviderLocal, ID: "01HXXX"}
+	if parsed != expected {
+		t.Errorf("ParseTypedRef(%s) = %v, want %v", input, parsed, expected)
+	}
+
+	// Output should be 4-segment
+	output := parsed.String()
+	expectedOutput := "memx:evidence:local:01HXXX"
+	if output != expectedOutput {
+		t.Errorf("String() = %s, want %s", output, expectedOutput)
+	}
+}
+
 func TestNewTypedRef(t *testing.T) {
 	ref := NewTypedRef(EntityTypeEvidence, "01HTEST")
 	if ref.Type != EntityTypeEvidence {
@@ -85,6 +125,28 @@ func TestNewTypedRef(t *testing.T) {
 	}
 	if ref.ID != "01HTEST" {
 		t.Errorf("NewTypedRef id = %s, want 01HTEST", ref.ID)
+	}
+	if ref.Domain != DomainMemx {
+		t.Errorf("NewTypedRef domain = %s, want %s", ref.Domain, DomainMemx)
+	}
+	if ref.Provider != ProviderLocal {
+		t.Errorf("NewTypedRef provider = %s, want %s", ref.Provider, ProviderLocal)
+	}
+}
+
+func TestNewTypedRefWithProvider(t *testing.T) {
+	ref := NewTypedRefWithProvider(DomainTracker, "issue", ProviderJira, "PROJ-123")
+	if ref.Domain != DomainTracker {
+		t.Errorf("domain = %s, want %s", ref.Domain, DomainTracker)
+	}
+	if ref.Type != "issue" {
+		t.Errorf("type = %s, want issue", ref.Type)
+	}
+	if ref.Provider != ProviderJira {
+		t.Errorf("provider = %s, want %s", ref.Provider, ProviderJira)
+	}
+	if ref.ID != "PROJ-123" {
+		t.Errorf("id = %s, want PROJ-123", ref.ID)
 	}
 }
 
@@ -97,7 +159,7 @@ func TestTypedRef_IsZero_IsValid(t *testing.T) {
 		t.Error("empty TypedRef should not be valid")
 	}
 
-	valid := TypedRef{Type: EntityTypeEvidence, ID: "01HTEST"}
+	valid := TypedRef{Domain: DomainMemx, Type: EntityTypeEvidence, Provider: ProviderLocal, ID: "01HTEST"}
 	if valid.IsZero() {
 		t.Error("non-empty TypedRef should not be zero")
 	}
@@ -105,26 +167,36 @@ func TestTypedRef_IsZero_IsValid(t *testing.T) {
 		t.Error("non-empty TypedRef should be valid")
 	}
 
-	noID := TypedRef{Type: EntityTypeEvidence, ID: ""}
+	noID := TypedRef{Domain: DomainMemx, Type: EntityTypeEvidence, Provider: ProviderLocal, ID: ""}
 	if noID.IsValid() {
 		t.Error("TypedRef without ID should not be valid")
 	}
 
-	noType := TypedRef{Type: "", ID: "01HTEST"}
+	noType := TypedRef{Domain: DomainMemx, Type: "", Provider: ProviderLocal, ID: "01HTEST"}
 	if noType.IsValid() {
 		t.Error("TypedRef without Type should not be valid")
+	}
+
+	noProvider := TypedRef{Domain: DomainMemx, Type: EntityTypeEvidence, Provider: "", ID: "01HTEST"}
+	if noProvider.IsValid() {
+		t.Error("TypedRef without Provider should not be valid")
+	}
+
+	noDomain := TypedRef{Domain: "", Type: EntityTypeEvidence, Provider: ProviderLocal, ID: "01HTEST"}
+	if noDomain.IsValid() {
+		t.Error("TypedRef without Domain should not be valid")
 	}
 }
 
 func TestTypedRef_MarshalUnmarshal(t *testing.T) {
-	original := TypedRef{Type: EntityTypeEvidence, ID: "01HTEST"}
+	original := TypedRef{Domain: DomainMemx, Type: EntityTypeEvidence, Provider: ProviderLocal, ID: "01HTEST"}
 
 	data, err := original.MarshalText()
 	if err != nil {
 		t.Fatalf("MarshalText error: %v", err)
 	}
-	if string(data) != "memx:evidence:01HTEST" {
-		t.Errorf("MarshalText = %s, want memx:evidence:01HTEST", string(data))
+	if string(data) != "memx:evidence:local:01HTEST" {
+		t.Errorf("MarshalText = %s, want memx:evidence:local:01HTEST", string(data))
 	}
 
 	var parsed TypedRef
@@ -133,5 +205,30 @@ func TestTypedRef_MarshalUnmarshal(t *testing.T) {
 	}
 	if parsed != original {
 		t.Errorf("UnmarshalText = %v, want %v", parsed, original)
+	}
+}
+
+func TestTypedRef_MarshalUnmarshal_LegacyInput(t *testing.T) {
+	// Unmarshaling 3-segment should produce canonical 4-segment
+	legacy := []byte("memx:evidence:01HTEST")
+
+	var parsed TypedRef
+	if err := parsed.UnmarshalText(legacy); err != nil {
+		t.Fatalf("UnmarshalText error: %v", err)
+	}
+
+	// Should be normalized to 4-segment
+	expected := TypedRef{Domain: DomainMemx, Type: EntityTypeEvidence, Provider: ProviderLocal, ID: "01HTEST"}
+	if parsed != expected {
+		t.Errorf("UnmarshalText = %v, want %v", parsed, expected)
+	}
+
+	// Re-marshaling should produce 4-segment
+	data, err := parsed.MarshalText()
+	if err != nil {
+		t.Fatalf("MarshalText error: %v", err)
+	}
+	if string(data) != "memx:evidence:local:01HTEST" {
+		t.Errorf("MarshalText = %s, want memx:evidence:local:01HTEST", string(data))
 	}
 }
