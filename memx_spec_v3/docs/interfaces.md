@@ -188,3 +188,57 @@ next_review_due: 2026-06-03
 | --- | --- |
 | `IF-GC-SHORT-REQ` | `mem gc short` の入力（`--dry-run` 等の実行パラメータ） |
 | `IF-GC-SHORT-RES` | `mem gc short` の出力（dry-run 結果 JSON / 実行結果） |
+
+## 7. typed_ref I/F 仕様（FR-008 / AC-006）
+
+> Source: `docs/kv-priority-roadmap/kv-cache-independence-amendments.md#追記案-1-typed_ref-canonical-format-の固定`
+
+### 7.1 canonical format
+
+```txt
+<domain>:<entity_type>:<provider>:<entity_id>
+```
+
+| セグメント | 説明 | 許容値 |
+|-----------|------|--------|
+| `domain` | システム領域 | `memx`, `workx`, `tracker` |
+| `entity_type` | エンティティ種別 | `evidence`, `artifact`, `knowledge`, `lineage`, `task`, `decision`, `issue` 等 |
+| `provider` | データソース | `local`, `jira`, `github`, `linear` 等 |
+| `entity_id` | 一意識別子 | システム固有のID形式 |
+
+### 7.2 memx-core での使用
+
+| I/F 項目ID | フォーマット | 例 |
+|-----------|-------------|-----|
+| `IF-TYPEDREF-EVIDENCE` | `memx:evidence:local:<id>` | `memx:evidence:local:01HXXX` |
+| `IF-TYPEDREF-ARTIFACT` | `memx:artifact:local:<id>` | `memx:artifact:local:01HYYY` |
+| `IF-TYPEDREF-KNOWLEDGE` | `memx:knowledge:local:<id>` | `memx:knowledge:local:01HZZZ` |
+| `IF-TYPEDREF-LINEAGE` | `memx:lineage:local:<id>` | `memx:lineage:local:01HAAA` |
+
+### 7.3 移行期の互換（read-both / write-one）
+
+#### 入力（パーサー）
+
+| 入力形式 | 正規化結果 | 備考 |
+|---------|-----------|------|
+| `memx:evidence:01HXXX` | `memx:evidence:local:01HXXX` | 3セグメント → `provider=local` 補完 |
+| `memx:evidence:local:01HXXX` | `memx:evidence:local:01HXXX` | canonical（そのまま） |
+
+#### 出力（フォーマッタ）
+
+常に canonical format（4セグメント）を出力。
+
+### 7.4 検証ルール
+
+```go
+// 検証条件
+// 1. 4セグメントに split 可能
+// 2. 全セグメントが空でない
+// 3. domain が既知 namespace（memx, workx, tracker）
+// 4. 実在性確認は別責務（形式検証とは分離）
+```
+
+### 7.5 関連要件
+
+- `FR-008` typed_ref 正規化（requirements-api.md#6-6）
+- `AC-006` typed_ref 一貫性（requirements-nfr.md#5-5）

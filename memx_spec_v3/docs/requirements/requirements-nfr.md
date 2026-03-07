@@ -150,3 +150,32 @@ next_review_due: 2026-06-03
   5. 代替統制（監視強化・手動運用手順・追加検証）
   6. 解除条件（どの証跡が揃えば waiver を解消するか）
   7. 関連証跡パス（`artifacts/ops/incident-summary.json`、`artifacts/ops/recovery-log.ndjson` など）
+
+### 5-5. typed_ref 一貫性（AC-006）
+
+> Source: `docs/kv-priority-roadmap/kv-cache-independence-amendments.md#追記案-1-typed_ref-canonical-format-の固定`
+
+- Requirement ID: `AC-006`
+
+`workx` / `memx-core` / `tracker-bridge` をまたぐ主要参照が、同一 canonical `typed_ref` 形式で保存・再利用・追跡可能であること。
+
+#### 受入条件
+
+1. **出力整合**: 新規生成される全ての typed_ref が canonical format（4セグメント）であること
+2. **読込互換**: 移行期間中、旧形式（3セグメント）の typed_ref を正規化して読み込めること
+3. **追跡可能性**: `source_refs`、`entity_link`、`lineage`、`context_bundle_source` で同じ ref 形式を共有できること
+4. **検証一元化**: 3システムが同じ validation rule を持つこと
+
+#### 検証コマンド
+
+```bash
+# memx-core での typed_ref 形式検証
+go test ./memx_spec_v3/go/api/... -run TestTypedRef
+
+# canonical format の確認
+rg -n "memx:[a-z_]+:[a-z]+:" memx_spec_v3/go/ --type go
+```
+
+#### 関連要件
+
+- `FR-008` typed_ref 正規化（requirements-api.md#6-6-typed_ref-正規化fr-008）

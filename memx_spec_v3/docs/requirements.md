@@ -59,6 +59,8 @@ priority: high
 | Security | `REQ-SEC-001` | fail-closed |
 | Error | `REQ-ERR-001` | エラーモデル |
 | NFR | `REQ-NFR-001`〜`REQ-NFR-006` | 非機能要件 |
+| typed_ref | `FR-008` | typed_ref 正規化（4セグメント canonical） |
+| typed_ref | `AC-006` | typed_ref 一貫性（cross-system 追跡可能） |
 
 ---
 
@@ -89,3 +91,5 @@ priority: high
 | `REQ-SEC-001` | fail-closed security | [requirements/data-model.md#2-7](./requirements/requirements-data-model.md#2-7-security--retention-requirements) |
 | `REQ-ERR-001` | エラーモデル | [requirements/api.md#6-4](./requirements/requirements-api.md#6-4-エラーモデル) |
 | `REQ-NFR-001` | 性能目標 | [requirements/nfr.md#5-1](./requirements/requirements-nfr.md#5-1-性能目標v1必須3エンドポイント) |
+| `FR-008` | typed_ref 正規化（canonical format） | [requirements/api.md#6-6](./requirements/requirements-api.md#6-6-typed_ref-正規化fr-008) |
+| `AC-006` | typed_ref 一貫性（cross-system） | [requirements/nfr.md#5-5](./requirements/requirements-nfr.md#5-5-typed_ref-一貫性ac-006) |

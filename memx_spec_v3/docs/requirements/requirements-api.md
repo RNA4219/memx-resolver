@@ -211,3 +211,47 @@ CLI 出力との互換責任範囲：
 - 人間向けの通常表示（非 `--json`）は、可読性改善のための文言・並び変更を許容する。
 - `--json` 出力は API の互換ポリシーと同等に扱い、v1 では破壊的変更を禁止する。
 - 機械連携は API または CLI `--json` を正とし、互換責任はこの 2 系統に対して負う。
+
+### 6-6. typed_ref 正規化（FR-008）
+
+> Source: `docs/kv-priority-roadmap/kv-cache-independence-amendments.md#追記案-1-typed_ref-canonical-format-の固定`
+
+- Requirement ID: `FR-008`
+
+システムは、外部状態・bundle・根拠参照で用いる `typed_ref` を canonical format で保存・返却しなければならない。
+
+#### canonical format
+
+```txt
+<domain>:<entity_type>:<provider>:<entity_id>
+```
+
+#### 例
+
+| domain | entity_type | provider | entity_id | canonical format |
+|--------|-------------|----------|-----------|------------------|
+| `memx` | `evidence` | `local` | `01HXXX` | `memx:evidence:local:01HXXX` |
+| `memx` | `artifact` | `local` | `01HYYY` | `memx:artifact:local:01HYYY` |
+| `memx` | `knowledge` | `local` | `01HZZZ` | `memx:knowledge:local:01HZZZ` |
+| `workx` | `task` | `local` | `task_01J...` | `workx:task:local:task_01J...` |
+| `tracker` | `issue` | `jira` | `PROJ-123` | `tracker:issue:jira:PROJ-123` |
+| `tracker` | `issue` | `github` | `owner/repo#123` | `tracker:issue:github:owner/repo#123` |
+
+#### 必須条件
+
+1. 新規生成される ref は canonical format であること
+2. migration 期間中は旧 ref（3セグメント形式）を canonical format へ正規化可能であること
+3. 実在性確認と形式妥当性確認を分離すること
+
+#### 移行期の read-both / write-one
+
+- **パーサー**: 一時的に 3セグメント（`memx:<type>:<id>`）も受理し、`provider=local` として正規化する
+- **フォーマッタ**: 常に 4セグメント canonical format を出力する
+- **DB**: 既存の 3セグメント文字列を直ちに破壊しない（移行完了後に一括更新）
+
+#### 検証ルール
+
+- 4セグメントに split 可能であること
+- `domain`, `entity_type`, `provider`, `entity_id` がいずれも空でないこと
+- `domain` は既知 namespace（`memx` / `workx` / `tracker`）のいずれかであること
+- 実在性確認は別責務とする（形式検証とは分離）
