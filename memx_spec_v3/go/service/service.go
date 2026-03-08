@@ -19,6 +19,7 @@ type Service struct {
 	Gate       db.Gatekeeper
 	MiniLLM    db.MiniLLMClient // 任意（nil の場合は要約生成なし）
 	ReflectLLM db.ReflectLLMClient
+	Logger     warningLogger
 }
 
 func New(paths db.Paths) (*Service, error) {
@@ -27,8 +28,9 @@ func New(paths db.Paths) (*Service, error) {
 		return nil, err
 	}
 	return &Service{
-		Conn: c,
-		Gate: db.NewDefaultGatekeeper(db.GateProfileNormal), // デフォルトは NORMAL
+		Conn:   c,
+		Gate:   db.NewDefaultGatekeeper(db.GateProfileNormal), // デフォルトは NORMAL
+		Logger: newDefaultLogger(),
 	}, nil
 }
 
@@ -199,7 +201,7 @@ func (s *Service) IngestShort(ctx context.Context, req IngestNoteRequest) (Note,
 		result, err := s.MiniLLM.Summarize(ctx, req.Title, req.Body)
 		if err != nil {
 			// 要約生成失敗は警告レベルとし、空の要約で保存を継続
-			// TODO: ログ出力
+			s.warnAutoSummaryFailure("short", req.Title, err)
 		} else {
 			summary = result.Summary
 		}
@@ -366,14 +368,8 @@ func (s *Service) GetShort(ctx context.Context, id string) (Note, error) {
 
 	now := time.Now().UTC().Format(time.RFC3339Nano)
 
-	tx, err := s.Conn.DB.BeginTx(ctx, nil)
-	if err != nil {
-		return Note{}, err
-	}
-	defer func() { _ = tx.Rollback() }()
-
 	var n Note
-	err = tx.QueryRowContext(ctx, `
+	err := s.Conn.DB.QueryRowContext(ctx, `
 SELECT id, title, summary, body,
        created_at, updated_at, last_accessed_at, access_count,
        source_type, origin, source_trust, sensitivity
@@ -390,15 +386,11 @@ FROM notes WHERE id = ?;
 		return Note{}, err
 	}
 
-	_, _ = tx.ExecContext(ctx, `
+	_, _ = s.Conn.DB.ExecContext(ctx, `
 UPDATE notes
 SET last_accessed_at = ?, access_count = access_count + 1
 WHERE id = ?;
 `, now, id)
-
-	if err := tx.Commit(); err != nil {
-		return Note{}, err
-	}
 
 	n.LastAccessedAt = now
 	n.AccessCount++
@@ -502,4 +494,166 @@ func (s *Service) SummarizeNotes(ctx context.Context, ids []string) (SummarizeNo
 		Summary:   summary,
 		NoteCount: len(ids),
 	}, nil
+}
+
+// -------------------- Recall --------------------
+
+// RecallRequest は Semantic Recall のリクエスト。
+type RecallRequest struct {
+	Query        string
+	TopK         int
+	MessageRange int
+	Stores       []string
+	FallbackFTS  bool
+}
+
+// RecallNote は Recall 結果のノート。
+type RecallNote struct {
+	ID      string
+	Title   string
+	Summary string
+	Body    string
+	Store   string
+	Score   float64
+}
+
+// NoteWithContext は anchor ノートとその前後の文脈。
+type NoteWithContext struct {
+	Anchor RecallNote
+	Before []RecallNote
+	After  []RecallNote
+}
+
+// Recall は Semantic Recall を実行する。
+func (s *Service) Recall(ctx context.Context, req RecallRequest) ([]NoteWithContext, error) {
+	// クエリ検証
+	if strings.TrimSpace(req.Query) == "" {
+		return nil, fmt.Errorf("%w: query is required", ErrInvalidArgument)
+	}
+
+	// ストア正規化
+	stores := normalizeRecallStores(req.Stores)
+
+	// 埋め込みクライアント確認
+	if s.Conn.Embed == nil {
+		if req.FallbackFTS {
+			return s.recallFTS(ctx, req, stores)
+		}
+		return nil, fmt.Errorf("%w: embedding client not configured", ErrInvalidArgument)
+	}
+
+	// 埋め込み生成
+	embeddings, err := s.Conn.Embed.EmbedText(ctx, []string{req.Query})
+	if err != nil {
+		return nil, fmt.Errorf("embedding generation: %w", err)
+	}
+	if len(embeddings) == 0 {
+		return nil, fmt.Errorf("embedding generation: empty result")
+	}
+
+	// Recall実行
+	q := db.RecallQuery{
+		Text:         req.Query,
+		Stores:       stores,
+		TopK:         req.TopK,
+		MessageRange: req.MessageRange,
+		FallbackFTS:  req.FallbackFTS,
+	}
+
+	results, err := s.Conn.Recall(ctx, q)
+	if err != nil {
+		return nil, err
+	}
+
+	// 結果変換
+	var out []NoteWithContext
+	for _, r := range results {
+		nwc := NoteWithContext{
+			Anchor: RecallNote{
+				ID:      r.Anchor.ID,
+				Title:   r.Anchor.Title,
+				Summary: r.Anchor.Summary,
+				Body:    r.Anchor.Body,
+				Store:   string(r.Anchor.Store),
+				Score:   r.Anchor.Score,
+			},
+		}
+		for _, b := range r.Before {
+			nwc.Before = append(nwc.Before, RecallNote{
+				ID:      b.ID,
+				Title:   b.Title,
+				Summary: b.Summary,
+				Body:    b.Body,
+				Store:   string(b.Store),
+				Score:   b.Score,
+			})
+		}
+		for _, a := range r.After {
+			nwc.After = append(nwc.After, RecallNote{
+				ID:      a.ID,
+				Title:   a.Title,
+				Summary: a.Summary,
+				Body:    a.Body,
+				Store:   string(a.Store),
+				Score:   a.Score,
+			})
+		}
+		out = append(out, nwc)
+	}
+
+	return out, nil
+}
+
+// recallFTS は FTS フォールバック検索を実行する。
+func (s *Service) recallFTS(ctx context.Context, req RecallRequest, stores []db.StoreKind) ([]NoteWithContext, error) {
+	q := db.RecallQuery{
+		Text:         req.Query,
+		Stores:       stores,
+		TopK:         req.TopK,
+		MessageRange: req.MessageRange,
+		FallbackFTS:  true,
+	}
+
+	results, err := s.Conn.Recall(ctx, q)
+	if err != nil {
+		return nil, err
+	}
+
+	var out []NoteWithContext
+	for _, r := range results {
+		nwc := NoteWithContext{
+			Anchor: RecallNote{
+				ID:      r.Anchor.ID,
+				Title:   r.Anchor.Title,
+				Summary: r.Anchor.Summary,
+				Body:    r.Anchor.Body,
+				Store:   string(r.Anchor.Store),
+				Score:   r.Anchor.Score,
+			},
+		}
+		out = append(out, nwc)
+	}
+
+	return out, nil
+}
+
+func normalizeRecallStores(stores []string) []db.StoreKind {
+	validStores := map[string]db.StoreKind{
+		"short":     db.StoreShort,
+		"journal":   db.StoreJournal,
+		"knowledge": db.StoreKnowledge,
+	}
+
+	var result []db.StoreKind
+	for _, s := range stores {
+		if k, ok := validStores[strings.ToLower(strings.TrimSpace(s))]; ok {
+			result = append(result, k)
+		}
+	}
+
+	if len(result) == 0 {
+		return []db.StoreKind{db.StoreShort}
+	}
+
+	return result
 }

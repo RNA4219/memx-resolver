@@ -604,3 +604,118 @@ func (r openAIErrorResponse) message() string {
 	}
 	return strings.TrimSpace(r.Message)
 }
+
+// EmbedText はテキストの埋め込みベクトルを生成する（EmbeddingClient interface実装）。
+func (c *OpenAIClient) EmbedText(ctx context.Context, texts []string) ([][]float32, error) {
+	if len(texts) == 0 {
+		return nil, nil
+	}
+
+	// OpenAI Embeddings APIを使用
+	reqBody := openAIEmbeddingsRequest{
+		Model: "text-embedding-ada-002",
+		Input: texts,
+	}
+
+	payload, err := json.Marshal(reqBody)
+	if err != nil {
+		return nil, fmt.Errorf("marshal embeddings request: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.baseURL+"/embeddings", bytes.NewReader(payload))
+	if err != nil {
+		return nil, fmt.Errorf("create embeddings request: %w", err)
+	}
+	req.Header.Set("Authorization", "Bearer "+c.apiKey)
+	req.Header.Set("Content-Type", "application/json")
+	if c.project != "" {
+		req.Header.Set("OpenAI-Project", c.project)
+	}
+	if c.organization != "" {
+		req.Header.Set("OpenAI-Organization", c.organization)
+	}
+
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("call embeddings api: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("read embeddings api body: %w", err)
+	}
+
+	if resp.StatusCode >= http.StatusBadRequest {
+		var apiErr openAIErrorResponse
+		if err := json.Unmarshal(body, &apiErr); err == nil {
+			if message := apiErr.message(); message != "" {
+				return nil, fmt.Errorf("openai embeddings api: %s", message)
+			}
+		}
+		return nil, fmt.Errorf("openai embeddings api: status %d", resp.StatusCode)
+	}
+
+	var decoded openAIEmbeddingsResponse
+	if err := json.Unmarshal(body, &decoded); err != nil {
+		return nil, fmt.Errorf("decode embeddings api body: %w", err)
+	}
+
+	return decoded.embeddings(), nil
+}
+
+type openAIEmbeddingsRequest struct {
+	Model string   `json:"model"`
+	Input []string `json:"input"`
+}
+
+type openAIEmbeddingsResponse struct {
+	Data []openAIEmbeddingData `json:"data"`
+}
+
+type openAIEmbeddingData struct {
+	Index    int         `json:"index"`
+	Embedding interface{} `json:"embedding"`
+}
+
+func (r openAIEmbeddingsResponse) embeddings() [][]float32 {
+	// 結果をインデックス順にソート
+	sorted := make([]openAIEmbeddingData, len(r.Data))
+	for _, d := range r.Data {
+		if d.Index >= 0 && d.Index < len(r.Data) {
+			sorted[d.Index] = d
+		}
+	}
+
+	result := make([][]float32, 0, len(sorted))
+	for _, d := range sorted {
+		result = append(result, toFloat32Slice(d.Embedding))
+	}
+	return result
+}
+
+func toFloat32Slice(v interface{}) []float32 {
+	switch arr := v.(type) {
+	case []interface{}:
+		result := make([]float32, 0, len(arr))
+		for _, item := range arr {
+			switch val := item.(type) {
+			case float64:
+				result = append(result, float32(val))
+			case float32:
+				result = append(result, val)
+			}
+		}
+		return result
+	case []float64:
+		result := make([]float32, 0, len(arr))
+		for _, val := range arr {
+			result = append(result, float32(val))
+		}
+		return result
+	case []float32:
+		return arr
+	default:
+		return nil
+	}
+}

@@ -14,6 +14,12 @@ type Paths struct {
 type Conn struct {
 	DB *sql.DB
 
+	// 個別ストア参照（Recall等で使用）
+	ShortDB     *sql.DB
+	JournalDB   *sql.DB
+	KnowledgeDB *sql.DB
+	ArchiveDB   *sql.DB
+
 	// LLM 系クライアント（必要に応じて設定される）
 	Embed   EmbeddingClient
 	Mini    MiniLLMClient

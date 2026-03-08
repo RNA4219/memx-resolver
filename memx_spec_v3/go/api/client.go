@@ -33,4 +33,7 @@ type Client interface {
 	ArchiveGet(ctx context.Context, id string) (ArchiveNote, *Error)
 	ArchiveList(ctx context.Context, req ArchiveListRequest) (ArchiveListResponse, *Error)
 	ArchiveRestore(ctx context.Context, id string) (ArchiveRestoreResponse, *Error)
+
+	// Recall
+	Recall(ctx context.Context, req RecallRequest) (RecallResponse, *Error)
 }

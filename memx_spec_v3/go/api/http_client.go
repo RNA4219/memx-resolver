@@ -192,6 +192,16 @@ func (c *HTTPClient) ArchiveRestore(ctx context.Context, id string) (ArchiveRest
 	return out, nil
 }
 
+// -------------------- Recall --------------------
+
+func (c *HTTPClient) Recall(ctx context.Context, req RecallRequest) (RecallResponse, *Error) {
+	var out RecallResponse
+	if err := c.post(ctx, "/v1/notes:recall", req, &out); err != nil {
+		return RecallResponse{}, err
+	}
+	return out, nil
+}
+
 func (c *HTTPClient) post(ctx context.Context, path string, in interface{}, out interface{}) *Error {
 	b, _ := json.Marshal(in)
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.BaseURL+path, bytes.NewReader(b))
