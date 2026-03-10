@@ -20,12 +20,12 @@ func repoRoot(t *testing.T) string {
 	if !ok {
 		t.Fatal("runtime.Caller failed")
 	}
-	return filepath.Clean(filepath.Join(filepath.Dir(file), "..", "..", "..", ".."))
+	return filepath.Clean(filepath.Join(filepath.Dir(file), "..", "..", "..", "..", ".."))
 }
 
 func moduleRoot(t *testing.T) string {
 	t.Helper()
-	return filepath.Join(repoRoot(t), "memx_spec_v3", "go")
+	return filepath.Join(repoRoot(t), "docs", "memx_spec_v3", "go")
 }
 
 func buildMemBinary(t *testing.T) string {
