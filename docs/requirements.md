@@ -1,8 +1,8 @@
-# cookbook-resolver 要件定義
+# memx-resolver 要件定義
 
 ## 1. 文書情報
 
-- 文書名: cookbook-resolver 要件定義
+- 文書名: memx-resolver 要件定義
 - 文書種別: requirements
 - 版: v0.1
 - 作成日: 2026-03-10
@@ -96,7 +96,7 @@
 - `memx-core` の検証用ブランチ
 - `memx-core` の private fork
 - `memx-*` 系の別リポジトリ
-- `cookbook-resolver` のような隣接リポジトリ
+- `memx-resolver` のような隣接リポジトリ
 
 ※ 本家 `memx-core` の責務を不必要に肥大化させないことを優先する。
 
