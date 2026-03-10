@@ -24,24 +24,24 @@ next_review_due: 2026-04-10
 - **Guardrails** (`GUARDRAILS.md`): ガードレール/行動指針。優先順: 高。
 - **Evaluation** (`EVALUATION.md`): 受け入れ基準・品質指標。優先順: 中。
 - **Checklist** (`CHECKLISTS.md`): リリース/レビュー確認項目。優先順: 低。
-- **Birdseye Map** (`docs/birdseye/index.json`): 依存トポロジと役割。優先順: 高。
-- **Requirements** (`docs/requirements.md`): 要件定義。優先順: 高。
-- **Design** (`docs/design.md`): 設計書。優先順: 高。
-- **Interfaces** (`docs/interfaces.md`): インターフェース定義。優先順: 高。
+- **Birdseye Map** (`birdseye/index.json`): 依存トポロジと役割。優先順: 高。
+- **Requirements** (`requirements.md`): 要件定義。優先順: 高。
+- **Design** (`design.md`): 設計書。優先順: 高。
+- **Interfaces** (`interfaces.md`): インターフェース定義。優先順: 高。
 
 補完資料一覧:
 
-- `README.md`: リポジトリ概要と参照リンク
-- `CHANGELOG.md`: 完了タスクと履歴の記録
-- `AGENT_GUIDE.md`: AIエージェント向けガイド
-- `memx_spec_v3/`: 実装コード
+- `../README.md`: リポジトリ概要と参照リンク
+- `../CHANGELOG.md`: 完了タスクと履歴の記録
+- `../AGENT_GUIDE.md`: AIエージェント向けガイド
+- `../memx_spec_v3/`: 実装コード
 
 更新日: 2026-03-10
 
 ## 3. 自動タスク分割フロー
 
 0. **Birdseye Readiness Check**:
-   - `docs/birdseye/index.json` の存在確認と JSON 妥当性検証
+   - `birdseye/index.json` の存在確認と JSON 妥当性検証
    - `nodes` 形式検証、`caps` パス検証
    - 鮮度検証: `generated_at` と対象ドキュメント更新時刻の比較
    - 判定値: `ready | degraded | blocked`
@@ -88,12 +88,12 @@ planned → active → in_progress → reviewing → done
 
 ```yaml
 - task_id: 20260310-01
-  source: docs/requirements.md#機能要件
+  source: requirements.md#機能要件
   birdseye:
-    node_id: docs/requirements.md
+    node_id: requirements.md
     role: requirements
     hops: 0
-    caps_ref: docs/birdseye/caps/docs.requirements.md.json
+    caps_ref: birdseye/caps/docs.requirements.md.json
   objective: 文書登録APIの実装
   scope:
     in: [memx_spec_v3/go/api]

@@ -146,6 +146,7 @@ Alibaba 互換モードでは `chat/completions` を使います。
 ## 参照先
 
 - [AGENT_GUIDE.md](./AGENT_GUIDE.md)
+- [docs/HUB.codex.md](./docs/HUB.codex.md) - ドキュメントハブ
 - [docs/requirements.md](./docs/requirements.md)
 - [docs/interfaces.md](./docs/interfaces.md)
 - [docs/design.md](./docs/design.md)
