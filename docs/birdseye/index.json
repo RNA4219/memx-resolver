@@ -21,9 +21,9 @@
       "caps": "docs/birdseye/caps/README.md.json",
       "mtime": "2026-03-10T06:17:00Z"
     },
-    "AGENT_GUIDE.md": {
+    "USER_GUIDE.md": {
       "role": "guide",
-      "caps": "docs/birdseye/caps/AGENT_GUIDE.md.json",
+      "caps": "docs/birdseye/caps/USER_GUIDE.md.json",
       "mtime": "2026-03-10T06:44:00Z"
     },
     "memx_spec_v3/go": {
@@ -36,7 +36,7 @@
     ["README.md", "docs/requirements.md"],
     ["README.md", "docs/interfaces.md"],
     ["README.md", "docs/design.md"],
-    ["README.md", "AGENT_GUIDE.md"],
+    ["README.md", "USER_GUIDE.md"],
     ["docs/requirements.md", "docs/design.md"],
     ["docs/requirements.md", "docs/interfaces.md"],
     ["docs/design.md", "memx_spec_v3/go"],

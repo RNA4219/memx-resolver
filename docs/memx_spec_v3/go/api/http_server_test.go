@@ -193,7 +193,7 @@ func TestHTTP_NotesIngest_PolicyDenied(t *testing.T) {
 }
 
 // TestHTTP_NotesIngest_ConfidentialSensitivity はconfidential機密度のテスト。
-// 仕様書: AGENT_GUIDE.md - sensitivity に confidential が含まれる
+// 仕様書: USER_GUIDE.md - sensitivity に confidential が含まれる
 func TestHTTP_NotesIngest_ConfidentialSensitivity(t *testing.T) {
 	server, cleanup := setupHTTPTestServer(t)
 	defer cleanup()
@@ -793,3 +793,4 @@ func TestHTTP_BuildBundle_Success(t *testing.T) {
 		t.Fatal("expected complete bundle")
 	}
 }
+

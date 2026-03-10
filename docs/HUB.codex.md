@@ -31,10 +31,10 @@ next_review_due: 2026-04-10
 
 補完資料一覧:
 
-- `../README.md`: リポジトリ概要と参照リンク
+- `../README.md`: エージェント向けの入口
 - `../CHANGELOG.md`: 完了タスクと履歴の記録
-- `../AGENT_GUIDE.md`: AIエージェント向けガイド
-- `../memx_spec_v3/`: 実装コード
+- `../USER_GUIDE.md`: 人間向けの利用ガイド
+- `./memx_spec_v3/`: 実装コード
 
 更新日: 2026-03-10
 

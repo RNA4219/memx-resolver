@@ -1,0 +1,15 @@
+{
+  "id": "USER_GUIDE.md",
+  "role": "guide",
+  "public_api": [],
+  "summary": "人間向け利用ガイド。CLI、API、LLM設定、resolver系コマンドをまとめる。",
+  "deps_out": [],
+  "deps_in": ["README.md"],
+  "risks": [],
+  "tests": [],
+  "key_sections": {
+    "Quickstart": "cd docs/memx_spec_v3/go; go build ./cmd/mem",
+    "CLI": "mem in/out/summarize/gc/docs",
+    "API使用": "mem api serve --addr 127.0.0.1:7766"
+  }
+}
