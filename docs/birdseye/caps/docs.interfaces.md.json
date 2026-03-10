@@ -10,7 +10,7 @@
     "POST /v1/docs:stale-check",
     "POST /v1/contracts:resolve"
   ],
-  "summary": "cookbook-resolver外部インターフェース。文書登録、解決、chunk取得、検索、読了記録、stale判定、契約解決APIを定義。",
+  "summary": "cookbook-resolver外部インターフェース。文書登録、解決、chunk取得、検索、読了記録、stale判定、契約解決APIを定義し、resolver store の分離でも契約を変えない。",
   "deps_out": ["memx_spec_v3/go"],
   "deps_in": ["docs/requirements.md", "README.md"],
   "risks": ["MVPは認可機構最小", "read receipt改ざん防止は将来課題"],
@@ -18,6 +18,7 @@
   "key_sections": {
     "API一覧": "ingest, resolve, chunks:get, search, reads:ack, stale-check, contracts:resolve",
     "Skill一覧": "/resolve-docs, /read-chunks, /ack-docs, /stale-check, /resolve-contract",
+    "ストア境界": "resolver_documents/resolver_chunks/read_receiptsはshort.db固定にしない",
     "データ構造": "Document, DocumentChunk, ResolveEntry, ReadReceipt, StaleReason"
   }
 }

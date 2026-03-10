@@ -235,7 +235,7 @@ func (s *Service) DocsIngest(ctx context.Context, req DocsIngestRequest) (Resolv
 		Importance:         defaultDocImportance(req.DocType),
 	}
 	chunks := buildResolverChunks(req.DocID, sections, req.Chunking)
-	tx, err := s.Conn.DB.BeginTx(ctx, nil)
+	tx, err := s.resolverDB().BeginTx(ctx, nil)
 	if err != nil {
 		return ResolverDocument{}, 0, err
 	}
@@ -383,7 +383,7 @@ func (s *Service) ReadsAck(ctx context.Context, req ReadsAckRequest) (ResolverRe
 		Reader:   req.Reader,
 		ReadAt:   time.Now().UTC().Format(time.RFC3339),
 	}
-	if _, err := s.Conn.DB.ExecContext(ctx, `
+	if _, err := s.resolverDB().ExecContext(ctx, `
 INSERT INTO resolver_read_receipts(task_id, doc_id, version, chunk_ids_json, reader, read_at)
 VALUES(?, ?, ?, ?, ?, ?);
 `, receipt.TaskID, receipt.DocID, receipt.Version, mustJSON(receipt.ChunkIDs), receipt.Reader, receipt.ReadAt); err != nil {
@@ -397,7 +397,7 @@ func (s *Service) DocsStaleCheck(ctx context.Context, req DocsStaleCheckRequest)
 	if req.TaskID == "" {
 		return nil, fmt.Errorf("%w: task_id is required", ErrInvalidArgument)
 	}
-	rows, err := s.Conn.DB.QueryContext(ctx, `
+	rows, err := s.resolverDB().QueryContext(ctx, `
 SELECT rr.task_id, rr.doc_id, rr.version
 FROM resolver_read_receipts rr
 JOIN (
@@ -465,7 +465,7 @@ func (s *Service) ContractsResolve(ctx context.Context, req ContractsResolveRequ
 func (s *Service) getResolverDocument(ctx context.Context, docID string) (ResolverDocument, error) {
 	var doc ResolverDocument
 	var tagsJSON, featureJSON, taskJSON, acceptanceJSON, forbiddenJSON, doneJSON, dependenciesJSON string
-	err := s.Conn.DB.QueryRowContext(ctx, `
+	err := s.resolverDB().QueryRowContext(ctx, `
 SELECT doc_id, doc_type, title, source_path, version, updated_at, summary, body,
        tags_json, feature_keys_json, task_ids_json,
        acceptance_criteria_json, forbidden_patterns_json, definition_of_done_json,
@@ -492,7 +492,7 @@ WHERE doc_id = ?;
 	return doc, nil
 }
 func (s *Service) listResolverDocuments(ctx context.Context) ([]ResolverDocument, error) {
-	rows, err := s.Conn.DB.QueryContext(ctx, `
+	rows, err := s.resolverDB().QueryContext(ctx, `
 SELECT doc_id, doc_type, title, source_path, version, updated_at, summary, body,
        tags_json, feature_keys_json, task_ids_json,
        acceptance_criteria_json, forbidden_patterns_json, definition_of_done_json,
@@ -526,7 +526,7 @@ FROM resolver_documents;
 }
 
 func (s *Service) getResolverChunksByDocID(ctx context.Context, docID string) ([]ResolverChunk, error) {
-	rows, err := s.Conn.DB.QueryContext(ctx, `
+	rows, err := s.resolverDB().QueryContext(ctx, `
 SELECT chunk_id, doc_id, heading, heading_path_json, ordinal, body, token_estimate, importance
 FROM resolver_chunks
 WHERE doc_id = ?
@@ -562,7 +562,7 @@ func (s *Service) getResolverChunksByIDs(ctx context.Context, chunkIDs []string)
 	for _, chunkID := range uniqueTrimmedStrings(chunkIDs) {
 		var chunk ResolverChunk
 		var headingPathJSON string
-		err := s.Conn.DB.QueryRowContext(ctx, `
+		err := s.resolverDB().QueryRowContext(ctx, `
 SELECT chunk_id, doc_id, heading, heading_path_json, ordinal, body, token_estimate, importance
 FROM resolver_chunks
 WHERE chunk_id = ?;
@@ -990,6 +990,15 @@ func decodeStringSlice(raw string) []string {
 	return out
 }
 
+func (s *Service) resolverDB() *sql.DB {
+	if s != nil && s.Conn != nil && s.Conn.ResolverDB != nil {
+		return s.Conn.ResolverDB
+	}
+	if s != nil && s.Conn != nil {
+		return s.Conn.DB
+	}
+	return nil
+}
 func compareVersions(left string, right string) int {
 	left = strings.TrimSpace(left)
 	right = strings.TrimSpace(right)

@@ -266,3 +266,57 @@ func TestIngestCommandsAcceptNoLLMFlag(t *testing.T) {
 		}
 	}
 }
+
+func TestDocsCommandsCanUseSeparateResolverStore(t *testing.T) {
+	binPath := buildMemBinary(t)
+	workdir := t.TempDir()
+	resolverPath := filepath.Join(workdir, "resolver.db")
+
+	out := runMem(t, binPath, workdir,
+		"docs", "ingest", "--json",
+		"--resolver", resolverPath,
+		"--title", "CLI Resolver Split",
+		"--body", "# CLI Resolver Split\n\n## Acceptance Criteria\n- separated resolver store works",
+		"--doc-type", "spec",
+		"--version", "2026-03-10",
+		"--feature", "resolver-cli-split",
+	)
+	var ingestResp struct {
+		DocID      string `json:"doc_id"`
+		ChunkCount int    `json:"chunk_count"`
+	}
+	if err := json.Unmarshal([]byte(out), &ingestResp); err != nil {
+		t.Fatalf("decode docs ingest response: %v\n%s", err, out)
+	}
+	if ingestResp.DocID == "" || ingestResp.ChunkCount == 0 {
+		t.Fatalf("unexpected docs ingest response: %#v", ingestResp)
+	}
+
+	svc, err := service.New(db.Paths{
+		Short:     filepath.Join(workdir, "short.db"),
+		Journal:   filepath.Join(workdir, "journal.db"),
+		Knowledge: filepath.Join(workdir, "knowledge.db"),
+		Archive:   filepath.Join(workdir, "archive.db"),
+		Resolver:  resolverPath,
+	})
+	if err != nil {
+		t.Fatalf("service.New: %v", err)
+	}
+	defer func() { _ = svc.Close() }()
+
+	var shortCount int
+	if err := svc.Conn.ShortDB.QueryRow("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='resolver_documents';").Scan(&shortCount); err != nil {
+		t.Fatalf("check short resolver table: %v", err)
+	}
+	if shortCount != 0 {
+		t.Fatalf("expected short.db to not own resolver tables, got count=%d", shortCount)
+	}
+
+	required, _, err := svc.DocsResolve(context.Background(), service.DocsResolveRequest{Feature: "resolver-cli-split"})
+	if err != nil {
+		t.Fatalf("DocsResolve: %v", err)
+	}
+	if len(required) != 1 || required[0].DocID != ingestResp.DocID {
+		t.Fatalf("unexpected required docs: %#v", required)
+	}
+}

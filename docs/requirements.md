@@ -264,13 +264,21 @@ chunk 生成は以下を満たすこと。
 - resolver 機能は分離可能な構成であること
 - schema 変更の影響範囲が明確であること
 
-### 13.4 コスト効率
+### 13.4 ストア分離性
+
+- `resolver_documents` / `resolver_chunks` / resolver 系メタデータは `short.db` と同居できてもよいが、専用 resolver store に分離可能であること
+- ストア境界を切り替えても API / CLI / Skill の契約を変更しないこと
+- 分離時も read receipt、stale 判定、contract resolve が同等に動作すること
+
+### 13.5 コスト効率
 
 - 毎回全文を返す設計にしないこと
 - 解決結果は chunk 単位で返し、コンテキスト消費を抑えること
 - 検索と参照解決は長文読み込みより安価であること
 
 ## 14. データ要件
+
+resolver 系テーブルの保持先は、`short.db` 同居または resolver 専用 store のいずれかを選択可能とする。
 
 ### 14.1 documents
 
@@ -423,7 +431,7 @@ chunk の目的は長文分割そのものではない。
 
 - 第1段階
   - branch または fork 上で PoC
-  - documents / document_chunks を追加
+  - documents / document_chunks を resolver store として切り出し可能な形で追加
   - resolve / get を先に作る
 
 - 第2段階

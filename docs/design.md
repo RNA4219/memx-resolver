@@ -28,12 +28,20 @@
 
 最小実装は `memx_spec_v3/go` 配下に追加し、既存の `memx-core` 系 API と同じプロセスで提供する。
 
-- DB: `short.db` に resolver 用テーブルを追加する
+- DB: resolver 用テーブルは resolver store に配置し、未設定時のみ `short.db` 同居を許可する
 - service: resolver 用 usecase を追加する
 - api: `/v1/docs:*` などの HTTP API を追加する
 - client: in-proc / HTTP client の両方から同じ API を呼べるようにする
 
-### 3.2 agent-taskstate 連携
+### 3.2 ストア境界
+
+resolver 系テーブルは 1 つの resolver store にまとめる。
+
+- `resolver_documents` / `resolver_chunks` / `resolver_document_links` / `resolver_read_receipts` を同一境界に置く
+- 物理配置は `short.db` 同居または専用 `resolver.db` を選択可能にする
+- API / CLI / Skill からは保持先の違いを見せない
+
+### 3.3 agent-taskstate 連携
 
 本段階では `agent-taskstate` に直接書き込まない。
 
@@ -43,7 +51,7 @@
 - `task_id` をキーに stale 判定を返す API を提供する
 - 将来 `agent-taskstate` へ移譲しやすいように payload 形状を `docs/interfaces.md` に合わせる
 
-### 3.3 chunking
+### 3.4 chunking
 
 chunk 生成は見出し優先とする。
 
@@ -51,7 +59,7 @@ chunk 生成は見出し優先とする。
 - section が長すぎる場合のみ固定長で再分割する
 - `importance` は見出し名と `doc_type` から推定する
 
-### 3.4 解決ロジック
+### 3.5 解決ロジック
 
 文書解決は軽量な決定的ロジックを採用する。
 
@@ -60,7 +68,7 @@ chunk 生成は見出し優先とする。
 - 次に `tags` / `title` / `summary` / `body` の部分一致
 - `required` / `recommended` は doc importance で振り分ける
 
-### 3.5 契約情報
+### 3.6 契約情報
 
 契約情報は以下の 2 系統から集約する。
 
@@ -75,6 +83,8 @@ chunk 生成は見出し優先とする。
 - Dependencies
 
 ## 4. データモデル
+
+4.1 から 4.4 の resolver 系テーブルは resolver store にまとめ、`short.db` とは独立して配置できるようにする。
 
 ### 4.1 resolver_documents
 
@@ -139,6 +149,7 @@ task と文書参照の対応を保持する。
 
 ## 5. 既知の制約
 
+- 既存 `short.db` 内の resolver データを専用 store へ自動移送する機能は MVP 範囲外
 - version 比較は最小実装として完全な順序比較を行わず、文字列不一致を stale とみなす
 - task dependency は外部正本に問い合わせず、ローカル保持の `task_ids_json` を優先利用する
 - 全文検索は resolver 専用 FTS を作らず、最小実装では LIKE ベースとする
@@ -150,3 +161,4 @@ task と文書参照の対応を保持する。
 - feature / task / topic から required / recommended docs を返せる
 - read receipt 登録と stale 判定が動く
 - contract resolve が acceptance / forbidden / DoD / dependencies を返せる
+- resolver store を分離しても同じ API 契約で動作する

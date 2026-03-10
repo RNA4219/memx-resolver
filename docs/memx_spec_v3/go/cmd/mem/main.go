@@ -125,7 +125,7 @@ func usage() {
 	fmt.Fprint(os.Stderr, `mem - memx CLI (v1.4)
 
 Usage:
-  mem api serve   [--addr 127.0.0.1:7766] [--short short.db] ...
+  mem api serve   [--addr 127.0.0.1:7766] [--short short.db] [--resolver resolver.db] ...
   mem in short    --title TITLE [--body BODY | --stdin] [--tag TAG ...] [--no-llm]
   mem in journal --title TITLE --body BODY --scope SCOPE [--tag TAG ...] [--no-llm]
   mem in knowledge --title TITLE --body BODY --scope SCOPE [--tag TAG ...] [--pinned] [--no-llm]
@@ -164,6 +164,7 @@ DB flags (in-proc / server):
   --journal journal.db
   --knowledge knowledge.db
   --archive archive.db
+  --resolver resolver.db   # optional, defaults to short.db
 
 GC flags:
   --dry-run      Show planned operations without executing
@@ -187,6 +188,7 @@ type commonFlags struct {
 	journal   string
 	knowledge string
 	archive   string
+	resolver  string
 }
 
 func (c *commonFlags) bind(fs *flag.FlagSet) {
@@ -196,6 +198,7 @@ func (c *commonFlags) bind(fs *flag.FlagSet) {
 	fs.StringVar(&c.journal, "journal", "journal.db", "path to journal.db")
 	fs.StringVar(&c.knowledge, "knowledge", "knowledge.db", "path to knowledge.db")
 	fs.StringVar(&c.archive, "archive", "archive.db", "path to archive.db")
+	fs.StringVar(&c.resolver, "resolver", "", "path to resolver.db (optional, defaults to short.db)")
 }
 
 func (c *commonFlags) paths() db.Paths {
@@ -204,6 +207,7 @@ func (c *commonFlags) paths() db.Paths {
 		Journal:   c.journal,
 		Knowledge: c.knowledge,
 		Archive:   c.archive,
+		Resolver:  c.resolver,
 	}
 }
 

@@ -207,3 +207,52 @@ func TestDocsIngestFixedChunking(t *testing.T) {
 		t.Fatalf("expected fixed chunk body length <= 10, got %d", len(chunks[0].Body))
 	}
 }
+
+func TestResolverDocsCanUseSeparateResolverStore(t *testing.T) {
+	tmpDir := t.TempDir()
+	svc, err := New(db.Paths{
+		Short:     filepath.Join(tmpDir, "short.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
+		Archive:   filepath.Join(tmpDir, "archive.db"),
+		Resolver:  filepath.Join(tmpDir, "resolver.db"),
+	})
+	if err != nil {
+		t.Fatalf("New: %v", err)
+	}
+	defer func() { _ = svc.Close() }()
+	ctx := context.Background()
+
+	doc, chunkCount, err := svc.DocsIngest(ctx, DocsIngestRequest{
+		DocType:     "spec",
+		Title:       "Separated Resolver Spec",
+		Version:     "2026-03-10",
+		FeatureKeys: []string{"resolver-split"},
+		Body: `# Separated Resolver Spec
+
+## Acceptance Criteria
+- resolver store can be separated`,
+	})
+	if err != nil {
+		t.Fatalf("DocsIngest: %v", err)
+	}
+	if chunkCount == 0 {
+		t.Fatal("expected chunks to be generated")
+	}
+
+	var shortCount int
+	if err := svc.Conn.ShortDB.QueryRow("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='resolver_documents';").Scan(&shortCount); err != nil {
+		t.Fatalf("check short resolver table: %v", err)
+	}
+	if shortCount != 0 {
+		t.Fatalf("expected short.db to not own resolver tables, got count=%d", shortCount)
+	}
+
+	required, _, err := svc.DocsResolve(ctx, DocsResolveRequest{Feature: "resolver-split"})
+	if err != nil {
+		t.Fatalf("DocsResolve: %v", err)
+	}
+	if len(required) != 1 || required[0].DocID != doc.DocID {
+		t.Fatalf("unexpected required docs: %#v", required)
+	}
+}

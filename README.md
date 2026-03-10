@@ -46,6 +46,9 @@ Skill 定義は `.claude/commands/` にあります。
 ```bash
 cd docs/memx_spec_v3/go
 go build ./cmd/mem
+
+# resolver を分離したい場合
+mem api serve --resolver resolver.db
 ```
 
 ### 保存
@@ -106,3 +109,4 @@ mem api serve --addr 127.0.0.1:7766
 - [docs/memx_spec_v3/docs/design.md](./docs/memx_spec_v3/docs/design.md)
 
 License: MIT
+

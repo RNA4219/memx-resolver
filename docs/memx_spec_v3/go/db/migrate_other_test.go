@@ -196,7 +196,7 @@ func TestOpenAll(t *testing.T) {
 
 	paths := Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
@@ -230,4 +230,51 @@ func TestOpenAll(t *testing.T) {
 
 func openDB(dsn string) (*sql.DB, error) {
 	return sql.Open("sqlite", dsn)
+}
+func TestOpenAllWithSeparateResolverStore(t *testing.T) {
+	tmpDir := t.TempDir()
+
+	paths := Paths{
+		Short:     filepath.Join(tmpDir, "short.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
+		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
+		Archive:   filepath.Join(tmpDir, "archive.db"),
+		Resolver:  filepath.Join(tmpDir, "resolver.db"),
+	}
+
+	conn, err := OpenAll(paths)
+	if err != nil {
+		t.Fatalf("OpenAll failed: %v", err)
+	}
+	defer conn.Close()
+
+	if conn.ResolverDB == nil {
+		t.Fatal("expected resolver DB to be configured")
+	}
+	if conn.ResolverDB == conn.ShortDB {
+		t.Fatal("expected resolver DB to be separate from short DB")
+	}
+
+	var shortCount int
+	if err := conn.ShortDB.QueryRow("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='resolver_documents';").Scan(&shortCount); err != nil {
+		t.Fatalf("check short resolver table: %v", err)
+	}
+	if shortCount != 0 {
+		t.Fatalf("expected short.db to not own resolver tables, got count=%d", shortCount)
+	}
+
+	var resolverCount int
+	if err := conn.ResolverDB.QueryRow("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='resolver_documents';").Scan(&resolverCount); err != nil {
+		t.Fatalf("check resolver resolver_documents: %v", err)
+	}
+	if resolverCount != 1 {
+		t.Fatalf("expected resolver.db to have resolver_documents, got count=%d", resolverCount)
+	}
+
+	if err := conn.ResolverDB.QueryRow("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='resolver_chunks';").Scan(&resolverCount); err != nil {
+		t.Fatalf("check resolver resolver_chunks: %v", err)
+	}
+	if resolverCount != 1 {
+		t.Fatalf("expected resolver.db to have resolver_chunks, got count=%d", resolverCount)
+	}
 }

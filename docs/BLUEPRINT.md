@@ -38,6 +38,7 @@ next_review_due: 2026-04-10
 - 依存: memx-core, agent-taskstate, workflow-cookbook
 - 互換性: 既存CLI/API/Skillとの統合が容易
 - データベース: SQLite
+- ストア境界: resolver 系テーブルは short.db から分離可能
 
 ## 4. I/O Contract
 
@@ -93,3 +94,4 @@ flowchart LR
 - `/ack-docs`
 - `/stale-check`
 - `/resolve-contract`
+

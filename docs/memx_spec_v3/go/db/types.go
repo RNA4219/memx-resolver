@@ -5,12 +5,13 @@ import "database/sql"
 // Paths は各ストアDBファイルのパスを保持する。
 type Paths struct {
 	Short     string
-	Journal string
+	Journal   string
 	Knowledge string
 	Archive   string
+	Resolver  string
 }
 
-// Conn は ATTACH 済みのメイン接続と、LLM/Gatekeeper クライアントをラップする。
+// Conn は各ストア接続と、LLM/Gatekeeper クライアントをラップする。
 type Conn struct {
 	DB *sql.DB
 
@@ -19,6 +20,7 @@ type Conn struct {
 	JournalDB   *sql.DB
 	KnowledgeDB *sql.DB
 	ArchiveDB   *sql.DB
+	ResolverDB  *sql.DB
 
 	// LLM 系クライアント（必要に応じて設定される）
 	Embed   EmbeddingClient
