@@ -18,6 +18,7 @@
   - [ ] 互換期間中の挙動（並行提供/警告/明示フラグ要否）を明記
 
 ## 2026-03-06
+- `workflow-cookbook` から docs resolve / ack / stale-check を呼べる `memx_resolver_workflow_plugin` を追加。
 - journal/knowledge/archive スキーマを完全実装：FTS同期トリガー、インデックス、*_meta テーブル、lineage テーブルを追加。
 - GC機能を実装：`mem gc short --dry-run` CLI、`POST /v1/gc:run` API、Phase0トリガ判定、Phase3 Archive退避。feature flag対応。
 

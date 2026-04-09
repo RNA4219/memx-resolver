@@ -108,5 +108,14 @@ mem api serve --addr 127.0.0.1:7766
 - [docs/memx_spec_v3/docs/requirements.md](./docs/memx_spec_v3/docs/requirements.md)
 - [docs/memx_spec_v3/docs/design.md](./docs/memx_spec_v3/docs/design.md)
 
+## workflow-cookbook plugin
+
+- package: `memx_resolver_workflow_plugin/`
+- factory: `memx_resolver_workflow_plugin.plugin:create_plugin`
+- capabilities:
+  - `docs.resolve`
+  - `docs.ack`
+  - `docs.stale_check`
+
 License: MIT
 
