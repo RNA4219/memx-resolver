@@ -35,3 +35,6 @@ Thumbs.db
 /memx_spec_v3/go/*.db
 /memx_spec_v3/go/*.db-shm
 /memx_spec_v3/go/*.db-wal
+/docs/memx_spec_v3/go/*.db
+/docs/memx_spec_v3/go/*.db-shm
+/docs/memx_spec_v3/go/*.db-wal

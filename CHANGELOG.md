@@ -5,11 +5,17 @@
 本プロジェクトは [Semantic Versioning](https://semver.org/spec/v2.0.0.html) に準拠します。
 
 ## 運用方針
+
 - 記録対象: `done` になったタスクのうち、利用者影響がある変更（機能追加、仕様変更、互換性影響、運用ルール更新）。
-- 粒度: 1タスクにつき1〜3行の最小要約。実装詳細ではなく「何が変わったか」と「影響範囲」を記録する。
+- 粒度: 1タスクにつき1〜3行の最小要約。
+  実装詳細ではなく「何が変わったか」と「影響範囲」を記録する。
 - 日付形式: `YYYY-MM-DD`（ISO 8601）で統一する。
-- 重複回避: 既存エントリと同一内容は追記しない。`memx_spec_v3/CHANGES.md` から移送する際は要約のみ転記する。
-- 転記手順: Task Seed が `done` になったら、Task Seed の `Release Note Draft` を正本として `CHANGELOG.md` に1〜3行で転記し、転記後に Task Seed へ `Moved-to-CHANGES: YYYY-MM-DD` を追記してトレース可能にする。
+- 重複回避: 既存エントリと同一内容は追記しない。
+  `memx_spec_v3/CHANGES.md` から移送する際は要約のみ転記する。
+- 転記手順: Task Seed が `done` になったら、
+  Task Seed の `Release Note Draft` を正本として `CHANGELOG.md` に
+  1〜3行で転記し、転記後に Task Seed へ
+  `Moved-to-CHANGES: YYYY-MM-DD` を追記してトレース可能にする。
 
 - 破壊変更時必須チェックリスト（未完了の変更は記載不可）:
   - [ ] 対象 I/F（CLI/API/`--json`）を明記
@@ -19,6 +25,13 @@
   - [ ] 移行手順（最小2ステップ以上）を明記
   - [ ] 互換期間中の挙動（並行提供/警告/明示フラグ要否）を明記
 
+## Unreleased
+
+- `docs/memx_spec_v3/go/` の runtime DB ignore パスを実配置へ合わせ、
+  ローカル実行生成物が差分へ混ざりにくいよう整理。
+- tracked されていた runtime DB は index から外し、
+  `testdata/` fixture だけを継続管理する方針へ寄せた。
+
 ## v1.0.1 - 2026-04-11
 
 - `docs/acceptance/` ディレクトリを追加し、検収記録の置き場とテンプレートを整備。
@@ -27,10 +40,15 @@
 
 ## v1.0.0 - 2026-03-06
 
-- `workflow-cookbook` から docs resolve / ack / stale-check を呼べる `memx_resolver_workflow_plugin` を追加。
-- journal/knowledge/archive スキーマを完全実装：FTS同期トリガー、インデックス、*_meta テーブル、lineage テーブルを追加。
-- GC機能を実装：`mem gc short --dry-run` CLI、`POST /v1/gc:run` API、Phase0トリガ判定、Phase3 Archive退避。feature flag対応。
+- `workflow-cookbook` から docs resolve / ack / stale-check を呼べる
+  `memx_resolver_workflow_plugin` を追加。
+- journal/knowledge/archive スキーマを完全実装:
+  FTS同期トリガー、インデックス、`*_meta` テーブル、lineage テーブルを追加。
+- GC機能を実装:
+  `mem gc short --dry-run` CLI、`POST /v1/gc:run` API、
+  Phase0トリガ判定、Phase3 Archive退避。feature flag対応。
 
 ## v0.1.0 - 2026-03-03
 
-- v3 要件として CLI/API 分離、HTTP + in-proc API 追加、Service 層追加、DB 層再編（`OpenAll` 追加、`MustOpenAll` 互換維持）を反映。
+- v3 要件として CLI/API 分離、HTTP + in-proc API 追加、Service 層追加、
+  DB 層再編（`OpenAll` 追加、`MustOpenAll` 互換維持）を反映。
