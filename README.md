@@ -91,6 +91,18 @@ mem api serve --addr 127.0.0.1:7766
 - 読むべき設計資料は resolver で解決
 - 退避済みの確認は `archive`
 
+## Acceptance
+
+検収記録の正本は `docs/acceptance/` です。
+
+| 項目 | 参照 |
+| --- | --- |
+| Acceptance 一覧 | [docs/acceptance/INDEX.md](docs/acceptance/INDEX.md) |
+| 作成方法 | [docs/acceptance/README.md](docs/acceptance/README.md) |
+| Template | [docs/acceptance/ACCEPTANCE_TEMPLATE.md](docs/acceptance/ACCEPTANCE_TEMPLATE.md) |
+
+重大な変更や release 判定前に acceptance record を作成すること。
+
 ## 守るべき前提
 
 - `journal` と `knowledge` は `--scope` 必須

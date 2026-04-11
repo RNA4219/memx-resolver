@@ -17,6 +17,12 @@
   - [ ] 移行手順（最小2ステップ以上）を明記
   - [ ] 互換期間中の挙動（並行提供/警告/明示フラグ要否）を明記
 
+## 2026-04-11
+
+- `docs/acceptance/` ディレクトリを追加し、検収記録の置き場とテンプレートを整備。
+- Acceptance workflow section を `docs/CHECKLISTS.md` に追加。
+- Acceptance 入口を `README.md` に追加。
+
 ## 2026-03-06
 - `workflow-cookbook` から docs resolve / ack / stale-check を呼べる `memx_resolver_workflow_plugin` を追加。
 - journal/knowledge/archive スキーマを完全実装：FTS同期トリガー、インデックス、*_meta テーブル、lineage テーブルを追加。
