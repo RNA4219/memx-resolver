@@ -1,5 +1,7 @@
 # memx-resolver
 
+[![Version](https://img.shields.io/badge/version-1.0.1-blue)](CHANGELOG.md)
+
 memx-resolver は、`memx-core` をエージェント実行向けに拡張し、読むべき文書の解決、必要 chunk の取得、読了記録、stale 判定、契約解決まで扱える agent-first の OSS です。
 
 ## LLM-BOOTSTRAP

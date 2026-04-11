@@ -2,6 +2,8 @@
 
 本ファイルは、memx の完了済み変更を利用者向けに要約する正本（canonical source）です。
 
+本プロジェクトは [Semantic Versioning](https://semver.org/spec/v2.0.0.html) に準拠します。
+
 ## 運用方針
 - 記録対象: `done` になったタスクのうち、利用者影響がある変更（機能追加、仕様変更、互換性影響、運用ルール更新）。
 - 粒度: 1タスクにつき1〜3行の最小要約。実装詳細ではなく「何が変わったか」と「影響範囲」を記録する。
@@ -17,16 +19,18 @@
   - [ ] 移行手順（最小2ステップ以上）を明記
   - [ ] 互換期間中の挙動（並行提供/警告/明示フラグ要否）を明記
 
-## 2026-04-11
+## v1.0.1 - 2026-04-11
 
 - `docs/acceptance/` ディレクトリを追加し、検収記録の置き場とテンプレートを整備。
 - Acceptance workflow section を `docs/CHECKLISTS.md` に追加。
 - Acceptance 入口を `README.md` に追加。
 
-## 2026-03-06
+## v1.0.0 - 2026-03-06
+
 - `workflow-cookbook` から docs resolve / ack / stale-check を呼べる `memx_resolver_workflow_plugin` を追加。
 - journal/knowledge/archive スキーマを完全実装：FTS同期トリガー、インデックス、*_meta テーブル、lineage テーブルを追加。
 - GC機能を実装：`mem gc short --dry-run` CLI、`POST /v1/gc:run` API、Phase0トリガ判定、Phase3 Archive退避。feature flag対応。
 
-## 2026-03-03
+## v0.1.0 - 2026-03-03
+
 - v3 要件として CLI/API 分離、HTTP + in-proc API 追加、Service 層追加、DB 層再編（`OpenAll` 追加、`MustOpenAll` 互換維持）を反映。
