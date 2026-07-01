@@ -14,12 +14,13 @@ jobs:
       run:
         working-directory: docs/memx_spec_v3/go
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version: '1.21'
+          cache-dependency-path: docs/memx_spec_v3/go/go.sum
 
       - name: Build
         run: go build ./...
@@ -31,10 +32,10 @@ jobs:
     name: Python Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
