@@ -40,7 +40,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pytest
+          pip install pytest PyYAML jsonschema
 
       - name: Test
         run: python -m pytest tests/ -v --tb=short
