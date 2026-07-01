@@ -1,0 +1,18 @@
+{
+  "schema_version": "diff-risk-test/v1",
+  "source": "code-to-gate",
+  "target_repo": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver",
+  "artifacts": {
+    "findings": "../ctg/findings.json",
+    "risk_register": "../ctg/risk-register.yaml",
+    "test_seeds": "../ctg/test-seeds.json",
+    "release_readiness": "../ctg/release-readiness.json",
+    "sarif": "../ctg/results.sarif"
+  },
+  "summary": {
+    "findings": 3,
+    "critical": 0,
+    "high": 1,
+    "release_readiness": "passed"
+  }
+}

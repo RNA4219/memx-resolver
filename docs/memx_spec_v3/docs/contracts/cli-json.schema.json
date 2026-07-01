@@ -13,6 +13,39 @@
     },
     {
       "$ref": "#/definitions/Note"
+    },
+    {
+      "$ref": "#/definitions/DocsIngestResponse"
+    },
+    {
+      "$ref": "#/definitions/DocsResolveResponse"
+    },
+    {
+      "$ref": "#/definitions/ChunksGetResponse"
+    },
+    {
+      "$ref": "#/definitions/DocsSearchResponse"
+    },
+    {
+      "$ref": "#/definitions/CardsSearchResponse"
+    },
+    {
+      "$ref": "#/definitions/CardFeedbackResponse"
+    },
+    {
+      "$ref": "#/definitions/PromptBundleResponse"
+    },
+    {
+      "$ref": "#/definitions/TaskStateExportResponse"
+    },
+    {
+      "$ref": "#/definitions/ReadsAckResponse"
+    },
+    {
+      "$ref": "#/definitions/DocsStaleCheckResponse"
+    },
+    {
+      "$ref": "#/definitions/ContractsResolveResponse"
     }
   ],
   "definitions": {
@@ -71,6 +104,343 @@
           "items": {
             "$ref": "#/definitions/Note"
           }
+        }
+      }
+    },
+    "ResolverImportance": {
+      "type": "string",
+      "enum": ["required", "recommended", "reference"]
+    },
+    "ResolverMemoryType": {
+      "type": "string",
+      "enum": ["acceptance", "constraint", "done", "dependency", "procedure", "decision", "risk", "concept", "reference"]
+    },
+    "ResolveEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["doc_id", "title", "version", "importance", "reason", "top_chunks"],
+      "properties": {
+        "doc_id": { "type": "string" },
+        "title": { "type": "string" },
+        "version": { "type": "string" },
+        "importance": { "$ref": "#/definitions/ResolverImportance" },
+        "reason": { "type": "string" },
+        "top_chunks": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "ResolverChunk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chunk_id", "doc_id", "heading_path", "ordinal", "body", "token_estimate", "importance", "memory_type", "cue"],
+      "properties": {
+        "chunk_id": { "type": "string" },
+        "doc_id": { "type": "string" },
+        "heading": { "type": "string" },
+        "heading_path": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "ordinal": { "type": "integer" },
+        "body": { "type": "string" },
+        "token_estimate": { "type": "integer" },
+        "importance": { "$ref": "#/definitions/ResolverImportance" },
+        "memory_type": { "$ref": "#/definitions/ResolverMemoryType" },
+        "cue": { "type": "string" }
+      }
+    },
+    "ResolverMemoryCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["card_id", "doc_id", "chunk_id", "memory_type", "cue", "statement", "heading_path", "importance", "token_estimate", "score"],
+      "properties": {
+        "card_id": { "type": "string" },
+        "doc_id": { "type": "string" },
+        "chunk_id": { "type": "string" },
+        "memory_type": { "$ref": "#/definitions/ResolverMemoryType" },
+        "cue": { "type": "string" },
+        "statement": { "type": "string" },
+        "heading_path": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "importance": { "$ref": "#/definitions/ResolverImportance" },
+        "token_estimate": { "type": "integer" },
+        "score": { "type": "integer" }
+      }
+    },
+    "ResolverReadReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "doc_id", "version", "reader", "read_at"],
+      "properties": {
+        "task_id": { "type": "string" },
+        "doc_id": { "type": "string" },
+        "version": { "type": "string" },
+        "chunk_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "chunk_snapshots": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolverChunkSnapshot" }
+        },
+        "reader": { "type": "string" },
+        "read_at": { "type": "string" }
+      }
+    },
+    "ResolverChunkSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chunk_id", "body_hash"],
+      "properties": {
+        "chunk_id": { "type": "string" },
+        "body_hash": { "type": "string" },
+        "heading_path": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "memory_type": { "$ref": "#/definitions/ResolverMemoryType" },
+        "importance": { "$ref": "#/definitions/ResolverImportance" },
+        "token_estimate": { "type": "integer" }
+      }
+    },
+    "ResolverChunkChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["chunk_id", "change_type", "impact"],
+      "properties": {
+        "chunk_id": { "type": "string" },
+        "change_type": {
+          "type": "string",
+          "enum": ["modified", "removed"]
+        },
+        "heading_path": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "memory_type": { "$ref": "#/definitions/ResolverMemoryType" },
+        "impact": { "type": "string" }
+      }
+    },
+    "ResolverStaleReason": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "doc_id", "previous_version", "reason", "detected_at"],
+      "properties": {
+        "task_id": { "type": "string" },
+        "doc_id": { "type": "string" },
+        "previous_version": { "type": "string" },
+        "current_version": { "type": "string" },
+        "reason": {
+          "type": "string",
+          "enum": ["version_mismatch", "document_missing", "semantic_diff"]
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "impact_scope": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "changed_chunks": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolverChunkChange" }
+        },
+        "detected_at": { "type": "string" }
+      }
+    },
+    "DocsIngestResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["doc_id", "version", "chunk_count", "status"],
+      "properties": {
+        "doc_id": { "type": "string" },
+        "version": { "type": "string" },
+        "chunk_count": { "type": "integer" },
+        "status": {
+          "type": "string",
+          "enum": ["ingested"]
+        }
+      }
+    },
+    "DocsResolveResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "recommended"],
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolveEntry" }
+        },
+        "recommended": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolveEntry" }
+        }
+      }
+    },
+    "ChunksGetResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["doc_id", "chunks"],
+      "properties": {
+        "doc_id": { "type": "string" },
+        "chunks": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolverChunk" }
+        },
+        "memory_cards": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolverMemoryCard" }
+        }
+      }
+    },
+    "DocsSearchResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["results"],
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolveEntry" }
+        }
+      }
+    },
+    "CardsSearchResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cards"],
+      "properties": {
+        "cards": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolverMemoryCard" }
+        }
+      }
+    },
+    "CardFeedbackRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["card_id", "signal", "weight", "recorded_at"],
+      "properties": {
+        "card_id": { "type": "string" },
+        "doc_id": { "type": "string" },
+        "chunk_id": { "type": "string" },
+        "memory_type": { "type": "string" },
+        "signal": { "type": "string" },
+        "weight": { "type": "integer" },
+        "query": { "type": "string" },
+        "recorded_at": { "type": "string" }
+      }
+    },
+    "CardFeedbackResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["feedback"],
+      "properties": {
+        "feedback": { "$ref": "#/definitions/CardFeedbackRecord" }
+      }
+    },
+    "PromptBundleResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bundle_id", "query", "format", "token_estimate", "cards", "prompt", "source_refs"],
+      "properties": {
+        "bundle_id": { "type": "string" },
+        "query": { "type": "string" },
+        "format": { "type": "string" },
+        "token_estimate": { "type": "integer" },
+        "cards": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolverMemoryCard" }
+        },
+        "prompt": { "type": "string" },
+        "source_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "TaskStateExportResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_ref", "task_id", "required_docs", "read_receipts", "stale_reasons", "source_refs", "exported_at"],
+      "properties": {
+        "task_ref": { "type": "string" },
+        "task_id": { "type": "string" },
+        "required_docs": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolveEntry" }
+        },
+        "read_receipts": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolverReadReceipt" }
+        },
+        "stale_reasons": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolverStaleReason" }
+        },
+        "source_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "exported_at": { "type": "string" }
+      }
+    },
+    "ReadsAckResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receipt"],
+      "properties": {
+        "receipt": { "$ref": "#/definitions/ResolverReadReceipt" }
+      }
+    },
+    "DocsStaleCheckResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "status", "stale_reasons"],
+      "properties": {
+        "task_id": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["fresh", "stale"]
+        },
+        "stale_reasons": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolverStaleReason" }
+        },
+        "stale": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolverStaleReason" }
+        }
+      }
+    },
+    "ContractsResolveResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "acceptance_criteria", "forbidden_patterns", "definition_of_done", "dependencies"],
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ResolveEntry" }
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "forbidden_patterns": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "definition_of_done": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "dependencies": {
+          "type": "array",
+          "items": { "type": "string" }
         }
       }
     }

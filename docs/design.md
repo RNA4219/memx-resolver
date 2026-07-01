@@ -49,7 +49,8 @@ resolver 系テーブルは 1 つの resolver store にまとめる。
 
 - `read_receipt` 相当を `memx-resolver` 内に正規化して保持する
 - `task_id` をキーに stale 判定を返す API を提供する
-- 将来 `agent-taskstate` へ移譲しやすいように payload 形状を `docs/interfaces.md` に合わせる
+- `taskstate-export` で `agent-taskstate:task:local:<id>` と `memx:doc/chunk/card:local:<id>` の `typed_ref`、required docs、read receipts、stale reasons をまとめて返す
+- direct write ではなく export bridge とし、`agent-taskstate` 側の `context_bundle_source` へ取り込める payload 形状を `docs/interfaces.md` に合わせる
 
 ### 3.4 chunking
 
@@ -58,6 +59,26 @@ chunk 生成は見出し優先とする。
 - Markdown 見出しを検出して section 化する
 - section が長すぎる場合のみ固定長で再分割する
 - `importance` は見出し名と `doc_type` から推定する
+- LLM が役割を推定しやすいように、chunk には `memory_type` と `cue` を付与する
+
+### 3.4.1 LLM 向け memory card
+
+chunk は文書構造を保つ単位であり、そのままでは LLM にとって「制約」「手順」「受入条件」の区別が曖昧になりやすい。
+
+そのため `chunks:get` は、chunk に加えて `memory_cards` を返せるようにする。
+
+- `memory_type`: `acceptance` / `constraint` / `procedure` / `dependency` / `done` / `decision` / `risk` / `concept` / `reference`
+- `cue`: 見出し階層を短く連結した検索・プロンプト用手がかり
+- `statement`: 箇条書き単位、または chunk 本文から作る短い記述
+- `doc_id` / `chunk_id`: 出典を失わないための参照
+
+memory card は `memory_type`、`importance`、query match、feedback log、`token_budget` に基づいて並べ替え、予算内で優先度の高いものから返す。
+
+実利用ログは `cards-feedback` で `used` / `helpful` / `pinned` / `irrelevant` / `skipped` として蓄積し、card ID と memory type の補正値として ranking に反映する。呼び出し側は `ranking_weights` で重みを上書きできる。
+
+`cards:bundle` / `mem docs bundle` は、選ばれた card を Markdown または JSONL の prompt-ready bundle として出力し、`source_refs` に card / chunk / doc の `typed_ref` を含める。
+
+これにより、LLM に渡す記憶は「長い本文」ではなく、役割・手がかり・出典・ランキング根拠を持つ prompt-ready な最小単位として扱える。
 
 ### 3.5 解決ロジック
 
@@ -123,6 +144,8 @@ chunk 生成は見出し優先とする。
 - `body`
 - `token_estimate`
 - `importance`
+- `memory_type`（レスポンス生成時に推定可能）
+- `cue`（レスポンス生成時に推定可能）
 
 ### 4.3 resolver_document_links
 
@@ -144,13 +167,17 @@ task と文書参照の対応を保持する。
 - `doc_id`
 - `version`
 - `chunk_ids_json`
+- `chunk_snapshots_json`
 - `reader`
 - `read_at`
+
+`chunk_snapshots_json` は読了時点の `chunk_id`、本文 hash、heading path、memory type、importance、token estimate を保持する。stale 判定では最新版 chunk と比較し、読んだ chunk が変化した場合は `semantic_diff` として `impact_scope` / `changed_chunks` を返す。version だけが変わり読了 chunk が不変の場合は metadata impact の `version_mismatch` として扱う。
 
 ## 5. 既知の制約
 
 - 既存 `short.db` 内の resolver データを専用 store へ自動移送する機能は MVP 範囲外
-- version 比較は最小実装として完全な順序比較を行わず、文字列不一致を stale とみなす
+- version 比較は完全な順序比較を行わず、文字列不一致を stale 候補とみなす
+- stale 候補は read receipt の chunk snapshot と最新版 chunk を比較し、semantic diff と影響範囲を返す
 - task dependency は外部正本に問い合わせず、ローカル保持の `task_ids_json` を優先利用する
 - 全文検索は resolver 専用 FTS を作らず、最小実装では LIKE ベースとする
 
@@ -162,3 +189,5 @@ task と文書参照の対応を保持する。
 - read receipt 登録と stale 判定が動く
 - contract resolve が acceptance / forbidden / DoD / dependencies を返せる
 - resolver store を分離しても同じ API 契約で動作する
+- memory card ranking が feedback と重み設定で補正できる
+- prompt-ready bundle と agent-taskstate export が取得できる

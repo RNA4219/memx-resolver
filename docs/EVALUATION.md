@@ -10,14 +10,20 @@ next_review_due: 2026-04-10
 
 ## Acceptance Criteria
 
-- [ ] workflow-cookbookの主要文書をdocとして登録できる
-- [ ] feature名からrequired / recommended docsを返せる
-- [ ] docから必要chunkを取得できる
-- [ ] 読了したdoc versionとchunk_idsをtaskに紐づけて記録できる
-- [ ] doc version更新時にstale判定できる
-- [ ] docs/interfaces.md に記載した最小APIが呼べる
-- [ ] 文書を登録するとchunkが生成される
-- [ ] contract resolveがacceptance / forbidden / DoD / dependenciesを返せる
+- [x] workflow-cookbookの主要文書をdocとして登録できる
+- [x] feature名からrequired / recommended docsを返せる
+- [x] docから必要chunkを取得できる
+- [x] `memory_type` / importance / query match / token budget に基づいて memory_cards をランキングできる
+- [x] memory_cards ranking を実利用 feedback と ranking weights で補正できる
+- [x] `mem docs cards --query ...` で LLM 向け memory_cards を取得できる
+- [x] `mem docs bundle --query ...` で prompt-ready bundle を取得できる
+- [x] 読了したdoc versionとchunk_idsをtaskに紐づけて記録できる
+- [x] doc version更新時に semantic diff / impact scope 付きで stale 判定できる
+- [x] `mem docs taskstate-export --task-id ...` で agent-taskstate 連携 payload を取得できる
+- [x] docs/interfaces.md に記載した最小APIが呼べる
+- [x] 文書を登録するとchunkが生成される
+- [x] CLI JSON / HTTP 実レスポンスが `cli-json.schema.json` / OpenAPI schema に適合する
+- [x] contract resolveがacceptance / forbidden / DoD / dependenciesを返せる
 
 ## KPIs
 
@@ -35,6 +41,11 @@ next_review_due: 2026-04-10
 
 ## Verification Checklist
 
-- [ ] 主要フローが動作する（手動確認）
-- [ ] エラー時挙動が明示されている
-- [ ] 依存関係が再現できる環境である
+- [x] 主要フローが動作する（自動テスト確認）
+- [x] エラー時挙動が明示されている
+- [x] 依存関係が再現できる環境である
+
+## Acceptance Records
+
+- [AC-20260701-01](acceptance/AC-20260701-01.md)
+- [AC-20260702-01](acceptance/AC-20260702-01.md)

@@ -1,0 +1,38 @@
+# code-to-gate risk-register
+# Generated: 2026-07-01T16:01:19.405Z
+# Run ID: ctg-202607011601-local
+
+version: ctg/v1
+generated_at: 2026-07-01T16:01:19.405Z
+run_id: ctg-202607011601-local
+artifact: risk-register
+schema: risk-register@v1
+completeness: complete
+
+repo:
+  root: "."
+
+tool:
+  name: "code-to-gate"
+  version: "1.5.0"
+  plugin_versions: []
+
+risks:
+
+  - id: "risk-HARDCODED_SECRET-010"
+    title: "Possible secret in variable: help"
+    severity: high
+    likelihood: medium
+    confidence: 0.7
+    impact:
+      - "Variable \"help\" may contain hardcoded secret"
+    sourceFindingIds:
+      - "finding-HARDCODED_SECRET-010"
+    evidence:
+      - id: "evidence-finding-HARDCODED_SECRET-010-00"
+        path: "workflow-cookbook/tools/audit/verify_log_chain.py"
+        kind: text
+        startLine: 74
+        excerptHash: "14cf0a1e"
+    recommendedActions:
+      - "Address finding finding-HARDCODED_SECRET-010: HARDCODED_SECRET"

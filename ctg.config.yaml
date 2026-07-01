@@ -1,0 +1,42 @@
+# code-to-gate configuration for memx-resolver
+# Note: Exclude patterns are currently not used by scan command (future implementation)
+# Use suppressions.yaml for immediate suppression needs
+
+version: ctg/v1
+
+languages:
+  - py
+  - ts
+  - js
+
+exclude:
+  # Embedded workflow-cookbook symlink - findings belong to that repo
+  - workflow-cookbook/**/*
+
+  # Third-party libraries
+  - .venv/**/*
+  - node_modules/**/*
+  - __pycache__/**/*
+
+  # Generated files
+  - "*.pyc"
+  - "*.pyo"
+  - "*.generated.*"
+
+  # Test fixtures
+  - fixtures/**/*
+  - examples/**/*
+
+  # Documentation
+  - docs/**/*
+  - "*.md"
+
+thresholds:
+  large_module:
+    line_count: 500
+    function_count: 20
+    acknowledge_existing: true
+
+output:
+  default_out: .qh
+  suppressions: .ctg/suppressions.yaml

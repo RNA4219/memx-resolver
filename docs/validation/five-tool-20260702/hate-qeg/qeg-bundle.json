@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "qegVersion": "HATE/v1",
+    "runId": "memx-resolver-five-tool-20260702",
+    "runAttempt": 1,
+    "createdAt": "2026-07-02T00:15:00+09:00",
+    "profile": "lean",
+    "inputArtifacts": [
+      {
+        "kind": "HATE-run",
+        "path": "fixture:/p0a/HATE-run.json"
+      },
+      {
+        "kind": "HATE-test-results",
+        "path": "fixture:/p0a/HATE-test-results.ndjson"
+      },
+      {
+        "kind": "HATE-coverage",
+        "path": "fixture:/p0a/HATE-coverage.ndjson"
+      },
+      {
+        "kind": "precheck-decision",
+        "path": "fixture:/p0a/precheck-decision.json"
+      }
+    ],
+    "debugOnly": false
+  },
+  "nodes": [
+    {
+      "id": "hate_precheck:memx-resolver-five-tool-20260702:1",
+      "kind": "gate_verdict",
+      "label": "HATE P0a Precheck memx-resolver-five-tool-20260702",
+      "data": {
+        "decision": "eligible",
+        "exit_code": 0,
+        "qeg_export_allowed": true,
+        "qeg_export_phase": "P0b"
+      },
+      "sourceRefs": [
+        "fixture:/p0a/precheck-decision.json"
+      ]
+    },
+    {
+      "id": "run:memx-resolver-five-tool-20260702:1",
+      "kind": "run",
+      "label": "CI Run memx-resolver-five-tool-20260702",
+      "data": {
+        "repository": "memx-resolver",
+        "workflow": "local-five-tool-validation",
+        "job": "pytest",
+        "event_name": "unknown",
+        "started_at": "2026-07-02T00:00:00+09:00",
+        "finished_at": "2026-07-02T00:15:00+09:00",
+        "ci": {
+          "provider": "generic-ci",
+          "run_id": "memx-resolver-five-tool-20260702",
+          "run_attempt": 1,
+          "actor": null,
+          "ref": null
+        }
+      },
+      "sourceRefs": [
+        "fixture:/p0a/HATE-run.json"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "kind": "decides",
+      "from": "hate_precheck:memx-resolver-five-tool-20260702:1",
+      "to": "qeg_export:memx-resolver-five-tool-20260702",
+      "traceability": {
+        "sourceRefs": [
+          "fixture:/p0a/precheck-decision.json"
+        ],
+        "confidence": "high",
+        "assumptions": []
+      }
+    }
+  ],
+  "completeness": {
+    "score": 1.0,
+    "partial": false,
+    "parserFailures": [],
+    "unsupportedClaims": [],
+    "excludedArtifacts": []
+  }
+}

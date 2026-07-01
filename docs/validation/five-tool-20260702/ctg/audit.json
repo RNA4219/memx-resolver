@@ -1,0 +1,2104 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-01T16:01:19.551Z",
+  "run_id": "ctg-202607011601-local",
+  "repo": {
+    "root": ".",
+    "revision": "0da82481e888",
+    "branch": "main",
+    "dirty": true
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "plugin_versions": []
+  },
+  "artifact": "audit",
+  "schema": "audit@v1",
+  "inputs": [
+    {
+      "path": ".claude/commands/ack-docs.md",
+      "hash": "338add901514354e545d5cf1147a6debcf9a9bc7999d596f8a0aeabda45c5daa",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/journal.md",
+      "hash": "2969f61d609ce8a0a5add2d220aab42d36f70195abd360fec695b356eb681204",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/knowledge.md",
+      "hash": "cdd7c000b335c2fa873c4b2d46d4dd6733ffd39894f00ca5a215cad362acb5c7",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/memx-help.md",
+      "hash": "f4ae19d45da80d8f6ad25a69fcaa88484c51497e91841dd9bfb8e2299eb37b37",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/read-chunks.md",
+      "hash": "cb07de7b19b34805d591342e1461c017de06fdb30a1f07aea516edf883e87ddb",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/recall.md",
+      "hash": "4ffc89a9bc1f7a1264761060fa70de6cf4902e997eac02be08f2ea626bb8b7be",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/remember.md",
+      "hash": "2cd0a7f7e2a230ee59f62920a93ea623bacd581cceea01906268ac7d9fe934e1",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/resolve-contract.md",
+      "hash": "b85099b9171dfda171e7d918c48f420418af7ad96a6a615313ccf84eea8921e0",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/resolve-docs.md",
+      "hash": "20255027775992a261a6652e7c0c812851d3dbc6b9ed6b53589856f5d19c4b98",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/show.md",
+      "hash": "d7c6841b79b0a4051278dba937ca02f337322b57aa5892da63172a933d3839e9",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/stale-check.md",
+      "hash": "102aab5ce2decce8a619895737259e0613592dae64843616ed1286f30ab85138",
+      "kind": "source"
+    },
+    {
+      "path": ".ctg/policy.yaml",
+      "hash": "56b181fbbdd2fcb343c334e0a29ec332c77e3741857c4d865d836c0fac6b5ef6",
+      "kind": "config"
+    },
+    {
+      "path": ".ctg/suppressions.yaml",
+      "hash": "85906f60aaba91b97bed14ec46ea218b69ea5cc4f23df86ef4eaed39fb275cd7",
+      "kind": "config"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug.yml",
+      "hash": "fe026c12973f74324b75c07f2049f18c3ea2bef1f18294552e1d4eb93f2ce848",
+      "kind": "config"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "hash": "7fa64f6eeaa40a02349b9a801874ed229f55a06dab5368c23c4f1114a922253a",
+      "kind": "source"
+    },
+    {
+      "path": ".github/release-drafter.yml",
+      "hash": "073427ffa10ea9482d510bbb49f7cc79bb395115fbbbf4e882560423399e0525",
+      "kind": "config"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "hash": "4eb45c62cd7add0850a259d0a128548c6587c3c9c054cfcf6181f77734c21523",
+      "kind": "config"
+    },
+    {
+      "path": ".github/workflows/release-drafter.yml",
+      "hash": "7d98bc9d4161aaba80e54752109089acb1212fd6dd65ba53f029f7925443fee5",
+      "kind": "config"
+    },
+    {
+      "path": ".pytest_cache/README.md",
+      "hash": "420e808d79a6c25d3cda0af33bc4782314a14949866682c68ce8149e89b66b70",
+      "kind": "source"
+    },
+    {
+      "path": ".tmp/go-build/trim.txt",
+      "hash": "f80009313bdde7ea95bf74cfb7e9f1a8847ffa04ad8a760c22902ab4334a9099",
+      "kind": "source"
+    },
+    {
+      "path": "artifacts/ops/incident-summary.schema.json",
+      "hash": "e62cd24af8d1b0754b2bf84c31186cde979e53361eb11cf3e159127f10f7bf85",
+      "kind": "source"
+    },
+    {
+      "path": "artifacts/perf/formal_bench.py",
+      "hash": "c42f55ee2ec670ff45063b3e50e556e18484b4c3664d31d471232cbaaa05c95a",
+      "kind": "source"
+    },
+    {
+      "path": "artifacts/perf/perf-result.json",
+      "hash": "8c44adc0081e0f936883c168d8702cd6a31e860bc5abd7332bba5b1a7356f440",
+      "kind": "source"
+    },
+    {
+      "path": "artifacts/perf/seed-result.json",
+      "hash": "4e29cd5c9309a3fc84503c34a8555e1a3f34b23e75570e28e4d113c498c479bc",
+      "kind": "source"
+    },
+    {
+      "path": "artifacts/perf/warmup-result.json",
+      "hash": "723324204ecc805fcee601e35e8fe3b1eb14b29bd08d0449f8e278e1dd2ab632",
+      "kind": "source"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "hash": "2752da38bc9df6c43f1a406f26d410b02d75dd0d35383798236707cf411ab5fe",
+      "kind": "source"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "hash": "ce8cdf2acb42595e525bd52bd3869f401fcb71b681e231744dedca377eae4868",
+      "kind": "source"
+    },
+    {
+      "path": "ctg.config.yaml",
+      "hash": "5a55ce53bb595181a65343a317ffc5531d9213de5a3af284bf92fbb0c010e70c",
+      "kind": "config"
+    },
+    {
+      "path": "datasets/README.md",
+      "hash": "faf3ee3b5607af3cbcb33a7d84e9839bccd4c0bfd66210a9e7bf910f95386048",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/AC-20260701-01.md",
+      "hash": "05b41d7b241a3a3b804d71d25e62441ddcaf7de13b9c33f8e9a8ad06c3bc26b8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/AC-20260702-01.md",
+      "hash": "9043947268b4fafb008389e8034fae94265272734e1bb56f28ff549b74e7d708",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/ACCEPTANCE_TEMPLATE.md",
+      "hash": "e7c97a475638fe1b9804a6b24a2df6b9b2ec43cef949750bf94672f8916fe2da",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/INDEX.md",
+      "hash": "c2ac8812fafd25ec30207ec5702e6d6c4f3b7d1d7e4173f8122fb59d4703f10a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/README.md",
+      "hash": "d4cceee7ec733099d7348b36f8a4c3c91689cec470e49ef49ff6bc609280441b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.design.md.json",
+      "hash": "c29442dd7cb63e8fbd8752d202f42d1c3ea6d9f585390dbf5f4cc6d246cfc148",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.interfaces.md.json",
+      "hash": "64ab9672d6b19234365ec62b3229ece41fce2d8f2a82765b946304dc04601444",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.requirements.md.json",
+      "hash": "2869c6c0ee9258296e9ac011c482c7f6d530649d3d2ec65339d0a9e4e457e05c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/memx_spec_v3.go.json",
+      "hash": "37365f42e8c07518da873016e0888cea63f1318a28d512c39639b344aeacb9c5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/README.md.json",
+      "hash": "1754cc426a2f2c06c9688f05486529901b2a1f4322eaa978849f536c1d35c7f4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/USER_GUIDE.md.json",
+      "hash": "ec656662c766e5b5ada7d4d629e8327d2b1bb882c4ae321b4a978aed5a4cdc56",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/hot.json",
+      "hash": "db26deffc45ed19c41d7c8a85fe4cc268a4348021a1421b3f4152596b1705354",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/index.json",
+      "hash": "ea3bd021b8acf00734feb40aa23fffcfc21d74446ba9409102f2417a1eddcc7c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/BLUEPRINT.md",
+      "hash": "63df066cae38e182eee2f00aafaeb50cc22c78de57d46451a91fcc4dabadc698",
+      "kind": "source"
+    },
+    {
+      "path": "docs/CHECKLISTS.md",
+      "hash": "79200ec752c56ebdd348000f1f7f07a9837f4baa582ba5390ebb809081e973df",
+      "kind": "source"
+    },
+    {
+      "path": "docs/design.md",
+      "hash": "6187d7e9c4cd98e701734144a373d5cc18a53dabd5b59cde2c05d0ca43153a7b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/EVALUATION.md",
+      "hash": "de27fe83f069478e997587862d62daf8c1a0f28c80bb2694a2e2713785fd3285",
+      "kind": "source"
+    },
+    {
+      "path": "docs/GUARDRAILS.md",
+      "hash": "1b21dada0abc9736cc6c296cbe8eb28b018973ccdcc7b28967d558a8577b9f8d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/HUB.codex.md",
+      "hash": "2ebd18f81c3bbf162a3fba803281555d6fc575c70a8534102198847438abdc39",
+      "kind": "source"
+    },
+    {
+      "path": "docs/IMPLEMENTATION-PLAN.md",
+      "hash": "4c1c298548d0398b1f8cf6b1027a10a7fd58a7def93fa14a6a1dc5db805bceac",
+      "kind": "source"
+    },
+    {
+      "path": "docs/interfaces.md",
+      "hash": "93c23ddf6161a4b026a6367d49ed65ea5ec397ce18ae0d709395eeb1ac34c6d9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/CHANGES.md",
+      "hash": "72a991ec0d32aba2ffc66f77d39dd87b0d302ca786915ac7997f72a5e76fb62f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/contracts/cli-json.schema.json",
+      "hash": "792519dc03584a070880a5b8a5c742a3eee02f251a30c39f215a240e6cbff441",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/contracts/openapi.yaml",
+      "hash": "b87f390d3a607415af5ebeb0a32af3a67d1a2ff854c033ccd2aa18cfc4262967",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/contracts/reports/CONTRACT-ALIGN-20260304-001.md",
+      "hash": "2529d71b8fcb05c9997081d918f11915df3bc9882cc76be4371d983f276aac3b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/contracts/reports/LATEST.md",
+      "hash": "e72ed4f78433cb00ea45352620f938779c862b736979c5ac6680589d6aa4df55",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/contracts/reports/README.md",
+      "hash": "7a733c6285724df5e8d1d1ee33787a364f114f3607181ecc8eb8a1afe5d75ff8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/CONTRACTS.md",
+      "hash": "26da2ff7f1ce38826cfcc12bb832ba462109af12a0d703f6c9cc5ee333da9d1b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/design-template.md",
+      "hash": "7635011b7c6da8bc1893770c7e2b4da6d5ae1dbffbb3c733ca981c0dc208027b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/design.md",
+      "hash": "52775df43bffdd947c3475722aa7867fd424b742f638a50bddb4317e65cfb54d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/error-contract.md",
+      "hash": "6b6b5c5b9e8195382e5a128e3e6dd7efaa75ec18a3564c6bfaae017bc89143eb",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/interfaces.md",
+      "hash": "3cf20246c968a1cc975443092509f22400e59da961f1f4dc549cf783279a07a8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/quickstart.md",
+      "hash": "33fe14284067cec46db87eb47da92f22347428fb4987b20f2c25f283c4d16b07",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-api.md",
+      "hash": "5775707c58dd2a7003eed63e2f8a9e946196d63af30d1013f0760393ff903215",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-architecture.md",
+      "hash": "4752c1f3242942a47a6d12aae962b858b2913e2924fd80807e9688a56997b04a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-cli.md",
+      "hash": "2497e6c69e0926e5b5ebd9f7be50b815011a185edfa3aefbe5ff042b8d65a1e2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-data-model.md",
+      "hash": "7bf035afa7e5d4162409758fc4975fb019d12d9c61dc87dec0106b485f0fa9fb",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-incident.md",
+      "hash": "0f0eb8d9790fdbcfa8b2254c782742a543db0d529e9bbf2956d1388a7e9e5283",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-llm.md",
+      "hash": "dfbef52c07226d5b4f1bea6b91ecdb13a73d43502c96a8b68ebd033d68543182",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-nfr.md",
+      "hash": "f69c3fa7195181cf495974eee0cddb818a8b355a86affbc554244e6562ec1ae2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-release.md",
+      "hash": "21b5e05bb92e4c5771350f54e55c215936f7e075f17723de0d39e9b68fc0cd89",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements.md",
+      "hash": "5909d004fa2caace6409d1bd8bd2f29e0192106801072847bbd38e6e5d9278b8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/CONTRACT-ALIGN-20260304.md",
+      "hash": "6dda674c63bfce4805cb6edb37324126c630177efbd4191fb3fddbce9751f13b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-20260304.md",
+      "hash": "2377d195d1691646a08d7badce8f515354f7111b12e2238c274287dd8c4cd1a0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-YYYYMMDD.md",
+      "hash": "e521cbeee97d666d3a5fe88ddba148739e3c987e6fae1d4e0959e1402e680301",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-20260304-002.md",
+      "hash": "97ffe847bfa3dadb2f8f4cc5836fd62ec24f68af2a8553203b6f6dd8f2b29ef0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-20260304-003.md",
+      "hash": "ec88334e017c024b28deab7aed22896850c29365d9e1176be4444d8417d24a4e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-20260304.md",
+      "hash": "f43f15e6e1efd680a6bac0183e442284dd945e56d88b7004cb7f3da8b8b31261",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-GATE-EVIDENCE-INDEX.md",
+      "hash": "e40341504b18e938047b9181f914629c3a2c3fb2f1798b288dfee7fe04f3e8b7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-REVIEW-20260304-001.md",
+      "hash": "c9870f7ce0b616dfc85d70b9ba405ee3c48cfab2bedcc9318a5dc3446bcc0f6a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/GO-LOCK-AUDIT-20260304.md",
+      "hash": "387b649021aeea08e5781dffeaa434ecfc18de146bad6c136c06b60679b962d1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/inventory/DESIGN-SOURCE-INVENTORY-20260304.md",
+      "hash": "58bd9f3ef37aa6776989dde03244248049805be0be2256e4d8a3ea336ef1436c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/README.md",
+      "hash": "bf032d04db2c686ff541347994b16517984ed64c4fc0733b50b6d0db1212a7b0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/TEMPLATE.md",
+      "hash": "09bece02bfef3defd02d02f83ddfbd05d3fb45bd93e726d34fd123c3271e16af",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/spec.md",
+      "hash": "fffef3303022f5a1416ff9091274fd4c572d0c03936b77de29f16b6e4b8707ec",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/contract-alignment-lifecycle-spec.md",
+      "hash": "6a08db2de8ec0ea422f18f7265a14d15890112d5056b8956a37a6cb4aec8264c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/contract-alignment-report-spec.md",
+      "hash": "2038caeaae5a597b7ff3a62f10665c0867971499f80ae711548a25e2a190ff6f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/contract-alignment-spec.md",
+      "hash": "6a96136982af700f87a56848201eb7a12137c19da8be0878ad46999a5c0b26c5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-acceptance-lifecycle-spec.md",
+      "hash": "bfcb4c8cbc00fd2df8759ba9b33797dfdd29a6a6c668f22dae4a85d60a3b45b4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-acceptance-operations-spec.md",
+      "hash": "186ad3fd75e9a636fb411f49061bbb0d58834ae81fc2afc51ebc4ca610c37591",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-acceptance-report-spec.md",
+      "hash": "9b22da9c1b64801aea1fff4314c8f4e587341e6f18f136dd21cdf363b4a73ba3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-chapter-node-mapping-spec.md",
+      "hash": "bc59dca77877c042b696afc7bc753d60eff5273cadf36183a67edc3556b5421e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-chapter-validation-calculation-spec.md",
+      "hash": "9391da22c82e3ea52f0662a5429761d7780608ded26d47e52a7a814ac72e9246",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-chapter-validation-spec.md",
+      "hash": "e41d00e23ffb1c46df2eb39f98a7db520b750e4d607bc48369903b1ab103266a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-deliverables-package-spec.md",
+      "hash": "1d96d397552911b03e7129c0da2dacd4b30352fa1212cf2d66f72a2f4136903f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-doc-dod-spec.md",
+      "hash": "c94ee6122aecf1d2af4f592258035d34d668835b139f0e81a16c4d3f34117fd3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-doc-ia-spec.md",
+      "hash": "4b7a858a4c24865364698dae5eb14358794cb86589571f91536273527091e955",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-entrypoint-navigation-spec.md",
+      "hash": "4a60b08f62cc70f4ac69de5ace3d0f3ec555731b60292898e9b10b1640df564d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-evidence-schema-spec.md",
+      "hash": "d025a4b5875fb41386c930a3b503792fda0bf17416fa69138ab00ae859a7b4c5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-evidence-template-spec.md",
+      "hash": "693459cab9a9f72a3f8118d23107e33f9a6c5ebda2e9edccd091861854f85705",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-gate-evidence-spec.md",
+      "hash": "7be68bc06da12ffb271a07a250329d7504f3bdf2504719e21336b30ee303a5c8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-hub-source-coverage-spec.md",
+      "hash": "65acc78cbfb52fe5486235d7e2a06a7900c19d3e761983c23996fd4cd25f8ba9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-phase-gate-spec.md",
+      "hash": "e3d73fbfeac2f3f27ea9e03b6454d41fa653326ddd1de6904c92e66881b21d93",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-reference-alias-spec.md",
+      "hash": "bea1cd153e3ae14b95337690bba974b37c78b75fd212ba703aa77bbf967be3b0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-reference-conformance-spec.md",
+      "hash": "cb8e15ba67a225a2ed1bef2fe624768eefd50c412c2e85f9cf497971446ebc38",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-reference-resolution-spec.md",
+      "hash": "74aaf884d40660d21497822a0f4b33a9eeb826c4cf3a20fdd9c6e1f5e37e21a4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-reference-validation-automation-spec.md",
+      "hash": "3dbae4a14210c8c605048f8d590863667dd74a4191fbb133b767e84e36d4970e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-review-artifact-sla-spec.md",
+      "hash": "9a706103ef257941daf7a5fe6867932e2acd3a7a9077616cc0fe4d3acc8a2770",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-review-remediation-spec.md",
+      "hash": "bb3128125f7b5ff81f5ba9d8388f98e65d55b2709a35d1627bb16424b5e7e6c9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-review-spec.md",
+      "hash": "d398e405412845c84281a1896c1a784511c4c9191cb25b876dd7977adbe697fa",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-source-inventory-operations-spec.md",
+      "hash": "ea39eab8b0f3e7a4dba77c621d5ac0597de0d43eb4c7ba825079698089850428",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-source-inventory-spec.md",
+      "hash": "6e12d222d70f25aae71f74760c89afa954f2aaeb05906e31ab9b7699bd311d4b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-update-trigger-spec.md",
+      "hash": "051b3d1c367f42895add98b5ebe0bb121b22b62dce89e71ae32873cbd9e54ae4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/hub-source-coverage-operations-spec.md",
+      "hash": "7240f7693999a8b5a9f162b89199a544bdfacc9d1edd918329f61f9b729b3caa",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/incident-to-task-traceability-spec.md",
+      "hash": "2e4d059588724eda3ef1cf971044f5120bf44cc6e1240a9e42dbef96d7890d9a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/link-integrity-spec.md",
+      "hash": "ab0e0d219258baa14bd2039ad0e794d94202eb3c445c865d44a0f4827dd03d6b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/operations-spec.md",
+      "hash": "1cfa2001137eecfa5816a1fe01b78500350179f05e48e01eb634c82a6a4c7c4f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/req-id-lifecycle-spec.md",
+      "hash": "4b123cafbb166cde646008a2e12ae900d2b657ffae8ec8818fd24009c9f1c36c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/requirements-authoring-structure-spec.md",
+      "hash": "c9c5448031bf4bd53a0749d95deb975f100588913580a4da15744ca1db6a837f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/requirements-coverage-spec.md",
+      "hash": "8195e548b81d888ae59accc7206bbfc88f1cef356bf52335276acab4a02bcb6f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/requirements-structure-spec.md",
+      "hash": "0cdfcea866d475feeb0bb1862842c027cb0dc0a8ef5c65609cb24c437f0a5ab0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/traceability.md",
+      "hash": "46f35eacb495d538514e00280d6ac5f55317da5f992744ee19f6d6fa7876c5ad",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/client.go",
+      "hash": "6e01dc70b3e96232fdfe377e2dd094fcaf99eb8cc0a4320b338439a16a70f18a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/compatibility_test.go",
+      "hash": "bc3e46efbc70dffce13be7aa8f9272a7aa1d9e6c486886c5b4f7d7aa05478fd8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/errors.go",
+      "hash": "968e3b85e4b0f6f3df9976713da50b462c161a8ae7fa38ada85b4ee57f0ee437",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/errors_test.go",
+      "hash": "73fcef18ee0e3b9504b81a58f3b4f5ac8d784fb02125cd8f1eae1f55cef72834",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/http_client.go",
+      "hash": "4badd3f7f94a9118281111ff507b194e3f3c8294ddc4aea7626e0e2e4b886289",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/http_server.go",
+      "hash": "72f7405711732c1a3a172562bdfbc47525769775cf92a03b55788472797c92cd",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/http_server_test.go",
+      "hash": "e84bf4de3557237544fd797ebb32ee1aac01e7d8e69987d431ca6ced1b9f90e4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/inproc_client.go",
+      "hash": "11d662c7e83ee3f684d20dd0c145d7b1de3c08bbe3ef6dc486cdeb68c9f42057",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver.go",
+      "hash": "49b16f78764d6fc784537097cc8eb4810ee640d48b3ff6c6a0d95960aca69b1c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_docs_http_client.go",
+      "hash": "63a8a41a75c31dcd49ba1f187d607959fb293b566e50019dd4d93d26f8dc1177",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_docs_http_server.go",
+      "hash": "3509c14ae5427ac6a33c9a66198f2f8a4a10d726ec1ea1cc9c167749d909ec12",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_docs_http_test.go",
+      "hash": "f4a600f68b4ee87bb0e5399430b557b98e3a249cc658178d4fce45723042f535",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_docs_inproc.go",
+      "hash": "e10d7b4c194723c1e34091e539f9f77f511a8bcab2c719086afc600e1e8b7da7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_docs_types.go",
+      "hash": "3f6e7b70894ca100dd1c477775f6b92d65821e4e5386d646896f0ed7ec05b188",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_multi.go",
+      "hash": "ef01ccb4f2cb12ebeb7a0cfd865a55dfda3d4bfbfa84200d55061a64e9797878",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_multi_test.go",
+      "hash": "3a0267ee589974f6eb8596820aed9ea0817082b405743fc45a0eb7a1e81e3687",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_test.go",
+      "hash": "a5b52871a235a5097d2e9b05e205f84a49d93ee94739706e8c906c221db14e61",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/typed_ref.go",
+      "hash": "0feff7145d1e5e09b618bedc1d27509b9cfc41130b5021438c899e108e38428a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/typed_ref_test.go",
+      "hash": "cddaba96d0e6db79d28b7bc9c93230cdbb579bfa50d56dfeee4175ac812461f6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/types.go",
+      "hash": "883c1ce72ebc76095d552293762ac6fd221047e77e763a4a03eafc4a9ae03f4f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_api.go",
+      "hash": "46f1f9749e8b3a119f3e9f603c91baa13959a34fea2c76f2b154ab91b6a00c30",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_archive.go",
+      "hash": "5b4e89be90be7a34d151fb4d5b14d76b8c83ceb3d796f018a15beff593c72148",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_common.go",
+      "hash": "d5c69b51c68b512567b729768de404a5a1d4815ca8e84790f74d4b6de34ff91d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_docs.go",
+      "hash": "2dcc38f3eaea6641284a6001f44dac9af36b1c959a8d8566aa5899f9fdb49e4a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_gc.go",
+      "hash": "57d5a5c82b0ae6797cdb423b885b60873c8f8c35770d99b864d7fbf5cae98188",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_in.go",
+      "hash": "3e98e4d9d37980bb14ec8ead03865dc9ce7a20b9d1563c7a482dae03795b2d40",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_journal.go",
+      "hash": "a2cb4c0e424f1829bf6d8ea1ce7534af0a3874738eb2e730915552fb3c2cca5d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_knowledge.go",
+      "hash": "5253f87cde23820e2a5b6ee5a702f29a7eb9f5209aff7ea1909522f0c9bb4164",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_out.go",
+      "hash": "40c5415014d23fd1768e4f3744103c76bdb57fab6dd62ababb8c67448af2c8d0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_recall.go",
+      "hash": "6a73d681ced649a96db2e232a3acb2eecaac62a94f158ba4e83802b3feefe186",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_summarize.go",
+      "hash": "a639280b4ed255d6cfda5b301e840b20983cb214964c395de4ebc09499d10121",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/main.go",
+      "hash": "7189136555b049b9f7e89b986062aa7434bb14959c00567284b2d501d58948af",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/main_test.go",
+      "hash": "13ebd5cded5affb4dc6e92516540bb6f26275236ece43788d38d47517df9082a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/store_resolution.go",
+      "hash": "04beeafa80bd0df13be0572dabd362a0dda1b8f2706fb960694d542af7e6b5fe",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/gatekeeper.go",
+      "hash": "02b3d77b32860b6d237f470fbef147f841079e723708adb8117848f9914b8741",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/gatekeeper_impl.go",
+      "hash": "8efc464a0cd5c63784a7c814b3cde3a7c851f2a08d35b20be4755b7bac0f828a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/gatekeeper_impl_test.go",
+      "hash": "f7c2c475558e12909fb518234d8b744ac017b086eaa51f4dd9b5861fca01a927",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/gc.go",
+      "hash": "4d4c18d34ebc688685c9b792a2398ef61209b21c1afdf990b41f8d2f2c42c6a0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/llm_client.go",
+      "hash": "ec1b476e5cc7777fb30373ca441170703ec70a3a886f673eedb94a82335dcdbf",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/migrate_other.go",
+      "hash": "6434a1c07e63966093cf9764130bb180f3169d5ea31c6702e7bed55e2fbb1e13",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/migrate_other_test.go",
+      "hash": "65452f4c7bf7dae1bd231f0722224276e757f856c0815d2d0ec3871565458c49",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/migrate_resolver.go",
+      "hash": "3aa922fb4ac139e3c378a0cb372d3f2b6f7281cc163a5bc6d5f219413a9d6f19",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/migrate_short.go",
+      "hash": "24248d16601003ee9370488c9ad94f086684b2cd2f6cbd93d66f7f57e521d4d3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/open.go",
+      "hash": "8ebc6b6e7470384e8fb7ac46838331b85683353d4e3367dd72eb2de16aa0cb2f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/openai_client.go",
+      "hash": "5f2bd1650aafaed035db89773410d989a5cc4725cbecec83a4eab4e1dd0a03c3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/openai_client_test.go",
+      "hash": "3a159493b5bd055ff2e0cfcc44ea9287d671f20d0143b6af7d7f144d43e4de6e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/recall.go",
+      "hash": "c24774b136a69bc3f34c8a025458d0e5f9667672d9ddd47e31956f0090a729c2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/recall_test.go",
+      "hash": "741466fcea2136e691af4c2c169f15028e4594868de2f73475e29d9bff39f21e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/types.go",
+      "hash": "0de7fa8445049ad22a7a0759ea0b12a46a1c3ed648a32dd5ddbe90a00649fed1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/recovery/recovery.go",
+      "hash": "932c2b7f9986a7c59391cd5a3af40cdecbce3ad3f0a9349fb7462be9410f36bf",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/recovery/recovery_test.go",
+      "hash": "d07ada9259b7cae9b97118de0c5087dab6b3fe4019c2a98f7f52a6bca539364f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/errors.go",
+      "hash": "61e49f8d1423c8c53f3df563fd73b0aeec74b0aacab8fbe54d281b3e9e94e20f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/gc.go",
+      "hash": "55a244452deb75a341b6d9afb91b371b0a403b38a0ae7dc7fd31d48de6d29b80",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/gc_test.go",
+      "hash": "9867ca305302ff318c7b80de65f64440a9a2193835f9df741cfddf360a9f729e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/llm_config.go",
+      "hash": "5a57aeebe383b8c76b3343ea8182907ca88fec8ec175661cffc3390d2941a7c0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/logger.go",
+      "hash": "22bc498c70046e82012fe2c78e752bf4ba852c9bde8d0e5e919f78792e6f093a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/logger_test.go",
+      "hash": "8774c3a66d85548c16012ab4f0371f02f1bbfc8f2f98820e6c0492a772c34bb5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/models.go",
+      "hash": "6b94e20f9ed455f43111a2f2319cc997855772e04e79e9defcecf3616ba2b01a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/recall_test.go",
+      "hash": "7fa7cbef1946b7ca4db271027bea69b8ef9fba68ef53dd3964ccb575be241222",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver.go",
+      "hash": "03f472f9bd9e9a93e61d97f04f61bca0f4ad4bb30acb917c9f9102845e162f2a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs.go",
+      "hash": "50d447b31b7f756e2377604873e89c7a889e8e41331b28cd2209a63a1a8b90e3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_chunking.go",
+      "hash": "dfc91da2d416b03395b47c3ba8a0085388670a2b861ca20c861b426f653d7d32",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_parsing.go",
+      "hash": "ebe31f18e13769ea7074d234b7c7c89ba93d9369ad45603c16de5d1f4be1785b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_scoring.go",
+      "hash": "5208c97c0481d0fc36906b7242cb8c4eaf201f876bbf2f2d742bc13900af4690",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_test.go",
+      "hash": "258d69ca335557e9280164a70ecd65dd82a9a2f8aed59c47b463286348af417a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_types.go",
+      "hash": "b500b139cbb7f0f8ac643e58f3f1b122e56d86d780f493858ad3e9424458c9a2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_utils.go",
+      "hash": "86773edb0762a8d3765f6a84cb33c4874233b87d64c547ecdb59e63089f6f8b3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_memory_cards.go",
+      "hash": "2ee87be50b6ae950ecfc8ddd217b33442e5c641538847a8de0d21f880756358f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/search_fallback.go",
+      "hash": "4b893bfb2611dfd6353e08dd5fd9d26616570a89ffb418b84140f1758f5565c1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/service.go",
+      "hash": "8fbc077c2447d5ea241b5653c6cb21595ad048af0a9ac2a2757f63be5896a0c9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/service_test.go",
+      "hash": "425be274b5128c7a4630251a97fa4066cc57d1d1f3f4a8190e731953313156d3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_archive.go",
+      "hash": "0c0d7f19c07c506d028a43ef051fdf2398b8f829ad5e08cee8bef24a075516e0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_archive_test.go",
+      "hash": "b696f239f720f23d125fe9c842ebcc8ac8b111e8dbbe899de67c12cdb24cb2f7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_journal.go",
+      "hash": "cfa1367d3534c0ff67d123ce32340bac94e1a86b8bfc8cc3ff87f9490e6cfaef",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_journal_test.go",
+      "hash": "7162813f56c22f4f4c029b837702b38584cdd42648e2bda4d25880a7e8020717",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_knowledge.go",
+      "hash": "9b2c74b89b6392d3e89d39555f3c65a361ef82185118f7252dd9d8f4b996b636",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_knowledge_test.go",
+      "hash": "4fc997d5ff60bc26cc38af5c0aed0eca99d6c30f435638863da32ae399471dd9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/memory_policy.yaml",
+      "hash": "a7d0b4c0f03cb09df76fb19730c18fecb5346c0fbbd37157b35cea5527268f99",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/README.md",
+      "hash": "4e2d08f2ba4b00db2a995a6d87f99f85c7f5ec5d47f274683b8743ccb7ad6513",
+      "kind": "source"
+    },
+    {
+      "path": "docs/requirements.md",
+      "hash": "469191c137fb50d8d1f4852f256b6dc5a3ceb70092795c938468852509e61b09",
+      "kind": "source"
+    },
+    {
+      "path": "docs/RUNBOOK.md",
+      "hash": "6816b356ea8898f392c94647b6bc9281b7e6d7e03623833b650ac807a578571c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/TASKS.md",
+      "hash": "2ad83aac36ceda464efdf266e15233db67a75ec1d2181407591cd41501b46a60",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/addenda/A_Glossary.md",
+      "hash": "5ca52cef82cf98df08a469a70946c236df499ac13d1c8a30d579915eaea44e97",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/addenda/D_Context_Trimming.md",
+      "hash": "44a7fdc05be6646a50ba4ec6c353fe1ee13b3a86c3b6816edf6ba09582305e20",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/addenda/G_Security_Privacy.md",
+      "hash": "7224e2f7249ea483b16cd4b4265e8337a2375651b95cde1f87dfb26f9faa78ec",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/ADR/ADR-0001-4db-boundary.md",
+      "hash": "d1bfe69eeea6eec9097652a3c2ee3bb54da6d5b9c5e3dd049ceda38f5ba6fc6b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/ADR/ADR-0002-v1-required-endpoints.md",
+      "hash": "fa6a4df106e1532803e6203517567196fd50413dce6a228735e5a02034892fab",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/ADR/ADR-0003-errorcode-retryable-boundary.md",
+      "hash": "691facb03335ff875224b701602463b6b4cffeed9dfcd2d5104333de48c1e61a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/ADR/README.md",
+      "hash": "6680ee2f0f5dfeca3a71a3f1878e4b456ba7322d600aa3a9b0b183c7616199ea",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/api.json",
+      "hash": "d8cbb176f10ec6d627550b5064d8fba6f4e87e73fe07841cf89c4ee999b734a4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/CHECKLISTS.md.json",
+      "hash": "a5448704b4bdce528420691245d1761a5f8a70b6421bb12b9a52798102235eba",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/design.json",
+      "hash": "587f9293b743fbb2261048a9ddb81daf35c41be15e9686ed57f689ca32556b59",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/EVALUATION.md.json",
+      "hash": "9493a6eb6af8fdec7d5cb44514101aa2a90000ebfd25a84382925108a32bed3b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/governance.policy.yaml.json",
+      "hash": "df879b264e70d4b193211f2efd340e19c57ff74530051a47eda8900f97928675",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/governance.prioritization.yaml.json",
+      "hash": "40ba2394d1680e8fb15a04d3d5dfee0b3d4f2f097df1408e997e10f27cf81085",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/GUARDRAILS.md.json",
+      "hash": "49f4e0eef5300dee287ee9c0c5c4dd1197a93a1006a80c518d6c74057177ce66",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/memx_spec_v3__docs__interfaces.md.json",
+      "hash": "b8048cb52043e18d9458be4a41095decec4434a7eda959f927ea187fa3c13f5e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/memx_spec_v3__docs__quickstart.md.json",
+      "hash": "e658bfb903f48352efa587fd3016e2ba99d0f5378e75b7f0a607dda125c31216",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/memx_spec_v3__docs__requirements.md.json",
+      "hash": "76e209ee628e7502327dc9f065908422d218ca47b22ae3d41eeb9d1a09b94967",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/memx_spec_v3__go__api__http_server.go.json",
+      "hash": "a6700d9655b78a323733f24c3a194aa4e43141f8e253e3ecc023eaf4465b039f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/memx_spec_v3__go__service__service.go.json",
+      "hash": "311b6689d65b5a4541c321e40aa2a4a60bbd516cc84e0bd7a38e76542f7b9c78",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/quickstart.json",
+      "hash": "7f691c52848972a96423b26715a0cd09c7bc9efc54a012b3d0487ea934471a4e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/requirements.json",
+      "hash": "ebe74a8c36d0fe3c0180169094086a1088b0ffca05f6b759449a9bb03f856e6f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/RUNBOOK.md.json",
+      "hash": "e67f873a342520d625034b2bb4f319bf60376cb7eab6def9dabc6fbd975396da",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/service.json",
+      "hash": "a8ac12ed3ce41e625f815b38ba7ad3c9155f4e9de0be2e938b83aaebcf3e3057",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/hot.json",
+      "hash": "d20cb704a592d1af9133588dc23fc6d067cee4750ace739267fc2e1cc2ba5290",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/index.json",
+      "hash": "c8dc85a2bd40ab0bdf5fe9912fae4ef43d57effacec26eb3ce52a546006faa86",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/memx-birdseye-validation-spec.md",
+      "hash": "91178fb3602142492f5d013a0d54a12f5ddd001560a701de2cc86542e335d962",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/README.md",
+      "hash": "6d86cde6b5682d7625ec733ae9e9f69f59d245034aec3a5a043ff695a1b68d76",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/BLUEPRINT.md",
+      "hash": "7417f124d472b020d240796d3cce4841eccf69ed1e96622f38879cc1358ae1fe",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/CHECKLISTS.md",
+      "hash": "aebf7f23f20ab147e30c30bf84a02a1b1147304e5b9c65ef3f74f2b94cf211c7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/design-docs-prioritization-spec.md",
+      "hash": "9a31810d47cd2ca88c7d7d3a08884b4e9fa0dc4f72d73bcd44b5d2c141f40231",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/EVALUATION.md",
+      "hash": "61176a863d85ce2e66c9de859a9fb49aa5274b49945240b5228132d317cba016",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/GUARDRAILS.md",
+      "hash": "34b951c5c52db4faa164d60c6119cd26213a52cceab20dbd370deb4790e604eb",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/HUB.codex.md",
+      "hash": "00069fc6da14a78a9bf2bdba05d2ef51b840968a00d24780b0eddedb8fde4372",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/IN-20260303-002.md",
+      "hash": "1137db76fffe99eb4e1becc60c9f3734843a97d070aeac0aedbc81c07c1b5275",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/IN-BASELINE.md",
+      "hash": "78aa6a5647dc55a508d51531e1a713e75bf39ae6fec5d411736097dbfbcea0bf",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/IN-YYYYMMDD-001.md",
+      "hash": "e440d648fdbe62a8fb8410f509d857c8d9791e96c8e4b2b6ea81b9bffe322cbc",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/incident-record-operations-spec.md",
+      "hash": "16144a054e6a8b689b620e5a5f33b17cd29239c10a0b2b30f7ab04eb6fdb14a1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/INCIDENT_TEMPLATE.md",
+      "hash": "6e35f59bce23fefed50b3cbbcee4ec15c6786eeae7c4ea33891229160c0c506e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/01-typed-ref-unification.md",
+      "hash": "48047d9f288fa3fc514c593f95b66518bf6e8224276cfb27c95a7ced1dbfa863",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/02-agent-taskstate-state-history-and-bundle-audit.md",
+      "hash": "0fe65d09a05300db45285c7998f0133e1f6e1f8ce5ff95cda74fd9f79f1a61ab",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/03-agent-taskstate-memx-context-rebuild-resolver.md",
+      "hash": "629261985e6972c341ef6ab1eef8a928be2e90e1a35f85eb443bed6f2ce53df1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/04-tracker-bridge-minimum-integration.md",
+      "hash": "7031f651722f93da579ac97a7958d0940f60d7e84d3d9a88679dfe52eac5d809",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/kv-cache-independence-amendments.md",
+      "hash": "61020993ffed3a34657e6bd76025b15fd43e913888249b8b26347128ae71af20",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/プライオリティ.md",
+      "hash": "b0d00772bcd199c238d76b0aeb6b6de1d2640c36e8a9d59a74054d5a3868ccc4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/memx-core/interfaces.md",
+      "hash": "21031c1816ba335822608f6b19e810eda143081d6ba34b01a251534f43beb0ab",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/memx-core/memx-core-requirements.md",
+      "hash": "802ce43be8407457fdae88db2eecfded05e56861ac26c9f30a53713245348524",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/memx-core/scope.md",
+      "hash": "e66ec7a654c151fb2ccdb8fc603f2e3483d04ba06494ba64a290f5c923c4e1c3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/memx_specification_analysis.md",
+      "hash": "8ceaa212401b47322f2242fdaae78c0a806ff6abde91c9c6aabdaf9ff04e0360",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/orchestration/memx-design-docs-authoring.md",
+      "hash": "5ef16447bc09d91e3d9990446679e4dcd11224cca59b0d4f91b873065fc2deae",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/orchestration/memx-v1-bootstrap.md",
+      "hash": "d1e857d7ed0c8f3368dc6f0d77fbdef59d9bb32e1a79b1318152bb8494ef1039",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/QUALITY_GATES.md",
+      "hash": "67f8c48131543fc2bfea4698e956ed113e602dedddb05bd17f9759ab8877e423",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/RUNBOOK.md",
+      "hash": "8c494dc3ee27b8f0fccbe11c0728cb30b679ff6c802ec721fa4fe9a0c0655cc1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/security/minimal_operations.md",
+      "hash": "4a320aa86cc09aaa6950c3648e26557989c9ebd092b45f016dc72145437d2fb6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.chapter-validation-03-04-2026.md",
+      "hash": "2705a3f02d1319e88eb5b9ca7a85f0aec0467152ad5be7cff096ba3248da7e25",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.gc-trigger-dryrun-03-03-2026.md",
+      "hash": "bf13683f538badc99a051f640523973db13f415f918103ff7080f7580fd04ead",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.memx-bootstrap-03-03-2026.md",
+      "hash": "26ecf612425128fb0e53fb19c9dcd3c305383b4670cc23a9c0e1d6656317f611",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.migrate-other-ddl-order-03-03-2026.md",
+      "hash": "fa8f34686d7a11536bb729a360c462abacbb79595110590f5468bf88896adb86",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.phase3-4-artifacts-03-04-2026.md",
+      "hash": "269893e81ddfba855834c0e94607c08c9d0b578765af81858aff43375ea6a492",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.reassess-design-docs-priority-03-03-2026.md",
+      "hash": "5c525f941446d700b9b3dd41b045983f4644ce5900a91612c1c0098e77824698",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.recall-query-normalization-03-03-2026.md",
+      "hash": "3da8b8bde87ef43cc5f8c1352c61fb26c395f5a2acf0174bcea41506263ce2a8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.replace-incident-placeholder-ids-03-03-2026.md",
+      "hash": "6464ce173d7ed8510e8f24d87a3ad01fa01ce5bf328812c26d9f8ce230a68380",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/TASKS.md",
+      "hash": "c59a5d87b046b5c2525a3fc4afcd5df9fbcc9b2f2c06a1497c3e164e3e2571bd",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/UPSTREAM.md",
+      "hash": "5d0ea4c81ecd70312ec5c8187fbae2eef60b6d1aa570e1a23c04de788f244eda",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/UPSTREAM_WEEKLY_LOG.md",
+      "hash": "feeecf0911c331e8db4509672e7d3140aacc72b82816f54607e35b742d534971",
+      "kind": "source"
+    },
+    {
+      "path": "governance/metrics.yaml",
+      "hash": "e1a91822088a997ee3af63b0d38d1b2f38c1ab538aec4497dde0e04113930508",
+      "kind": "config"
+    },
+    {
+      "path": "governance/policy.yaml",
+      "hash": "3e9283a60174db384b3de8debddb6c0184fea4209b489ebb6c0a069a6f8d9d49",
+      "kind": "config"
+    },
+    {
+      "path": "governance/prioritization.yaml",
+      "hash": "63debe7c3899d5cb48faf5dee77e5853518472469255769912966ff2cb0a0686",
+      "kind": "config"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/markdown.py",
+      "hash": "6993f0c8de297103e79afeb5a4640c9f3ed9014f89d0f187f0df33ef5defdec3",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/plugin.py",
+      "hash": "e0cb7884abd1e8a931745c98fe71665f026b7e67b542e21bc1df51cb7fc410ef",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/policy.py",
+      "hash": "e02c7a2424e3f060ab7a626d6851e6c0629e8defceb8b3fae11b48a4d6d1717a",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/results.py",
+      "hash": "36b55a58a05c97f3255001f1a96bf57ca92749b3f28e1c96a21637662cc84f9b",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/store.py",
+      "hash": "46965208e89858d0e1fe0c79f38b172c8c850c834d1b7b3d8096252e3c5d93d0",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/typed_ref.py",
+      "hash": "ad0b751ab22395e5f1edc23123dfb088bc0af745ea53de10eb1badf2aea33b5d",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/__init__.py",
+      "hash": "b776dca142330a47e396ea148bca81467795c698001097f90ae9573e72aec7e1",
+      "kind": "source"
+    },
+    {
+      "path": "README.md",
+      "hash": "207af8e0b7a7fb8225a52ab3e2e6c13695a99959b6f4f77923c69ba81e9fa642",
+      "kind": "source"
+    },
+    {
+      "path": "SECURITY.md",
+      "hash": "49b2c4c565c43f55c91eeccfaf2ec6313b34fbb01341c5e5cb6776a7a6064f1c",
+      "kind": "source"
+    },
+    {
+      "path": "tests/test_cli_schema_contract.py",
+      "hash": "4d90b507377bd6ff067b22d837fb9b0bc9a69de09fb4dc0bea2918f93cfd02f3",
+      "kind": "source"
+    },
+    {
+      "path": "tests/test_typed_ref.py",
+      "hash": "7df76f8356c508c883d5c1cd74c1b1cec6d4cbf24b3f75cf3e5ee14db995ceca",
+      "kind": "source"
+    },
+    {
+      "path": "tests/test_workflow_plugin.py",
+      "hash": "6e97c6de0756308df0935c9ad5331b5aef5194261092e92cf0346ca6f9d08229",
+      "kind": "source"
+    },
+    {
+      "path": "USER_GUIDE.md",
+      "hash": "2ac6b60d48673bb70afe613d40b28565c7a58f9193d4202fa5ada9f042b8cc35",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/BLUEPRINT.md",
+      "hash": "e0d44b5b8e6d7c249c608885ae39d9c7ec7341b5a34abc34deb35e4068bc48a0",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/CHANGELOG.md",
+      "hash": "5d7cc2d245fe818ab838f0c73a790f1546fba1e6d76573c16495bfdd4c2c82b2",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/CHECKLISTS.md",
+      "hash": "e818d580e10d04517ab89169eccc34078e856a52971700744556b359583ef6b6",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/CODE_OF_CONDUCT.md",
+      "hash": "8e77e5923d0a5755ff03e0321afb8443daa5ae04b0c10a253dc78e0064937786",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/datasets/README.md",
+      "hash": "2839171e8ee2f56d7cc048839c655564ff7f6c8e7a172f71c6710a19c7dee5ec",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/addenda/A_Glossary.md",
+      "hash": "193e26c0afc8270dd548cc434a15800331f4730f734665818ffb78055a5bc15d",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/addenda/D_Context_Trimming.md",
+      "hash": "64c118c64ff559d2ea91df027e3b194985576d61a9bb74d82abe3131e76c3683",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/addenda/G_Security_Privacy.md",
+      "hash": "c38fd99cbe9ab8cbb8d789e57df0bab8d7d664725d312dd66cf339b298e847a2",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/addenda/I_Test_Cases.md",
+      "hash": "96078cb1488fbb444886569b011976fc543360309804242c420f8712b1be8b51",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/addenda/M_Versioning_Release.md",
+      "hash": "875d9ea04731afc1a9bf2b46a08db09e48522e7a3e1c8de7616c83ed308984be",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/ADR/ADR-021-metrics-observability.md",
+      "hash": "ff86b661d1f401d6109b33a90d416cab277ef5599e66dbc343c7dee0b789f516",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/ADR/README.md",
+      "hash": "05ea37e04b4335381fd35140630c2a67b2df467c7256dd6372bb5574d29c18ee",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/AUTOSAVE-DESIGN-IMPL.md",
+      "hash": "dda51ac0aadeafd52c3cc5d3a387077a10a98547127e83b406bca9cce2651d3a",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/BLUEPRINT.md.json",
+      "hash": "fc98a008cf65ff71433c3a74c636e889be32b194bf7bcb6246ea4cbcb3a79692",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/CHANGELOG.md.json",
+      "hash": "32ee0aae59739eeabda7477646b8a7a381b970e78c2c9d3c2b954fe5c23e0870",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/CHECKLISTS.md.json",
+      "hash": "fdccfc9ba59841472b0f3c8d91be1e89a3268712912d2107ba6978870a272512",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/docs.AUTOSAVE-DESIGN-IMPL.md.json",
+      "hash": "3279ba35a537a055d76d68effcbc8a61e96ff491c510c397535b20e429aa25bc",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/docs.birdseye.caps.json",
+      "hash": "f191b208559881cad408ce660d5ebc1ef6d6cad24bcc5362fdc43f4b91b02418",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/docs.birdseye.hot.json.json",
+      "hash": "3fee0c5fd282e4e00b907e5cb2ac62340abc2e2bc3f262cfee101e4b0d45f43c",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/docs.birdseye.index.json.json",
+      "hash": "639e9aac8cba5091cebd1744db9a42e3e8b97e1afd49bb8d908a54b18a3afbd3",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/docs.BIRDSEYE.md.json",
+      "hash": "fd27eebeb86f6836354c96fbd353b88acf45d451141e6cd67071b327d0429211",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/docs.IMPLEMENTATION-PLAN.md.json",
+      "hash": "62be072d9dab3d739ab70cc022f4c72c7f7b0683e215146c163544d65c586aef",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/docs.IN-20250115-001.md.json",
+      "hash": "ec1f08ab6a29ca0a61544c424b46b551f6fd41d8d2e6bd33fbccf06451c8122b",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/docs.INCIDENT_TEMPLATE.md.json",
+      "hash": "494a1430d8ddad9d98f65302d9a57b94a21203498b6774fbe747f2df40513b0b",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/docs.MERGE-DESIGN-IMPL.md.json",
+      "hash": "ce7b61208e7a2b0dadc8ad1ddb4923d00fd13fe990938b4861a975282e0c6320",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/docs.tasks.task-autosave-project-locks.md.json",
+      "hash": "2492efb91504c561f1fe4e195fc98ff378a388370f75e6fd043d93a65b2e8687",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/EVALUATION.md.json",
+      "hash": "4acb2186c76300dc05f9b6f8711e3e67828d0675e7c75ae099285ea3ee3ccd9e",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/governance.policy.yaml.json",
+      "hash": "9e4f82952eb57b81ddf5ce4b59aa2ebd164e0c90447407a62f0be8f5c800c238",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/governance.prioritization.yaml.json",
+      "hash": "22a2dc0a4f3f4fceaa6c06737340fee97958bee79daa75ca5f1ce4a79f288161",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/GUARDRAILS.md.json",
+      "hash": "095cd7a8d5d8edc05853cb34287a42508cbb43acaecdb69fa73676924c501ef1",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/HUB.codex.md.json",
+      "hash": "7c5c53f16796d2fb743e39a1d2ee9fcef8b73514d5c524ef82fb90f5bfecedbe",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/README.md.json",
+      "hash": "77d720a03187f9cee58755ebd4f722947a6238ac509a9bf2263eaf45b95b8cd0",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/RUNBOOK.md.json",
+      "hash": "da4a8a3694882594599b26e1a5af4f414cbfda50b0af6378aca66904725776b2",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/SECURITY.md.json",
+      "hash": "f8cafcdff971f369db192dbbc3a9c65039a040833b7a58ce9ae034f747bff17d",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/TASK.codex.md.json",
+      "hash": "e22203aa91cf19e5b534892af42f92b6c0c8fa0124000a9a0fc68e8965fa3a33",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/tools.codemap.json",
+      "hash": "9e2167bd1f2b81cd9ed4643af946b39493a2709bd8b4ad9f7bf281d999ecdc89",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/tools.codemap.README.md.json",
+      "hash": "80d8acb5aee41d0830eb8a60f2dc09314c06cc81159dc46c184498df45d18fbd",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/caps/tools.codemap.update.py.json",
+      "hash": "5c64baaece0883e484bf60cca1ac9b3aa0f18a801caaf7d3c3d3a555682a28dd",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/hot.json",
+      "hash": "5568f56dd8c4e44bbb9d106dedc1d0c94ab20b0821315b4241dca744e3a6eac9",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/index.json",
+      "hash": "412d15358f697ecf1e52639a65f0b59540bca0c04fec9f9f6e63b3fbe0f17285",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/birdseye/README.md",
+      "hash": "3f5f87950ee5ae584c0ae269a4d1612261d3239abe4502fb3090830f30f6cbd8",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/BIRDSEYE.md",
+      "hash": "b0065a772b6f9576e5e97cf269fa486d9c03c0429e7eb0145424ebaabff1ca51",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/ci-config.md",
+      "hash": "1b1f3be13a8e70d42815ffc98178b59c4bff7f236705a92a797bd0b31a3ec914",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/ci_phased_rollout_requirements.md",
+      "hash": "41e2290b4493fe62baf418c6f8f60fc4559bfa94547b269be4c300a51c17a6cc",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/CONTRACTS.md",
+      "hash": "451e515daa5871a6daec4aab373e280f3c03a8b5868d95c81ad89981c524afc2",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/design.md",
+      "hash": "d5f668cf81d7c20f910c9de3c2c1586b5b55a562c9d59ba47923f2d018087494",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/design.template.md",
+      "hash": "59314050e9e7ca90952d7590f3a470557fda7862a6f639ae3f7db03cc8d18c32",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/FORK_NOTES.md",
+      "hash": "f59cf0d8ba46a1fe7d2a39c560b6cc2571e9e7324baf9c40c07cb2c1658133b1",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/IMPLEMENTATION-PLAN.md",
+      "hash": "8021b4d14bca7a213fe62ef3f11387cc6e189fa9bfc0450fd4cad01d6e395ac0",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/IN-20250115-001.md",
+      "hash": "823f4af336faeac786f2dc0b34b6be2e8644d0483311b6a738e8c19f05f6b392",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/INCIDENT_TEMPLATE.md",
+      "hash": "c2da1ebec5b8b2985e6a384c83ddcfb668827d41a3e5db0f80ce9f91e5d01f3d",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/interfaces.md",
+      "hash": "d0f830d115f03e1527da4a3d7dc368352826b5184d09505693c51907c2b65823",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/MERGE-DESIGN-IMPL.md",
+      "hash": "e8513587207bf75196d5340e87ea4e8a06cc81049eff1f7839847a3700d925dd",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/POLICY.md",
+      "hash": "6a69cd356e49311a587de5fb6e62e4c7a80cf868066b9233dee24bb4a5080011",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/qa/contract_align_report.md",
+      "hash": "dd6c6211de0d084955fa91388c3d78789b88af9942ed8723eb54289f98a4a3f8",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/qa/dependency_lock_audit.md",
+      "hash": "097eb17d3a20f92b09c9ceb5ed32a58be59f4079ed2de7cc1b3262aee86021e0",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/qa/design_acceptance.md",
+      "hash": "75e931f6e34aef5927857694013e0416e3fcaba05e9a4a7a31b9f251097b2b55",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/qa/mapping_match_check.md",
+      "hash": "d4b31f5f59b399246cd3c57de9e212869130af3ea48ee4641cdb70acc16ada4d",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/qa/mapping_matrix.yaml",
+      "hash": "24a2901f7fcc7014d51ad1c91852b0c1031506f970ba4693a9a20b31840883a1",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/qa/requirements_traceability.yaml",
+      "hash": "cf3c272275e879e4d3125740bc4ed8fe1dead856726432e9b119230919b19556",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/qa/req_coverage_report.md",
+      "hash": "df9be587c5436b2aec216fa5ce3ff7970e1749cb107a0bad6ccbd474d4551b6c",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/QUALITY_GATES.md",
+      "hash": "5fd395c5a338b3598f710ddd52c92294b038501f91bc93a804e3682b71147df4",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/Release_Checklist.md",
+      "hash": "d14ef00d92bdd47a52c228977c69cce515702716a1852f652e193a208dedfcc8",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/reports/security-retention.md",
+      "hash": "c5bd032a230306da09433e444623bd0dac87eff3f64f38cf0f20ba58cab64623",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/requirements.md",
+      "hash": "d5ff2cda765bd7acaff5771bfc990bf2a2e076a8cd9dec2987eb8894e562cd16",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/requirements.template.md",
+      "hash": "c8385ad1ee3e8e804d0f0f5bd85823f1ffb217a489947e3cae4c465df8b8833b",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/ROADMAP_AND_SPECS.md",
+      "hash": "aa35de946047a4d95b95a3141dc1e80a94df8b29f6efe7e393f6df60efae3b95",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/security/SAC.md",
+      "hash": "4001561821e1c2d0bdc856147d9e2b3d218ae34ea569ed005d96e9cad03360d0",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/security/Security_Review_Checklist.md",
+      "hash": "aa8ee0754e9293c024cd936e213d2cbb9b931e8e73a54b8df18f72977bb06ef4",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/spec.md",
+      "hash": "3ecb3888ab932a2ea1a69ef3dfa6fc48a65c386e52d01c5a8d3f2ac62c47c0f4",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/spec.template.md",
+      "hash": "31ee021dd42b6aed0a97dd9176f5b1469e18c20e6b5cb6c0f1ac93d461eefc35",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/tasks/task-autosave-project-locks.md",
+      "hash": "7313adef2a1f8c69f0e50e10988c37231bf8795d2988c453b54ed3ef3b14d5c8",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/TASKS.md",
+      "hash": "9be6a7fbc68612301d7e623b846e4d40daddecb7fac387a08bcb99dfc80ad89f",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/UPSTREAM.md",
+      "hash": "cbba98eb6bf4b797fc3fb8ae569dce270dd771341d45a8d6214104d6234f56a3",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/docs/UPSTREAM_WEEKLY_LOG.md",
+      "hash": "46cc5f293237b03e3b145fb81822648d531f74276cea1a0ee9e9c6aebfef6b2c",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/EVALUATION.md",
+      "hash": "cb60ba619a877126a0a97438125f4bdee5a0e48d477f2b82c09ecb6eb6ae3899",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/examples/TASK.sample.md",
+      "hash": "614c304dffbabb89337607f871e4bcca1f9058e761e9a411e7b37b7b443aed91",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/governance/metrics.yaml",
+      "hash": "d2ab6a64a39e1df8ac4410ba17fdb5b5ca52caf1711ef524429e817105b2db2c",
+      "kind": "config"
+    },
+    {
+      "path": "workflow-cookbook/governance/policy.yaml",
+      "hash": "44fe39624061dba7f4fc93ef1f212ca74ba163feb6ae0936f5b2e587e7985d67",
+      "kind": "config"
+    },
+    {
+      "path": "workflow-cookbook/governance/prioritization.yaml",
+      "hash": "904897262be63e1faf798f6572b29c3568880a555b69916831a2f1739f90dc30",
+      "kind": "config"
+    },
+    {
+      "path": "workflow-cookbook/GUARDRAILS.md",
+      "hash": "3801eed4b321edf1fd1ae5fe5dd085a137267cc552cfa0e2911a0fe32aec61a3",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/HUB.codex.md",
+      "hash": "d4d4caeb2deaca3b2be569b73bb94df7085d9f99e17887d0810d4f99dc05dd21",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/network/allowlist.yaml",
+      "hash": "cc78b1e20b6d8412f90b390c6f195ac5ffd454bb0cc83e638275dfbc25f401c7",
+      "kind": "config"
+    },
+    {
+      "path": "workflow-cookbook/README.md",
+      "hash": "5f612d1b7fecf2199e679219899e5318a4e1c2da024767f5d027fa4ed10c69bb",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/RUNBOOK.md",
+      "hash": "39f257d25350ca74f48516d7248be50151796c5afa8e905a9f9b25c492864beb",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/schemas/tool-request.schema.json",
+      "hash": "329c039e7b90d5b2f2f044fea5f7e3e878f147e1b8ea4570071f1a90ba01491e",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/SECURITY.md",
+      "hash": "b1568f6bb878cc17c1cb07810534ae1c553ed3e392887f6c8ff5a07fcd8d70ee",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/security_headers/middleware.py",
+      "hash": "3401708b82251713e0f8fcc1b1a1d9019c5789ce044573c78097faeda41542d0",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/security_headers/__init__.py",
+      "hash": "102deafc812a851fae6e9d2ab035ad664f7d0309ef640506462a688fcd1be7f2",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/styles/qa/QA.yml",
+      "hash": "6a47dcf104533bf838eb33ac614b8ec6b449b96442c854fce27f73cca99c215f",
+      "kind": "config"
+    },
+    {
+      "path": "workflow-cookbook/TASK.codex.md",
+      "hash": "4f32ddd8677d6eac15227221af06d2e952393ea0813a854d355ef791fff40d91",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/autosave/test_project_lock_service.py",
+      "hash": "9dc89d55c9241f0badf1a022a3cee0a8ff38cc9537233b138773730ddc7cf30a",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/conftest.py",
+      "hash": "9a715237a1d7f6d7ff0d83ca075faf7547fcc77866591c7960cf27ec5e50713d",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/merge/test_precision_mode_pipeline.py",
+      "hash": "923b957f3f454bdd4cabd83c6cabd5f75deac0330db1389ccec049c09de225a3",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/perf/test_collect_metrics_autosave_merge.py",
+      "hash": "16d5c0cc2439660cdcb176fb2708312601b8e25da384b1a3c4d9ad6661eb3e32",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/security/test_security_headers.py",
+      "hash": "84bafb01e45c755adc26d2cdf65ef7de8590268a02c8a8fad5135e2dc8b9cd81",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_aggregate_int.py",
+      "hash": "6586d8b73cfbc54b4d306849f684aa35d5e3a16179ebd15217ddec7318b01bcc",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_check_front_matter.py",
+      "hash": "cc83b6976e89be723497d9bff5d0f24d67f3ff644eb5d744eafe0976c45d896c",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_check_governance_gate.py",
+      "hash": "ef4e8864055370757bc6b0a2cff8cfeec8dd599722b1cd4d6a0776deaa0201a6",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_codemap_update.py",
+      "hash": "89459f45afda1bbc52af9514ed06fc5173f3e6510275db443e9b3c7d5f713223",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_collect_metrics_cli.py",
+      "hash": "e454b21f0dcfe5cccbe0f66b4be49ed0b40abea320d07d03ea0580bc49414c50",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_context_pack.py",
+      "hash": "43116935b57031f2de4fb134fc1dbc59b2bc32e12356d822e6670ac2aae723bf",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_context_trimmer.py",
+      "hash": "7b01a94027039c657cf5b50d662eeed1be887a9be44bc207d3cd69e8ab551c27",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_governance_metrics.py",
+      "hash": "3570a91ee4cc60ba1d98c2d34c55b096fefd9b908dba5bad345d499b515d84f1",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_metrics_registry.py",
+      "hash": "403022785ed485ae9b179e2925ce6b05b91f613edf227f87c386b02a7da2f50f",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_provider_spi.py",
+      "hash": "d128cd6d46a31f2999d6c809c9809208c48206a7a90c31ba164077eec62e7e45",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/test_structured_logger.py",
+      "hash": "a9e662d6a7cd88fbdd68c743d3c40a016a6978eb58b2bc70f6d1797b9d508064",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/tools/audit/test_audit_scripts.py",
+      "hash": "a1cdba732b167c07ce43a491607d7c19049ed76706e108e57104217c766b83a9",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tests/tools/security/test_allowlist_guard.py",
+      "hash": "6a59710acf5d9b5ac736051d265fb82c1d5138f19b37707d5cb918304bc3f70a",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tickets/outbound-request.md",
+      "hash": "005d4479a26926d5f4d546cb40c8f0669c0ef3cedb503ebffce418418d22e8b2",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/audit/purge_logs.py",
+      "hash": "b8eb0bd54c1fc5bb2127f86b34bfe22f7786374c8c607c3b3e630da1ed1641ba",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/audit/verify_log_chain.py",
+      "hash": "e3e957df8f848ac98b025930114a50ecee3dc112a0628a7ea40a49964e86d887",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/autosave/project_lock_service.py",
+      "hash": "b594393ae9416c92645f4fc800cecc7b43262d9aff26c1ce9d0e432f835fcf82",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/autosave/__init__.py",
+      "hash": "ef7a061b6315de69e7bdfa73487abf1eced3424374051f2d68089f666ead840f",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/ci/aggregate_int.py",
+      "hash": "2ffc9b78789ff7118e5490614c99f5cee12186de901e98af2c41fbe76a2f8651",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/ci/check_front_matter.py",
+      "hash": "7d76a9e6e45fbad3afc90c977294bc5303365aab0d5f838989b2147ce9df84c3",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/ci/check_governance_gate.py",
+      "hash": "e1d3882791a4e0352cc417852dc42851c96d7ff8bfa8f51904fe1a9098ed718f",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/codemap/README.md",
+      "hash": "dd55deef91fcf399ffc368dfe13d69678431335a2d8bed3e1471328a926672d2",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/codemap/update.py",
+      "hash": "c0c4cdd79ccdd1d77036ad90b0d7980395d34bb08b267c84bed909a4ece4f2d9",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/context/pack.py",
+      "hash": "a98495f2248d4ddbd4e0582d69e544773c633f9001fdcac521ce7a1b32921750",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/merge/orchestrator.py",
+      "hash": "bf0ea5e1313600cd2314f917121a93cce83729352356cad3419bc24c46ec40bb",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/merge/precision_mode_pipeline.py",
+      "hash": "ea26289184ab6d333ff1e6683fa078f9c0bcb75a150013267ca86351310c55c5",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/merge/__init__.py",
+      "hash": "f1030232be52e56a61040075af0081b41ddd34f7f9026df42672d1bbf04665ac",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/merge.py",
+      "hash": "af3051dac4ee4a738832eff307b7c799b07892adade8f56fcb73eadecef50059",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/perf/collect_metrics.py",
+      "hash": "966a7a123884780d22e4f64b505d6704c07dcf6ba44780dd4926f75c6abe8039",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/perf/context_trimmer.py",
+      "hash": "d46ba0ff372bda480ca46edbd5412ab2af5cc82af223626425aef419ac4b1736",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/perf/metrics_registry.py",
+      "hash": "d1c3be03b986d20c9448fba3e42dec60483bc984e960220e121019f9845a6f10",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/perf/structured_logger.py",
+      "hash": "5868d2c0fa0601f2e48bf8077e5f9b14fd65459e03b5eb40352c22d29d39f4ff",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/provider_spi.py",
+      "hash": "b150bd4c4dac94220f48f1ca4bbd5209444271f9cd6b24a2a4b59802e25d0b8a",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/security/allowlist_guard.py",
+      "hash": "0c680f1b371a38fe41843705ad4c05b841c632b92c16c8fd04f15438e2fd4fbc",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/security/__init__.py",
+      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "source"
+    },
+    {
+      "path": "workflow-cookbook/tools/__init__.py",
+      "hash": "257baa77eec082129da9c2fc562b1c898103734fcdf78f92561bbb9dabb5f66a",
+      "kind": "source"
+    }
+  ],
+  "policy": {
+    "id": "default",
+    "hash": "none"
+  },
+  "exit": {
+    "code": 0,
+    "status": "passed",
+    "reason": "Analysis complete"
+  }
+}

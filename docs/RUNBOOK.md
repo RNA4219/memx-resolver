@@ -18,35 +18,52 @@ next_review_due: 2026-04-10
 
 ### 準備
 ```bash
-cd memx_spec_v3/go
-go build ./cmd/mem
+cd docs/memx_spec_v3/go
+go build -o mem.exe ./cmd/mem
+```
+
+Codex/sandbox などで `AppData` 配下の Go cache に書き込めない場合:
+
+```powershell
+$repoRoot = (Resolve-Path ..\..\..).Path
+$env:GOCACHE = Join-Path $repoRoot ".tmp\go-build"
+go test ./...
 ```
 
 ### 文書登録
 ```bash
-mem in docs --title "Memory Import Spec" --doc-type spec --body "$(cat docs/specs/memory-import.md)"
+mem docs ingest --title "Memory Import Spec" --doc-type spec --body "$(cat docs/specs/memory-import.md)"
 ```
 
 ### 文書解決
 ```bash
-mem out resolve --feature memory-import
-mem out resolve --task-id task:feature:local:123
+mem docs resolve --feature memory-import
+mem docs resolve --task-id task:feature:local:123
+```
+
+### 文書検索
+```bash
+mem docs search "acceptance criteria" --doc-type spec --feature memory-import --tag memory
+mem docs cards --query "acceptance criteria" --doc-type spec --feature memory-import --memory-type acceptance --token-budget 120
 ```
 
 ### Chunk取得
 ```bash
-mem out chunks --doc-id doc:spec:memory-import
-mem out chunks --doc-id doc:spec:memory-import --query "acceptance criteria"
+mem docs chunks --doc-id doc:spec:memory-import
+mem docs chunks --doc-id doc:spec:memory-import --query "acceptance criteria"
+mem docs chunks --chunk-id chunk:doc:spec:memory-import:001
 ```
+
+`--json` では `chunks` に加えて、LLM に渡しやすい `memory_cards` も返る。
 
 ### 読了記録
 ```bash
-mem ack docs --task-id task:feature:local:123 --doc-id doc:spec:memory-import --version 2026-03-10
+mem docs ack --task-id task:feature:local:123 --doc-id doc:spec:memory-import --version 2026-03-10
 ```
 
 ### Stale確認
 ```bash
-mem stale-check --task-id task:feature:local:123
+mem docs stale --task-id task:feature:local:123
 ```
 
 ## Observability

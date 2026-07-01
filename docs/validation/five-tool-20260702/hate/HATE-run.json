@@ -1,0 +1,28 @@
+{
+  "schema_version": "HATE/v1",
+  "record_type": "run",
+  "record_id": "run-memx-resolver-five-tool-20260702-attempt-1",
+  "run_id": "memx-resolver-five-tool-20260702",
+  "run_attempt": 1,
+  "commit_sha": "0da82481e888",
+  "created_at": "2026-07-02T00:15:00+09:00",
+  "source_tool": "harness-auto-test-evidence",
+  "source_version": "memx-resolver-five-tool-20260702",
+  "sha256": "sha256:7de0b0e60f9df2c3685292a7eac4f4915743fbf694ee71a6c7534af6825938c6",
+  "redaction_status": "not_required",
+  "payload": {
+    "repository": "memx-resolver",
+    "workflow": "local-five-tool-validation",
+    "job": "pytest",
+    "event_name": "unknown",
+    "started_at": "2026-07-02T00:00:00+09:00",
+    "finished_at": "2026-07-02T00:15:00+09:00",
+    "ci": {
+      "provider": "generic-ci",
+      "run_id": "memx-resolver-five-tool-20260702",
+      "run_attempt": 1,
+      "actor": null,
+      "ref": null
+    }
+  }
+}

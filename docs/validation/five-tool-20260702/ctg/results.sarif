@@ -1,0 +1,96 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "code-to-gate",
+          "version": "1.5.0",
+          "rules": [
+            {
+              "id": "SUPPRESSION_DEBT",
+              "shortDescription": {
+                "text": "Suppression may hide debt (UNSAFE_DELETE)"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "HARDCODED_SECRET",
+              "shortDescription": {
+                "text": "Possible secret in variable: help"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "SUPPRESSION_DEBT",
+          "level": "warning",
+          "message": {
+            "text": "This suppression has expiry longer than 180 days. Narrow the path, add a near-term expiry, or replace the suppression with a tracked remediation item."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".ctg/suppressions.yaml"
+                },
+                "region": {
+                  "startLine": 6,
+                  "endLine": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "SUPPRESSION_DEBT",
+          "level": "warning",
+          "message": {
+            "text": "This suppression has expiry longer than 180 days. Narrow the path, add a near-term expiry, or replace the suppression with a tracked remediation item."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".ctg/suppressions.yaml"
+                },
+                "region": {
+                  "startLine": 11,
+                  "endLine": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "HARDCODED_SECRET",
+          "level": "error",
+          "message": {
+            "text": "Variable \"help\" may contain hardcoded secret"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "workflow-cookbook/tools/audit/verify_log_chain.py"
+                },
+                "region": {
+                  "startLine": 74,
+                  "endLine": 74
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

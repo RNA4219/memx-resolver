@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 FRONT_MATTER_PATTERN = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
 LINK_PATTERN = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
@@ -31,9 +32,13 @@ def linked_markdown_paths(source_path: Path, text: str) -> list[Path]:
     docs: list[Path] = []
     for match in LINK_PATTERN.findall(text):
         link_path = match.strip()
-        if not link_path.endswith(".md"):
+        parsed = urlsplit(link_path)
+        if parsed.scheme or parsed.netloc:
             continue
-        target = (source_path.parent / link_path).resolve()
+        path_part = unquote(parsed.path)
+        if not path_part.endswith(".md"):
+            continue
+        target = (source_path.parent / path_part).resolve()
         if target.is_file() and target not in docs:
             docs.append(target)
     return docs

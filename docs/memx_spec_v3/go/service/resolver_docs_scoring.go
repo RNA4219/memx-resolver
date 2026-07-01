@@ -83,6 +83,27 @@ func filterResolverChunks(chunks []ResolverChunk, heading string, query string, 
 	return filtered[:limit]
 }
 
+// filterResolverDocumentsForSearch applies structured search filters.
+func filterResolverDocumentsForSearch(docs []ResolverDocument, req DocsSearchRequest) []ResolverDocument {
+	if len(req.DocTypes) == 0 && len(req.Tags) == 0 && len(req.FeatureKeys) == 0 {
+		return docs
+	}
+	filtered := make([]ResolverDocument, 0, len(docs))
+	for _, doc := range docs {
+		if len(req.DocTypes) > 0 && !containsFold(req.DocTypes, doc.DocType) {
+			continue
+		}
+		if len(req.Tags) > 0 && !intersectsFold(doc.Tags, req.Tags) {
+			continue
+		}
+		if len(req.FeatureKeys) > 0 && !intersectsFold(doc.FeatureKeys, req.FeatureKeys) {
+			continue
+		}
+		filtered = append(filtered, doc)
+	}
+	return filtered
+}
+
 // pickTopChunkIDs picks top chunk IDs based on importance and query.
 func pickTopChunkIDs(chunks []ResolverChunk, query string, limit int) []string {
 	selected := filterResolverChunks(chunks, "", query, 0)
@@ -117,4 +138,26 @@ func chunkImportanceRank(v string) int {
 	default:
 		return 2
 	}
+}
+
+func hydrateResolverChunkMemoryFields(chunk *ResolverChunk) {
+	if chunk.MemoryType == "" {
+		chunk.MemoryType = inferMemoryType(chunk.Heading, chunk.HeadingPath)
+	}
+	if chunk.Cue == "" {
+		chunk.Cue = buildChunkCue(chunk.HeadingPath)
+	}
+}
+
+func filterResolverMemoryCards(cards []ResolverMemoryCard, memoryTypes []string) []ResolverMemoryCard {
+	if len(memoryTypes) == 0 {
+		return cards
+	}
+	filtered := make([]ResolverMemoryCard, 0, len(cards))
+	for _, card := range cards {
+		if containsFold(memoryTypes, card.MemoryType) {
+			filtered = append(filtered, card)
+		}
+	}
+	return filtered
 }

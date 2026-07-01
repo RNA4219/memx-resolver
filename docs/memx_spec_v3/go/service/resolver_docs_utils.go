@@ -15,6 +15,16 @@ func containsFold(values []string, target string) bool {
 	return false
 }
 
+// intersectsFold checks whether two string slices share at least one value.
+func intersectsFold(left []string, right []string) bool {
+	for _, value := range left {
+		if containsFold(right, value) {
+			return true
+		}
+	}
+	return false
+}
+
 // textContainsFold checks if text contains query (case-insensitive).
 func textContainsFold(text string, query string) bool {
 	return strings.Contains(strings.ToLower(text), strings.ToLower(strings.TrimSpace(query)))
@@ -55,6 +65,23 @@ func decodeStringSlice(raw string) []string {
 		return nil
 	}
 	return out
+}
+
+// decodeJSON decodes JSON into a destination and leaves zero value on invalid input.
+func decodeJSON(raw string, dst interface{}) {
+	if strings.TrimSpace(raw) == "" {
+		return
+	}
+	_ = json.Unmarshal([]byte(raw), dst)
+}
+
+// nonEmptySlice returns a single-item slice for a non-empty string.
+func nonEmptySlice(value string) []string {
+	value = strings.TrimSpace(value)
+	if value == "" {
+		return nil
+	}
+	return []string{value}
 }
 
 // compareVersions compares two version strings.

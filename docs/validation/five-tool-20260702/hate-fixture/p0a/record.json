@@ -1,0 +1,33 @@
+{
+  "schema_version": "HATE/v1",
+  "record_type": "audit_record",
+  "record_id": "audit-memx-resolver-five-tool-20260702-attempt-1",
+  "run_id": "memx-resolver-five-tool-20260702",
+  "run_attempt": 1,
+  "commit_sha": "0da82481e888",
+  "created_at": "2026-07-02T00:15:00+09:00",
+  "source_tool": "harness-auto-test-evidence",
+  "source_version": "memx-resolver-five-tool-20260702",
+  "sha256": "sha256:e0ccefd7e940be5e765bc8879cebca589136f372475e0c9a2298c9195b4ddefa",
+  "redaction_status": "not_required",
+  "payload": {
+    "validated_artifacts": [
+      "HATE-run.json",
+      "HATE-test-results.ndjson",
+      "HATE-coverage.ndjson",
+      "artifact-manifest.json",
+      "quarantine-report.json",
+      "profile-report.json",
+      "precheck-decision.json"
+    ],
+    "validation_result": "pass",
+    "source_refs": [
+      "path:/ci-context.json",
+      "path:/junit.xml",
+      "path:/lcov.info"
+    ],
+    "notes": [
+      "This record is generated from local P0a inputs and does not contain a release Gate verdict."
+    ]
+  }
+}

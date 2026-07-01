@@ -74,6 +74,78 @@ func (s *HTTPServer) handleDocsSearch(w http.ResponseWriter, r *http.Request) {
 	writeOK(w, resp)
 }
 
+func (s *HTTPServer) handleCardsSearch(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	var req CardsSearchRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
+		return
+	}
+	resp, apiErr := s.InProc.CardsSearch(r.Context(), req)
+	if apiErr != nil {
+		writeErr(w, apiErr)
+		return
+	}
+	writeOK(w, resp)
+}
+
+func (s *HTTPServer) handleCardsFeedback(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	var req CardFeedbackRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
+		return
+	}
+	resp, apiErr := s.InProc.CardFeedback(r.Context(), req)
+	if apiErr != nil {
+		writeErr(w, apiErr)
+		return
+	}
+	writeOK(w, resp)
+}
+
+func (s *HTTPServer) handleCardsBundle(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	var req PromptBundleRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
+		return
+	}
+	resp, apiErr := s.InProc.PromptBundle(r.Context(), req)
+	if apiErr != nil {
+		writeErr(w, apiErr)
+		return
+	}
+	writeOK(w, resp)
+}
+
+func (s *HTTPServer) handleTaskStateExport(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	var req TaskStateExportRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeErr(w, err)
+		return
+	}
+	resp, apiErr := s.InProc.TaskStateExport(r.Context(), req)
+	if apiErr != nil {
+		writeErr(w, apiErr)
+		return
+	}
+	writeOK(w, resp)
+}
+
 func (s *HTTPServer) handleReadsAck(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)

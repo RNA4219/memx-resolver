@@ -6,6 +6,7 @@ from memx_resolver_workflow_plugin.plugin import create_plugin
 from memx_resolver_workflow_plugin.policy import DocsSelectionPolicy
 from memx_resolver_workflow_plugin.results import DocsResolveResult
 from memx_resolver_workflow_plugin.store import JsonReceiptStore, JsonResolveCacheStore
+from memx_resolver_workflow_plugin.markdown import linked_markdown_paths
 
 
 def _write(path: Path, text: str) -> None:
@@ -52,6 +53,8 @@ status: active
 
     _write(tmp_path / doc_ids[0], "# Repo changed")
     stale = plugin.stale_check(repo_root=tmp_path, task_id="20260410-01")
+    assert stale.status == "stale"
+    assert stale.stale_reasons[0]["doc_id"] == doc_ids[0]
     assert stale.stale[0]["doc_id"] == doc_ids[0]
 
 
@@ -123,3 +126,20 @@ status: active
     resolved = plugin.resolve_docs(repo_root=tmp_path, task_id="20260410-01")
 
     assert resolved.required[0]["doc_id"] == "CUSTOM.md"
+
+
+def test_linked_markdown_paths_resolves_markdown_links_with_fragments(tmp_path: Path) -> None:
+    task_path = tmp_path / "docs" / "tasks" / "task-sample.md"
+    design_path = tmp_path / "docs" / "design.md"
+    _write(design_path, "# Design")
+    _write(
+        task_path,
+        """
+# Task Seed
+
+- [design acceptance](../design.md#acceptance)
+- [design query](../design.md?plain=1)
+""",
+    )
+
+    assert linked_markdown_paths(task_path, task_path.read_text(encoding="utf-8")) == [design_path.resolve()]

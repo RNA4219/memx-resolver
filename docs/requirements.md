@@ -185,6 +185,7 @@ chunk 生成は以下を満たすこと。
 - 長すぎる節のみ再分割する
 - chunk ごとに ordinal を持つ
 - chunk に importance を付与できる
+- chunk に LLM が参照目的を判断しやすい `memory_type` と `cue` を付与できる
 
 ### 12.3 文書解決
 
@@ -208,6 +209,8 @@ chunk 生成は以下を満たすこと。
 - heading 指定取得
 - query 指定取得
 - top-k chunk 取得
+- chunk 由来の LLM 向け `memory_cards` 取得
+- `memory_type`、importance、query match、token budget に基づく `memory_cards` 専用検索
 
 ### 12.5 読了記録
 
@@ -452,7 +455,10 @@ chunk の目的は長文分割そのものではない。
 - definition of done の自動展開
 - 外部 tracker / Birdseye view 同期
 - 変更影響範囲の自動推定
-- semantic diff に基づく stale 強度判定
+- semantic diff に基づく stale 強度判定（実装済み。読了 chunk snapshot と最新版 chunk を比較し、`semantic_diff` / `impact_scope` / `changed_chunks` を返す）
+- memory card ranking の実利用 feedback 補正（実装済み。`cards-feedback` のログを ranking に反映）
+- prompt-ready bundle export（実装済み。Markdown / JSONL と `source_refs` を返す）
+- agent-taskstate export bridge（実装済み。direct write ではなく `typed_ref` 付き payload を返す）
 
 ## 23. 結論
 

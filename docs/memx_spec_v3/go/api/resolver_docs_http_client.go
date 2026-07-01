@@ -34,6 +34,38 @@ func (c *HTTPClient) DocsSearch(ctx context.Context, req DocsSearchRequest) (Doc
 	return out, nil
 }
 
+func (c *HTTPClient) CardsSearch(ctx context.Context, req CardsSearchRequest) (CardsSearchResponse, *Error) {
+	var out CardsSearchResponse
+	if err := c.post(ctx, "/v1/cards:search", req, &out); err != nil {
+		return CardsSearchResponse{}, err
+	}
+	return out, nil
+}
+
+func (c *HTTPClient) CardFeedback(ctx context.Context, req CardFeedbackRequest) (CardFeedbackResponse, *Error) {
+	var out CardFeedbackResponse
+	if err := c.post(ctx, "/v1/cards:feedback", req, &out); err != nil {
+		return CardFeedbackResponse{}, err
+	}
+	return out, nil
+}
+
+func (c *HTTPClient) PromptBundle(ctx context.Context, req PromptBundleRequest) (PromptBundleResponse, *Error) {
+	var out PromptBundleResponse
+	if err := c.post(ctx, "/v1/cards:bundle", req, &out); err != nil {
+		return PromptBundleResponse{}, err
+	}
+	return out, nil
+}
+
+func (c *HTTPClient) TaskStateExport(ctx context.Context, req TaskStateExportRequest) (TaskStateExportResponse, *Error) {
+	var out TaskStateExportResponse
+	if err := c.post(ctx, "/v1/taskstate:export", req, &out); err != nil {
+		return TaskStateExportResponse{}, err
+	}
+	return out, nil
+}
+
 func (c *HTTPClient) ReadsAck(ctx context.Context, req ReadsAckRequest) (ReadsAckResponse, *Error) {
 	var out ReadsAckResponse
 	if err := c.post(ctx, "/v1/reads:ack", req, &out); err != nil {

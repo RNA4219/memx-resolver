@@ -24,6 +24,8 @@ func buildResolverChunks(docID string, sections []resolverSection, opts Chunking
 				Body:          body,
 				TokenEstimate: estimateTokens(body),
 				Importance:    section.Importance,
+				MemoryType:    inferMemoryType(section.Heading, section.HeadingPath),
+				Cue:           buildChunkCue(section.HeadingPath),
 			})
 			ordinal++
 		}
@@ -191,6 +193,40 @@ func inferChunkImportance(defaultImportance string, heading string, path []strin
 	default:
 		return defaultImportance
 	}
+}
+
+// inferMemoryType assigns a prompt-facing role to a chunk.
+func inferMemoryType(heading string, path []string) string {
+	joined := strings.ToLower(heading + " " + strings.Join(path, " "))
+	switch {
+	case strings.Contains(joined, "acceptance"):
+		return "acceptance"
+	case strings.Contains(joined, "forbidden"), strings.Contains(joined, "constraint"), strings.Contains(joined, "guardrail"):
+		return "constraint"
+	case strings.Contains(joined, "definition of done"), strings.Contains(joined, "done"):
+		return "done"
+	case strings.Contains(joined, "dependency"), strings.Contains(joined, "dependencies"):
+		return "dependency"
+	case strings.Contains(joined, "runbook"), strings.Contains(joined, "execute"), strings.Contains(joined, "procedure"), strings.Contains(joined, "workflow"):
+		return "procedure"
+	case strings.Contains(joined, "decision"), strings.Contains(joined, "adr"):
+		return "decision"
+	case strings.Contains(joined, "risk"), strings.Contains(joined, "incident"):
+		return "risk"
+	case strings.Contains(joined, "overview"), strings.Contains(joined, "background"), strings.Contains(joined, "purpose"):
+		return "concept"
+	default:
+		return "reference"
+	}
+}
+
+// buildChunkCue creates a compact retrieval cue for LLM prompts.
+func buildChunkCue(path []string) string {
+	parts := uniqueTrimmedStrings(path)
+	if len(parts) == 0 {
+		return ""
+	}
+	return strings.Join(parts, " > ")
 }
 
 // defaultDocImportance returns default importance for document type.

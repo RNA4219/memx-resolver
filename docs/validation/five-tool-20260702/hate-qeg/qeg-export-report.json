@@ -1,0 +1,30 @@
+{
+  "schema_version": "HATE/v1",
+  "run_id": "memx-resolver-five-tool-20260702",
+  "run_attempt": 1,
+  "commit_sha": "0da82481e888",
+  "created_at": "2026-07-02T00:15:00+09:00",
+  "export_status": "success",
+  "completeness": {
+    "score": 1.0,
+    "partial": false,
+    "parserFailures": [],
+    "unsupportedClaims": [],
+    "excludedArtifacts": []
+  },
+  "qeg_schema_compatibility": {
+    "schema": "schemas/HATE/v1/qeg-bundle.schema.json",
+    "valid": true,
+    "errors": []
+  },
+  "unsupportedClaims": [],
+  "contract_failures": [],
+  "mutation_gaps": [],
+  "missing_execution": [],
+  "excludedArtifacts": [],
+  "source_refs": [
+    "fixture:/p0a/precheck-decision.json",
+    "fixture:/diff-risk-test.json"
+  ],
+  "publish_gate_override": false
+}

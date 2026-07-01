@@ -1,0 +1,86 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-01T16:01:19.544Z",
+  "run_id": "ctg-202607011601-local",
+  "repo": {
+    "root": ".",
+    "revision": "0da82481e888",
+    "branch": "main",
+    "dirty": true
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "plugin_versions": []
+  },
+  "artifact": "test-seeds",
+  "schema": "test-seeds@v1",
+  "completeness": "complete",
+  "seeds": [
+    {
+      "id": "seed-000",
+      "title": "Test for SUPPRESSION_DEBT: Suppression may hide debt (UNSAFE_DELETE)",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-SUPPRESSION_DEBT-008"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-000-00",
+          "path": ".ctg/suppressions.yaml",
+          "startLine": 6,
+          "endLine": 6,
+          "kind": "text",
+          "excerptHash": "23c11e76"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "This suppression has expiry longer than 180 days. Narrow the path, add a near-term expiry, or replace the suppression with a tracked remediation item."
+    },
+    {
+      "id": "seed-001",
+      "title": "Test for SUPPRESSION_DEBT: Suppression may hide debt (LARGE_MODULE)",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-SUPPRESSION_DEBT-009"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-001-00",
+          "path": ".ctg/suppressions.yaml",
+          "startLine": 11,
+          "endLine": 11,
+          "kind": "text",
+          "excerptHash": "0a9d5d71"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "This suppression has expiry longer than 180 days. Narrow the path, add a near-term expiry, or replace the suppression with a tracked remediation item."
+    },
+    {
+      "id": "seed-002",
+      "title": "Test for HARDCODED_SECRET: Possible secret in variable: help",
+      "intent": "abuse",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-HARDCODED_SECRET-010"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-002-00",
+          "path": "workflow-cookbook/tools/audit/verify_log_chain.py",
+          "startLine": 74,
+          "endLine": 74,
+          "kind": "text",
+          "excerptHash": "14cf0a1e"
+        }
+      ],
+      "suggestedLevel": "integration",
+      "notes": "Variable \"help\" may contain hardcoded secret"
+    }
+  ],
+  "oracle_gaps": [],
+  "known_gaps": []
+}

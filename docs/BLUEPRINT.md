@@ -75,15 +75,18 @@ flowchart LR
 ## 6. Interfaces
 
 ### CLI:
-- `mem in docs --title "..." --body "..." --doc-type spec`
-- `mem out resolve --feature memory-import`
-- `mem out chunks --doc-id doc:spec:memory-import`
+- `mem docs ingest --title "..." --body "..." --doc-type spec`
+- `mem docs resolve --feature memory-import`
+- `mem docs chunks --doc-id doc:spec:memory-import`
+- `mem docs search "acceptance criteria" --doc-type spec --feature memory-import`
+- `mem docs cards --query "acceptance criteria" --memory-type acceptance --token-budget 120`
 
 ### API:
 - `POST /v1/docs:ingest`
 - `POST /v1/docs:resolve`
 - `POST /v1/chunks:get`
 - `POST /v1/docs:search`
+- `POST /v1/cards:search`
 - `POST /v1/reads:ack`
 - `POST /v1/docs:stale-check`
 - `POST /v1/contracts:resolve`

@@ -1,0 +1,45 @@
+{
+  "schema_version": "five-tool-validation-gate/v1",
+  "target_repo": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver",
+  "verdict": "needs_review",
+  "chain_status": {
+    "RanD": "degraded",
+    "Code-to-gate": "ran",
+    "HATE": "ran",
+    "manual-bb": "ran",
+    "QEG": "degraded"
+  },
+  "artifacts": {
+    "report": "docs/validation/five-tool-20260702/five-tool-gate-report.md",
+    "ctg_findings": "docs/validation/five-tool-20260702/ctg/findings.json",
+    "ctg_readiness": "docs/validation/five-tool-20260702/ctg/release-readiness.json",
+    "ctg_sarif": "docs/validation/five-tool-20260702/ctg/results.sarif",
+    "pytest_junit": "docs/validation/five-tool-20260702/hate-input/pytest-junit.xml",
+    "hate_precheck": "docs/validation/five-tool-20260702/hate/precheck-decision.json",
+    "hate_qeg_bundle": "docs/validation/five-tool-20260702/hate-qeg/qeg-bundle.json",
+    "hate_qeg_summary": "docs/validation/five-tool-20260702/hate-qeg/qeg-export-summary.md"
+  },
+  "summary": {
+    "python_tests": "27 passed",
+    "go_tests": "passed",
+    "code_to_gate_readiness": "passed",
+    "code_to_gate_findings": 3,
+    "code_to_gate_high": 1,
+    "hate_precheck": "eligible",
+    "qeg_direct_gate": "not_run_missing_full_gate_input"
+  },
+  "risks": [
+    {
+      "id": "finding-HARDCODED_SECRET-010",
+      "priority": "P1_review",
+      "source": "code-to-gate",
+      "note": "High finding in workflow-cookbook path; outside changed resolver surface but review required before release approval."
+    },
+    {
+      "id": "qeg-full-fixture-missing",
+      "priority": "P1_review",
+      "source": "QEG",
+      "note": "HATE optional evidence bundle exists, but no full QEG gate-input.json fixture was executed."
+    }
+  ]
+}

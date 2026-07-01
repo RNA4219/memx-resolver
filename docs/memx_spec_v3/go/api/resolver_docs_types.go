@@ -6,6 +6,10 @@ type ResolverDocument = service.ResolverDocument
 
 type ResolverChunk = service.ResolverChunk
 
+type ResolverMemoryCard = service.ResolverMemoryCard
+
+type MemoryCardRankingWeights = service.MemoryCardRankingWeights
+
 type ResolveEntry = service.ResolveEntry
 
 type ResolverReadReceipt = service.ResolverReadReceipt
@@ -22,9 +26,23 @@ type ChunksGetRequest = service.ChunksGetRequest
 
 type DocsSearchRequest = service.DocsSearchRequest
 
+type CardsSearchRequest = service.CardsSearchRequest
+
 type ReadsAckRequest = service.ReadsAckRequest
 
 type DocsStaleCheckRequest = service.DocsStaleCheckRequest
+
+type CardFeedbackRequest = service.CardFeedbackRequest
+
+type CardFeedbackRecord = service.CardFeedbackRecord
+
+type PromptBundleRequest = service.PromptBundleRequest
+
+type PromptBundleResponse = service.PromptBundleResponse
+
+type TaskStateExportRequest = service.TaskStateExportRequest
+
+type TaskStateExportResponse = service.TaskStateExportResponse
 
 type ContractsResolveRequest = service.ContractsResolveRequest
 
@@ -41,12 +59,17 @@ type DocsResolveResponse struct {
 }
 
 type ChunksGetResponse struct {
-	DocID  string          `json:"doc_id"`
-	Chunks []ResolverChunk `json:"chunks"`
+	DocID       string               `json:"doc_id"`
+	Chunks      []ResolverChunk      `json:"chunks"`
+	MemoryCards []ResolverMemoryCard `json:"memory_cards,omitempty"`
 }
 
 type DocsSearchResponse struct {
 	Results []ResolveEntry `json:"results"`
+}
+
+type CardsSearchResponse struct {
+	Cards []ResolverMemoryCard `json:"cards"`
 }
 
 type ReadsAckResponse struct {
@@ -54,8 +77,14 @@ type ReadsAckResponse struct {
 }
 
 type DocsStaleCheckResponse struct {
-	TaskID string                `json:"task_id"`
-	Stale  []ResolverStaleReason `json:"stale"`
+	TaskID       string                `json:"task_id"`
+	Status       string                `json:"status"`
+	StaleReasons []ResolverStaleReason `json:"stale_reasons"`
+	Stale        []ResolverStaleReason `json:"stale"`
+}
+
+type CardFeedbackResponse struct {
+	Feedback CardFeedbackRecord `json:"feedback"`
 }
 
 type ContractsResolveResponse struct {

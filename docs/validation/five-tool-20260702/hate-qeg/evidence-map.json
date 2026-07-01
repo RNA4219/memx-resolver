@@ -1,0 +1,25 @@
+{
+  "schema_version": "HATE/v1",
+  "run_id": "memx-resolver-five-tool-20260702",
+  "run_attempt": 1,
+  "requirements": [],
+  "risks": [],
+  "tests": [],
+  "evidence": [],
+  "findings": [],
+  "contracts": [],
+  "mutations": [],
+  "links": {
+    "requires_test": [],
+    "evidenced_by": [],
+    "supports": [],
+    "touches": [],
+    "contradicts": []
+  },
+  "gaps": {
+    "unsupported_claims": [],
+    "missing_execution": [],
+    "missing_coverage": [],
+    "unsafe_artifacts": []
+  }
+}

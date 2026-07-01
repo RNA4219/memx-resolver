@@ -74,10 +74,19 @@ mem out knowledge pinned --json
 ```bash
 mem docs resolve --feature resolver
 mem docs chunks --doc-id workflow-cookbook:blueprint
+mem docs search "acceptance criteria" --doc-type spec --feature resolver
+mem docs cards --query "acceptance criteria" --feature resolver --memory-type acceptance --token-budget 120
+mem docs cards-feedback --card-id card:... --memory-type acceptance --signal helpful
+mem docs bundle --query "acceptance criteria" --feature resolver --token-budget 240
 mem docs ack --task-id TASK.sample --doc-id workflow-cookbook:blueprint --version v1
 mem docs stale --task-id TASK.sample
+mem docs taskstate-export --task-id TASK.sample --feature resolver
 mem docs contract --feature resolver
 ```
+
+`mem docs chunks --json` は、chunk に加えて LLM 向けの `memory_cards` も返します。`mem docs bundle` は card をそのまま prompt に入れられる Markdown / JSONL 形式で返します。`mem docs cards-feedback` で実利用ログを残すと、以後の card ranking に補正として反映されます。
+
+`mem docs stale --json` は version mismatch に加え、読了時点の chunk snapshot と最新版 chunk を比較し、`semantic_diff`、`impact_scope`、`changed_chunks` を返します。`mem docs taskstate-export --json` は `agent-taskstate` の `context_bundle_source` に渡しやすい `typed_ref` と read receipt / required docs / stale reasons をまとめます。
 
 ### API
 
@@ -132,4 +141,3 @@ mem api serve --addr 127.0.0.1:7766
   - `docs.stale_check`
 
 License: MIT
-

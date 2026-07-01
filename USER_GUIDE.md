@@ -78,8 +78,13 @@ mem summarize --ids id1,id2,id3 --json
 # resolver
 mem docs resolve --feature resolver
 mem docs chunks --doc-id workflow-cookbook:blueprint
+mem docs search "acceptance criteria" --doc-type spec --feature resolver
+mem docs cards --query "acceptance criteria" --feature resolver --memory-type acceptance --token-budget 120
+mem docs cards-feedback --card-id card:... --memory-type acceptance --signal helpful
+mem docs bundle --query "acceptance criteria" --feature resolver --token-budget 240
 mem docs ack --task-id TASK.sample --doc-id workflow-cookbook:blueprint --version v1
 mem docs stale --task-id TASK.sample
+mem docs taskstate-export --task-id TASK.sample --feature resolver
 mem docs contract --feature resolver
 
 # resolver 専用 DB を使う場合
@@ -91,6 +96,10 @@ mem gc short --enable-gc
 ```
 
 既定 DB は `short.db / journal.db / knowledge.db / archive.db` です。
+
+`mem docs chunks --json` は `chunks` に加えて、LLM に渡しやすい `memory_cards` も返します。`mem docs bundle` は prompt-ready な card bundle を返し、`mem docs cards-feedback` の実利用ログは ranking 補正に使われます。
+
+`mem docs stale --json` は version mismatch だけでなく、読了時点の chunk snapshot と最新版 chunk の semantic diff、影響範囲、変更 chunk を返します。`mem docs taskstate-export --json` は `agent-taskstate` へ渡せる read receipt / required docs / stale reasons / `typed_ref` をまとめます。
 
 ## API
 
@@ -167,4 +176,3 @@ Alibaba 互換モードでは `chat/completions` を使います。
 - [docs/memx_spec_v3/docs/design.md](./docs/memx_spec_v3/docs/design.md)
 - [docs/memx_spec_v3/docs/contracts/openapi.yaml](./docs/memx_spec_v3/docs/contracts/openapi.yaml)
 - [docs/memx_spec_v3/docs/contracts/cli-json.schema.json](./docs/memx_spec_v3/docs/contracts/cli-json.schema.json)
-

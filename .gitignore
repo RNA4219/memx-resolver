@@ -7,6 +7,8 @@
 
 # Test binary
 *.test
+__pycache__/
+*.pyc
 
 # Output of go coverage
 *.out
@@ -16,6 +18,10 @@ go.work
 
 # Build artifacts
 /memx_spec_v3/go/mem
+.tmp/
+
+# External/local reference checkout
+/workflow-cookbook/
 
 # IDE
 .idea/

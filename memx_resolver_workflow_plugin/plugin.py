@@ -153,7 +153,11 @@ class MemxResolverWorkflowPlugin:
                         "reason": "version_mismatch",
                     }
                 )
-        return DocsStaleResult(task_id=task_id, stale=stale)
+        return DocsStaleResult(
+            task_id=task_id,
+            status="stale" if stale else "fresh",
+            stale_reasons=stale,
+        )
 
     def _find_task_path(self, repo_root: Path, task_id: str) -> Path | None:
         for path in (repo_root / "docs" / "tasks").glob("*.md"):

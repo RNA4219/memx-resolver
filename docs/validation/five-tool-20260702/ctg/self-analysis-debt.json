@@ -1,0 +1,129 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-01T16:01:32.085Z",
+  "run_id": "readiness-20260701160132",
+  "repo": {
+    "root": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver"
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0"
+  },
+  "artifact": "self-analysis-debt",
+  "schema": "self-analysis-debt@v1",
+  "rawFindings": {
+    "total": 11,
+    "bySeverity": {
+      "critical": 0,
+      "high": 3,
+      "medium": 8,
+      "low": 0
+    }
+  },
+  "effectiveFindings": {
+    "total": 1,
+    "bySeverity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 0,
+      "low": 0
+    }
+  },
+  "acceptedExceptions": {
+    "total": 8,
+    "bySeverity": {
+      "critical": 0,
+      "high": 2,
+      "medium": 6,
+      "low": 0
+    },
+    "byClass": {
+      "self-reference": 0,
+      "fixture-intentional": 0,
+      "generated-artifact": 0,
+      "accepted-design": 0,
+      "temporary-debt": 8
+    },
+    "details": [
+      {
+        "ruleId": "UNSAFE_DELETE",
+        "path": "workflow-cookbook/tools/audit/purge_logs.py",
+        "class": "temporary-debt",
+        "reason": "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config.",
+        "severity": "high"
+      },
+      {
+        "ruleId": "LARGE_MODULE",
+        "path": "workflow-cookbook/tools/autosave/project_lock_service.py",
+        "class": "temporary-debt",
+        "reason": "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config.",
+        "severity": "medium"
+      },
+      {
+        "ruleId": "LARGE_MODULE",
+        "path": "workflow-cookbook/tools/ci/check_governance_gate.py",
+        "class": "temporary-debt",
+        "reason": "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config.",
+        "severity": "medium"
+      },
+      {
+        "ruleId": "LARGE_MODULE",
+        "path": "workflow-cookbook/tools/codemap/update.py",
+        "class": "temporary-debt",
+        "reason": "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config.",
+        "severity": "medium"
+      },
+      {
+        "ruleId": "LARGE_MODULE",
+        "path": "workflow-cookbook/tools/context/pack.py",
+        "class": "temporary-debt",
+        "reason": "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config.",
+        "severity": "medium"
+      },
+      {
+        "ruleId": "LARGE_MODULE",
+        "path": "workflow-cookbook/tools/perf/collect_metrics.py",
+        "class": "temporary-debt",
+        "reason": "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config.",
+        "severity": "high"
+      },
+      {
+        "ruleId": "LARGE_MODULE",
+        "path": "workflow-cookbook/tools/perf/context_trimmer.py",
+        "class": "temporary-debt",
+        "reason": "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config.",
+        "severity": "medium"
+      },
+      {
+        "ruleId": "LARGE_MODULE",
+        "path": "workflow-cookbook/tools/security/allowlist_guard.py",
+        "class": "temporary-debt",
+        "reason": "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config.",
+        "severity": "medium"
+      }
+    ]
+  },
+  "broadSuppressions": {
+    "total": 1,
+    "items": [
+      {
+        "ruleId": "LARGE_MODULE",
+        "path": "workflow-cookbook/**/*",
+        "reason": "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config.",
+        "class": "temporary-debt",
+        "broadType": "rule-wide"
+      }
+    ],
+    "reviewRequired": true
+  },
+  "debtCandidates": {
+    "unsafeDelete": 0,
+    "tryCatchSwallow": 0,
+    "rawSql": 0,
+    "largeModule": 0
+  },
+  "recommendedActions": [
+    "Review 1 broad suppression(s) for scope reduction",
+    "Plan repayment for 8 temporary debt item(s)"
+  ]
+}

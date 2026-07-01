@@ -117,6 +117,245 @@ paths:
                     description: |
                       When /v1/gc:run is published but mem.features.gc_short is OFF,
                       return INTERNAL as the canonical v1 fallback (FAILED_PRECONDITION-equivalent).
+  /v1/docs:ingest:
+    post:
+      operationId: docsIngest
+      summary: Ingest a resolver document and generate chunks.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocsIngestRequest'
+      responses:
+        '200':
+          description: Document was ingested.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsIngestResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '409':
+          $ref: '#/components/responses/ConflictError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/docs:resolve:
+    post:
+      operationId: docsResolve
+      summary: Resolve required and recommended documents.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocsResolveRequest'
+      responses:
+        '200':
+          description: Resolved document sets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsResolveResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/chunks:get:
+    post:
+      operationId: chunksGet
+      summary: Get document chunks and prompt-ready memory cards.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChunksGetRequest'
+      responses:
+        '200':
+          description: Requested chunks.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChunksGetResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/docs:search:
+    post:
+      operationId: docsSearch
+      summary: Search resolver documents with optional structured filters.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocsSearchRequest'
+      responses:
+        '200':
+          description: Search results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsSearchResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/cards:search:
+    post:
+      operationId: cardsSearch
+      summary: Search prompt-ready memory cards.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardsSearchRequest'
+      responses:
+        '200':
+          description: Ranked memory cards.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardsSearchResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/cards:feedback:
+    post:
+      operationId: cardsFeedback
+      summary: Record actual memory card usage for adaptive ranking.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardFeedbackRequest'
+      responses:
+        '200':
+          description: Feedback was recorded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardFeedbackResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/cards:bundle:
+    post:
+      operationId: cardsBundle
+      summary: Export memory cards as a prompt-ready bundle.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromptBundleRequest'
+      responses:
+        '200':
+          description: Prompt-ready memory card bundle.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptBundleResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/taskstate:export:
+    post:
+      operationId: taskStateExport
+      summary: Export resolver read receipts, required docs, and stale reasons for agent-taskstate.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskStateExportRequest'
+      responses:
+        '200':
+          description: agent-taskstate-friendly resolver state export.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskStateExportResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/reads:ack:
+    post:
+      operationId: readsAck
+      summary: Acknowledge that a task read a document version.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReadsAckRequest'
+      responses:
+        '200':
+          description: Read receipt was recorded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReadsAckResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/docs:stale-check:
+    post:
+      operationId: docsStaleCheck
+      summary: Check whether a task has stale read receipts.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocsStaleCheckRequest'
+      responses:
+        '200':
+          description: Stale status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocsStaleCheckResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /v1/contracts:resolve:
+    post:
+      operationId: contractsResolve
+      summary: Resolve contract material for a feature or task.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractsResolveRequest'
+      responses:
+        '200':
+          description: Resolved contract material.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractsResolveResponse'
+        '400':
+          $ref: '#/components/responses/InvalidArgumentError'
+        '500':
+          $ref: '#/components/responses/InternalError'
 components:
   responses:
     InvalidArgumentError:
@@ -309,6 +548,659 @@ components:
           items:
             $ref: '#/components/schemas/Note'
       x-requirement-id: REQ-API-001
+
+    ResolverDocument:
+      type: object
+      additionalProperties: false
+      required: [doc_id, doc_type, title, source_path, version, updated_at, summary, importance]
+      properties:
+        doc_id:
+          type: string
+        doc_type:
+          type: string
+        title:
+          type: string
+        source_path:
+          type: string
+        version:
+          type: string
+        updated_at:
+          type: string
+        summary:
+          type: string
+        body:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        feature_keys:
+          type: array
+          items:
+            type: string
+        task_ids:
+          type: array
+          items:
+            type: string
+        acceptance_criteria:
+          type: array
+          items:
+            type: string
+        forbidden_patterns:
+          type: array
+          items:
+            type: string
+        definition_of_done:
+          type: array
+          items:
+            type: string
+        dependencies:
+          type: array
+          items:
+            type: string
+        importance:
+          $ref: '#/components/schemas/ResolverImportance'
+    ResolverImportance:
+      type: string
+      enum: [required, recommended, reference]
+    ResolverMemoryType:
+      type: string
+      enum: [acceptance, constraint, done, dependency, procedure, decision, risk, concept, reference]
+    ResolverChunk:
+      type: object
+      additionalProperties: false
+      required: [chunk_id, doc_id, heading_path, ordinal, body, token_estimate, importance, memory_type, cue]
+      properties:
+        chunk_id:
+          type: string
+        doc_id:
+          type: string
+        heading:
+          type: string
+        heading_path:
+          type: array
+          items:
+            type: string
+        ordinal:
+          type: integer
+        body:
+          type: string
+        token_estimate:
+          type: integer
+        importance:
+          $ref: '#/components/schemas/ResolverImportance'
+        memory_type:
+          $ref: '#/components/schemas/ResolverMemoryType'
+        cue:
+          type: string
+    ResolverMemoryCard:
+      type: object
+      additionalProperties: false
+      required: [card_id, doc_id, chunk_id, memory_type, cue, statement, heading_path, importance, token_estimate, score]
+      properties:
+        card_id:
+          type: string
+        doc_id:
+          type: string
+        chunk_id:
+          type: string
+        memory_type:
+          $ref: '#/components/schemas/ResolverMemoryType'
+        cue:
+          type: string
+        statement:
+          type: string
+        heading_path:
+          type: array
+          items:
+            type: string
+        importance:
+          $ref: '#/components/schemas/ResolverImportance'
+        token_estimate:
+          type: integer
+        score:
+          type: integer
+    ResolveEntry:
+      type: object
+      additionalProperties: false
+      required: [doc_id, title, version, importance, reason, top_chunks]
+      properties:
+        doc_id:
+          type: string
+        title:
+          type: string
+        version:
+          type: string
+        importance:
+          $ref: '#/components/schemas/ResolverImportance'
+        reason:
+          type: string
+        top_chunks:
+          type: array
+          items:
+            type: string
+    ResolverReadReceipt:
+      type: object
+      additionalProperties: false
+      required: [task_id, doc_id, version, reader, read_at]
+      properties:
+        task_id:
+          type: string
+        doc_id:
+          type: string
+        version:
+          type: string
+        chunk_ids:
+          type: array
+          items:
+            type: string
+        chunk_snapshots:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverChunkSnapshot'
+        reader:
+          type: string
+        read_at:
+          type: string
+    ResolverChunkSnapshot:
+      type: object
+      additionalProperties: false
+      required: [chunk_id, body_hash]
+      properties:
+        chunk_id:
+          type: string
+        body_hash:
+          type: string
+        heading_path:
+          type: array
+          items:
+            type: string
+        memory_type:
+          $ref: '#/components/schemas/ResolverMemoryType'
+        importance:
+          $ref: '#/components/schemas/ResolverImportance'
+        token_estimate:
+          type: integer
+    ResolverChunkChange:
+      type: object
+      additionalProperties: false
+      required: [chunk_id, change_type, impact]
+      properties:
+        chunk_id:
+          type: string
+        change_type:
+          type: string
+          enum: [modified, removed]
+        heading_path:
+          type: array
+          items:
+            type: string
+        memory_type:
+          $ref: '#/components/schemas/ResolverMemoryType'
+        impact:
+          type: string
+    ResolverStaleReason:
+      type: object
+      additionalProperties: false
+      required: [task_id, doc_id, previous_version, reason, detected_at]
+      properties:
+        task_id:
+          type: string
+        doc_id:
+          type: string
+        previous_version:
+          type: string
+        current_version:
+          type: string
+        reason:
+          type: string
+          enum: [version_mismatch, document_missing, semantic_diff]
+        severity:
+          type: string
+          enum: [low, medium, high, critical]
+        impact_scope:
+          type: array
+          items:
+            type: string
+        changed_chunks:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverChunkChange'
+        detected_at:
+          type: string
+    ChunkingOptions:
+      type: object
+      additionalProperties: false
+      properties:
+        mode:
+          type: string
+          enum: [heading, fixed]
+        max_chars:
+          type: integer
+    DocsIngestRequest:
+      type: object
+      additionalProperties: false
+      required: [doc_type, title, version, body]
+      properties:
+        doc_id:
+          type: string
+        doc_type:
+          type: string
+        title:
+          type: string
+        source_path:
+          type: string
+        version:
+          type: string
+        updated_at:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        feature_keys:
+          type: array
+          items:
+            type: string
+        task_ids:
+          type: array
+          items:
+            type: string
+        summary:
+          type: string
+        body:
+          type: string
+        chunking:
+          $ref: '#/components/schemas/ChunkingOptions'
+        acceptance_criteria:
+          type: array
+          items:
+            type: string
+        forbidden_patterns:
+          type: array
+          items:
+            type: string
+        definition_of_done:
+          type: array
+          items:
+            type: string
+        dependencies:
+          type: array
+          items:
+            type: string
+    DocsIngestResponse:
+      type: object
+      additionalProperties: false
+      required: [doc_id, version, chunk_count, status]
+      properties:
+        doc_id:
+          type: string
+        version:
+          type: string
+        chunk_count:
+          type: integer
+        status:
+          type: string
+          enum: [ingested]
+    DocsResolveRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        feature:
+          type: string
+        task_id:
+          type: string
+        topic:
+          type: string
+        limit:
+          type: integer
+    DocsResolveResponse:
+      type: object
+      additionalProperties: false
+      required: [required, recommended]
+      properties:
+        required:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolveEntry'
+        recommended:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolveEntry'
+    ChunksGetRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        doc_id:
+          type: string
+        query:
+          type: string
+        heading:
+          type: string
+        limit:
+          type: integer
+        chunk_ids:
+          type: array
+          items:
+            type: string
+    ChunksGetResponse:
+      type: object
+      additionalProperties: false
+      required: [doc_id, chunks]
+      properties:
+        doc_id:
+          type: string
+        chunks:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverChunk'
+        memory_cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverMemoryCard'
+    DocsSearchRequest:
+      type: object
+      additionalProperties: false
+      required: [query]
+      properties:
+        query:
+          type: string
+        doc_types:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        feature_keys:
+          type: array
+          items:
+            type: string
+        limit:
+          type: integer
+    DocsSearchResponse:
+      type: object
+      additionalProperties: false
+      required: [results]
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolveEntry'
+    CardsSearchRequest:
+      type: object
+      additionalProperties: false
+      required: [query]
+      properties:
+        query:
+          type: string
+        doc_types:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        feature_keys:
+          type: array
+          items:
+            type: string
+        memory_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverMemoryType'
+        limit:
+          type: integer
+        token_budget:
+          type: integer
+        ranking_weights:
+          $ref: '#/components/schemas/MemoryCardRankingWeights'
+    CardsSearchResponse:
+      type: object
+      additionalProperties: false
+      required: [cards]
+      properties:
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverMemoryCard'
+    MemoryCardRankingWeights:
+      type: object
+      additionalProperties: false
+      properties:
+        importance_required:
+          type: integer
+        importance_recommended:
+          type: integer
+        importance_reference:
+          type: integer
+        memory_type_base:
+          type: integer
+        query_exact:
+          type: integer
+        query_terms:
+          type: integer
+        cue_match:
+          type: integer
+        heading_match:
+          type: integer
+        short_card_bonus:
+          type: integer
+        feedback_boost:
+          type: integer
+    CardFeedbackRequest:
+      type: object
+      additionalProperties: false
+      required: [card_id, signal]
+      properties:
+        card_id:
+          type: string
+        doc_id:
+          type: string
+        chunk_id:
+          type: string
+        memory_type:
+          type: string
+        signal:
+          type: string
+          enum: [used, helpful, pinned, irrelevant, skipped]
+        weight:
+          type: integer
+        query:
+          type: string
+    CardFeedbackRecord:
+      type: object
+      additionalProperties: false
+      required: [card_id, signal, weight, recorded_at]
+      properties:
+        card_id:
+          type: string
+        doc_id:
+          type: string
+        chunk_id:
+          type: string
+        memory_type:
+          type: string
+        signal:
+          type: string
+        weight:
+          type: integer
+        query:
+          type: string
+        recorded_at:
+          type: string
+    CardFeedbackResponse:
+      type: object
+      additionalProperties: false
+      required: [feedback]
+      properties:
+        feedback:
+          $ref: '#/components/schemas/CardFeedbackRecord'
+    PromptBundleRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        query:
+          type: string
+        feature:
+          type: string
+        task_id:
+          type: string
+        memory_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverMemoryType'
+        limit:
+          type: integer
+        token_budget:
+          type: integer
+        format:
+          type: string
+          enum: [markdown, jsonl]
+    PromptBundleResponse:
+      type: object
+      additionalProperties: false
+      required: [bundle_id, query, format, token_estimate, cards, prompt, source_refs]
+      properties:
+        bundle_id:
+          type: string
+        query:
+          type: string
+        format:
+          type: string
+        token_estimate:
+          type: integer
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverMemoryCard'
+        prompt:
+          type: string
+        source_refs:
+          type: array
+          items:
+            type: string
+    TaskStateExportRequest:
+      type: object
+      additionalProperties: false
+      required: [task_id]
+      properties:
+        task_id:
+          type: string
+        feature:
+          type: string
+    TaskStateExportResponse:
+      type: object
+      additionalProperties: false
+      required: [task_ref, task_id, required_docs, read_receipts, stale_reasons, source_refs, exported_at]
+      properties:
+        task_ref:
+          type: string
+        task_id:
+          type: string
+        required_docs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolveEntry'
+        read_receipts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverReadReceipt'
+        stale_reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverStaleReason'
+        source_refs:
+          type: array
+          items:
+            type: string
+        exported_at:
+          type: string
+    ReadsAckRequest:
+      type: object
+      additionalProperties: false
+      required: [task_id, doc_id]
+      properties:
+        task_id:
+          type: string
+        doc_id:
+          type: string
+        version:
+          type: string
+        chunk_ids:
+          type: array
+          items:
+            type: string
+        reader:
+          type: string
+    ReadsAckResponse:
+      type: object
+      additionalProperties: false
+      required: [receipt]
+      properties:
+        receipt:
+          $ref: '#/components/schemas/ResolverReadReceipt'
+    DocsStaleCheckRequest:
+      type: object
+      additionalProperties: false
+      required: [task_id]
+      properties:
+        task_id:
+          type: string
+    DocsStaleCheckResponse:
+      type: object
+      additionalProperties: false
+      required: [task_id, status, stale_reasons]
+      properties:
+        task_id:
+          type: string
+        status:
+          type: string
+          enum: [fresh, stale]
+        stale_reasons:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolverStaleReason'
+        stale:
+          type: array
+          deprecated: true
+          items:
+            $ref: '#/components/schemas/ResolverStaleReason'
+    ContractsResolveRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        feature:
+          type: string
+        task_id:
+          type: string
+    ContractsResolveResponse:
+      type: object
+      additionalProperties: false
+      required: [required, acceptance_criteria, forbidden_patterns, definition_of_done, dependencies]
+      properties:
+        required:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResolveEntry'
+        acceptance_criteria:
+          type: array
+          items:
+            type: string
+        forbidden_patterns:
+          type: array
+          items:
+            type: string
+        definition_of_done:
+          type: array
+          items:
+            type: string
+        dependencies:
+          type: array
+          items:
+            type: string
 
     GCRunRequest:
       type: object

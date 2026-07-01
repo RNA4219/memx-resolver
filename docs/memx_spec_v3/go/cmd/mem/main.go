@@ -56,8 +56,12 @@ Usage:
   mem out archive restore ID
   mem docs ingest   --title TITLE --body BODY --doc-type TYPE [--version VER] [--feature KEY ...]
   mem docs resolve  --feature KEY | --task-id ID | --topic QUERY [--limit N]
-  mem docs chunks   --doc-id ID [--heading H] [--query Q] [--limit N]
-  mem docs search   QUERY [--limit N]
+  mem docs chunks   --doc-id ID | --chunk-id ID [--heading H] [--query Q] [--limit N]
+  mem docs search   QUERY [--doc-type TYPE ...] [--tag TAG ...] [--feature KEY ...] [--limit N]
+  mem docs cards    --query QUERY [--memory-type TYPE ...] [--token-budget N] [--weight-feedback-boost N]
+  mem docs cards-feedback --card-id ID --signal used|helpful|pinned|irrelevant|skipped
+  mem docs bundle   --query QUERY [--memory-type TYPE ...] [--token-budget N] [--format markdown|jsonl]
+  mem docs taskstate-export --task-id ID [--feature KEY]
   mem docs ack      --task-id ID --doc-id ID [--version VER]
   mem docs stale    --task-id ID
   mem docs contract --feature KEY | --task-id ID

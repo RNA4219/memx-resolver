@@ -1,0 +1,26 @@
+{
+  "schema_version": "HATE/v1",
+  "record_type": "precheck_decision",
+  "record_id": "precheck-memx-resolver-five-tool-20260702-attempt-1",
+  "run_id": "memx-resolver-five-tool-20260702",
+  "run_attempt": 1,
+  "commit_sha": "0da82481e888",
+  "created_at": "2026-07-02T00:15:00+09:00",
+  "source_tool": "harness-auto-test-evidence",
+  "source_version": "memx-resolver-five-tool-20260702",
+  "sha256": "sha256:198649f5284ed8540ebc614dcd5e1a0a514704bf25243c452761a886cea56a60",
+  "redaction_status": "not_required",
+  "payload": {
+    "decision": "eligible",
+    "exit_code": 0,
+    "dq_hits": [],
+    "soft_gaps": [],
+    "reasons": [
+      "Minimal P0a inputs satisfy HATE/v1 schema bootstrap contracts.",
+      "QEG export is allowed as optional evidence and scheduled for P0b bundling."
+    ],
+    "qeg_export_allowed": true,
+    "qeg_export_ref": null,
+    "qeg_export_phase": "P0b"
+  }
+}

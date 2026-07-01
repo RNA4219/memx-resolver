@@ -319,4 +319,126 @@ func TestDocsCommandsCanUseSeparateResolverStore(t *testing.T) {
 	if len(required) != 1 || required[0].DocID != ingestResp.DocID {
 		t.Fatalf("unexpected required docs: %#v", required)
 	}
+
+	resolveOut := runMem(t, binPath, workdir,
+		"docs", "resolve", "--json",
+		"--resolver", resolverPath,
+		"--feature", "resolver-cli-split",
+	)
+	var resolveResp struct {
+		Required []struct {
+			TopChunks []string `json:"top_chunks"`
+		} `json:"required"`
+	}
+	if err := json.Unmarshal([]byte(resolveOut), &resolveResp); err != nil {
+		t.Fatalf("decode docs resolve response: %v\n%s", err, resolveOut)
+	}
+	if len(resolveResp.Required) == 0 || len(resolveResp.Required[0].TopChunks) == 0 {
+		t.Fatalf("expected resolve response to include top chunks: %#v", resolveResp)
+	}
+
+	searchOut := runMem(t, binPath, workdir,
+		"docs", "search", "--json",
+		"--resolver", resolverPath,
+		"--feature", "resolver-cli-split",
+		"--doc-type", "spec",
+		"separated resolver",
+	)
+	var searchResp struct {
+		Results []struct {
+			DocID string `json:"doc_id"`
+		} `json:"results"`
+	}
+	if err := json.Unmarshal([]byte(searchOut), &searchResp); err != nil {
+		t.Fatalf("decode docs search response: %v\n%s", err, searchOut)
+	}
+	if len(searchResp.Results) != 1 || searchResp.Results[0].DocID != ingestResp.DocID {
+		t.Fatalf("unexpected docs search response: %#v", searchResp)
+	}
+
+	chunksOut := runMem(t, binPath, workdir,
+		"docs", "chunks", "--json",
+		"--resolver", resolverPath,
+		"--chunk-id", resolveResp.Required[0].TopChunks[0],
+	)
+	var chunksResp struct {
+		Chunks []struct {
+			ChunkID string `json:"chunk_id"`
+		} `json:"chunks"`
+	}
+	if err := json.Unmarshal([]byte(chunksOut), &chunksResp); err != nil {
+		t.Fatalf("decode docs chunks response: %v\n%s", err, chunksOut)
+	}
+	if len(chunksResp.Chunks) != 1 || chunksResp.Chunks[0].ChunkID != resolveResp.Required[0].TopChunks[0] {
+		t.Fatalf("unexpected chunks response: %#v", chunksResp)
+	}
+
+	cardsOut := runMem(t, binPath, workdir,
+		"docs", "cards", "--json",
+		"--resolver", resolverPath,
+		"--query", "separated resolver",
+		"--feature", "resolver-cli-split",
+		"--memory-type", "acceptance",
+		"--token-budget", "40",
+	)
+	var cardsResp struct {
+		Cards []struct {
+			CardID     string `json:"card_id"`
+			DocID      string `json:"doc_id"`
+			ChunkID    string `json:"chunk_id"`
+			MemoryType string `json:"memory_type"`
+			Score      int    `json:"score"`
+		} `json:"cards"`
+	}
+	if err := json.Unmarshal([]byte(cardsOut), &cardsResp); err != nil {
+		t.Fatalf("decode docs cards response: %v\n%s", err, cardsOut)
+	}
+	if len(cardsResp.Cards) != 1 || cardsResp.Cards[0].MemoryType != "acceptance" || cardsResp.Cards[0].Score <= 0 {
+		t.Fatalf("unexpected docs cards response: %#v", cardsResp)
+	}
+
+	feedbackOut := runMem(t, binPath, workdir,
+		"docs", "cards-feedback", "--json",
+		"--resolver", resolverPath,
+		"--card-id", cardsResp.Cards[0].CardID,
+		"--doc-id", cardsResp.Cards[0].DocID,
+		"--chunk-id", cardsResp.Cards[0].ChunkID,
+		"--memory-type", cardsResp.Cards[0].MemoryType,
+		"--signal", "helpful",
+		"--query", "separated resolver",
+	)
+	if !strings.Contains(feedbackOut, `"signal": "helpful"`) {
+		t.Fatalf("unexpected feedback output: %s", feedbackOut)
+	}
+
+	bundleOut := runMem(t, binPath, workdir,
+		"docs", "bundle", "--json",
+		"--resolver", resolverPath,
+		"--query", "separated resolver",
+		"--feature", "resolver-cli-split",
+		"--token-budget", "80",
+	)
+	if !strings.Contains(bundleOut, `"prompt"`) || !strings.Contains(bundleOut, `"source_refs"`) {
+		t.Fatalf("unexpected bundle output: %s", bundleOut)
+	}
+
+	ackOut := runMem(t, binPath, workdir,
+		"docs", "ack", "--json",
+		"--resolver", resolverPath,
+		"--task-id", "task:cli:split",
+		"--doc-id", ingestResp.DocID,
+	)
+	if !strings.Contains(ackOut, `"chunk_snapshots"`) {
+		t.Fatalf("unexpected ack output: %s", ackOut)
+	}
+
+	exportOut := runMem(t, binPath, workdir,
+		"docs", "taskstate-export", "--json",
+		"--resolver", resolverPath,
+		"--task-id", "task:cli:split",
+		"--feature", "resolver-cli-split",
+	)
+	if !strings.Contains(exportOut, `"task_ref": "agent-taskstate:task:local:task_cli_split"`) || !strings.Contains(exportOut, `"source_refs"`) {
+		t.Fatalf("unexpected taskstate export output: %s", exportOut)
+	}
 }

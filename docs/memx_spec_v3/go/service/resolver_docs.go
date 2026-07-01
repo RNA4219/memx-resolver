@@ -2,8 +2,11 @@ package service
 
 import (
 	"context"
+	"crypto/sha256"
 	"database/sql"
+	"encoding/hex"
 	"fmt"
+	"sort"
 	"strings"
 	"time"
 )
@@ -194,11 +197,31 @@ func (s *Service) DocsSearch(ctx context.Context, req DocsSearchRequest) ([]Reso
 	if req.Query == "" {
 		return nil, fmt.Errorf("%w: query is required", ErrInvalidArgument)
 	}
-	required, recommended, err := s.DocsResolve(ctx, DocsResolveRequest{Topic: req.Query, Limit: req.Limit})
+	req.DocTypes = uniqueTrimmedStrings(req.DocTypes)
+	req.Tags = uniqueTrimmedStrings(req.Tags)
+	req.FeatureKeys = uniqueTrimmedStrings(req.FeatureKeys)
+	docs, err := s.listResolverDocuments(ctx)
 	if err != nil {
 		return nil, err
 	}
-	return append(required, recommended...), nil
+	docs = filterResolverDocumentsForSearch(docs, req)
+	scored := scoreResolverDocuments(docs, "", "", req.Query)
+	limit := req.Limit
+	if limit <= 0 {
+		limit = 10
+	}
+	results := make([]ResolveEntry, 0, limit)
+	for _, item := range scored {
+		if len(results) >= limit {
+			break
+		}
+		entry, err := s.buildResolveEntry(ctx, item.Doc, item.Why, req.Query)
+		if err != nil {
+			return nil, err
+		}
+		results = append(results, entry)
+	}
+	return results, nil
 }
 
 func (s *Service) ChunksGet(ctx context.Context, req ChunksGetRequest) (string, []ResolverChunk, error) {
@@ -224,6 +247,47 @@ func (s *Service) ChunksGet(ctx context.Context, req ChunksGetRequest) (string, 
 	return req.DocID, filterResolverChunks(chunks, strings.TrimSpace(req.Heading), strings.TrimSpace(req.Query), req.Limit), nil
 }
 
+func (s *Service) CardsSearch(ctx context.Context, req CardsSearchRequest) ([]ResolverMemoryCard, error) {
+	req.Query = strings.TrimSpace(req.Query)
+	if req.Query == "" {
+		return nil, fmt.Errorf("%w: query is required", ErrInvalidArgument)
+	}
+	req.DocTypes = uniqueTrimmedStrings(req.DocTypes)
+	req.Tags = uniqueTrimmedStrings(req.Tags)
+	req.FeatureKeys = uniqueTrimmedStrings(req.FeatureKeys)
+	req.MemoryTypes = uniqueTrimmedStrings(req.MemoryTypes)
+	docs, err := s.listResolverDocuments(ctx)
+	if err != nil {
+		return nil, err
+	}
+	docs = filterResolverDocumentsForSearch(docs, DocsSearchRequest{
+		Query:       req.Query,
+		DocTypes:    req.DocTypes,
+		Tags:        req.Tags,
+		FeatureKeys: req.FeatureKeys,
+	})
+	scored := scoreResolverDocuments(docs, "", "", req.Query)
+	var chunks []ResolverChunk
+	for _, item := range scored {
+		docChunks, err := s.getResolverChunksByDocID(ctx, item.Doc.DocID)
+		if err != nil {
+			return nil, err
+		}
+		filtered := filterResolverChunks(docChunks, "", req.Query, 0)
+		if len(filtered) == 0 {
+			filtered = docChunks
+		}
+		chunks = append(chunks, filtered...)
+	}
+	feedback, err := s.memoryCardFeedbackWeights(ctx)
+	if err != nil {
+		return nil, err
+	}
+	cards := BuildRankedResolverMemoryCardsWithWeights(chunks, req.Query, 0, 0, req.RankingWeights, feedback)
+	cards = filterResolverMemoryCards(cards, req.MemoryTypes)
+	return applyMemoryCardLimits(cards, req.Limit, req.TokenBudget), nil
+}
+
 func (s *Service) ReadsAck(ctx context.Context, req ReadsAckRequest) (ResolverReadReceipt, error) {
 	req.TaskID = strings.TrimSpace(req.TaskID)
 	req.DocID = strings.TrimSpace(req.DocID)
@@ -242,18 +306,29 @@ func (s *Service) ReadsAck(ctx context.Context, req ReadsAckRequest) (ResolverRe
 	if req.Reader == "" {
 		req.Reader = "agent"
 	}
+	chunkIDs := uniqueTrimmedStrings(req.ChunkIDs)
+	snapshots, err := s.buildReadChunkSnapshots(ctx, req.DocID, chunkIDs)
+	if err != nil {
+		return ResolverReadReceipt{}, err
+	}
+	if len(chunkIDs) == 0 {
+		for _, snapshot := range snapshots {
+			chunkIDs = append(chunkIDs, snapshot.ChunkID)
+		}
+	}
 	receipt := ResolverReadReceipt{
-		TaskID:   req.TaskID,
-		DocID:    req.DocID,
-		Version:  req.Version,
-		ChunkIDs: uniqueTrimmedStrings(req.ChunkIDs),
-		Reader:   req.Reader,
-		ReadAt:   time.Now().UTC().Format(time.RFC3339),
+		TaskID:         req.TaskID,
+		DocID:          req.DocID,
+		Version:        req.Version,
+		ChunkIDs:       chunkIDs,
+		ChunkSnapshots: snapshots,
+		Reader:         req.Reader,
+		ReadAt:         time.Now().UTC().Format(time.RFC3339),
 	}
 	if _, err := s.resolverDB().ExecContext(ctx, `
-	INSERT INTO resolver_read_receipts(task_id, doc_id, version, chunk_ids_json, reader, read_at)
-	VALUES(?, ?, ?, ?, ?, ?);
-	`, receipt.TaskID, receipt.DocID, receipt.Version, mustJSON(receipt.ChunkIDs), receipt.Reader, receipt.ReadAt); err != nil {
+	INSERT INTO resolver_read_receipts(task_id, doc_id, version, chunk_ids_json, chunk_snapshots_json, reader, read_at)
+	VALUES(?, ?, ?, ?, ?, ?, ?);
+	`, receipt.TaskID, receipt.DocID, receipt.Version, mustJSON(receipt.ChunkIDs), mustJSON(receipt.ChunkSnapshots), receipt.Reader, receipt.ReadAt); err != nil {
 		return ResolverReadReceipt{}, err
 	}
 	return receipt, nil
@@ -265,7 +340,7 @@ func (s *Service) DocsStaleCheck(ctx context.Context, req DocsStaleCheckRequest)
 		return nil, fmt.Errorf("%w: task_id is required", ErrInvalidArgument)
 	}
 	rows, err := s.resolverDB().QueryContext(ctx, `
-	SELECT rr.task_id, rr.doc_id, rr.version
+	SELECT rr.task_id, rr.doc_id, rr.version, rr.chunk_ids_json, rr.chunk_snapshots_json
 	FROM resolver_read_receipts rr
 	JOIN (
 	  SELECT doc_id, MAX(id) AS latest_id
@@ -282,26 +357,375 @@ func (s *Service) DocsStaleCheck(ctx context.Context, req DocsStaleCheckRequest)
 	defer rows.Close()
 	var stale []ResolverStaleReason
 	for rows.Next() {
-		var taskID, docID, version string
-		if err := rows.Scan(&taskID, &docID, &version); err != nil {
+		var taskID, docID, version, chunkIDsJSON, snapshotsJSON string
+		if err := rows.Scan(&taskID, &docID, &version, &chunkIDsJSON, &snapshotsJSON); err != nil {
 			return nil, err
 		}
+		chunkIDs := decodeStringSlice(chunkIDsJSON)
+		var snapshots []ResolverChunkSnapshot
+		decodeJSON(snapshotsJSON, &snapshots)
 		doc, err := s.getResolverDocument(ctx, docID)
 		if err != nil {
 			if err == ErrNotFound {
-				stale = append(stale, ResolverStaleReason{TaskID: taskID, DocID: docID, PreviousVersion: version, Reason: "document_missing", DetectedAt: time.Now().UTC().Format(time.RFC3339)})
+				stale = append(stale, ResolverStaleReason{TaskID: taskID, DocID: docID, PreviousVersion: version, Reason: "document_missing", Severity: "critical", ImpactScope: []string{"document"}, DetectedAt: time.Now().UTC().Format(time.RFC3339)})
 				continue
 			}
 			return nil, err
 		}
 		if doc.Version != version {
-			stale = append(stale, ResolverStaleReason{TaskID: taskID, DocID: docID, PreviousVersion: version, CurrentVersion: doc.Version, Reason: "version_mismatch", DetectedAt: time.Now().UTC().Format(time.RFC3339)})
+			reason, err := s.buildSemanticStaleReason(ctx, taskID, docID, version, doc.Version, chunkIDs, snapshots)
+			if err != nil {
+				return nil, err
+			}
+			stale = append(stale, reason)
 		}
 	}
 	if err := rows.Err(); err != nil {
 		return nil, err
 	}
 	return stale, nil
+}
+
+func (s *Service) CardFeedback(ctx context.Context, req CardFeedbackRequest) (CardFeedbackRecord, error) {
+	req.CardID = strings.TrimSpace(req.CardID)
+	req.DocID = strings.TrimSpace(req.DocID)
+	req.ChunkID = strings.TrimSpace(req.ChunkID)
+	req.MemoryType = strings.TrimSpace(strings.ToLower(req.MemoryType))
+	req.Signal = strings.TrimSpace(strings.ToLower(req.Signal))
+	req.Query = strings.TrimSpace(req.Query)
+	if req.CardID == "" || req.Signal == "" {
+		return CardFeedbackRecord{}, fmt.Errorf("%w: card_id/signal is required", ErrInvalidArgument)
+	}
+	switch req.Signal {
+	case "used", "helpful", "pinned", "irrelevant", "skipped":
+	default:
+		return CardFeedbackRecord{}, fmt.Errorf("%w: unsupported signal", ErrInvalidArgument)
+	}
+	if req.Weight <= 0 {
+		req.Weight = 1
+	}
+	record := CardFeedbackRecord{
+		CardID:     req.CardID,
+		DocID:      req.DocID,
+		ChunkID:    req.ChunkID,
+		MemoryType: req.MemoryType,
+		Signal:     req.Signal,
+		Weight:     req.Weight,
+		Query:      req.Query,
+		RecordedAt: time.Now().UTC().Format(time.RFC3339),
+	}
+	if _, err := s.resolverDB().ExecContext(ctx, `
+	INSERT INTO resolver_memory_card_feedback(card_id, doc_id, chunk_id, memory_type, signal, weight, query, recorded_at)
+	VALUES(?, ?, ?, ?, ?, ?, ?, ?);
+	`, record.CardID, record.DocID, record.ChunkID, record.MemoryType, record.Signal, record.Weight, record.Query, record.RecordedAt); err != nil {
+		return CardFeedbackRecord{}, err
+	}
+	return record, nil
+}
+
+func (s *Service) PromptBundle(ctx context.Context, req PromptBundleRequest) (PromptBundleResponse, error) {
+	req.Query = strings.TrimSpace(req.Query)
+	req.Feature = strings.TrimSpace(req.Feature)
+	req.TaskID = strings.TrimSpace(req.TaskID)
+	req.Format = strings.TrimSpace(strings.ToLower(req.Format))
+	if req.Format == "" {
+		req.Format = "markdown"
+	}
+	query := firstNonEmpty(req.Query, req.Feature, req.TaskID)
+	if query == "" {
+		return PromptBundleResponse{}, fmt.Errorf("%w: query/feature/task_id is required", ErrInvalidArgument)
+	}
+	cards, err := s.CardsSearch(ctx, CardsSearchRequest{
+		Query:       query,
+		FeatureKeys: nonEmptySlice(req.Feature),
+		MemoryTypes: uniqueTrimmedStrings(req.MemoryTypes),
+		Limit:       req.Limit,
+		TokenBudget: req.TokenBudget,
+	})
+	if err != nil {
+		return PromptBundleResponse{}, err
+	}
+	prompt, sourceRefs, tokenEstimate := buildPromptBundleText(query, cards, req.Format)
+	return PromptBundleResponse{
+		BundleID:      fmt.Sprintf("prompt_bundle_%s", time.Now().UTC().Format("20060102_150405")),
+		Query:         query,
+		Format:        req.Format,
+		TokenEstimate: tokenEstimate,
+		Cards:         cards,
+		Prompt:        prompt,
+		SourceRefs:    sourceRefs,
+	}, nil
+}
+
+func (s *Service) TaskStateExport(ctx context.Context, req TaskStateExportRequest) (TaskStateExportResponse, error) {
+	req.TaskID = strings.TrimSpace(req.TaskID)
+	req.Feature = strings.TrimSpace(req.Feature)
+	if req.TaskID == "" {
+		return TaskStateExportResponse{}, fmt.Errorf("%w: task_id is required", ErrInvalidArgument)
+	}
+	required, _, err := s.DocsResolve(ctx, DocsResolveRequest{Feature: req.Feature, TaskID: req.TaskID, Limit: 20})
+	if err != nil && req.Feature != "" {
+		return TaskStateExportResponse{}, err
+	}
+	receipts, err := s.listLatestReadReceipts(ctx, req.TaskID)
+	if err != nil {
+		return TaskStateExportResponse{}, err
+	}
+	stale, err := s.DocsStaleCheck(ctx, DocsStaleCheckRequest{TaskID: req.TaskID})
+	if err != nil {
+		return TaskStateExportResponse{}, err
+	}
+	sourceRefs := make([]string, 0, len(required)+len(receipts))
+	for _, entry := range required {
+		sourceRefs = append(sourceRefs, typedRef("memx", "doc", entry.DocID))
+		for _, chunkID := range entry.TopChunks {
+			sourceRefs = append(sourceRefs, typedRef("memx", "chunk", chunkID))
+		}
+	}
+	for _, receipt := range receipts {
+		sourceRefs = append(sourceRefs, typedRef("memx", "doc", receipt.DocID))
+		for _, chunkID := range receipt.ChunkIDs {
+			sourceRefs = append(sourceRefs, typedRef("memx", "chunk", chunkID))
+		}
+	}
+	return TaskStateExportResponse{
+		TaskRef:      typedRef("agent-taskstate", "task", req.TaskID),
+		TaskID:       req.TaskID,
+		RequiredDocs: required,
+		ReadReceipts: receipts,
+		StaleReasons: stale,
+		SourceRefs:   uniqueTrimmedStrings(sourceRefs),
+		ExportedAt:   time.Now().UTC().Format(time.RFC3339),
+	}, nil
+}
+
+func (s *Service) buildReadChunkSnapshots(ctx context.Context, docID string, chunkIDs []string) ([]ResolverChunkSnapshot, error) {
+	var chunks []ResolverChunk
+	var err error
+	if len(chunkIDs) > 0 {
+		chunks, err = s.getResolverChunksByIDs(ctx, chunkIDs)
+	} else {
+		chunks, err = s.getResolverChunksByDocID(ctx, docID)
+	}
+	if err != nil {
+		return nil, err
+	}
+	snapshots := make([]ResolverChunkSnapshot, 0, len(chunks))
+	for _, chunk := range chunks {
+		snapshots = append(snapshots, chunkSnapshot(chunk))
+	}
+	return snapshots, nil
+}
+
+func (s *Service) buildSemanticStaleReason(ctx context.Context, taskID string, docID string, previousVersion string, currentVersion string, chunkIDs []string, snapshots []ResolverChunkSnapshot) (ResolverStaleReason, error) {
+	now := time.Now().UTC().Format(time.RFC3339)
+	reason := ResolverStaleReason{
+		TaskID:          taskID,
+		DocID:           docID,
+		PreviousVersion: previousVersion,
+		CurrentVersion:  currentVersion,
+		Reason:          "version_mismatch",
+		Severity:        "low",
+		ImpactScope:     []string{"metadata"},
+		DetectedAt:      now,
+	}
+	if len(snapshots) == 0 {
+		return reason, nil
+	}
+	currentChunks, err := s.getResolverChunksByDocID(ctx, docID)
+	if err != nil {
+		return ResolverStaleReason{}, err
+	}
+	currentByID := make(map[string]ResolverChunk, len(currentChunks))
+	for _, chunk := range currentChunks {
+		currentByID[chunk.ChunkID] = chunk
+	}
+	readIDs := make(map[string]struct{}, len(chunkIDs))
+	for _, chunkID := range chunkIDs {
+		readIDs[chunkID] = struct{}{}
+	}
+	impact := make(map[string]struct{})
+	var changes []ResolverChunkChange
+	for _, snapshot := range snapshots {
+		if len(readIDs) > 0 {
+			if _, ok := readIDs[snapshot.ChunkID]; !ok {
+				continue
+			}
+		}
+		current, ok := currentByID[snapshot.ChunkID]
+		if !ok {
+			changes = append(changes, ResolverChunkChange{
+				ChunkID:     snapshot.ChunkID,
+				ChangeType:  "removed",
+				HeadingPath: snapshot.HeadingPath,
+				MemoryType:  snapshot.MemoryType,
+				Impact:      "read_chunk_removed",
+			})
+			addImpactScope(impact, snapshot.HeadingPath, snapshot.MemoryType)
+			continue
+		}
+		currentSnapshot := chunkSnapshot(current)
+		if currentSnapshot.BodyHash != snapshot.BodyHash {
+			changes = append(changes, ResolverChunkChange{
+				ChunkID:     snapshot.ChunkID,
+				ChangeType:  "modified",
+				HeadingPath: currentSnapshot.HeadingPath,
+				MemoryType:  currentSnapshot.MemoryType,
+				Impact:      "read_chunk_modified",
+			})
+			addImpactScope(impact, currentSnapshot.HeadingPath, currentSnapshot.MemoryType)
+		}
+	}
+	if len(changes) == 0 {
+		return reason, nil
+	}
+	reason.Reason = "semantic_diff"
+	reason.Severity = "high"
+	if len(changes) == 1 {
+		reason.Severity = "medium"
+	}
+	reason.ChangedChunks = changes
+	reason.ImpactScope = sortedImpactScope(impact)
+	return reason, nil
+}
+
+func (s *Service) memoryCardFeedbackWeights(ctx context.Context) (map[string]int, error) {
+	rows, err := s.resolverDB().QueryContext(ctx, `
+	SELECT card_id, memory_type, signal, weight
+	FROM resolver_memory_card_feedback
+	ORDER BY id DESC
+	LIMIT 500;
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := make(map[string]int)
+	for rows.Next() {
+		var cardID, memoryType, signal string
+		var weight int
+		if err := rows.Scan(&cardID, &memoryType, &signal, &weight); err != nil {
+			return nil, err
+		}
+		delta := weight
+		switch signal {
+		case "irrelevant", "skipped":
+			delta = -weight
+		}
+		out[cardID] += delta
+		if memoryType != "" {
+			out["type:"+memoryType] += delta
+		}
+	}
+	return out, rows.Err()
+}
+
+func (s *Service) listLatestReadReceipts(ctx context.Context, taskID string) ([]ResolverReadReceipt, error) {
+	rows, err := s.resolverDB().QueryContext(ctx, `
+	SELECT rr.task_id, rr.doc_id, rr.version, rr.chunk_ids_json, rr.chunk_snapshots_json, rr.reader, rr.read_at
+	FROM resolver_read_receipts rr
+	JOIN (
+	  SELECT doc_id, MAX(id) AS latest_id
+	  FROM resolver_read_receipts
+	  WHERE task_id = ?
+	  GROUP BY doc_id
+	) latest ON latest.latest_id = rr.id
+	WHERE rr.task_id = ?
+	ORDER BY rr.id ASC;
+	`, taskID, taskID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var receipts []ResolverReadReceipt
+	for rows.Next() {
+		var receipt ResolverReadReceipt
+		var chunkIDsJSON, snapshotsJSON string
+		if err := rows.Scan(&receipt.TaskID, &receipt.DocID, &receipt.Version, &chunkIDsJSON, &snapshotsJSON, &receipt.Reader, &receipt.ReadAt); err != nil {
+			return nil, err
+		}
+		receipt.ChunkIDs = decodeStringSlice(chunkIDsJSON)
+		decodeJSON(snapshotsJSON, &receipt.ChunkSnapshots)
+		receipts = append(receipts, receipt)
+	}
+	return receipts, rows.Err()
+}
+
+func buildPromptBundleText(query string, cards []ResolverMemoryCard, format string) (string, []string, int) {
+	var b strings.Builder
+	sourceRefs := make([]string, 0, len(cards)*3)
+	tokenEstimate := 0
+	if format == "jsonl" {
+		for _, card := range cards {
+			b.WriteString(mustJSON(card))
+			b.WriteByte('\n')
+			sourceRefs = append(sourceRefs, typedRef("memx", "card", card.CardID), typedRef("memx", "chunk", card.ChunkID), typedRef("memx", "doc", card.DocID))
+			tokenEstimate += card.TokenEstimate
+		}
+		return b.String(), uniqueTrimmedStrings(sourceRefs), tokenEstimate
+	}
+	b.WriteString("# Memory Cards\n\n")
+	b.WriteString("Query: ")
+	b.WriteString(query)
+	b.WriteString("\n\n")
+	for _, card := range cards {
+		b.WriteString("- [")
+		b.WriteString(card.MemoryType)
+		b.WriteString("] ")
+		b.WriteString(card.Statement)
+		b.WriteString("\n  source: ")
+		b.WriteString(card.DocID)
+		b.WriteString(" / ")
+		b.WriteString(card.ChunkID)
+		b.WriteString("\n")
+		sourceRefs = append(sourceRefs, typedRef("memx", "card", card.CardID), typedRef("memx", "chunk", card.ChunkID), typedRef("memx", "doc", card.DocID))
+		tokenEstimate += card.TokenEstimate
+	}
+	return b.String(), uniqueTrimmedStrings(sourceRefs), tokenEstimate
+}
+
+func chunkSnapshot(chunk ResolverChunk) ResolverChunkSnapshot {
+	hydrateResolverChunkMemoryFields(&chunk)
+	return ResolverChunkSnapshot{
+		ChunkID:       chunk.ChunkID,
+		BodyHash:      hashText(chunk.Body),
+		HeadingPath:   append([]string(nil), chunk.HeadingPath...),
+		MemoryType:    chunk.MemoryType,
+		Importance:    chunk.Importance,
+		TokenEstimate: chunk.TokenEstimate,
+	}
+}
+
+func hashText(text string) string {
+	sum := sha256.Sum256([]byte(strings.TrimSpace(text)))
+	return hex.EncodeToString(sum[:])
+}
+
+func addImpactScope(scopes map[string]struct{}, headingPath []string, memoryType string) {
+	if memoryType != "" {
+		scopes["memory_type:"+memoryType] = struct{}{}
+	}
+	if len(headingPath) > 0 {
+		scopes["heading:"+strings.Join(headingPath, " > ")] = struct{}{}
+	}
+}
+
+func sortedImpactScope(scopes map[string]struct{}) []string {
+	out := make([]string, 0, len(scopes))
+	for scope := range scopes {
+		out = append(out, scope)
+	}
+	sort.Strings(out)
+	if len(out) == 0 {
+		return []string{"document"}
+	}
+	return out
+}
+
+func typedRef(domain string, entityType string, id string) string {
+	id = strings.TrimSpace(id)
+	id = strings.ReplaceAll(id, ":", "_")
+	return fmt.Sprintf("%s:%s:local:%s", domain, entityType, id)
 }
 
 func (s *Service) ContractsResolve(ctx context.Context, req ContractsResolveRequest) ([]ResolveEntry, []string, []string, []string, []string, error) {
@@ -414,6 +838,7 @@ func (s *Service) getResolverChunksByDocID(ctx context.Context, docID string) ([
 			return nil, err
 		}
 		chunk.HeadingPath = decodeStringSlice(headingPathJSON)
+		hydrateResolverChunkMemoryFields(&chunk)
 		out = append(out, chunk)
 	}
 	if err := rows.Err(); err != nil {
@@ -444,6 +869,7 @@ func (s *Service) getResolverChunksByIDs(ctx context.Context, chunkIDs []string)
 			return nil, err
 		}
 		chunk.HeadingPath = decodeStringSlice(headingPathJSON)
+		hydrateResolverChunkMemoryFields(&chunk)
 		out = append(out, chunk)
 	}
 	return out, nil

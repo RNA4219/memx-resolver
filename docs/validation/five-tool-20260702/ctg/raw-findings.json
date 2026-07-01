@@ -1,0 +1,347 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-01T16:01:19.405Z",
+  "run_id": "ctg-202607011601-local",
+  "repo": {
+    "root": ".",
+    "revision": "0da82481e888",
+    "branch": "main",
+    "dirty": true
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "plugin_versions": []
+  },
+  "artifact": "raw-findings",
+  "schema": "raw-findings@v1",
+  "completeness": "complete",
+  "findings": [
+    {
+      "id": "finding-UNSAFE_DELETE-000",
+      "ruleId": "UNSAFE_DELETE",
+      "category": "data",
+      "severity": "high",
+      "confidence": 0.8,
+      "title": "Unsafe delete operation detected",
+      "summary": "A delete operation is detected without proper safety checks. Add WHERE clauses, filters, soft-delete, or confirmation to prevent accidental data loss.",
+      "evidence": [
+        {
+          "id": "evidence-finding-UNSAFE_DELETE-000-00",
+          "path": "workflow-cookbook/tools/audit/purge_logs.py",
+          "startLine": 28,
+          "endLine": 34,
+          "kind": "text",
+          "excerptHash": "4e34a355"
+        }
+      ],
+      "tags": [
+        "data-loss",
+        "delete",
+        "domain:data-access",
+        "safety"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "69cf7146e85d6097"
+    },
+    {
+      "id": "finding-LARGE_MODULE-001",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Module has too many functions (22)",
+      "summary": "This file has 22 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-001-00",
+          "path": "workflow-cookbook/tools/autosave/project_lock_service.py",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "5a2b0623"
+        }
+      ],
+      "tags": [
+        "complexity",
+        "domain:code-health",
+        "maintainability",
+        "refactoring"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "dd7d88eaea44d5b9"
+    },
+    {
+      "id": "finding-LARGE_MODULE-002",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Module has too many functions (32)",
+      "summary": "This file has 32 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-002-00",
+          "path": "workflow-cookbook/tools/ci/check_governance_gate.py",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "029b012c"
+        }
+      ],
+      "tags": [
+        "complexity",
+        "domain:code-health",
+        "maintainability",
+        "refactoring"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "2ef238d7d3db6318"
+    },
+    {
+      "id": "finding-LARGE_MODULE-003",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.9,
+      "title": "Module exceeds line count threshold (998 lines)",
+      "summary": "This file has 998 lines, exceeding the 500 line threshold. Large files are hard to maintain, test, and understand. Consider splitting into smaller, focused modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-003-00",
+          "path": "workflow-cookbook/tools/codemap/update.py",
+          "startLine": 1,
+          "endLine": 20,
+          "kind": "text",
+          "excerptHash": "2de833e5"
+        }
+      ],
+      "tags": [
+        "domain:code-health",
+        "maintainability",
+        "refactoring",
+        "size"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "26e14a2e422fd27b"
+    },
+    {
+      "id": "finding-LARGE_MODULE-004",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.9,
+      "title": "Module exceeds line count threshold (861 lines)",
+      "summary": "This file has 861 lines, exceeding the 500 line threshold. Large files are hard to maintain, test, and understand. Consider splitting into smaller, focused modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-004-00",
+          "path": "workflow-cookbook/tools/context/pack.py",
+          "startLine": 1,
+          "endLine": 20,
+          "kind": "text",
+          "excerptHash": "1d757210"
+        }
+      ],
+      "tags": [
+        "domain:code-health",
+        "maintainability",
+        "refactoring",
+        "size"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "70e08306126a4bbc"
+    },
+    {
+      "id": "finding-LARGE_MODULE-005",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "high",
+      "confidence": 0.9,
+      "title": "Module exceeds line count threshold (1230 lines)",
+      "summary": "This file has 1230 lines, exceeding the 500 line threshold. Large files are hard to maintain, test, and understand. Consider splitting into smaller, focused modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-005-00",
+          "path": "workflow-cookbook/tools/perf/collect_metrics.py",
+          "startLine": 1,
+          "endLine": 20,
+          "kind": "text",
+          "excerptHash": "06dd8a39"
+        }
+      ],
+      "tags": [
+        "domain:code-health",
+        "maintainability",
+        "refactoring",
+        "size"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "ae00e54ae5a762b4"
+    },
+    {
+      "id": "finding-LARGE_MODULE-006",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Module has too many functions (21)",
+      "summary": "This file has 21 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-006-00",
+          "path": "workflow-cookbook/tools/perf/context_trimmer.py",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "5ca1ff24"
+        }
+      ],
+      "tags": [
+        "complexity",
+        "domain:code-health",
+        "maintainability",
+        "refactoring"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "f1f815ba2361b9d3"
+    },
+    {
+      "id": "finding-LARGE_MODULE-007",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Module has too many functions (22)",
+      "summary": "This file has 22 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-007-00",
+          "path": "workflow-cookbook/tools/security/allowlist_guard.py",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "73d335af"
+        }
+      ],
+      "tags": [
+        "complexity",
+        "domain:code-health",
+        "maintainability",
+        "refactoring"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "e2414b94b0859cb6"
+    },
+    {
+      "id": "finding-SUPPRESSION_DEBT-008",
+      "ruleId": "SUPPRESSION_DEBT",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.8,
+      "title": "Suppression may hide debt (UNSAFE_DELETE)",
+      "summary": "This suppression has expiry longer than 180 days. Narrow the path, add a near-term expiry, or replace the suppression with a tracked remediation item.",
+      "evidence": [
+        {
+          "id": "evidence-finding-SUPPRESSION_DEBT-008-00",
+          "path": ".ctg/suppressions.yaml",
+          "startLine": 6,
+          "endLine": 6,
+          "kind": "text",
+          "excerptHash": "23c11e76"
+        }
+      ],
+      "tags": [
+        "domain:code-health",
+        "maintainability",
+        "suppression",
+        "technical-debt"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "7344d19de3da03ac"
+    },
+    {
+      "id": "finding-SUPPRESSION_DEBT-009",
+      "ruleId": "SUPPRESSION_DEBT",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.8,
+      "title": "Suppression may hide debt (LARGE_MODULE)",
+      "summary": "This suppression has expiry longer than 180 days. Narrow the path, add a near-term expiry, or replace the suppression with a tracked remediation item.",
+      "evidence": [
+        {
+          "id": "evidence-finding-SUPPRESSION_DEBT-009-00",
+          "path": ".ctg/suppressions.yaml",
+          "startLine": 11,
+          "endLine": 11,
+          "kind": "text",
+          "excerptHash": "0a9d5d71"
+        }
+      ],
+      "tags": [
+        "domain:code-health",
+        "maintainability",
+        "suppression",
+        "technical-debt"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "9d06d54a6841c53b"
+    },
+    {
+      "id": "finding-HARDCODED_SECRET-010",
+      "ruleId": "HARDCODED_SECRET",
+      "category": "security",
+      "severity": "high",
+      "confidence": 0.7,
+      "title": "Possible secret in variable: help",
+      "summary": "Variable \"help\" may contain hardcoded secret",
+      "evidence": [
+        {
+          "id": "evidence-finding-HARDCODED_SECRET-010-00",
+          "path": "workflow-cookbook/tools/audit/verify_log_chain.py",
+          "startLine": 74,
+          "endLine": 74,
+          "kind": "text",
+          "excerptHash": "14cf0a1e"
+        }
+      ],
+      "tags": [
+        "domain:security-boundary"
+      ],
+      "fingerprint": "364eed6d24d03d55"
+    }
+  ],
+  "unsupported_claims": [],
+  "bySeverity": {
+    "critical": 0,
+    "high": 3,
+    "medium": 8,
+    "low": 0
+  },
+  "byRule": {
+    "UNSAFE_DELETE": 1,
+    "LARGE_MODULE": 7,
+    "SUPPRESSION_DEBT": 2,
+    "HARDCODED_SECRET": 1
+  }
+}

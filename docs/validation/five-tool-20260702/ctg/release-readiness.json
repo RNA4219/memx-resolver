@@ -1,0 +1,58 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-01T16:01:32.083Z",
+  "run_id": "readiness-20260701160132",
+  "repo": {
+    "root": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver",
+    "revision": "0da82481e888",
+    "branch": "main",
+    "dirty": true
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "policy_id": "default-policy",
+    "plugin_versions": []
+  },
+  "artifact": "release-readiness",
+  "schema": "release-readiness@v1",
+  "status": "passed",
+  "completeness": "complete",
+  "summary": "All policy conditions met, release ready",
+  "counts": {
+    "findings": 3,
+    "critical": 0,
+    "high": 1,
+    "risks": 0,
+    "testSeeds": 0,
+    "unsupportedClaims": 0
+  },
+  "selfAnalysis": {
+    "rawCritical": 0,
+    "rawHigh": 3,
+    "rawMedium": 8,
+    "rawLow": 0,
+    "suppressedCritical": 0,
+    "suppressedHigh": 2,
+    "suppressedMedium": 6,
+    "suppressedLow": 0,
+    "broadSuppressions": 1,
+    "acceptedExceptionsByClass": {
+      "self-reference": 0,
+      "fixture-intentional": 0,
+      "generated-artifact": 0,
+      "accepted-design": 0,
+      "temporary-debt": 8
+    }
+  },
+  "failedConditions": [],
+  "recommendedActions": [
+    "Review findings and assess impact on release",
+    "Consider addressing medium/low severity findings",
+    "REVIEW REQUIRED: 1 broad suppression(s) detected. Review path patterns for scope reduction."
+  ],
+  "artifactRefs": {
+    "findings": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260702\\ctg\\findings.json",
+    "riskRegister": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260702\\ctg\\risk-register.yaml"
+  }
+}
