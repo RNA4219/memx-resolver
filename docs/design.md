@@ -50,6 +50,7 @@ resolver 系テーブルは 1 つの resolver store にまとめる。
 - `read_receipt` 相当を `memx-resolver` 内に正規化して保持する
 - `task_id` をキーに stale 判定を返す API を提供する
 - `taskstate-export` で `agent-taskstate:task:local:<id>` と `memx:doc/chunk/card:local:<id>` の `typed_ref`、required docs、read receipts、stale reasons をまとめて返す
+- doc に紐づく `tracker:issue:*:*` と `birdseye:view:local:*` 参照も `source_refs` に含め、issue / Birdseye view 起点の再開材料として渡す
 - direct write ではなく export bridge とし、`agent-taskstate` 側の `context_bundle_source` へ取り込める payload 形状を `docs/interfaces.md` に合わせる
 
 ### 3.4 chunking
@@ -118,12 +119,15 @@ memory card は `memory_type`、`importance`、query match、feedback log、`tok
 - `title`
 - `source_path`
 - `version`
+- `version_scheme`
 - `updated_at`
 - `summary`
 - `body`
 - `tags_json`
 - `feature_keys_json`
 - `task_ids_json`
+- `tracker_refs_json`
+- `birdseye_refs_json`
 - `acceptance_criteria_json`
 - `forbidden_patterns_json`
 - `definition_of_done_json`
@@ -168,18 +172,37 @@ task と文書参照の対応を保持する。
 - `version`
 - `chunk_ids_json`
 - `chunk_snapshots_json`
+- `previous_receipt_hash`
+- `receipt_hash`
 - `reader`
 - `read_at`
 
 `chunk_snapshots_json` は読了時点の `chunk_id`、本文 hash、heading path、memory type、importance、token estimate を保持する。stale 判定では最新版 chunk と比較し、読んだ chunk が変化した場合は `semantic_diff` として `impact_scope` / `changed_chunks` を返す。version だけが変わり読了 chunk が不変の場合は metadata impact の `version_mismatch` として扱う。
 
+`previous_receipt_hash` / `receipt_hash` は task 単位の hash chain を形成し、`resolver_audit_log` の `reads_ack` 記録から後追い確認できる。
+
+### 4.5 resolver_audit_log
+
+resolver 操作の監査証跡を保持する。
+
+主な項目:
+
+- `operation`
+- `actor`
+- `target_type`
+- `target_id`
+- `result`
+- `receipt_hash`
+- `details_json`
+- `recorded_at`
+
 ## 5. 既知の制約
 
-- 既存 `short.db` 内の resolver データを専用 store へ自動移送する機能は MVP 範囲外
-- version 比較は完全な順序比較を行わず、文字列不一致を stale 候補とみなす
+- 既存 `short.db` 内の resolver データは `mem docs migrate-resolver-store --from short.db --to resolver.db --dry-run` で事前確認し、dry-run なしで専用 store へ移送できる
+- version 比較は `version_scheme` により `semver` / `iso_datetime` / `git_revision` / `string` を区別する。scheme 未指定時は version 文字列から推定する
 - stale 候補は read receipt の chunk snapshot と最新版 chunk を比較し、semantic diff と影響範囲を返す
 - task dependency は外部正本に問い合わせず、ローカル保持の `task_ids_json` を優先利用する
-- 全文検索は resolver 専用 FTS を作らず、最小実装では LIKE ベースとする
+- 全文検索は resolver 専用 FTS5 (`resolver_documents_fts` / `resolver_chunks_fts`) を使い、FTS が使えない場合に既存の軽量一致ロジックへフォールバックする
 
 ## 6. 完了条件
 
@@ -189,5 +212,8 @@ task と文書参照の対応を保持する。
 - read receipt 登録と stale 判定が動く
 - contract resolve が acceptance / forbidden / DoD / dependencies を返せる
 - resolver store を分離しても同じ API 契約で動作する
+- `short.db` 同居 resolver store から専用 `resolver.db` へ CLI で移行できる
 - memory card ranking が feedback と重み設定で補正できる
 - prompt-ready bundle と agent-taskstate export が取得できる
+- read receipt hash chain と audit log で ack 証跡を追跡できる
+- tracker / Birdseye view refs と version_scheme が export / stale 判定に反映される

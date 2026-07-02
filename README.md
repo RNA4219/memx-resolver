@@ -82,11 +82,12 @@ mem docs ack --task-id TASK.sample --doc-id workflow-cookbook:blueprint --versio
 mem docs stale --task-id TASK.sample
 mem docs taskstate-export --task-id TASK.sample --feature resolver
 mem docs contract --feature resolver
+mem docs migrate-resolver-store --from short.db --to resolver.db --dry-run
 ```
 
 `mem docs chunks --json` は、chunk に加えて LLM 向けの `memory_cards` も返します。`mem docs bundle` は card をそのまま prompt に入れられる Markdown / JSONL 形式で返します。`mem docs cards-feedback` で実利用ログを残すと、以後の card ranking に補正として反映されます。
 
-`mem docs stale --json` は version mismatch に加え、読了時点の chunk snapshot と最新版 chunk を比較し、`semantic_diff`、`impact_scope`、`changed_chunks` を返します。`mem docs taskstate-export --json` は `agent-taskstate` の `context_bundle_source` に渡しやすい `typed_ref` と read receipt / required docs / stale reasons をまとめます。
+`mem docs search` と `mem docs cards` は resolver 専用 FTS5 を使い、文書数が増えても doc / chunk を効率よく検索します。`mem docs stale --json` は version mismatch に加え、読了時点の chunk snapshot と最新版 chunk を比較し、`semantic_diff`、`impact_scope`、`changed_chunks` を返します。`version_scheme` を指定すると `semver` / `iso_datetime` / `git_revision` / `string` に応じて stale 判定します。`mem docs ack --json` は `receipt_hash` / `previous_receipt_hash` を返し、監査ログへ記録します。`mem docs taskstate-export --json` は `agent-taskstate` の `context_bundle_source` に渡しやすい `typed_ref` と read receipt / required docs / stale reasons / tracker refs / Birdseye refs をまとめます。
 
 ### API
 

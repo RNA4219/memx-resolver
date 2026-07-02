@@ -453,12 +453,16 @@ chunk の目的は長文分割そのものではない。
 - query 解決結果に基づく required section 提示
 - forbidden pattern 自動検出
 - definition of done の自動展開
-- 外部 tracker / Birdseye view 同期
+- 外部 tracker / Birdseye view 同期（部分実装済み。doc 登録時の `tracker_refs` / `birdseye_refs` を `taskstate-export` の `source_refs` に含める）
 - 変更影響範囲の自動推定
 - semantic diff に基づく stale 強度判定（実装済み。読了 chunk snapshot と最新版 chunk を比較し、`semantic_diff` / `impact_scope` / `changed_chunks` を返す）
 - memory card ranking の実利用 feedback 補正（実装済み。`cards-feedback` のログを ranking に反映）
 - prompt-ready bundle export（実装済み。Markdown / JSONL と `source_refs` を返す）
 - agent-taskstate export bridge（実装済み。direct write ではなく `typed_ref` 付き payload を返す）
+- resolver 専用 FTS 検索（実装済み。`resolver_documents_fts` / `resolver_chunks_fts` を `docs:search` / `cards:search` で利用）
+- read receipt hash chain / audit log（実装済み。`previous_receipt_hash` / `receipt_hash` と `resolver_audit_log` を保存）
+- resolver store 移行ツール（実装済み。`mem docs migrate-resolver-store --from short.db --to resolver.db --dry-run`）
+- `version_scheme` 比較ポリシー（実装済み。`semver` / `iso_datetime` / `git_revision` / `string` を区別）
 
 ## 23. 結論
 

@@ -27,6 +27,8 @@
 
 ## Unreleased
 
+- resolver 専用 FTS5 を追加し、`docs:search` / `cards:search` が doc / chunk 検索で利用できるようにした。
+- read receipt hash chain、resolver audit log、tracker / Birdseye refs export、resolver store 移行CLI、`version_scheme` 比較ポリシーを追加。
 - `docs/memx_spec_v3/go/` の runtime DB ignore パスを実配置へ合わせ、
   ローカル実行生成物が差分へ混ざりにくいよう整理。
 - tracked されていた runtime DB は index から外し、

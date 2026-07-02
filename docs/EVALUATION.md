@@ -20,6 +20,11 @@ next_review_due: 2026-04-10
 - [x] 読了したdoc versionとchunk_idsをtaskに紐づけて記録できる
 - [x] doc version更新時に semantic diff / impact scope 付きで stale 判定できる
 - [x] `mem docs taskstate-export --task-id ...` で agent-taskstate 連携 payload を取得できる
+- [x] resolver 専用 FTS5 で `docs:search` / `cards:search` が doc / chunk を検索できる
+- [x] read receipt が `receipt_hash` / `previous_receipt_hash` と audit log を保存できる
+- [x] tracker refs / Birdseye refs が `taskstate-export` の `source_refs` に含まれる
+- [x] `mem docs migrate-resolver-store --from short.db --to resolver.db --dry-run` で移行計画を確認し、実移行できる
+- [x] `version_scheme` により SemVer 等の表記差を stale 誤検知にしない
 - [x] docs/interfaces.md に記載した最小APIが呼べる
 - [x] 文書を登録するとchunkが生成される
 - [x] CLI JSON / HTTP 実レスポンスが `cli-json.schema.json` / OpenAPI schema に適合する

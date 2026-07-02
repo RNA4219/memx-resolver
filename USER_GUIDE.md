@@ -86,6 +86,7 @@ mem docs ack --task-id TASK.sample --doc-id workflow-cookbook:blueprint --versio
 mem docs stale --task-id TASK.sample
 mem docs taskstate-export --task-id TASK.sample --feature resolver
 mem docs contract --feature resolver
+mem docs migrate-resolver-store --from short.db --to resolver.db --dry-run
 
 # resolver 専用 DB を使う場合
 mem docs ingest --resolver resolver.db --title "Spec" --body "# Spec" --doc-type spec --version 2026-03-10
@@ -97,9 +98,9 @@ mem gc short --enable-gc
 
 既定 DB は `short.db / journal.db / knowledge.db / archive.db` です。
 
-`mem docs chunks --json` は `chunks` に加えて、LLM に渡しやすい `memory_cards` も返します。`mem docs bundle` は prompt-ready な card bundle を返し、`mem docs cards-feedback` の実利用ログは ranking 補正に使われます。
+`mem docs search` と `mem docs cards` は resolver 専用 FTS5 を使います。`mem docs chunks --json` は `chunks` に加えて、LLM に渡しやすい `memory_cards` も返します。`mem docs bundle` は prompt-ready な card bundle を返し、`mem docs cards-feedback` の実利用ログは ranking 補正に使われます。
 
-`mem docs stale --json` は version mismatch だけでなく、読了時点の chunk snapshot と最新版 chunk の semantic diff、影響範囲、変更 chunk を返します。`mem docs taskstate-export --json` は `agent-taskstate` へ渡せる read receipt / required docs / stale reasons / `typed_ref` をまとめます。
+`mem docs stale --json` は version mismatch だけでなく、読了時点の chunk snapshot と最新版 chunk の semantic diff、影響範囲、変更 chunk を返します。`version_scheme` を指定すると `semver` / `iso_datetime` / `git_revision` / `string` に応じて比較します。`mem docs ack --json` は read receipt の hash chain を返し、監査ログへ記録します。`mem docs taskstate-export --json` は `agent-taskstate` へ渡せる read receipt / required docs / stale reasons / `typed_ref` / tracker refs / Birdseye refs をまとめます。
 
 ## API
 
