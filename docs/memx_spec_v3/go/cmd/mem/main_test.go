@@ -442,3 +442,55 @@ func TestDocsCommandsCanUseSeparateResolverStore(t *testing.T) {
 		t.Fatalf("unexpected taskstate export output: %s", exportOut)
 	}
 }
+
+func TestDocsMigrateResolverStoreCommand(t *testing.T) {
+	binPath := buildMemBinary(t)
+	workdir := t.TempDir()
+	shortPath := filepath.Join(workdir, "short.db")
+	resolverPath := filepath.Join(workdir, "resolver.db")
+
+	out := runMem(t, binPath, workdir,
+		"docs", "ingest", "--json",
+		"--title", "Migration Source Spec",
+		"--body", "# Migration Source Spec\n\n## Acceptance Criteria\n- migrated resolver store resolves docs",
+		"--doc-type", "spec",
+		"--version", "2026-03-10",
+		"--feature", "resolver-migration",
+	)
+	var ingestResp struct {
+		DocID string `json:"doc_id"`
+	}
+	if err := json.Unmarshal([]byte(out), &ingestResp); err != nil {
+		t.Fatalf("decode docs ingest response: %v\n%s", err, out)
+	}
+	if ingestResp.DocID == "" {
+		t.Fatalf("missing doc id: %s", out)
+	}
+
+	dryRunOut := runMem(t, binPath, workdir,
+		"docs", "migrate-resolver-store", "--json", "--dry-run",
+		"--from", shortPath,
+		"--to", resolverPath,
+	)
+	if !strings.Contains(dryRunOut, `"dry_run": true`) || !strings.Contains(dryRunOut, `"resolver_documents": 1`) {
+		t.Fatalf("unexpected dry-run output: %s", dryRunOut)
+	}
+
+	migrateOut := runMem(t, binPath, workdir,
+		"docs", "migrate-resolver-store", "--json",
+		"--from", shortPath,
+		"--to", resolverPath,
+	)
+	if !strings.Contains(migrateOut, `"status": "migrated"`) || !strings.Contains(migrateOut, `"resolver_chunks"`) {
+		t.Fatalf("unexpected migrate output: %s", migrateOut)
+	}
+
+	resolveOut := runMem(t, binPath, workdir,
+		"docs", "resolve", "--json",
+		"--resolver", resolverPath,
+		"--feature", "resolver-migration",
+	)
+	if !strings.Contains(resolveOut, ingestResp.DocID) {
+		t.Fatalf("expected migrated resolver doc to resolve, got: %s", resolveOut)
+	}
+}

@@ -191,6 +191,63 @@ func TestDocsSearchSupportsStructuredFilters(t *testing.T) {
 	}
 }
 
+func TestDocsSearchUsesResolverFTSAcrossDocumentFields(t *testing.T) {
+	svc := newResolverServiceForTest(t)
+	defer func() { _ = svc.Close() }()
+	ctx := context.Background()
+
+	doc, _, err := svc.DocsIngest(ctx, DocsIngestRequest{
+		DocType: "spec",
+		Title:   "Alpha Resolver Spec",
+		Version: "2026-03-10",
+		Body:    "# Search\n\nBudget behavior is described here.",
+	})
+	if err != nil {
+		t.Fatalf("DocsIngest: %v", err)
+	}
+
+	results, err := svc.DocsSearch(ctx, DocsSearchRequest{Query: "alpha budget"})
+	if err != nil {
+		t.Fatalf("DocsSearch: %v", err)
+	}
+	if len(results) != 1 || results[0].DocID != doc.DocID || results[0].Reason != "fts matched" {
+		t.Fatalf("expected FTS result across title/body fields, got %#v", results)
+	}
+}
+
+func TestCardsSearchUsesResolverChunkFTSAcrossHeadingAndBody(t *testing.T) {
+	svc := newResolverServiceForTest(t)
+	defer func() { _ = svc.Close() }()
+	ctx := context.Background()
+
+	_, _, err := svc.DocsIngest(ctx, DocsIngestRequest{
+		DocType: "spec",
+		Title:   "Chunk FTS Spec",
+		Version: "2026-03-10",
+		Body: `# Chunk FTS Spec
+
+## Acceptance Criteria
+- budget item is prompt ready
+
+## Background
+- unrelated acceptance note`,
+	})
+	if err != nil {
+		t.Fatalf("DocsIngest: %v", err)
+	}
+
+	cards, err := svc.CardsSearch(ctx, CardsSearchRequest{Query: "acceptance budget", Limit: 5})
+	if err != nil {
+		t.Fatalf("CardsSearch: %v", err)
+	}
+	if len(cards) == 0 {
+		t.Fatal("expected cards from chunk FTS")
+	}
+	if cards[0].MemoryType != "acceptance" || cards[0].Statement != "budget item is prompt ready" {
+		t.Fatalf("expected chunk FTS to prefer matching acceptance card, got %#v", cards)
+	}
+}
+
 func TestDocsStaleCheckReportsSemanticDiffImpact(t *testing.T) {
 	svc := newResolverServiceForTest(t)
 	defer func() { _ = svc.Close() }()
@@ -239,6 +296,43 @@ func TestDocsStaleCheckReportsSemanticDiffImpact(t *testing.T) {
 	}
 	if len(stale[0].ChangedChunks) != 1 || len(stale[0].ImpactScope) == 0 {
 		t.Fatalf("expected changed chunk impact scope, got %#v", stale[0])
+	}
+}
+
+func TestReadsAckStoresHashChainAndAuditLog(t *testing.T) {
+	svc := newResolverServiceForTest(t)
+	defer func() { _ = svc.Close() }()
+	ctx := context.Background()
+
+	doc, _, err := svc.DocsIngest(ctx, DocsIngestRequest{DocType: "spec", Title: "Receipt Audit Spec", Version: "2026-03-10", Body: "# Spec"})
+	if err != nil {
+		t.Fatalf("DocsIngest: %v", err)
+	}
+	first, err := svc.ReadsAck(ctx, ReadsAckRequest{TaskID: "task:audit", DocID: doc.DocID, Reader: "agent-a"})
+	if err != nil {
+		t.Fatalf("ReadsAck first: %v", err)
+	}
+	second, err := svc.ReadsAck(ctx, ReadsAckRequest{TaskID: "task:audit", DocID: doc.DocID, Reader: "agent-a"})
+	if err != nil {
+		t.Fatalf("ReadsAck second: %v", err)
+	}
+	if first.ReceiptHash == "" {
+		t.Fatalf("expected first receipt hash: %#v", first)
+	}
+	if second.PreviousReceiptHash != first.ReceiptHash || second.ReceiptHash == "" || second.ReceiptHash == first.ReceiptHash {
+		t.Fatalf("unexpected hash chain: first=%#v second=%#v", first, second)
+	}
+
+	var auditCount int
+	if err := svc.resolverDB().QueryRow(`
+SELECT COUNT(*)
+FROM resolver_audit_log
+WHERE operation = 'reads_ack' AND receipt_hash = ? AND result = 'ok';
+`, second.ReceiptHash).Scan(&auditCount); err != nil {
+		t.Fatalf("query audit log: %v", err)
+	}
+	if auditCount != 1 {
+		t.Fatalf("expected one audit row for second receipt, got %d", auditCount)
 	}
 }
 
@@ -468,11 +562,13 @@ func TestPromptBundleAndTaskStateExport(t *testing.T) {
 	ctx := context.Background()
 
 	doc, _, err := svc.DocsIngest(ctx, DocsIngestRequest{
-		DocType:     "spec",
-		Title:       "Prompt Export Spec",
-		Version:     "2026-03-10",
-		FeatureKeys: []string{"prompt-export"},
-		TaskIDs:     []string{"task:prompt"},
+		DocType:      "spec",
+		Title:        "Prompt Export Spec",
+		Version:      "2026-03-10",
+		FeatureKeys:  []string{"prompt-export"},
+		TaskIDs:      []string{"task:prompt"},
+		TrackerRefs:  []string{"tracker:issue:github:owner/repo#123"},
+		BirdseyeRefs: []string{"docs.requirements"},
 		Body: `# Prompt Export Spec
 
 ## Acceptance Criteria
@@ -503,6 +599,12 @@ func TestPromptBundleAndTaskStateExport(t *testing.T) {
 	if len(exported.RequiredDocs) != 1 || len(exported.ReadReceipts) != 1 || len(exported.SourceRefs) == 0 {
 		t.Fatalf("unexpected taskstate export: %#v", exported)
 	}
+	if !containsFold(exported.SourceRefs, "tracker:issue:github:owner/repo#123") {
+		t.Fatalf("expected tracker source ref in export: %#v", exported.SourceRefs)
+	}
+	if !containsFold(exported.SourceRefs, "birdseye:view:local:docs.requirements") {
+		t.Fatalf("expected Birdseye source ref in export: %#v", exported.SourceRefs)
+	}
 }
 
 func TestDocsIngestRejectsOlderVersion(t *testing.T) {
@@ -518,6 +620,60 @@ func TestDocsIngestRejectsOlderVersion(t *testing.T) {
 	_, _, err = svc.DocsIngest(ctx, DocsIngestRequest{DocID: doc.DocID, DocType: "spec", Title: "Versioned Spec", Version: "2026-03-10", Body: "# Older"})
 	if !errors.Is(err, ErrConflict) {
 		t.Fatalf("expected ErrConflict, got %v", err)
+	}
+}
+
+func TestDocsIngestUsesSemverVersionScheme(t *testing.T) {
+	svc := newResolverServiceForTest(t)
+	defer func() { _ = svc.Close() }()
+	ctx := context.Background()
+
+	doc, _, err := svc.DocsIngest(ctx, DocsIngestRequest{
+		DocType:       "spec",
+		Title:         "Semver Spec",
+		Version:       "v1.0.0",
+		VersionScheme: "semver",
+		TaskIDs:       []string{"task:semver"},
+		Body:          "# Spec",
+	})
+	if err != nil {
+		t.Fatalf("DocsIngest initial: %v", err)
+	}
+	if doc.VersionScheme != "semver" {
+		t.Fatalf("expected semver scheme, got %#v", doc)
+	}
+	if _, err := svc.ReadsAck(ctx, ReadsAckRequest{TaskID: "task:semver", DocID: doc.DocID}); err != nil {
+		t.Fatalf("ReadsAck: %v", err)
+	}
+	if _, _, err := svc.DocsIngest(ctx, DocsIngestRequest{
+		DocID:         doc.DocID,
+		DocType:       "spec",
+		Title:         "Semver Spec",
+		Version:       "1.0.0",
+		VersionScheme: "semver",
+		TaskIDs:       []string{"task:semver"},
+		Body:          "# Spec",
+	}); err != nil {
+		t.Fatalf("DocsIngest equivalent semver: %v", err)
+	}
+	stale, err := svc.DocsStaleCheck(ctx, DocsStaleCheckRequest{TaskID: "task:semver"})
+	if err != nil {
+		t.Fatalf("DocsStaleCheck: %v", err)
+	}
+	if len(stale) != 0 {
+		t.Fatalf("expected equivalent semver to stay fresh, got %#v", stale)
+	}
+
+	_, _, err = svc.DocsIngest(ctx, DocsIngestRequest{
+		DocID:         doc.DocID,
+		DocType:       "spec",
+		Title:         "Semver Spec",
+		Version:       "0.9.0",
+		VersionScheme: "semver",
+		Body:          "# Older",
+	})
+	if !errors.Is(err, ErrConflict) {
+		t.Fatalf("expected semver ErrConflict, got %v", err)
 	}
 }
 

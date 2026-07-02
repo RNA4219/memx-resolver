@@ -13,12 +13,15 @@ CREATE TABLE IF NOT EXISTS resolver_documents (
   title TEXT NOT NULL,
   source_path TEXT NOT NULL DEFAULT '',
   version TEXT NOT NULL,
+  version_scheme TEXT NOT NULL DEFAULT 'string',
   updated_at TEXT NOT NULL,
   summary TEXT NOT NULL DEFAULT '',
   body TEXT NOT NULL,
   tags_json TEXT NOT NULL DEFAULT '[]',
   feature_keys_json TEXT NOT NULL DEFAULT '[]',
   task_ids_json TEXT NOT NULL DEFAULT '[]',
+  tracker_refs_json TEXT NOT NULL DEFAULT '[]',
+  birdseye_refs_json TEXT NOT NULL DEFAULT '[]',
   acceptance_criteria_json TEXT NOT NULL DEFAULT '[]',
   forbidden_patterns_json TEXT NOT NULL DEFAULT '[]',
   definition_of_done_json TEXT NOT NULL DEFAULT '[]',
@@ -31,6 +34,32 @@ CREATE INDEX IF NOT EXISTS idx_resolver_documents_type
 
 CREATE INDEX IF NOT EXISTS idx_resolver_documents_version
   ON resolver_documents(version);
+
+CREATE VIRTUAL TABLE IF NOT EXISTS resolver_documents_fts USING fts5(
+  doc_id UNINDEXED,
+  doc_type,
+  title,
+  source_path,
+  summary,
+  body,
+  tags,
+  feature_keys
+);
+
+CREATE TRIGGER IF NOT EXISTS resolver_documents_ai AFTER INSERT ON resolver_documents BEGIN
+  INSERT INTO resolver_documents_fts(doc_id, doc_type, title, source_path, summary, body, tags, feature_keys)
+  VALUES (new.doc_id, new.doc_type, new.title, new.source_path, new.summary, new.body, new.tags_json, new.feature_keys_json);
+END;
+
+CREATE TRIGGER IF NOT EXISTS resolver_documents_au AFTER UPDATE ON resolver_documents BEGIN
+  DELETE FROM resolver_documents_fts WHERE doc_id = old.doc_id;
+  INSERT INTO resolver_documents_fts(doc_id, doc_type, title, source_path, summary, body, tags, feature_keys)
+  VALUES (new.doc_id, new.doc_type, new.title, new.source_path, new.summary, new.body, new.tags_json, new.feature_keys_json);
+END;
+
+CREATE TRIGGER IF NOT EXISTS resolver_documents_ad AFTER DELETE ON resolver_documents BEGIN
+  DELETE FROM resolver_documents_fts WHERE doc_id = old.doc_id;
+END;
 
 CREATE TABLE IF NOT EXISTS resolver_chunks (
   chunk_id TEXT PRIMARY KEY,
@@ -48,6 +77,30 @@ CREATE TABLE IF NOT EXISTS resolver_chunks (
 CREATE INDEX IF NOT EXISTS idx_resolver_chunks_doc
   ON resolver_chunks(doc_id, ordinal);
 
+CREATE VIRTUAL TABLE IF NOT EXISTS resolver_chunks_fts USING fts5(
+  chunk_id UNINDEXED,
+  doc_id UNINDEXED,
+  heading,
+  heading_path,
+  body,
+  importance
+);
+
+CREATE TRIGGER IF NOT EXISTS resolver_chunks_ai AFTER INSERT ON resolver_chunks BEGIN
+  INSERT INTO resolver_chunks_fts(chunk_id, doc_id, heading, heading_path, body, importance)
+  VALUES (new.chunk_id, new.doc_id, new.heading, new.heading_path_json, new.body, new.importance);
+END;
+
+CREATE TRIGGER IF NOT EXISTS resolver_chunks_au AFTER UPDATE ON resolver_chunks BEGIN
+  DELETE FROM resolver_chunks_fts WHERE chunk_id = old.chunk_id;
+  INSERT INTO resolver_chunks_fts(chunk_id, doc_id, heading, heading_path, body, importance)
+  VALUES (new.chunk_id, new.doc_id, new.heading, new.heading_path_json, new.body, new.importance);
+END;
+
+CREATE TRIGGER IF NOT EXISTS resolver_chunks_ad AFTER DELETE ON resolver_chunks BEGIN
+  DELETE FROM resolver_chunks_fts WHERE chunk_id = old.chunk_id;
+END;
+
 CREATE TABLE IF NOT EXISTS resolver_document_links (
   src_doc_id TEXT NOT NULL,
   dst_doc_id TEXT NOT NULL,
@@ -62,12 +115,32 @@ CREATE TABLE IF NOT EXISTS resolver_read_receipts (
   version TEXT NOT NULL,
   chunk_ids_json TEXT NOT NULL DEFAULT '[]',
   chunk_snapshots_json TEXT NOT NULL DEFAULT '[]',
+  previous_receipt_hash TEXT NOT NULL DEFAULT '',
+  receipt_hash TEXT NOT NULL DEFAULT '',
   reader TEXT NOT NULL,
   read_at TEXT NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS idx_resolver_read_receipts_task
   ON resolver_read_receipts(task_id, read_at);
+
+CREATE INDEX IF NOT EXISTS idx_resolver_read_receipts_hash
+  ON resolver_read_receipts(receipt_hash);
+
+CREATE TABLE IF NOT EXISTS resolver_audit_log (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  operation TEXT NOT NULL,
+  actor TEXT NOT NULL DEFAULT '',
+  target_type TEXT NOT NULL DEFAULT '',
+  target_id TEXT NOT NULL DEFAULT '',
+  result TEXT NOT NULL,
+  receipt_hash TEXT NOT NULL DEFAULT '',
+  details_json TEXT NOT NULL DEFAULT '{}',
+  recorded_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_resolver_audit_log_operation
+  ON resolver_audit_log(operation, recorded_at);
 
 CREATE TABLE IF NOT EXISTS resolver_memory_card_feedback (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -97,6 +170,41 @@ func migrateResolver(db *sql.DB) error {
 	}
 	if err := ensureResolverColumn(db, "resolver_read_receipts", "chunk_snapshots_json", "TEXT NOT NULL DEFAULT '[]'"); err != nil {
 		return err
+	}
+	if err := ensureResolverColumn(db, "resolver_read_receipts", "previous_receipt_hash", "TEXT NOT NULL DEFAULT ''"); err != nil {
+		return err
+	}
+	if err := ensureResolverColumn(db, "resolver_read_receipts", "receipt_hash", "TEXT NOT NULL DEFAULT ''"); err != nil {
+		return err
+	}
+	if err := ensureResolverColumn(db, "resolver_documents", "tracker_refs_json", "TEXT NOT NULL DEFAULT '[]'"); err != nil {
+		return err
+	}
+	if err := ensureResolverColumn(db, "resolver_documents", "birdseye_refs_json", "TEXT NOT NULL DEFAULT '[]'"); err != nil {
+		return err
+	}
+	if err := ensureResolverColumn(db, "resolver_documents", "version_scheme", "TEXT NOT NULL DEFAULT 'string'"); err != nil {
+		return err
+	}
+	if err := rebuildResolverFTS(db); err != nil {
+		return err
+	}
+	return nil
+}
+
+func rebuildResolverFTS(db *sql.DB) error {
+	if _, err := db.Exec(`
+DELETE FROM resolver_documents_fts;
+INSERT INTO resolver_documents_fts(doc_id, doc_type, title, source_path, summary, body, tags, feature_keys)
+SELECT doc_id, doc_type, title, source_path, summary, body, tags_json, feature_keys_json
+FROM resolver_documents;
+
+DELETE FROM resolver_chunks_fts;
+INSERT INTO resolver_chunks_fts(chunk_id, doc_id, heading, heading_path, body, importance)
+SELECT chunk_id, doc_id, heading, heading_path_json, body, importance
+FROM resolver_chunks;
+`); err != nil {
+		return fmt.Errorf("rebuild resolver fts: %w", err)
 	}
 	return nil
 }

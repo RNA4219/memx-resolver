@@ -9,12 +9,15 @@ type ResolverDocument struct {
 	Title              string   `json:"title"`
 	SourcePath         string   `json:"source_path"`
 	Version            string   `json:"version"`
+	VersionScheme      string   `json:"version_scheme,omitempty"`
 	UpdatedAt          string   `json:"updated_at"`
 	Summary            string   `json:"summary"`
 	Body               string   `json:"body,omitempty"`
 	Tags               []string `json:"tags,omitempty"`
 	FeatureKeys        []string `json:"feature_keys,omitempty"`
 	TaskIDs            []string `json:"task_ids,omitempty"`
+	TrackerRefs        []string `json:"tracker_refs,omitempty"`
+	BirdseyeRefs       []string `json:"birdseye_refs,omitempty"`
 	AcceptanceCriteria []string `json:"acceptance_criteria,omitempty"`
 	ForbiddenPatterns  []string `json:"forbidden_patterns,omitempty"`
 	DefinitionOfDone   []string `json:"definition_of_done,omitempty"`
@@ -84,13 +87,15 @@ type ResolveEntry struct {
 
 // ResolverReadReceipt represents a read receipt for a document.
 type ResolverReadReceipt struct {
-	TaskID         string                  `json:"task_id"`
-	DocID          string                  `json:"doc_id"`
-	Version        string                  `json:"version"`
-	ChunkIDs       []string                `json:"chunk_ids,omitempty"`
-	ChunkSnapshots []ResolverChunkSnapshot `json:"chunk_snapshots,omitempty"`
-	Reader         string                  `json:"reader"`
-	ReadAt         string                  `json:"read_at"`
+	TaskID              string                  `json:"task_id"`
+	DocID               string                  `json:"doc_id"`
+	Version             string                  `json:"version"`
+	ChunkIDs            []string                `json:"chunk_ids,omitempty"`
+	ChunkSnapshots      []ResolverChunkSnapshot `json:"chunk_snapshots,omitempty"`
+	PreviousReceiptHash string                  `json:"previous_receipt_hash,omitempty"`
+	ReceiptHash         string                  `json:"receipt_hash,omitempty"`
+	Reader              string                  `json:"reader"`
+	ReadAt              string                  `json:"read_at"`
 }
 
 // ResolverStaleReason represents a stale check result.
@@ -138,10 +143,13 @@ type DocsIngestRequest struct {
 	Title              string          `json:"title"`
 	SourcePath         string          `json:"source_path,omitempty"`
 	Version            string          `json:"version"`
+	VersionScheme      string          `json:"version_scheme,omitempty"`
 	UpdatedAt          string          `json:"updated_at,omitempty"`
 	Tags               []string        `json:"tags,omitempty"`
 	FeatureKeys        []string        `json:"feature_keys,omitempty"`
 	TaskIDs            []string        `json:"task_ids,omitempty"`
+	TrackerRefs        []string        `json:"tracker_refs,omitempty"`
+	BirdseyeRefs       []string        `json:"birdseye_refs,omitempty"`
 	Summary            string          `json:"summary,omitempty"`
 	Body               string          `json:"body"`
 	Chunking           ChunkingOptions `json:"chunking,omitempty"`

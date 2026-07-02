@@ -18,6 +18,10 @@ func (r *DocsIngestRequest) normalize() {
 	r.Title = strings.TrimSpace(r.Title)
 	r.SourcePath = strings.TrimSpace(r.SourcePath)
 	r.Version = strings.TrimSpace(r.Version)
+	r.VersionScheme = normalizeVersionScheme(r.VersionScheme)
+	if r.VersionScheme == "string" {
+		r.VersionScheme = inferVersionScheme(r.Version)
+	}
 	r.UpdatedAt = strings.TrimSpace(r.UpdatedAt)
 	r.Summary = strings.TrimSpace(r.Summary)
 	r.Body = strings.TrimSpace(r.Body)
@@ -35,6 +39,8 @@ func (r *DocsIngestRequest) normalize() {
 	r.Tags = uniqueTrimmedStrings(r.Tags)
 	r.FeatureKeys = uniqueTrimmedStrings(r.FeatureKeys)
 	r.TaskIDs = uniqueTrimmedStrings(r.TaskIDs)
+	r.TrackerRefs = uniqueTrimmedStrings(r.TrackerRefs)
+	r.BirdseyeRefs = normalizeBirdseyeRefs(r.BirdseyeRefs)
 	r.AcceptanceCriteria = uniqueTrimmedStrings(r.AcceptanceCriteria)
 	r.ForbiddenPatterns = uniqueTrimmedStrings(r.ForbiddenPatterns)
 	r.DefinitionOfDone = uniqueTrimmedStrings(r.DefinitionOfDone)
@@ -80,7 +86,11 @@ func (s *Service) DocsIngest(ctx context.Context, req DocsIngestRequest) (Resolv
 		req.Summary = buildDocumentSummary(req.Body)
 	}
 	if existing, err := s.getResolverDocument(ctx, req.DocID); err == nil {
-		if compareVersions(req.Version, existing.Version) < 0 {
+		scheme := req.VersionScheme
+		if scheme == "string" && existing.VersionScheme != "" {
+			scheme = existing.VersionScheme
+		}
+		if compareVersionsWithScheme(req.Version, existing.Version, scheme) < 0 {
 			return ResolverDocument{}, 0, fmt.Errorf("%w: version conflict", ErrConflict)
 		}
 	} else if err != ErrNotFound {
@@ -92,12 +102,15 @@ func (s *Service) DocsIngest(ctx context.Context, req DocsIngestRequest) (Resolv
 		Title:              req.Title,
 		SourcePath:         req.SourcePath,
 		Version:            req.Version,
+		VersionScheme:      req.VersionScheme,
 		UpdatedAt:          req.UpdatedAt,
 		Summary:            req.Summary,
 		Body:               req.Body,
 		Tags:               req.Tags,
 		FeatureKeys:        req.FeatureKeys,
 		TaskIDs:            req.TaskIDs,
+		TrackerRefs:        req.TrackerRefs,
+		BirdseyeRefs:       req.BirdseyeRefs,
 		AcceptanceCriteria: req.AcceptanceCriteria,
 		ForbiddenPatterns:  req.ForbiddenPatterns,
 		DefinitionOfDone:   req.DefinitionOfDone,
@@ -121,13 +134,13 @@ func (s *Service) DocsIngest(ctx context.Context, req DocsIngestRequest) (Resolv
 	}
 	if _, err := tx.ExecContext(ctx, `
 	INSERT INTO resolver_documents(
-	  doc_id, doc_type, title, source_path, version, updated_at,
-	  summary, body, tags_json, feature_keys_json, task_ids_json,
+	  doc_id, doc_type, title, source_path, version, version_scheme, updated_at,
+	  summary, body, tags_json, feature_keys_json, task_ids_json, tracker_refs_json, birdseye_refs_json,
 	  acceptance_criteria_json, forbidden_patterns_json, definition_of_done_json,
 	  dependencies_json, importance
-	) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-	`, doc.DocID, doc.DocType, doc.Title, doc.SourcePath, doc.Version, doc.UpdatedAt,
-		doc.Summary, doc.Body, mustJSON(doc.Tags), mustJSON(doc.FeatureKeys), mustJSON(doc.TaskIDs),
+	) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+	`, doc.DocID, doc.DocType, doc.Title, doc.SourcePath, doc.Version, doc.VersionScheme, doc.UpdatedAt,
+		doc.Summary, doc.Body, mustJSON(doc.Tags), mustJSON(doc.FeatureKeys), mustJSON(doc.TaskIDs), mustJSON(doc.TrackerRefs), mustJSON(doc.BirdseyeRefs),
 		mustJSON(doc.AcceptanceCriteria), mustJSON(doc.ForbiddenPatterns), mustJSON(doc.DefinitionOfDone),
 		mustJSON(doc.Dependencies), doc.Importance); err != nil {
 		return ResolverDocument{}, 0, err
@@ -205,7 +218,11 @@ func (s *Service) DocsSearch(ctx context.Context, req DocsSearchRequest) ([]Reso
 		return nil, err
 	}
 	docs = filterResolverDocumentsForSearch(docs, req)
-	scored := scoreResolverDocuments(docs, "", "", req.Query)
+	ftsScores, err := s.resolverDocumentFTSScores(ctx, req.Query)
+	if err != nil {
+		return nil, err
+	}
+	scored := scoreResolverDocumentsWithBoost(docs, "", "", req.Query, ftsScores)
 	limit := req.Limit
 	if limit <= 0 {
 		limit = 10
@@ -266,14 +283,25 @@ func (s *Service) CardsSearch(ctx context.Context, req CardsSearchRequest) ([]Re
 		Tags:        req.Tags,
 		FeatureKeys: req.FeatureKeys,
 	})
-	scored := scoreResolverDocuments(docs, "", "", req.Query)
+	docFTSScores, err := s.resolverDocumentFTSScores(ctx, req.Query)
+	if err != nil {
+		return nil, err
+	}
+	scored := scoreResolverDocumentsWithBoost(docs, "", "", req.Query, docFTSScores)
+	chunkFTSScores, err := s.resolverChunkFTSScores(ctx, req.Query)
+	if err != nil {
+		return nil, err
+	}
 	var chunks []ResolverChunk
 	for _, item := range scored {
 		docChunks, err := s.getResolverChunksByDocID(ctx, item.Doc.DocID)
 		if err != nil {
 			return nil, err
 		}
-		filtered := filterResolverChunks(docChunks, "", req.Query, 0)
+		filtered := filterResolverChunksByFTS(docChunks, chunkFTSScores)
+		if len(filtered) == 0 {
+			filtered = filterResolverChunks(docChunks, "", req.Query, 0)
+		}
 		if len(filtered) == 0 {
 			filtered = docChunks
 		}
@@ -316,19 +344,32 @@ func (s *Service) ReadsAck(ctx context.Context, req ReadsAckRequest) (ResolverRe
 			chunkIDs = append(chunkIDs, snapshot.ChunkID)
 		}
 	}
-	receipt := ResolverReadReceipt{
-		TaskID:         req.TaskID,
-		DocID:          req.DocID,
-		Version:        req.Version,
-		ChunkIDs:       chunkIDs,
-		ChunkSnapshots: snapshots,
-		Reader:         req.Reader,
-		ReadAt:         time.Now().UTC().Format(time.RFC3339),
+	previousHash, err := s.latestReceiptHash(ctx, req.TaskID)
+	if err != nil {
+		return ResolverReadReceipt{}, err
 	}
+	receipt := ResolverReadReceipt{
+		TaskID:              req.TaskID,
+		DocID:               req.DocID,
+		Version:             req.Version,
+		ChunkIDs:            chunkIDs,
+		ChunkSnapshots:      snapshots,
+		PreviousReceiptHash: previousHash,
+		Reader:              req.Reader,
+		ReadAt:              time.Now().UTC().Format(time.RFC3339),
+	}
+	receipt.ReceiptHash = hashReadReceipt(receipt)
 	if _, err := s.resolverDB().ExecContext(ctx, `
-	INSERT INTO resolver_read_receipts(task_id, doc_id, version, chunk_ids_json, chunk_snapshots_json, reader, read_at)
-	VALUES(?, ?, ?, ?, ?, ?, ?);
-	`, receipt.TaskID, receipt.DocID, receipt.Version, mustJSON(receipt.ChunkIDs), mustJSON(receipt.ChunkSnapshots), receipt.Reader, receipt.ReadAt); err != nil {
+	INSERT INTO resolver_read_receipts(task_id, doc_id, version, chunk_ids_json, chunk_snapshots_json, previous_receipt_hash, receipt_hash, reader, read_at)
+	VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);
+	`, receipt.TaskID, receipt.DocID, receipt.Version, mustJSON(receipt.ChunkIDs), mustJSON(receipt.ChunkSnapshots), receipt.PreviousReceiptHash, receipt.ReceiptHash, receipt.Reader, receipt.ReadAt); err != nil {
+		return ResolverReadReceipt{}, err
+	}
+	if err := s.recordResolverAudit(ctx, "reads_ack", receipt.Reader, "read_receipt", receipt.TaskID+":"+receipt.DocID, "ok", receipt.ReceiptHash, map[string]string{
+		"doc_id":                receipt.DocID,
+		"version":               receipt.Version,
+		"previous_receipt_hash": receipt.PreviousReceiptHash,
+	}); err != nil {
 		return ResolverReadReceipt{}, err
 	}
 	return receipt, nil
@@ -372,7 +413,7 @@ func (s *Service) DocsStaleCheck(ctx context.Context, req DocsStaleCheckRequest)
 			}
 			return nil, err
 		}
-		if doc.Version != version {
+		if !versionsEquivalent(doc.Version, version, doc.VersionScheme) {
 			reason, err := s.buildSemanticStaleReason(ctx, taskID, docID, version, doc.Version, chunkIDs, snapshots)
 			if err != nil {
 				return nil, err
@@ -481,12 +522,24 @@ func (s *Service) TaskStateExport(ctx context.Context, req TaskStateExportReques
 		for _, chunkID := range entry.TopChunks {
 			sourceRefs = append(sourceRefs, typedRef("memx", "chunk", chunkID))
 		}
+		doc, err := s.getResolverDocument(ctx, entry.DocID)
+		if err != nil {
+			return TaskStateExportResponse{}, err
+		}
+		sourceRefs = append(sourceRefs, doc.TrackerRefs...)
+		sourceRefs = append(sourceRefs, doc.BirdseyeRefs...)
 	}
 	for _, receipt := range receipts {
 		sourceRefs = append(sourceRefs, typedRef("memx", "doc", receipt.DocID))
 		for _, chunkID := range receipt.ChunkIDs {
 			sourceRefs = append(sourceRefs, typedRef("memx", "chunk", chunkID))
 		}
+		doc, err := s.getResolverDocument(ctx, receipt.DocID)
+		if err != nil {
+			return TaskStateExportResponse{}, err
+		}
+		sourceRefs = append(sourceRefs, doc.TrackerRefs...)
+		sourceRefs = append(sourceRefs, doc.BirdseyeRefs...)
 	}
 	return TaskStateExportResponse{
 		TaskRef:      typedRef("agent-taskstate", "task", req.TaskID),
@@ -622,7 +675,7 @@ func (s *Service) memoryCardFeedbackWeights(ctx context.Context) (map[string]int
 
 func (s *Service) listLatestReadReceipts(ctx context.Context, taskID string) ([]ResolverReadReceipt, error) {
 	rows, err := s.resolverDB().QueryContext(ctx, `
-	SELECT rr.task_id, rr.doc_id, rr.version, rr.chunk_ids_json, rr.chunk_snapshots_json, rr.reader, rr.read_at
+	SELECT rr.task_id, rr.doc_id, rr.version, rr.chunk_ids_json, rr.chunk_snapshots_json, rr.previous_receipt_hash, rr.receipt_hash, rr.reader, rr.read_at
 	FROM resolver_read_receipts rr
 	JOIN (
 	  SELECT doc_id, MAX(id) AS latest_id
@@ -641,7 +694,7 @@ func (s *Service) listLatestReadReceipts(ctx context.Context, taskID string) ([]
 	for rows.Next() {
 		var receipt ResolverReadReceipt
 		var chunkIDsJSON, snapshotsJSON string
-		if err := rows.Scan(&receipt.TaskID, &receipt.DocID, &receipt.Version, &chunkIDsJSON, &snapshotsJSON, &receipt.Reader, &receipt.ReadAt); err != nil {
+		if err := rows.Scan(&receipt.TaskID, &receipt.DocID, &receipt.Version, &chunkIDsJSON, &snapshotsJSON, &receipt.PreviousReceiptHash, &receipt.ReceiptHash, &receipt.Reader, &receipt.ReadAt); err != nil {
 			return nil, err
 		}
 		receipt.ChunkIDs = decodeStringSlice(chunkIDsJSON)
@@ -701,6 +754,46 @@ func hashText(text string) string {
 	return hex.EncodeToString(sum[:])
 }
 
+func hashReadReceipt(receipt ResolverReadReceipt) string {
+	payload := strings.Join([]string{
+		receipt.TaskID,
+		receipt.DocID,
+		receipt.Version,
+		mustJSON(receipt.ChunkIDs),
+		mustJSON(receipt.ChunkSnapshots),
+		receipt.PreviousReceiptHash,
+		receipt.Reader,
+		receipt.ReadAt,
+	}, "\x1f")
+	return hashText(payload)
+}
+
+func (s *Service) latestReceiptHash(ctx context.Context, taskID string) (string, error) {
+	var hash string
+	err := s.resolverDB().QueryRowContext(ctx, `
+SELECT receipt_hash
+FROM resolver_read_receipts
+WHERE task_id = ? AND receipt_hash != ''
+ORDER BY id DESC
+LIMIT 1;
+`, taskID).Scan(&hash)
+	if err == sql.ErrNoRows {
+		return "", nil
+	}
+	if err != nil {
+		return "", err
+	}
+	return hash, nil
+}
+
+func (s *Service) recordResolverAudit(ctx context.Context, operation string, actor string, targetType string, targetID string, result string, receiptHash string, details map[string]string) error {
+	_, err := s.resolverDB().ExecContext(ctx, `
+INSERT INTO resolver_audit_log(operation, actor, target_type, target_id, result, receipt_hash, details_json, recorded_at)
+VALUES(?, ?, ?, ?, ?, ?, ?, ?);
+`, operation, actor, targetType, targetID, result, receiptHash, mustJSON(details), time.Now().UTC().Format(time.RFC3339))
+	return err
+}
+
 func addImpactScope(scopes map[string]struct{}, headingPath []string, memoryType string) {
 	if memoryType != "" {
 		scopes["memory_type:"+memoryType] = struct{}{}
@@ -757,17 +850,17 @@ func (s *Service) ContractsResolve(ctx context.Context, req ContractsResolveRequ
 
 func (s *Service) getResolverDocument(ctx context.Context, docID string) (ResolverDocument, error) {
 	var doc ResolverDocument
-	var tagsJSON, featureJSON, taskJSON, acceptanceJSON, forbiddenJSON, doneJSON, dependenciesJSON string
+	var tagsJSON, featureJSON, taskJSON, trackerRefsJSON, birdseyeRefsJSON, acceptanceJSON, forbiddenJSON, doneJSON, dependenciesJSON string
 	err := s.resolverDB().QueryRowContext(ctx, `
-	SELECT doc_id, doc_type, title, source_path, version, updated_at, summary, body,
-	       tags_json, feature_keys_json, task_ids_json,
+	SELECT doc_id, doc_type, title, source_path, version, version_scheme, updated_at, summary, body,
+	       tags_json, feature_keys_json, task_ids_json, tracker_refs_json, birdseye_refs_json,
 	       acceptance_criteria_json, forbidden_patterns_json, definition_of_done_json,
 	       dependencies_json, importance
 	FROM resolver_documents
 	WHERE doc_id = ?;
 	`, docID).Scan(
-		&doc.DocID, &doc.DocType, &doc.Title, &doc.SourcePath, &doc.Version, &doc.UpdatedAt, &doc.Summary, &doc.Body,
-		&tagsJSON, &featureJSON, &taskJSON, &acceptanceJSON, &forbiddenJSON, &doneJSON, &dependenciesJSON, &doc.Importance,
+		&doc.DocID, &doc.DocType, &doc.Title, &doc.SourcePath, &doc.Version, &doc.VersionScheme, &doc.UpdatedAt, &doc.Summary, &doc.Body,
+		&tagsJSON, &featureJSON, &taskJSON, &trackerRefsJSON, &birdseyeRefsJSON, &acceptanceJSON, &forbiddenJSON, &doneJSON, &dependenciesJSON, &doc.Importance,
 	)
 	if err != nil {
 		if err == sql.ErrNoRows {
@@ -778,6 +871,8 @@ func (s *Service) getResolverDocument(ctx context.Context, docID string) (Resolv
 	doc.Tags = decodeStringSlice(tagsJSON)
 	doc.FeatureKeys = decodeStringSlice(featureJSON)
 	doc.TaskIDs = decodeStringSlice(taskJSON)
+	doc.TrackerRefs = decodeStringSlice(trackerRefsJSON)
+	doc.BirdseyeRefs = decodeStringSlice(birdseyeRefsJSON)
 	doc.AcceptanceCriteria = decodeStringSlice(acceptanceJSON)
 	doc.ForbiddenPatterns = decodeStringSlice(forbiddenJSON)
 	doc.DefinitionOfDone = decodeStringSlice(doneJSON)
@@ -787,8 +882,8 @@ func (s *Service) getResolverDocument(ctx context.Context, docID string) (Resolv
 
 func (s *Service) listResolverDocuments(ctx context.Context) ([]ResolverDocument, error) {
 	rows, err := s.resolverDB().QueryContext(ctx, `
-	SELECT doc_id, doc_type, title, source_path, version, updated_at, summary, body,
-	       tags_json, feature_keys_json, task_ids_json,
+	SELECT doc_id, doc_type, title, source_path, version, version_scheme, updated_at, summary, body,
+	       tags_json, feature_keys_json, task_ids_json, tracker_refs_json, birdseye_refs_json,
 	       acceptance_criteria_json, forbidden_patterns_json, definition_of_done_json,
 	       dependencies_json, importance
 	FROM resolver_documents;
@@ -800,13 +895,15 @@ func (s *Service) listResolverDocuments(ctx context.Context) ([]ResolverDocument
 	var out []ResolverDocument
 	for rows.Next() {
 		var doc ResolverDocument
-		var tagsJSON, featureJSON, taskJSON, acceptanceJSON, forbiddenJSON, doneJSON, dependenciesJSON string
-		if err := rows.Scan(&doc.DocID, &doc.DocType, &doc.Title, &doc.SourcePath, &doc.Version, &doc.UpdatedAt, &doc.Summary, &doc.Body, &tagsJSON, &featureJSON, &taskJSON, &acceptanceJSON, &forbiddenJSON, &doneJSON, &dependenciesJSON, &doc.Importance); err != nil {
+		var tagsJSON, featureJSON, taskJSON, trackerRefsJSON, birdseyeRefsJSON, acceptanceJSON, forbiddenJSON, doneJSON, dependenciesJSON string
+		if err := rows.Scan(&doc.DocID, &doc.DocType, &doc.Title, &doc.SourcePath, &doc.Version, &doc.VersionScheme, &doc.UpdatedAt, &doc.Summary, &doc.Body, &tagsJSON, &featureJSON, &taskJSON, &trackerRefsJSON, &birdseyeRefsJSON, &acceptanceJSON, &forbiddenJSON, &doneJSON, &dependenciesJSON, &doc.Importance); err != nil {
 			return nil, err
 		}
 		doc.Tags = decodeStringSlice(tagsJSON)
 		doc.FeatureKeys = decodeStringSlice(featureJSON)
 		doc.TaskIDs = decodeStringSlice(taskJSON)
+		doc.TrackerRefs = decodeStringSlice(trackerRefsJSON)
+		doc.BirdseyeRefs = decodeStringSlice(birdseyeRefsJSON)
 		doc.AcceptanceCriteria = decodeStringSlice(acceptanceJSON)
 		doc.ForbiddenPatterns = decodeStringSlice(forbiddenJSON)
 		doc.DefinitionOfDone = decodeStringSlice(doneJSON)
@@ -873,6 +970,64 @@ func (s *Service) getResolverChunksByIDs(ctx context.Context, chunkIDs []string)
 		out = append(out, chunk)
 	}
 	return out, nil
+}
+
+func (s *Service) resolverDocumentFTSScores(ctx context.Context, query string) (map[string]int, error) {
+	match := normalizeFTSQuery(query)
+	if match == "" {
+		return nil, nil
+	}
+	rows, err := s.resolverDB().QueryContext(ctx, `
+SELECT doc_id
+FROM resolver_documents_fts
+WHERE resolver_documents_fts MATCH ?
+ORDER BY bm25(resolver_documents_fts)
+LIMIT 100;
+`, match)
+	if err != nil {
+		return nil, nil
+	}
+	defer rows.Close()
+	scores := make(map[string]int)
+	rank := 0
+	for rows.Next() {
+		var docID string
+		if err := rows.Scan(&docID); err != nil {
+			return nil, err
+		}
+		scores[docID] = 500 - rank
+		rank++
+	}
+	return scores, rows.Err()
+}
+
+func (s *Service) resolverChunkFTSScores(ctx context.Context, query string) (map[string]int, error) {
+	match := normalizeFTSQuery(query)
+	if match == "" {
+		return nil, nil
+	}
+	rows, err := s.resolverDB().QueryContext(ctx, `
+SELECT chunk_id
+FROM resolver_chunks_fts
+WHERE resolver_chunks_fts MATCH ?
+ORDER BY bm25(resolver_chunks_fts)
+LIMIT 200;
+`, match)
+	if err != nil {
+		return nil, nil
+	}
+	defer rows.Close()
+	scores := make(map[string]int)
+	rank := 0
+	for rows.Next() {
+		var chunkID string
+		if err := rows.Scan(&chunkID); err != nil {
+			return nil, err
+		}
+		scores[chunkID] = 500 - rank
+		rank++
+	}
+	return scores, rows.Err()
 }
 
 func (s *Service) buildResolveEntry(ctx context.Context, doc ResolverDocument, reason string, query string) (ResolveEntry, error) {

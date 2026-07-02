@@ -60,6 +60,37 @@ func scoreResolverDocuments(docs []ResolverDocument, feature string, taskID stri
 	return scored
 }
 
+func scoreResolverDocumentsWithBoost(docs []ResolverDocument, feature string, taskID string, topic string, boosts map[string]int) []scoredResolverDoc {
+	scored := scoreResolverDocuments(docs, feature, taskID, topic)
+	byDocID := make(map[string]int, len(scored))
+	for idx := range scored {
+		if boost := boosts[scored[idx].Doc.DocID]; boost > 0 {
+			scored[idx].Score += boost
+			if scored[idx].Why == "" || scored[idx].Why == "topic matched" {
+				scored[idx].Why = "fts matched"
+			}
+		}
+		byDocID[scored[idx].Doc.DocID] = idx
+	}
+	for _, doc := range docs {
+		boost := boosts[doc.DocID]
+		if boost <= 0 {
+			continue
+		}
+		if _, ok := byDocID[doc.DocID]; ok {
+			continue
+		}
+		scored = append(scored, scoredResolverDoc{Doc: doc, Score: boost, Why: "fts matched"})
+	}
+	sort.SliceStable(scored, func(i, j int) bool {
+		if scored[i].Score == scored[j].Score {
+			return scored[i].Doc.UpdatedAt > scored[j].Doc.UpdatedAt
+		}
+		return scored[i].Score > scored[j].Score
+	})
+	return scored
+}
+
 // filterResolverChunks filters chunks by heading and query.
 func filterResolverChunks(chunks []ResolverChunk, heading string, query string, limit int) []ResolverChunk {
 	filtered := make([]ResolverChunk, 0, len(chunks))
@@ -81,6 +112,25 @@ func filterResolverChunks(chunks []ResolverChunk, heading string, query string, 
 		limit = len(filtered)
 	}
 	return filtered[:limit]
+}
+
+func filterResolverChunksByFTS(chunks []ResolverChunk, scores map[string]int) []ResolverChunk {
+	if len(scores) == 0 {
+		return nil
+	}
+	filtered := make([]ResolverChunk, 0, len(chunks))
+	for _, chunk := range chunks {
+		if scores[chunk.ChunkID] > 0 {
+			filtered = append(filtered, chunk)
+		}
+	}
+	sort.SliceStable(filtered, func(i, j int) bool {
+		if scores[filtered[i].ChunkID] == scores[filtered[j].ChunkID] {
+			return filtered[i].Ordinal < filtered[j].Ordinal
+		}
+		return scores[filtered[i].ChunkID] > scores[filtered[j].ChunkID]
+	})
+	return filtered
 }
 
 // filterResolverDocumentsForSearch applies structured search filters.
