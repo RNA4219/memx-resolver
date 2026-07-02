@@ -46,6 +46,9 @@
     },
     {
       "$ref": "#/definitions/ContractsResolveResponse"
+    },
+    {
+      "$ref": "#/definitions/ResolverStoreMigrationReport"
     }
   ],
   "definitions": {
@@ -187,6 +190,8 @@
           "type": "array",
           "items": { "$ref": "#/definitions/ResolverChunkSnapshot" }
         },
+        "previous_receipt_hash": { "type": "string" },
+        "receipt_hash": { "type": "string" },
         "reader": { "type": "string" },
         "read_at": { "type": "string" }
       }
@@ -439,6 +444,32 @@
           "items": { "type": "string" }
         },
         "dependencies": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "ResolverStoreMigrationReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "dry_run", "counts", "status"],
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "dry_run": { "type": "boolean" },
+        "counts": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        },
+        "copied": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        },
+        "status": {
+          "type": "string",
+          "enum": ["planned", "migrated"]
+        },
+        "warnings": {
           "type": "array",
           "items": { "type": "string" }
         }

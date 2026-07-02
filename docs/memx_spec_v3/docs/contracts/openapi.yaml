@@ -564,6 +564,9 @@ components:
           type: string
         version:
           type: string
+        version_scheme:
+          type: string
+          enum: [semver, iso_datetime, git_revision, string]
         updated_at:
           type: string
         summary:
@@ -579,6 +582,14 @@ components:
           items:
             type: string
         task_ids:
+          type: array
+          items:
+            type: string
+        tracker_refs:
+          type: array
+          items:
+            type: string
+        birdseye_refs:
           type: array
           items:
             type: string
@@ -698,6 +709,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ResolverChunkSnapshot'
+        previous_receipt_hash:
+          type: string
+        receipt_hash:
+          type: string
         reader:
           type: string
         read_at:
@@ -792,6 +807,9 @@ components:
           type: string
         version:
           type: string
+        version_scheme:
+          type: string
+          enum: [semver, iso_datetime, git_revision, string]
         updated_at:
           type: string
         tags:
@@ -803,6 +821,14 @@ components:
           items:
             type: string
         task_ids:
+          type: array
+          items:
+            type: string
+        tracker_refs:
+          type: array
+          items:
+            type: string
+        birdseye_refs:
           type: array
           items:
             type: string
