@@ -3,7 +3,7 @@
   "generated_at": "2026-07-01T16:01:32.085Z",
   "run_id": "readiness-20260701160132",
   "repo": {
-    "root": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver"
+    "root": "."
   },
   "tool": {
     "name": "code-to-gate",

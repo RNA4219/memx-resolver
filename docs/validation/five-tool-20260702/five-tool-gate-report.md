@@ -1,6 +1,6 @@
 # Five Tool Validation Gate Report
 
-Target: `C:\Users\ryo-n\Codex_dev\memx-resolver`
+Target: `..\memx-resolver`
 
 Scope:
 
@@ -130,10 +130,10 @@ This change set is suitable for engineering review and internal continuation. It
 ## Next Commands
 
 ```powershell
-cd C:\Users\ryo-n\Codex_dev\memx-resolver
-C:\Users\ryo-n\AppData\Local\Programs\Python\Python311\python.exe -m pytest tests --junitxml docs\validation\five-tool-20260702\hate-input\pytest-junit.xml
-$env:GOCACHE='C:\Users\ryo-n\Codex_dev\memx-resolver\.tmp\go-build'; go test ./...
-node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js analyze C:\Users\ryo-n\Codex_dev\memx-resolver --emit all --out docs\validation\five-tool-20260702\ctg --cache disabled --parallel 4
-uv run hate p0a --input C:\Users\ryo-n\Codex_dev\memx-resolver\docs\validation\five-tool-20260702\hate-input --out C:\Users\ryo-n\Codex_dev\memx-resolver\docs\validation\five-tool-20260702\hate --source-version memx-resolver-five-tool-20260702
-uv run hate export qeg --fixture C:\Users\ryo-n\Codex_dev\memx-resolver\docs\validation\five-tool-20260702\hate-fixture --out C:\Users\ryo-n\Codex_dev\memx-resolver\docs\validation\five-tool-20260702\hate-qeg --source-version memx-resolver-five-tool-20260702
+cd ..\memx-resolver
+python -m pytest tests --junitxml docs\validation\five-tool-20260702\hate-input\pytest-junit.xml
+$env:GOCACHE='.tmp\go-build'; go test ./...
+node ..\..\code-to-gate\dist\cli.js analyze ..\memx-resolver --emit all --out docs\validation\five-tool-20260702\ctg --cache disabled --parallel 4
+uv run hate p0a --input docs\validation\five-tool-20260702\hate-input --out docs\validation\five-tool-20260702\hate --source-version memx-resolver-five-tool-20260702
+uv run hate export qeg --fixture docs\validation\five-tool-20260702\hate-fixture --out docs\validation\five-tool-20260702\hate-qeg --source-version memx-resolver-five-tool-20260702
 ```

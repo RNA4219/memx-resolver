@@ -1,7 +1,7 @@
 {
   "schema_version": "diff-risk-test/v1",
   "source": "code-to-gate",
-  "target_repo": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver",
+  "target_repo": ".",
   "artifacts": {
     "findings": "../ctg/findings.json",
     "risk_register": "../ctg/risk-register.yaml",

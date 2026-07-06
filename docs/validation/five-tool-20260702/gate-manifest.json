@@ -1,6 +1,6 @@
 {
   "schema_version": "five-tool-validation-gate/v1",
-  "target_repo": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver",
+  "target_repo": ".",
   "verdict": "needs_review",
   "chain_status": {
     "RanD": "degraded",

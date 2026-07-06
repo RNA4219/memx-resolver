@@ -3,7 +3,7 @@
   "generated_at": "2026-07-01T16:01:32.083Z",
   "run_id": "readiness-20260701160132",
   "repo": {
-    "root": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver",
+    "root": ".",
     "revision": "0da82481e888",
     "branch": "main",
     "dirty": true
@@ -52,7 +52,7 @@
     "REVIEW REQUIRED: 1 broad suppression(s) detected. Review path patterns for scope reduction."
   ],
   "artifactRefs": {
-    "findings": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260702\\ctg\\findings.json",
-    "riskRegister": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260702\\ctg\\risk-register.yaml"
+    "findings": "docs\\validation\\five-tool-20260702\\ctg\\findings.json",
+    "riskRegister": "docs\\validation\\five-tool-20260702\\ctg\\risk-register.yaml"
   }
 }

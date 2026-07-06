@@ -25,7 +25,7 @@ Search and retrieve information from memx memory stores.
 Use the Bash tool to run:
 
 ```bash
-cd C:/Users/ryo-n/Codex_dev/memx-core/memx_spec_v3/go && go run ./cmd/mem out search --json "<query>"
+cd ../../memx-core/memx_spec_v3/go && go run ./cmd/mem out search --json "<query>"
 ```
 
 The top-level search already aggregates short, journal, and knowledge stores. Use store-specific search only when you need to narrow the scope:

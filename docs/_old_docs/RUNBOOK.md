@@ -450,7 +450,7 @@ python workflow-cookbook/tools/codemap/update.py --targets docs/birdseye/hot.jso
 #### 実行コマンド
 ```bash
 # テスト実行（.env から自動読み込み）
-cd C:\Users\ryo-n\Codex_dev\memx-core
+cd ..\..\memx-core
 go test ./memx_spec_v3/go/... -v
 
 # 特定のテストのみ実行
