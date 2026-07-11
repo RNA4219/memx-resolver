@@ -3,12 +3,19 @@ from __future__ import annotations
 import json
 import os
 import tempfile
+import threading
+import time
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Protocol
 
 from filelock import FileLock, Timeout
 
 from .paths import resolve_repository_path
+
+_THREAD_LOCKS_GUARD = threading.Lock()
+_THREAD_LOCKS: dict[str, Any] = {}
+
 
 
 class JsonStoreError(RuntimeError):
@@ -45,6 +52,19 @@ def _read_json(path: Path, *, expected: type) -> Any:
         )
     return payload
 
+def _replace_with_retry(source: Path, destination: Path) -> None:
+    attempts = 5 if os.name == "nt" else 1
+    for attempt in range(attempts):
+        try:
+            os.replace(source, destination)
+            return
+        except PermissionError:
+            if attempt + 1 >= attempts:
+                raise
+            time.sleep(0.01 * (2**attempt))
+
+
+
 
 def _atomic_write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -64,17 +84,31 @@ def _atomic_write_json(path: Path, payload: Any) -> None:
             handle.write("\n")
             handle.flush()
             os.fsync(handle.fileno())
-        os.replace(temporary, path)
+        _replace_with_retry(temporary, path)
     finally:
         if temporary is not None and temporary.exists():
             temporary.unlink()
 
 
+@contextmanager
 def _lock(path: Path, timeout: float):
+    deadline = time.monotonic() + timeout
+    key = os.path.normcase(os.path.abspath(path))
+    with _THREAD_LOCKS_GUARD:
+        thread_lock = _THREAD_LOCKS.setdefault(key, threading.Lock())
+    if not thread_lock.acquire(timeout=max(0.0, timeout)):
+        raise JsonStoreLockTimeoutError(f"timed out locking JSON store {path}")
     try:
-        return FileLock(str(path) + ".lock", timeout=timeout).acquire()
-    except Timeout as exc:
-        raise JsonStoreLockTimeoutError(f"timed out locking JSON store {path}") from exc
+        remaining = max(0.0, deadline - time.monotonic())
+        try:
+            with FileLock(str(path) + ".lock", timeout=remaining):
+                yield
+        except Timeout as exc:
+            raise JsonStoreLockTimeoutError(
+                f"timed out locking JSON store {path}"
+            ) from exc
+    finally:
+        thread_lock.release()
 
 
 class ReceiptStore(Protocol):
