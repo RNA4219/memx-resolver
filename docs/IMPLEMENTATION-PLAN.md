@@ -88,10 +88,10 @@ next_review_due: 2026-04-10
 - [x] typed_ref 3/4 segment compatibility and canonical output
 - [x] repository path boundary and atomic JSON persistence
 - [x] HTTP limits, timeouts, graceful shutdown and bind warning
-- [x] Python packaging and protected release workflow
+- [x] Python packaging and GitHub Release workflow
 - [x] CTG/HATE/manual-BB/QEG local gate: GO
-- [ ] GitHub Windows/Linux CI and Linux race
-- [ ] protected PyPI environment approval and v1.1.0 tag publication
+- [x] GitHub Windows/Linux CI and Linux race
+- [ ] GitHub Release artifact creation and checksum verification
 
 ## v2.0.0
 
