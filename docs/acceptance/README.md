@@ -41,7 +41,7 @@ next_review_due: 2026-05-11
 ## 検証
 
 ```sh
-cd docs/memx_spec_v3/go
+cd .
 go test ./...
 ```
 

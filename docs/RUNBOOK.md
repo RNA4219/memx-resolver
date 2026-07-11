@@ -18,7 +18,7 @@ next_review_due: 2026-04-10
 
 ### 準備
 ```bash
-cd docs/memx_spec_v3/go
+cd .
 go build -o mem.exe ./cmd/mem
 ```
 

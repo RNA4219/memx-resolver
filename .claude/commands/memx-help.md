@@ -35,7 +35,7 @@ Shows all available memx commands and their usage.
 ## CLI Direct Access
 
 ```bash
-cd ../../memx-core/memx_spec_v3/go
+cd .
 go run ./cmd/mem in short --title "Title" --body "Body"
 go run ./cmd/mem out search --json "query"
 go run ./cmd/mem out show <id>

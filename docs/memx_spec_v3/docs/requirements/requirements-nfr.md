@@ -170,10 +170,10 @@ next_review_due: 2026-06-03
 
 ```bash
 # memx-core での typed_ref 形式検証
-go test ./memx_spec_v3/go/api/... -run TestTypedRef
+go test ./api/... -run TestTypedRef
 
 # canonical format の確認
-rg -n "memx:[a-z_]+:[a-z]+:" memx_spec_v3/go/ --type go
+rg -n "memx:[a-z_]+:[a-z]+:" api/ --type go
 ```
 
 #### 関連要件

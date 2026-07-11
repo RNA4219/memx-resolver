@@ -7,7 +7,7 @@ memx-resolver は、`memx-core` をエージェント実行向けに拡張し、
 ## LLM-BOOTSTRAP
 
 - このリポジトリの最初の入口はこの `README.md`
-- 実装本体は [docs/memx_spec_v3/go](./docs/memx_spec_v3/go)
+- 実装本体は [Go implementation](./api)
 - 仕様の正本は [docs/requirements.md](./docs/requirements.md), [docs/interfaces.md](./docs/interfaces.md), [docs/design.md](./docs/design.md)
 - 人間向けの使い方は [USER_GUIDE.md](./USER_GUIDE.md)
 - ドキュメントハブは [docs/HUB.codex.md](./docs/HUB.codex.md)
@@ -46,7 +46,7 @@ Skill 定義は `.claude/commands/` にあります。
 ## 最低限の実行手順
 
 ```bash
-cd docs/memx_spec_v3/go
+cd .
 go build ./cmd/mem
 
 # resolver を分離したい場合

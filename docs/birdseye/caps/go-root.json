@@ -1,5 +1,5 @@
 {
-  "id": "memx_spec_v3/go",
+  "id": "go",
   "role": "implementation",
   "public_api": ["mem CLI", "HTTP API server"],
   "summary": "Go実装。memx-core機能とresolver機能を提供。SQLiteベースの軽量メモリ基盤。",

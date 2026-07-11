@@ -17,7 +17,7 @@ __pycache__/
 go.work
 
 # Build artifacts
-/memx_spec_v3/go/mem
+/mem
 .tmp/
 /dist/
 /memx_resolver_workflow_plugin/_version.py
@@ -40,9 +40,9 @@ Thumbs.db
 !.env.example
 
 # Local memx runtime data
-/memx_spec_v3/go/*.db
-/memx_spec_v3/go/*.db-shm
-/memx_spec_v3/go/*.db-wal
-/docs/memx_spec_v3/go/*.db
-/docs/memx_spec_v3/go/*.db-shm
-/docs/memx_spec_v3/go/*.db-wal
+/*.db
+/*.db-shm
+/*.db-wal
+/docs/*.db
+/docs/*.db-shm
+/docs/*.db-wal

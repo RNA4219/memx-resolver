@@ -6,52 +6,52 @@
 ## 1) API サーバー起動
 
 ```bash
-go run ./memx_spec_v3/go/cmd/mem api serve --addr 127.0.0.1:7766 --short ./short.db
+go run .//cmd/mem api serve --addr 127.0.0.1:7766 --short ./short.db
 ```
 
 代替表記（`go` ディレクトリへ移動して実行）:
 
 ```bash
-cd memx_spec_v3/go
+cd .
 go run ./cmd/mem api serve --addr 127.0.0.1:7766 --short ./short.db
 ```
 
 ## 2) ノート投入
 
 ```bash
-echo "hello memx" | go run ./memx_spec_v3/go/cmd/mem in short --title "test" --stdin --api-url http://127.0.0.1:7766
+echo "hello memx" | go run .//cmd/mem in short --title "test" --stdin --api-url http://127.0.0.1:7766
 ```
 
 代替表記（`go` ディレクトリへ移動して実行）:
 
 ```bash
-cd memx_spec_v3/go
+cd .
 echo "hello memx" | go run ./cmd/mem in short --title "test" --stdin --api-url http://127.0.0.1:7766
 ```
 
 ## 3) 検索
 
 ```bash
-go run ./memx_spec_v3/go/cmd/mem out search "hello" --api-url http://127.0.0.1:7766
+go run .//cmd/mem out search "hello" --api-url http://127.0.0.1:7766
 ```
 
 代替表記（`go` ディレクトリへ移動して実行）:
 
 ```bash
-cd memx_spec_v3/go
+cd .
 go run ./cmd/mem out search "hello" --api-url http://127.0.0.1:7766
 ```
 
 ## 4) 単体表示
 
 ```bash
-go run ./memx_spec_v3/go/cmd/mem out show <NOTE_ID> --api-url http://127.0.0.1:7766
+go run .//cmd/mem out show <NOTE_ID> --api-url http://127.0.0.1:7766
 ```
 
 代替表記（`go` ディレクトリへ移動して実行）:
 
 ```bash
-cd memx_spec_v3/go
+cd .
 go run ./cmd/mem out show <NOTE_ID> --api-url http://127.0.0.1:7766
 ```
 

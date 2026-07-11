@@ -26,7 +26,7 @@
 
 ### 3.1 配置
 
-最小実装は `memx_spec_v3/go` 配下に追加し、既存の `memx-core` 系 API と同じプロセスで提供する。
+最小実装は `repository root Go module` 配下に追加し、既存の `memx-core` 系 API と同じプロセスで提供する。
 
 - DB: resolver 用テーブルは resolver store に配置し、未設定時のみ `short.db` 同居を許可する
 - service: resolver 用 usecase を追加する

@@ -8,7 +8,7 @@
   "risks": [],
   "tests": [],
   "key_sections": {
-    "LLM-BOOTSTRAP": "README, docs/memx_spec_v3/go, docs/requirements.md, docs/interfaces.md, docs/design.md, USER_GUIDE.md",
+    "LLM-BOOTSTRAP": "README, go, docs/requirements.md, docs/interfaces.md, docs/design.md, USER_GUIDE.md",
     "Skills": "/remember, /recall, /journal, /knowledge, /show, /memx-help, /resolve-docs, /read-chunks, /ack-docs, /stale-check, /resolve-contract",
     "CLI": "mem in/out/summarize/api/docs"
   }

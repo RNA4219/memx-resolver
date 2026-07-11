@@ -63,10 +63,10 @@ jobs:
       - uses: actions/setup-go@v6
         with:
           go-version: '1.22'
-          cache-dependency-path: docs/memx_spec_v3/go/go.sum
+          cache-dependency-path: go.sum
       - name: Build mem
         shell: bash
-        working-directory: docs/memx_spec_v3/go
+        working-directory: .
         run: |
           suffix=''
           if [ '${{ matrix.goos }}' = windows ]; then suffix='.exe'; fi
