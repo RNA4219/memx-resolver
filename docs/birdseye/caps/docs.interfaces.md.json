@@ -11,7 +11,7 @@
     "POST /v1/contracts:resolve"
   ],
   "summary": "cookbook-resolver外部インターフェース。文書登録、解決、chunk取得、検索、読了記録、stale判定、契約解決APIを定義し、resolver store の分離でも契約を変えない。",
-  "deps_out": ["memx_spec_v3/go"],
+  "deps_out": ["go"],
   "deps_in": ["docs/requirements.md", "README.md"],
   "risks": ["MVPは認可機構最小", "read receipt改ざん防止は将来課題"],
   "tests": [],

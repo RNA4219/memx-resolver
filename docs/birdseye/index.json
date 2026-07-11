@@ -26,9 +26,9 @@
       "caps": "docs/birdseye/caps/USER_GUIDE.md.json",
       "mtime": "2026-03-10T06:44:00Z"
     },
-    "memx_spec_v3/go": {
+    "go": {
       "role": "implementation",
-      "caps": "docs/birdseye/caps/memx_spec_v3.go.json",
+      "caps": "docs/birdseye/caps/go-root.json",
       "mtime": "2026-03-10T06:44:00Z"
     }
   },
@@ -39,7 +39,7 @@
     ["README.md", "USER_GUIDE.md"],
     ["docs/requirements.md", "docs/design.md"],
     ["docs/requirements.md", "docs/interfaces.md"],
-    ["docs/design.md", "memx_spec_v3/go"],
-    ["docs/interfaces.md", "memx_spec_v3/go"]
+    ["docs/design.md", "go"],
+    ["docs/interfaces.md", "go"]
   ]
 }

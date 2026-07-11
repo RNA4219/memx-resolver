@@ -1,204 +1,101 @@
-"""Tests for typed_ref module."""
+"""Tests for strict v2 typed_ref behavior."""
 
 from __future__ import annotations
 
 import pytest
 
 from memx_resolver_workflow_plugin.typed_ref import (
+    DEFAULT_PROVIDER,
     Domain,
     EntityType,
     Provider,
     TypedRef,
     TypedRefParseError,
-    parse_typed_ref,
     must_parse_typed_ref,
     new_typed_ref,
     new_typed_ref_with_provider,
-    DEFAULT_PROVIDER,
+    parse_typed_ref,
 )
 
 
-class TestParseTypedRef:
-    """Test parse_typed_ref function."""
-
-    def test_parse_three_segment_memx_evidence(self) -> None:
-        """Parse 3-segment format: memx:evidence:id."""
-        ref = parse_typed_ref("memx:evidence:01HXXXXXXX")
-        assert ref.domain == Domain.MEMX
-        assert ref.type == EntityType.EVIDENCE
-        assert ref.provider == DEFAULT_PROVIDER
-        assert ref.id == "01HXXXXXXX"
-
-    def test_parse_three_segment_memx_knowledge(self) -> None:
-        """Parse 3-segment format: memx:knowledge:id."""
-        ref = parse_typed_ref("memx:knowledge:01HYYYYYYY")
-        assert ref.domain == Domain.MEMX
-        assert ref.type == EntityType.KNOWLEDGE
-        assert ref.provider == DEFAULT_PROVIDER
-        assert ref.id == "01HYYYYYYY"
-
-    def test_parse_four_segment_canonical(self) -> None:
-        """Parse 4-segment canonical format."""
-        ref = parse_typed_ref("memx:evidence:local:01HXXXXXXX")
-        assert ref.domain == Domain.MEMX
-        assert ref.type == EntityType.EVIDENCE
-        assert ref.provider == Provider.LOCAL
-        assert ref.id == "01HXXXXXXX"
-
-    def test_parse_four_segment_with_jira_provider(self) -> None:
-        """Parse 4-segment with jira provider."""
-        ref = parse_typed_ref("tracker:issue:jira:PROJ-123")
-        assert ref.domain == Domain.TRACKER
-        assert ref.type == "issue"  # tracker domain uses string, not EntityType
-        assert ref.provider == Provider.JIRA
-        assert ref.id == "PROJ-123"
-
-    def test_parse_empty_string_raises_error(self) -> None:
-        """Empty string should raise TypedRefParseError."""
-        with pytest.raises(TypedRefParseError, match="empty ref"):
-            parse_typed_ref("")
-
-    def test_parse_invalid_segment_count_raises_error(self) -> None:
-        """Invalid segment count should raise TypedRefParseError."""
-        with pytest.raises(TypedRefParseError, match="invalid ref format"):
-            parse_typed_ref("memx:evidence")
-
-    def test_parse_invalid_domain_raises_error(self) -> None:
-        """Invalid domain should raise TypedRefParseError."""
-        with pytest.raises(TypedRefParseError, match="invalid domain"):
-            parse_typed_ref("unknown:evidence:local:id")
-
-    def test_parse_extensible_entity_type_for_memx(self) -> None:
-        """Memx entity types are extensible across resolver capabilities."""
-        ref = parse_typed_ref("memx:doc:custom-provider:id")
-        assert ref.entity_type == "doc"
-        assert str(ref) == "memx:doc:custom-provider:id"
-
-    def test_parse_empty_id_raises_error(self) -> None:
-        """Empty id should raise TypedRefParseError."""
-        with pytest.raises(TypedRefParseError, match="empty id"):
-            parse_typed_ref("memx:evidence:local:")
-
-    def test_parse_empty_provider_raises_error(self) -> None:
-        """Empty provider in 4-segment should raise TypedRefParseError."""
-        with pytest.raises(TypedRefParseError, match="empty provider"):
-            parse_typed_ref("memx:evidence::id")
+def test_parse_canonical_ref() -> None:
+    ref = parse_typed_ref("memx:evidence:local:01HXXXXXXX")
+    assert ref.domain == Domain.MEMX
+    assert ref.type == EntityType.EVIDENCE
+    assert ref.provider == DEFAULT_PROVIDER
+    assert ref.id == "01HXXXXXXX"
 
 
-class TestTypedRef:
-    """Test TypedRef class."""
-
-    def test_str_returns_canonical_format(self) -> None:
-        """TypedRef.__str__ returns canonical format."""
-        ref = TypedRef(
-            domain=Domain.MEMX,
-            type=EntityType.EVIDENCE,
-            provider=Provider.LOCAL,
-            id="01HXXXXXXX",
-        )
-        assert str(ref) == "memx:evidence:local:01HXXXXXXX"
-
-    def test_ref_alias(self) -> None:
-        """TypedRef.ref() is alias for __str__."""
-        ref = TypedRef(
-            domain=Domain.MEMX,
-            type=EntityType.EVIDENCE,
-            provider=Provider.LOCAL,
-            id="01HXXXXXXX",
-        )
-        assert ref.ref() == str(ref)
-
-    def test_is_zero(self) -> None:
-        """TypedRef.is_zero() returns True for zero value."""
-        ref = TypedRef(
-            domain=Domain.MEMX,
-            type=EntityType.EVIDENCE,
-            provider=Provider.LOCAL,
-            id="",
-        )
-        assert not ref.is_zero()  # has domain, type, provider
-
-        zero_ref = TypedRef(
-            domain=None,
-            type=None,
-            provider=None,
-            id=None,
-        )
-        assert zero_ref.is_zero()
-
-    def test_is_valid(self) -> None:
-        """TypedRef.is_valid() returns True for valid ref."""
-        ref = TypedRef(
-            domain=Domain.MEMX,
-            type=EntityType.EVIDENCE,
-            provider=Provider.LOCAL,
-            id="01HXXXXXXX",
-        )
-        assert ref.is_valid()
-
-        invalid_ref = TypedRef(
-            domain=Domain.MEMX,
-            type=EntityType.EVIDENCE,
-            provider=Provider.LOCAL,
-            id="",
-        )
-        assert not invalid_ref.is_valid()
-
-    def test_frozen(self) -> None:
-        """TypedRef is frozen (immutable)."""
-        ref = TypedRef(
-            domain=Domain.MEMX,
-            type=EntityType.EVIDENCE,
-            provider=Provider.LOCAL,
-            id="01HXXXXXXX",
-        )
-        with pytest.raises(Exception):
-            ref.id = "new-id"  # type: ignore
+def test_parse_lowercases_components_but_preserves_id_case() -> None:
+    ref = parse_typed_ref("TRACKER:Issue:JIRA:Proj-ABC")
+    assert ref.domain == Domain.TRACKER
+    assert ref.entity_type == "issue"
+    assert ref.provider == Provider.JIRA
+    assert ref.id == "Proj-ABC"
+    assert str(ref) == "tracker:issue:jira:Proj-ABC"
 
 
-class TestHelperFunctions:
-    """Test helper functions."""
-
-    def test_new_typed_ref(self) -> None:
-        """new_typed_ref creates TypedRef with memx domain and local provider."""
-        ref = new_typed_ref(EntityType.KNOWLEDGE, "01HZZZZZZZ")
-        assert ref.domain == Domain.MEMX
-        assert ref.type == EntityType.KNOWLEDGE
-        assert ref.provider == Provider.LOCAL
-        assert ref.id == "01HZZZZZZZ"
-
-    def test_new_typed_ref_with_provider(self) -> None:
-        """new_typed_ref_with_provider creates TypedRef with specified provider."""
-        ref = new_typed_ref_with_provider(
-            domain=Domain.TRACKER,
-            entity_type=EntityType.ARTIFACT,
-            provider=Provider.GITHUB,
-            id="gh-123",
-        )
-        assert ref.domain == Domain.TRACKER
-        assert ref.type == EntityType.ARTIFACT
-        assert ref.provider == Provider.GITHUB
-        assert ref.id == "gh-123"
-
-    def test_must_parse_typed_ref(self) -> None:
-        """must_parse_typed_ref is same as parse_typed_ref."""
-        ref = must_parse_typed_ref("memx:evidence:local:01HXXXXXXX")
-        assert ref.domain == Domain.MEMX
-        assert ref.type == EntityType.EVIDENCE
+def test_three_segment_ref_is_rejected() -> None:
+    with pytest.raises(TypedRefParseError, match="v2 requires"):
+        parse_typed_ref("memx:evidence:01HXXXXXXX")
 
 
-class TestNormalization:
-    """Test normalization from 3-segment to 4-segment."""
+def test_empty_and_unknown_components_are_rejected() -> None:
+    with pytest.raises(TypedRefParseError, match="empty provider"):
+        parse_typed_ref("memx:evidence::id")
+    with pytest.raises(TypedRefParseError, match="empty id"):
+        parse_typed_ref("memx:evidence:local:")
+    with pytest.raises(TypedRefParseError, match="invalid domain"):
+        parse_typed_ref("unknown:evidence:local:id")
 
-    def test_three_segment_normalizes_to_local_provider(self) -> None:
-        """3-segment format normalizes to provider='local'."""
-        ref = parse_typed_ref("memx:evidence:01HXXXXXXX")
-        assert ref.provider == Provider.LOCAL
-        assert str(ref) == "memx:evidence:local:01HXXXXXXX"
 
-    def test_output_is_canonical(self) -> None:
-        """Output is always canonical format."""
-        ref = parse_typed_ref("memx:knowledge:01HYYYYYYY")
-        canonical = ref.canonical()
-        assert canonical.count(":") == 3  # 4 segments
-        assert canonical.startswith("memx:knowledge:local:")
+def test_percent_encoding_round_trip_for_colon_and_reserved_chars() -> None:
+    ref = TypedRef(Domain.MEMX, EntityType.DOC, Provider.LOCAL, "A:B / C")
+    assert str(ref) == "memx:doc:local:A%3AB%20%2F%20C"
+    parsed = parse_typed_ref(str(ref))
+    assert parsed.id == "A:B / C"
+    assert str(parsed) == str(ref)
+
+
+@pytest.mark.parametrize(
+    "value",
+    ["memx:doc:local:bad%2", "memx:doc:local:bad%GG", "memx:doc:local:%FF"],
+)
+def test_malformed_percent_encoding_is_rejected(value: str) -> None:
+    with pytest.raises(TypedRefParseError):
+        parse_typed_ref(value)
+
+
+def test_unreserved_id_characters_are_not_encoded() -> None:
+    ref = new_typed_ref(EntityType.KNOWLEDGE, "AZaz09-._~")
+    assert str(ref) == "memx:knowledge:local:AZaz09-._~"
+
+
+def test_custom_entity_type_and_provider_are_supported() -> None:
+    ref = parse_typed_ref("memx:doc:custom-provider:id")
+    assert ref.entity_type == "doc"
+    assert ref.provider == "custom-provider"
+    assert str(ref) == "memx:doc:custom-provider:id"
+
+
+def test_invalid_and_zero_values() -> None:
+    valid = TypedRef(Domain.MEMX, EntityType.EVIDENCE, Provider.LOCAL, "id")
+    assert valid.is_valid()
+    invalid = TypedRef(Domain.MEMX, EntityType.EVIDENCE, Provider.LOCAL, "")
+    assert not invalid.is_valid()
+    zero = TypedRef(None, None, None, None)  # type: ignore[arg-type]
+    assert zero.is_zero()
+    with pytest.raises(Exception):
+        valid.id = "new-id"  # type: ignore[misc]
+
+
+def test_helper_functions_and_must_parse() -> None:
+    ref = new_typed_ref_with_provider(
+        domain=Domain.TRACKER,
+        entity_type=EntityType.ARTIFACT,
+        provider=Provider.GITHUB,
+        id="gh:123",
+    )
+    assert ref.entity_id == "gh:123"
+    assert ref.canonical() == "tracker:artifact:github:gh%3A123"
+    assert must_parse_typed_ref(ref.canonical()) == ref

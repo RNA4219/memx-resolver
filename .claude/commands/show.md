@@ -25,7 +25,7 @@ Display a specific note by its ID.
 Use the Bash tool to run:
 
 ```bash
-cd ../../memx-core/memx_spec_v3/go && go run ./cmd/mem out show "<note_id>"
+go run ./cmd/mem out show "<note_id>"
 ```
 
 If you need a store-specific view, these variants are also available:

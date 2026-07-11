@@ -34,7 +34,7 @@ next_review_due: 2026-04-10
 - `../README.md`: エージェント向けの入口
 - `../CHANGELOG.md`: 完了タスクと履歴の記録
 - `../USER_GUIDE.md`: 人間向けの利用ガイド
-- `./memx_spec_v3/`: 実装コード
+- `./`: 実装コード
 
 更新日: 2026-03-10
 
@@ -96,7 +96,7 @@ planned → active → in_progress → reviewing → done
     caps_ref: birdseye/caps/docs.requirements.md.json
   objective: 文書登録APIの実装
   scope:
-    in: [memx_spec_v3/go/api]
+    in: [api]
     out: []
   requirements:
     behavior:
