@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ntpath
 import os
 from pathlib import Path
 from typing import Union
@@ -39,7 +40,7 @@ def resolve_repository_path(
 ) -> Path:
     root = repository_root(repo_root)
     raw = Path(value)
-    if reject_absolute and raw.is_absolute():
+    if reject_absolute and (raw.is_absolute() or ntpath.isabs(str(value))):
         raise PathBoundaryError(f"absolute path is not allowed: {value}")
     candidate = raw if raw.is_absolute() else root / raw
     resolved = candidate.resolve(strict=False)
