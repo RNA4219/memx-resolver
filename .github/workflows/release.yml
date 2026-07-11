@@ -1,0 +1,111 @@
+name: Release v1.1.0
+
+on:
+  push:
+    tags:
+      - v1.1.0
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Verify tag and clean build
+        run: |
+          test "${GITHUB_REF_NAME}" = "v1.1.0"
+          test -z "$(git status --porcelain)"
+      - name: Verify PyPI project name
+        shell: bash
+        run: |
+          status=$(curl -sS -o pypi-project.json -w '%{http_code}' https://pypi.org/pypi/memx-resolver/json)
+          if [ "$status" = 404 ]; then exit 0; fi
+          if [ "$status" != 200 ]; then echo "PyPI preflight failed: HTTP $status"; exit 1; fi
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('pypi-project.json').read_text())
+          urls = data.get('info', {}).get('project_urls') or {}
+          if not any('github.com/RNA4219/memx-resolver' in str(value) for value in urls.values()):
+              raise SystemExit('PyPI name memx-resolver is owned by another project')
+          PY
+
+  python-dist:
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: python -m pip install --upgrade build
+      - run: python -m build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-dist
+          path: dist/*
+          if-no-files-found: error
+
+  go-binaries:
+    needs: verify
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [linux, windows, darwin]
+        goarch: [amd64, arm64]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.22'
+          cache-dependency-path: docs/memx_spec_v3/go/go.sum
+      - name: Build mem
+        shell: bash
+        working-directory: docs/memx_spec_v3/go
+        run: |
+          suffix=''
+          if [ '${{ matrix.goos }}' = windows ]; then suffix='.exe'; fi
+          mkdir -p "$GITHUB_WORKSPACE/release-assets"
+          CGO_ENABLED=0 GOOS='${{ matrix.goos }}' GOARCH='${{ matrix.goarch }}' go build -trimpath -ldflags='-s -w' -o "$GITHUB_WORKSPACE/release-assets/mem-${{ matrix.goos }}-${{ matrix.goarch }}${suffix}" ./cmd/mem
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mem-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: release-assets/*
+          if-no-files-found: error
+
+  publish-pypi:
+    needs: [python-dist, go-binaries]
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-dist
+          path: dist
+      - uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    needs: [publish-pypi]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+      - name: Generate checksums
+        working-directory: release-assets
+        run: sha256sum * > SHA256SUMS
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release-assets/* --verify-tag --generate-notes --title "$GITHUB_REF_NAME"
