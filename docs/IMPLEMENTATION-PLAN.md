@@ -91,11 +91,11 @@ next_review_due: 2026-04-10
 - [x] Python packaging and GitHub Release workflow
 - [x] CTG/HATE/manual-BB/QEG local gate: GO
 - [x] GitHub Windows/Linux CI and Linux race
-- [ ] GitHub Release artifact creation and checksum verification
+- [x] GitHub Release artifact creation and checksum verification (`29149767355`)
 
 ## v2.0.0
 
-- Status: planned; work starts only after v1.1.0 publication is verified.
+- Status: active; v1.1.0 GitHub Release verified, v2.0.0 work may start on a separate branch.
 - Planned: root Go module, strict four-segment typed_ref, non-loopback opt-in enforcement, unknown-field rejection, migration guide and DB compatibility test.
 
 - 逆リンク: [README.md](../README.md) / [HUB.codex.md](../HUB.codex.md)

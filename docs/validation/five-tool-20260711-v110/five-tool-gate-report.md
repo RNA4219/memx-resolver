@@ -29,7 +29,7 @@
 - Broad suppressions: 0
 - Narrow suppression: atomic writer temp cleanup only, path-specific, expires 2026-10-01
 - Residual: Windows symlink test skipped when OS privilege is unavailable; Linux CI must execute it.
-- Residual: GitHub Release artifact and checksum verification remains before acceptance closure.
+- Residual: none blocking v1.1.0; Windows symlink coverage remains privilege-dependent.
 
 ## Tool Compatibility Note
 
@@ -41,7 +41,7 @@ Grounded viewpoints, risks, priorities, eight executed P1 cases, effort, gate ju
 
 ## Verdict
 
-`go` for the local release candidate. Acceptance closure remains blocked until the GitHub Release-only workflow publishes and checksums are verified.
+`go` for the local release candidate; GitHub Release v1.1.0 assets and checksums are verified.
 
 
 

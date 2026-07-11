@@ -69,8 +69,8 @@ planned → active → in_progress → reviewing → done
 | TASK-005 | reads:ack API | planned | medium |
 | TASK-006 | stale-check API | planned | medium |
 | TASK-007 | contracts:resolve API | planned | medium |
-| TASK.release-v1.1.0 | v1.1.0 safety and release gate | reviewing | high |
-| TASK.release-v2.0.0 | Go root migration and breaking safety changes | planned | high |
+| TASK.release-v1.1.0 | v1.1.0 safety and release gate | done | high |
+| TASK.release-v2.0.0 | Go root migration and breaking safety changes | in_progress | high |
 
 ---
 
