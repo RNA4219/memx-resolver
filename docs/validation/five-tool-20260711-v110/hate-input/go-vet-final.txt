@@ -1,0 +1,1 @@
+go vet ./... (exit 0, final HEAD 57ce98361e81c68e26cc9be3b030c29546e02d08)
