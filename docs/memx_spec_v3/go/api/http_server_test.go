@@ -794,3 +794,35 @@ func TestHTTP_BuildBundle_Success(t *testing.T) {
 	}
 }
 
+func TestHTTP_RequestBodyLimit(t *testing.T) {
+	server, cleanup := setupHTTPTestServer(t)
+	defer cleanup()
+	server.MaxRequestBytes = 32
+
+	body := append(bytes.Repeat([]byte(" "), 64), []byte("{}")...)
+	req := httptest.NewRequest(http.MethodPost, "/v1/notes:ingest", bytes.NewReader(body))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+
+	server.Handler().ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusRequestEntityTooLarge {
+		t.Fatalf("expected status 413, got %d: %s", rec.Code, rec.Body.String())
+	}
+}
+
+func TestHTTP_RejectsMultipleJSONValues(t *testing.T) {
+	server, cleanup := setupHTTPTestServer(t)
+	defer cleanup()
+
+	body := []byte(`{"title":"first","body":"one"} {"title":"second","body":"two"}`)
+	req := httptest.NewRequest(http.MethodPost, "/v1/notes:ingest", bytes.NewReader(body))
+	req.Header.Set("Content-Type", "application/json")
+	rec := httptest.NewRecorder()
+
+	server.Handler().ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusBadRequest {
+		t.Fatalf("expected status 400, got %d: %s", rec.Code, rec.Body.String())
+	}
+}

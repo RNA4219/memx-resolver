@@ -13,9 +13,10 @@ const (
 )
 
 type Error struct {
-	Code    ErrorCode   `json:"code"`
-	Message string      `json:"message"`
-	Details interface{} `json:"details,omitempty"`
+	Code       ErrorCode   `json:"code"`
+	Message    string      `json:"message"`
+	Details    interface{} `json:"details,omitempty"`
+	HTTPStatus int         `json:"-"`
 }
 
 // NoteBase はノートの共通フィールド。
@@ -295,20 +296,20 @@ type LoadSelectedRawResponse struct {
 // ContextBundle は再開用の文脈バンドル。
 // P4仕様: purpose, summary, decision_digest, open_question_digest, artifact_refs, evidence_refs, source_refs, raw_included, resolver_diagnostics
 type ContextBundle struct {
-	ID                 string             `json:"id"`
-	Purpose            string             `json:"purpose"`
-	Summary            string             `json:"summary"`
-	RebuildLevel       string             `json:"rebuild_level"`
-	DecisionDigest     string             `json:"decision_digest,omitempty"`
-	OpenQuestionDigest string             `json:"open_question_digest,omitempty"`
-	ArtifactRefs       []TypedRef         `json:"artifact_refs,omitempty"`
-	EvidenceRefs       []TypedRef         `json:"evidence_refs,omitempty"`
-	SourceRefs         []BundleSourceRef  `json:"source_refs,omitempty"`
-	TrackerRefs        []TypedRef         `json:"tracker_refs,omitempty"`
-	RawIncluded        bool               `json:"raw_included"`
-	GeneratorVersion   string             `json:"generator_version"`
-	GeneratedAt        string             `json:"generated_at"`
-	Diagnostics        BundleDiagnostics  `json:"diagnostics"`
+	ID                 string            `json:"id"`
+	Purpose            string            `json:"purpose"`
+	Summary            string            `json:"summary"`
+	RebuildLevel       string            `json:"rebuild_level"`
+	DecisionDigest     string            `json:"decision_digest,omitempty"`
+	OpenQuestionDigest string            `json:"open_question_digest,omitempty"`
+	ArtifactRefs       []TypedRef        `json:"artifact_refs,omitempty"`
+	EvidenceRefs       []TypedRef        `json:"evidence_refs,omitempty"`
+	SourceRefs         []BundleSourceRef `json:"source_refs,omitempty"`
+	TrackerRefs        []TypedRef        `json:"tracker_refs,omitempty"`
+	RawIncluded        bool              `json:"raw_included"`
+	GeneratorVersion   string            `json:"generator_version"`
+	GeneratedAt        string            `json:"generated_at"`
+	Diagnostics        BundleDiagnostics `json:"diagnostics"`
 }
 
 // BundleSourceRef はバンドル内のソース参照。
@@ -329,9 +330,9 @@ type BundleDiagnostics struct {
 
 // BuildBundleRequest は Context Bundle 構築リクエスト。
 type BuildBundleRequest struct {
-	Purpose      string     `json:"purpose"`
-	SourceRefs   []TypedRef `json:"source_refs"`
-	IncludeRaw   bool       `json:"include_raw,omitempty"`
+	Purpose      string                 `json:"purpose"`
+	SourceRefs   []TypedRef             `json:"source_refs"`
+	IncludeRaw   bool                   `json:"include_raw,omitempty"`
 	RawSelectors map[string]RawSelector `json:"raw_selectors,omitempty"`
 }
 
