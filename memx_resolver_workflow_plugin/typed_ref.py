@@ -1,4 +1,4 @@
-"""typed_ref module for memx-resolver workflow plugin.
+"""Canonical typed_ref support for the memx-resolver workflow plugin.
 
 Provides typed reference parsing and validation following the canonical format:
 <domain>:<entity_type>:<provider>:<entity_id>
@@ -11,9 +11,10 @@ and normalized to provider='local'.
 
 from __future__ import annotations
 
+import warnings
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional, Union
+from typing import Union
 
 
 class Domain(str, Enum):
@@ -30,6 +31,10 @@ class EntityType(str, Enum):
     KNOWLEDGE = "knowledge"
     ARTIFACT = "artifact"
     LINEAGE = "lineage"
+    DOC = "doc"
+    CHUNK = "chunk"
+    CARD = "card"
+    TASK = "task"
 
 
 class Provider(str, Enum):
@@ -42,6 +47,14 @@ class Provider(str, Enum):
 
 DEFAULT_PROVIDER = Provider.LOCAL
 
+KNOWN_DOMAINS = frozenset(domain.value for domain in Domain)
+
+
+def _component_value(value: Union[Enum, str, None]) -> str:
+    if isinstance(value, Enum):
+        return str(value.value)
+    return "" if value is None else str(value)
+
 
 @dataclass(frozen=True)
 class TypedRef:
@@ -49,17 +62,25 @@ class TypedRef:
 
     Canonical format: <domain>:<entity_type>:<provider>:<entity_id>
     """
-    domain: Domain
-    type: Union[EntityType, str]  # EntityType for memx, str for other domains
-    provider: Provider
+    domain: Union[Domain, str]
+    type: Union[EntityType, str]
+    provider: Union[Provider, str]
     id: str
 
     def __str__(self) -> str:
         """Return canonical format string."""
-        domain_val = self.domain.value if self.domain else ""
-        type_val = self.type.value if isinstance(self.type, EntityType) else self.type
-        provider_val = self.provider.value if self.provider else ""
+        domain_val = _component_value(self.domain).lower()
+        type_val = _component_value(self.type).lower()
+        provider_val = _component_value(self.provider).lower()
         return f"{domain_val}:{type_val}:{provider_val}:{self.id}"
+
+    @property
+    def entity_type(self) -> str:
+        return _component_value(self.type)
+
+    @property
+    def entity_id(self) -> str:
+        return self.id
 
     def ref(self) -> str:
         """Alias for __str__."""
@@ -75,7 +96,15 @@ class TypedRef:
 
     def is_valid(self) -> bool:
         """Check if TypedRef is valid."""
-        return bool(self.domain and self.type and self.provider and self.id)
+        try:
+            domain = _component_value(self.domain).lower()
+            _validate_domain(domain)
+            _validate_entity_type(domain, _component_value(self.type))
+            _validate_provider(_component_value(self.provider))
+            _validate_id(self.id)
+        except TypedRefParseError:
+            return False
+        return True
 
 
 class TypedRefParseError(ValueError):
@@ -107,6 +136,11 @@ def parse_typed_ref(s: str) -> TypedRef:
     parts = s.split(":")
 
     if len(parts) == 3:
+        warnings.warn(
+            "three-segment typed_ref is deprecated; use domain:type:provider:id",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         return _parse_three_segment(parts)
 
     if len(parts) == 4:
@@ -118,85 +152,77 @@ def parse_typed_ref(s: str) -> TypedRef:
 
 
 def _parse_three_segment(parts: list[str]) -> TypedRef:
-    """Parse 3-segment format and normalize to provider='local'."""
-    domain_str = parts[0]
-    if domain_str != Domain.MEMX.value:
-        raise TypedRefParseError(
-            f"invalid domain: {domain_str} (expected 'memx' for 3-segment format)"
-        )
-
-    entity_type_str = parts[1]
+    """Parse legacy format and normalize it to the canonical provider."""
+    domain_str = parts[0].lower()
+    _validate_domain(domain_str)
+    entity_type_str = parts[1].lower()
     _validate_entity_type(domain_str, entity_type_str)
-
     id_part = parts[2]
-    if not id_part:
-        raise TypedRefParseError("empty id in ref")
-
+    _validate_id(id_part)
     return TypedRef(
-        domain=Domain.MEMX,
-        type=EntityType(entity_type_str),
+        domain=Domain(domain_str),
+        type=_known_entity_type_or_string(entity_type_str),
         provider=DEFAULT_PROVIDER,
         id=id_part,
     )
 
 
 def _parse_four_segment(parts: list[str]) -> TypedRef:
-    """Parse 4-segment canonical format."""
-    domain_str = parts[0]
+    """Parse the canonical four-segment format."""
+    domain_str = parts[0].lower()
     _validate_domain(domain_str)
-
-    entity_type_str = parts[1]
+    entity_type_str = parts[1].lower()
     _validate_entity_type(domain_str, entity_type_str)
-
-    provider_str = parts[2]
-    if not provider_str:
-        raise TypedRefParseError("empty provider in ref")
-
+    provider_str = parts[2].lower()
+    _validate_provider(provider_str)
     id_part = parts[3]
-    if not id_part:
-        raise TypedRefParseError("empty id in ref")
-
-    # For memx domain, use EntityType enum; for other domains, use string
-    if domain_str == Domain.MEMX.value:
-        entity_type = EntityType(entity_type_str)
-    else:
-        entity_type = entity_type_str
-
+    _validate_id(id_part)
     return TypedRef(
         domain=Domain(domain_str),
-        type=entity_type,
-        provider=Provider(provider_str),
+        type=_known_entity_type_or_string(entity_type_str),
+        provider=_known_provider_or_string(provider_str),
         id=id_part,
     )
 
 
 def _validate_domain(domain: str) -> None:
-    """Validate domain is known."""
-    valid_domains = {d.value for d in Domain}
-    if domain not in valid_domains:
+    if domain not in KNOWN_DOMAINS:
         raise TypedRefParseError(
             f"invalid domain: {domain} (expected memx, agent-taskstate, or tracker)"
         )
 
 
 def _validate_entity_type(domain: str, entity_type: str) -> None:
-    """Validate entity type.
-
-    For memx domain, only known types are allowed.
-    For other domains, just check non-empty.
-    """
+    """Entity types are extensible; only a non-empty value is required."""
     if not entity_type:
         raise TypedRefParseError("empty entity type")
 
-    if domain == Domain.MEMX.value:
-        valid_types = {t.value for t in EntityType}
-        if entity_type not in valid_types:
-            raise TypedRefParseError(
-                f"invalid entity type for memx domain: {entity_type}"
-            )
+
+def _validate_provider(provider: str) -> None:
+    if not provider:
+        raise TypedRefParseError("empty provider")
 
 
-def new_typed_ref(entity_type: EntityType, id: str) -> TypedRef:
+def _validate_id(entity_id: str) -> None:
+    if not entity_id:
+        raise TypedRefParseError("empty id")
+
+
+def _known_entity_type_or_string(value: str) -> Union[EntityType, str]:
+    try:
+        return EntityType(value)
+    except ValueError:
+        return value
+
+
+def _known_provider_or_string(value: str) -> Union[Provider, str]:
+    try:
+        return Provider(value)
+    except ValueError:
+        return value
+
+
+def new_typed_ref(entity_type: Union[EntityType, str], id: str) -> TypedRef:
     """Create TypedRef with memx domain and local provider."""
     return TypedRef(
         domain=Domain.MEMX,
@@ -207,9 +233,9 @@ def new_typed_ref(entity_type: EntityType, id: str) -> TypedRef:
 
 
 def new_typed_ref_with_provider(
-    domain: Domain,
-    entity_type: EntityType,
-    provider: Provider,
+    domain: Union[Domain, str],
+    entity_type: Union[EntityType, str],
+    provider: Union[Provider, str],
     id: str,
 ) -> TypedRef:
     """Create TypedRef with specified provider."""
