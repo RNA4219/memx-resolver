@@ -45,6 +45,8 @@ def resolve_repository_path(
     resolved = candidate.resolve(strict=False)
     if not is_within_repository(repo_root=root, target=resolved):
         raise PathBoundaryError(f"path escapes repository root: {value}")
+    if os.name == "nt" and str(resolved).startswith("\\\\?\\"):
+        resolved = Path(str(resolved)[4:])
     if require_file and not resolved.is_file():
         raise FileNotFoundError(f"document does not exist: {value}")
     return resolved
