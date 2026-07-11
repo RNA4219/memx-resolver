@@ -90,9 +90,9 @@ LIMIT ?;
 // GC から呼び出される。
 type ArchiveNoteRequest struct {
 	Note
-	SrcStore   string // 元のストア名（通常 "short"）
-	SrcNoteID  string // 元のノートID
-	Relation   string // lineage 用の関係（通常 "archived_from"）
+	SrcStore  string // 元のストア名（通常 "short"）
+	SrcNoteID string // 元のノートID
+	Relation  string // lineage 用の関係（通常 "archived_from"）
 }
 
 // ArchiveNoteFromShort は short ノートを archive に退避する。
@@ -261,11 +261,11 @@ ORDER BY created_at DESC;
 
 // LineageRecord は lineage テーブルのレコード。
 type LineageRecord struct {
-	ID          int64
-	SrcStore    string
-	SrcNoteID   string
-	DestStore   string
-	DestNoteID  string
-	Relation    string
-	CreatedAt   string
+	ID         int64
+	SrcStore   string
+	SrcNoteID  string
+	DestStore  string
+	DestNoteID string
+	Relation   string
+	CreatedAt  string
 }

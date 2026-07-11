@@ -6,14 +6,14 @@ import (
 	"testing"
 	"time"
 
-	"memx/db"
+	"github.com/RNA4219/memx-resolver/v2/db"
 )
 
 func TestService_GCShort_FeatureDisabled(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
@@ -39,7 +39,7 @@ func TestService_GCShort_DryRun(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
@@ -89,7 +89,7 @@ func TestService_GCShort_SkippedUnderLimit(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
@@ -130,7 +130,7 @@ func TestService_GCTriggerCheck(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
@@ -226,7 +226,7 @@ func TestService_GCShort_ArchiveOldNotes(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
@@ -291,7 +291,7 @@ func TestService_GCShort_WithArchiveStore(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}

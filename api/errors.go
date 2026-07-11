@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"memx/service"
+	"github.com/RNA4219/memx-resolver/v2/service"
 )
 
 func mapError(err error) *Error {

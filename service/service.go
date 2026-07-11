@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"memx/db"
+	"github.com/RNA4219/memx-resolver/v2/db"
 )
 
 // Service は memx の Usecase 層。

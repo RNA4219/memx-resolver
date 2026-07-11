@@ -24,10 +24,10 @@ type Resolver interface {
 // TypedRef は typed_ref の service パッケージ内表現。
 // api.TypedRef との変換は境界層で行う。
 type TypedRef struct {
-	Domain     string
-	Type       string
-	Provider   string
-	ID         string
+	Domain   string
+	Type     string
+	Provider string
+	ID       string
 }
 
 func (r TypedRef) String() string {
@@ -74,10 +74,10 @@ type ResolveReport struct {
 
 // ResolverDiagnostics は解決診断情報。
 type ResolverDiagnostics struct {
-	MissingRefs     []TypedRef
-	UnsupportedRefs []TypedRef
+	MissingRefs      []TypedRef
+	UnsupportedRefs  []TypedRef
 	ResolverWarnings []string
-	PartialBundle   bool
+	PartialBundle    bool
 }
 
 // SummaryPayload は要約取得結果。
@@ -156,10 +156,10 @@ func (r *ShortNoteResolver) ResolveMany(ctx context.Context, refs []TypedRef) (*
 		Unresolved:  []TypedRef{},
 		Unsupported: []TypedRef{},
 		Diagnostics: ResolverDiagnostics{
-			MissingRefs:     []TypedRef{},
-			UnsupportedRefs: []TypedRef{},
+			MissingRefs:      []TypedRef{},
+			UnsupportedRefs:  []TypedRef{},
 			ResolverWarnings: []string{},
-			PartialBundle:   false,
+			PartialBundle:    false,
 		},
 	}
 

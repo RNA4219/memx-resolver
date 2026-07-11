@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"memx/db"
+	"github.com/RNA4219/memx-resolver/v2/db"
 )
 
 func TestService_IngestShort_Validation(t *testing.T) {

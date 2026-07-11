@@ -12,10 +12,10 @@ import (
 // GCConfig は GC の設定値。
 // requirements-cli.md#3-5 の閾値と一致させる。
 type GCConfig struct {
-	SoftLimitNotes      int // 1200
-	HardLimitNotes      int // 2000
-	MinIntervalMinutes  int // 180
-	ArchiveBatchSize    int // 100 (1回のGCで退避する最大ノート数)
+	SoftLimitNotes     int // 1200
+	HardLimitNotes     int // 2000
+	MinIntervalMinutes int // 180
+	ArchiveBatchSize   int // 100 (1回のGCで退避する最大ノート数)
 }
 
 // DefaultGCConfig はデフォルトのGC設定。
@@ -31,29 +31,29 @@ type GCTriggerDecision struct {
 	ShouldRun bool   `json:"should_run"`
 	Reason    string `json:"reason"`
 	Metrics   struct {
-		NoteCount           int `json:"note_count"`
-		SoftLimitNotes      int `json:"soft_limit_notes"`
-		HardLimitNotes      int `json:"hard_limit_notes"`
-		MinutesSinceLastGC  int `json:"minutes_since_last_gc"`
-		MinIntervalMinutes  int `json:"min_interval_minutes"`
+		NoteCount          int `json:"note_count"`
+		SoftLimitNotes     int `json:"soft_limit_notes"`
+		HardLimitNotes     int `json:"hard_limit_notes"`
+		MinutesSinceLastGC int `json:"minutes_since_last_gc"`
+		MinIntervalMinutes int `json:"min_interval_minutes"`
 	} `json:"metrics"`
 }
 
 // GCDryRunResult は dry-run の結果。
 type GCDryRunResult struct {
-	Target     string             `json:"target"`
-	Phase      string             `json:"phase"`
-	Decision   GCTriggerDecision  `json:"decision"`
-	PlannedOps []GCPlannedOp      `json:"planned_ops"`
+	Target     string            `json:"target"`
+	Phase      string            `json:"phase"`
+	Decision   GCTriggerDecision `json:"decision"`
+	PlannedOps []GCPlannedOp     `json:"planned_ops"`
 }
 
 // GCPlannedOp は予定されている操作。
 type GCPlannedOp struct {
-	Op               string   `json:"op"`
-	SrcNoteIDs       []string `json:"src_note_ids,omitempty"`
-	SrcNoteID        string   `json:"src_note_id,omitempty"`
-	DestStore        string   `json:"dest_store"`
-	LineageRelation  string   `json:"lineage_relation,omitempty"`
+	Op              string   `json:"op"`
+	SrcNoteIDs      []string `json:"src_note_ids,omitempty"`
+	SrcNoteID       string   `json:"src_note_id,omitempty"`
+	DestStore       string   `json:"dest_store"`
+	LineageRelation string   `json:"lineage_relation,omitempty"`
 }
 
 // GCRequest は GC 実行リクエスト。
@@ -65,10 +65,10 @@ type GCRequest struct {
 
 // GCResult は GC 実行結果。
 type GCResult struct {
-	Status     string         `json:"status"`
-	DryRun     bool           `json:"dry_run"`
-	DryRunResult *GCDryRunResult `json:"dry_run_result,omitempty"`
-	ArchivedCount int          `json:"archived_count,omitempty"`
+	Status        string          `json:"status"`
+	DryRun        bool            `json:"dry_run"`
+	DryRunResult  *GCDryRunResult `json:"dry_run_result,omitempty"`
+	ArchivedCount int             `json:"archived_count,omitempty"`
 }
 
 // GCShort は short.db に対する GC を実行する。
@@ -215,15 +215,15 @@ LIMIT ?`, cutoffDate, cfg.ArchiveBatchSize)
 
 	var candidates []struct {
 		id, title, summary, body, createdAt, updatedAt, lastAccessedAt string
-		accessCount                                                     int
-		sourceType, origin, sourceTrust, sensitivity                    string
+		accessCount                                                    int
+		sourceType, origin, sourceTrust, sensitivity                   string
 	}
 
 	for rows.Next() {
 		var c struct {
 			id, title, summary, body, createdAt, updatedAt, lastAccessedAt string
-			accessCount                                                     int
-			sourceType, origin, sourceTrust, sensitivity                    string
+			accessCount                                                    int
+			sourceType, origin, sourceTrust, sensitivity                   string
 		}
 		if err := rows.Scan(&c.id, &c.title, &c.summary, &c.body,
 			&c.createdAt, &c.updatedAt, &c.lastAccessedAt,

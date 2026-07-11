@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"memx/db"
+	"github.com/RNA4219/memx-resolver/v2/db"
 )
 
 func TestArchiveNoteFromShort(t *testing.T) {
@@ -14,7 +14,7 @@ func TestArchiveNoteFromShort(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
@@ -69,7 +69,7 @@ func TestRestoreFromArchive(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
@@ -129,7 +129,7 @@ func TestGetArchive(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
@@ -159,7 +159,7 @@ func TestListArchive(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
@@ -201,7 +201,7 @@ func TestGetArchiveLineage(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}

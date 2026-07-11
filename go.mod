@@ -1,4 +1,4 @@
-module memx
+module github.com/RNA4219/memx-resolver/v2
 
 go 1.22
 

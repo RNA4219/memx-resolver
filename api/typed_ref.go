@@ -2,19 +2,21 @@ package api
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
+	"unicode/utf8"
 )
 
 // Domain は typed_ref のシステム領域を表す。
 type Domain string
 
 const (
-	DomainMemx          Domain = "memx"
+	DomainMemx           Domain = "memx"
 	DomainAgentTaskstate Domain = "agent-taskstate"
-	DomainTracker       Domain = "tracker"
+	DomainTracker        Domain = "tracker"
 )
 
-// EntityType は memx 内のエンティティ種別。
+// EntityType はエンティティ種別。未知の値も拡張用に受理する。
 type EntityType string
 
 const (
@@ -25,7 +27,7 @@ const (
 	EntityTypeLineage       EntityType = "lineage"
 )
 
-// Provider は typed_ref のデータソースを表す。
+// Provider はデータソース。未知の値も拡張用に受理する。
 type Provider string
 
 const (
@@ -35,33 +37,31 @@ const (
 	ProviderLinear Provider = "linear"
 )
 
-// DefaultProvider は provider が省略された場合のデフォルト値。
 const DefaultProvider Provider = ProviderLocal
 
-// TypedRef はエンティティへの型付き参照。
-// Canonical format: <domain>:<entity_type>:<provider>:<entity_id>
-// 例: memx:evidence:local:01HXXXXXXX
-//
-// 移行期間中は3セグメント形式（memx:<type>:<id>）も受理し、
-// provider=local として正規化する。
+// TypedRef はv2の4セグメント型付き参照。
 type TypedRef struct {
-	Domain     Domain     `json:"domain"`
-	Type       EntityType `json:"type"`
-	Provider   Provider   `json:"provider"`
-	ID         string     `json:"id"`
+	Domain   Domain     `json:"domain"`
+	Type     EntityType `json:"type"`
+	Provider Provider   `json:"provider"`
+	ID       string     `json:"id"`
 }
 
-// String は TypedRef を canonical format（4セグメント）の文字列に変換する。
+// String はdomain/type/providerを小文字化し、IDをRFC 3986形式で符号化する。
 func (r TypedRef) String() string {
-	return fmt.Sprintf("%s:%s:%s:%s", r.Domain, r.Type, r.Provider, r.ID)
+	return fmt.Sprintf(
+		"%s:%s:%s:%s",
+		strings.ToLower(string(r.Domain)),
+		strings.ToLower(string(r.Type)),
+		strings.ToLower(string(r.Provider)),
+		percentEncodeID(r.ID),
+	)
 }
 
-// MarshalText は encoding.TextMarshaler インターフェースを実装する。
 func (r TypedRef) MarshalText() ([]byte, error) {
 	return []byte(r.String()), nil
 }
 
-// UnmarshalText は encoding.TextUnmarshaler インターフェースを実装する。
 func (r *TypedRef) UnmarshalText(text []byte) error {
 	ref, err := ParseTypedRef(string(text))
 	if err != nil {
@@ -71,86 +71,39 @@ func (r *TypedRef) UnmarshalText(text []byte) error {
 	return nil
 }
 
-// ParseTypedRef は typed_ref 文字列を TypedRef に変換する。
-// 3セグメント形式（memx:<type>:<id>）と4セグメント形式（memx:<type>:<provider>:<id>）の両方を受理する。
-// 3セグメント形式の場合は provider=local として正規化する。
+// ParseTypedRef はv2の4セグメント形式だけを受理する。
 func ParseTypedRef(s string) (TypedRef, error) {
 	s = strings.TrimSpace(s)
 	if s == "" {
 		return TypedRef{}, fmt.Errorf("empty ref")
 	}
-
 	parts := strings.Split(s, ":")
-
-	// 3セグメント形式（旧形式）の受理
-	if len(parts) == 3 {
-		return parseThreeSegment(parts)
+	if len(parts) != 4 {
+		return TypedRef{}, fmt.Errorf("invalid ref format: %s (v2 requires <domain>:<type>:<provider>:<id>)", s)
 	}
-
-	// 4セグメント形式（canonical）の受理
-	if len(parts) == 4 {
-		return parseFourSegment(parts)
-	}
-
-	return TypedRef{}, fmt.Errorf("invalid ref format: %s (expected <domain>:<type>:[<provider>:]<id>)", s)
+	return parseFourSegment(parts)
 }
 
-// parseThreeSegment は3セグメント形式をパースし、provider=local として正規化する。
-func parseThreeSegment(parts []string) (TypedRef, error) {
-	domain := Domain(parts[0])
-	if domain != DomainMemx {
-		return TypedRef{}, fmt.Errorf("invalid domain: %s (expected 'memx' for 3-segment format)", domain)
-	}
-
-	entityType := EntityType(parts[1])
-	if err := validateEntityType(domain, entityType); err != nil {
-		return TypedRef{}, err
-	}
-
-	id := parts[2]
-	if id == "" {
-		return TypedRef{}, fmt.Errorf("empty id in ref")
-	}
-
-	return TypedRef{
-		Domain:   domain,
-		Type:     entityType,
-		Provider: DefaultProvider,
-		ID:       id,
-	}, nil
-}
-
-// parseFourSegment は4セグメント形式（canonical）をパースする。
 func parseFourSegment(parts []string) (TypedRef, error) {
-	domain := Domain(parts[0])
+	domain := Domain(strings.ToLower(parts[0]))
 	if err := validateDomain(domain); err != nil {
 		return TypedRef{}, err
 	}
-
-	entityType := EntityType(parts[1])
+	entityType := EntityType(strings.ToLower(parts[1]))
 	if err := validateEntityType(domain, entityType); err != nil {
 		return TypedRef{}, err
 	}
-
-	provider := Provider(parts[2])
-	if provider == "" {
-		return TypedRef{}, fmt.Errorf("empty provider in ref")
+	provider := Provider(strings.ToLower(parts[2]))
+	if err := validateProvider(provider); err != nil {
+		return TypedRef{}, err
 	}
-
-	id := parts[3]
-	if id == "" {
-		return TypedRef{}, fmt.Errorf("empty id in ref")
+	id, err := decodeEntityID(parts[3])
+	if err != nil {
+		return TypedRef{}, err
 	}
-
-	return TypedRef{
-		Domain:   domain,
-		Type:     entityType,
-		Provider: provider,
-		ID:       id,
-	}, nil
+	return TypedRef{Domain: domain, Type: entityType, Provider: provider, ID: id}, nil
 }
 
-// validateDomain はドメインが有効かどうかを検証する。
 func validateDomain(domain Domain) error {
 	switch domain {
 	case DomainMemx, DomainAgentTaskstate, DomainTracker:
@@ -160,29 +113,81 @@ func validateDomain(domain Domain) error {
 	}
 }
 
-// validateEntityType はエンティティタイプが有効かどうかを検証する。
-// memx ドメインの場合は既知のタイプのみ許可し、それ以外のドメインでは空でないことを確認する。
-func validateEntityType(domain Domain, entityType EntityType) error {
+func validateEntityType(_ Domain, entityType EntityType) error {
 	if entityType == "" {
 		return fmt.Errorf("empty entity type")
 	}
-
-	// memx ドメインの場合は既知のタイプのみ許可
-	if domain == DomainMemx {
-		switch entityType {
-		case EntityTypeEvidence, EntityTypeEvidenceChunk, EntityTypeKnowledge, EntityTypeArtifact, EntityTypeLineage:
-			return nil
-		default:
-			return fmt.Errorf("invalid entity type for memx domain: %s", entityType)
-		}
+	if strings.Contains(string(entityType), "%") {
+		return fmt.Errorf("percent encoding is only allowed in id")
 	}
-
-	// 他のドメイン（agent-taskstate, tracker）では空でないことを確認するのみ
-	// 実在性確認は別責務とする
 	return nil
 }
 
-// MustParseTypedRef は ParseTypedRef のパニック版。
+func validateProvider(provider Provider) error {
+	if provider == "" {
+		return fmt.Errorf("empty provider")
+	}
+	if strings.Contains(string(provider), "%") {
+		return fmt.Errorf("percent encoding is only allowed in id")
+	}
+	return nil
+}
+
+func decodeEntityID(raw string) (string, error) {
+	if raw == "" {
+		return "", fmt.Errorf("empty id in ref")
+	}
+	for i := 0; i < len(raw); i++ {
+		if raw[i] != '%' {
+			continue
+		}
+		if i+2 >= len(raw) || !isHex(raw[i+1]) || !isHex(raw[i+2]) {
+			return "", fmt.Errorf("malformed percent encoding in id")
+		}
+		i += 2
+	}
+	decoded, err := url.PathUnescape(raw)
+	if err != nil {
+		return "", fmt.Errorf("malformed percent encoding in id: %w", err)
+	}
+	if decoded == "" {
+		return "", fmt.Errorf("empty id in ref")
+	}
+	if !utf8.ValidString(decoded) {
+		return "", fmt.Errorf("invalid UTF-8 percent encoding in id")
+	}
+	return decoded, nil
+}
+
+func percentEncodeID(id string) string {
+	var b strings.Builder
+	const hex = "0123456789ABCDEF"
+	for i := 0; i < len(id); i++ {
+		c := id[i]
+		if isUnreserved(c) {
+			b.WriteByte(c)
+			continue
+		}
+		b.WriteByte('%')
+		b.WriteByte(hex[c>>4])
+		b.WriteByte(hex[c&0x0f])
+	}
+	return b.String()
+}
+
+func isUnreserved(c byte) bool {
+	return (c >= 'a' && c <= 'z') ||
+		(c >= 'A' && c <= 'Z') ||
+		(c >= '0' && c <= '9') ||
+		c == '-' || c == '.' || c == '_' || c == '~'
+}
+
+func isHex(c byte) bool {
+	return (c >= '0' && c <= '9') ||
+		(c >= 'a' && c <= 'f') ||
+		(c >= 'A' && c <= 'F')
+}
+
 func MustParseTypedRef(s string) TypedRef {
 	ref, err := ParseTypedRef(s)
 	if err != nil {
@@ -191,43 +196,36 @@ func MustParseTypedRef(s string) TypedRef {
 	return ref
 }
 
-// NewTypedRef は指定された型とIDから TypedRef を作成する（memx ドメイン、local provider）。
 func NewTypedRef(entityType EntityType, id string) TypedRef {
-	return TypedRef{
-		Domain:   DomainMemx,
-		Type:     entityType,
-		Provider: DefaultProvider,
-		ID:       id,
-	}
+	return TypedRef{Domain: DomainMemx, Type: entityType, Provider: DefaultProvider, ID: id}
 }
 
-// NewTypedRefWithProvider は指定された provider で TypedRef を作成する。
 func NewTypedRefWithProvider(domain Domain, entityType EntityType, provider Provider, id string) TypedRef {
-	return TypedRef{
-		Domain:   domain,
-		Type:     entityType,
-		Provider: provider,
-		ID:       id,
-	}
+	return TypedRef{Domain: domain, Type: entityType, Provider: provider, ID: id}
 }
 
-// Ref は TypedRef.String() のエイリアス。
 func (r TypedRef) Ref() string {
 	return r.String()
 }
 
-// IsZero は TypedRef がゼロ値かどうかを返す。
 func (r TypedRef) IsZero() bool {
 	return r.Domain == "" && r.Type == "" && r.Provider == "" && r.ID == ""
 }
 
-// IsValid は TypedRef が有効かどうかを返す。
 func (r TypedRef) IsValid() bool {
-	return r.Domain != "" && r.Type != "" && r.Provider != "" && r.ID != ""
+	if validateDomain(Domain(strings.ToLower(string(r.Domain)))) != nil {
+		return false
+	}
+	if validateEntityType(r.Domain, EntityType(strings.ToLower(string(r.Type)))) != nil {
+		return false
+	}
+	if validateProvider(Provider(strings.ToLower(string(r.Provider)))) != nil {
+		return false
+	}
+	_, err := decodeEntityID(r.ID)
+	return err == nil
 }
 
-// Canonical は TypedRef を canonical format で返す。
-// 既に canonical の場合はそのまま返す。
 func (r TypedRef) Canonical() string {
 	return r.String()
 }

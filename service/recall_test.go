@@ -3,7 +3,7 @@ package service
 import (
 	"testing"
 
-	"memx/db"
+	"github.com/RNA4219/memx-resolver/v2/db"
 )
 
 func TestNormalizeRecallStores(t *testing.T) {

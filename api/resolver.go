@@ -23,9 +23,9 @@ type Resolver interface {
 
 // ResolvedRef は解決結果を表す。
 type ResolvedRef struct {
-	Ref      TypedRef   `json:"ref"`
-	Status   RefStatus  `json:"status"`
-	Summary  string     `json:"summary,omitempty"`
+	Ref      TypedRef    `json:"ref"`
+	Status   RefStatus   `json:"status"`
+	Summary  string      `json:"summary,omitempty"`
 	Metadata RefMetadata `json:"metadata,omitempty"`
 }
 
@@ -33,8 +33,8 @@ type ResolvedRef struct {
 type RefStatus string
 
 const (
-	RefStatusResolved   RefStatus = "resolved"
-	RefStatusUnresolved RefStatus = "unresolved"
+	RefStatusResolved    RefStatus = "resolved"
+	RefStatusUnresolved  RefStatus = "unresolved"
 	RefStatusUnsupported RefStatus = "unsupported"
 )
 
@@ -49,18 +49,18 @@ type RefMetadata struct {
 
 // ResolveReport は一括解決結果を表す。
 type ResolveReport struct {
-	Resolved   []ResolvedRef `json:"resolved"`
-	Unresolved []TypedRef    `json:"unresolved"`
-	Unsupported []TypedRef   `json:"unsupported"`
+	Resolved    []ResolvedRef       `json:"resolved"`
+	Unresolved  []TypedRef          `json:"unresolved"`
+	Unsupported []TypedRef          `json:"unsupported"`
 	Diagnostics ResolverDiagnostics `json:"diagnostics"`
 }
 
 // ResolverDiagnostics は解決診断情報。
 type ResolverDiagnostics struct {
-	MissingRefs    []TypedRef `json:"missing_refs"`
-	UnsupportedRefs []TypedRef `json:"unsupported_refs"`
-	ResolverWarnings []string `json:"resolver_warnings"`
-	PartialBundle   bool      `json:"partial_bundle"`
+	MissingRefs      []TypedRef `json:"missing_refs"`
+	UnsupportedRefs  []TypedRef `json:"unsupported_refs"`
+	ResolverWarnings []string   `json:"resolver_warnings"`
+	PartialBundle    bool       `json:"partial_bundle"`
 }
 
 // SummaryPayload は要約取得結果。
@@ -72,9 +72,9 @@ type SummaryPayload struct {
 
 // RawSelector は raw データ取得時のセレクタ。
 type RawSelector struct {
-	IncludeBody   bool     `json:"include_body"`
-	IncludeTags   bool     `json:"include_tags"`
-	Fields        []string `json:"fields,omitempty"`
+	IncludeBody bool     `json:"include_body"`
+	IncludeTags bool     `json:"include_tags"`
+	Fields      []string `json:"fields,omitempty"`
 }
 
 // RawPayload は raw データ取得結果。
@@ -95,7 +95,7 @@ func (e *ErrUnsupportedRef) Error() string {
 
 // ErrUnresolvedRef は解決できない typed_ref が指定された場合のエラー。
 type ErrUnresolvedRef struct {
-	Ref TypedRef
+	Ref    TypedRef
 	Reason string
 }
 
@@ -172,10 +172,10 @@ func (r *ShortNoteResolver) ResolveMany(ctx context.Context, refs []TypedRef) (*
 		Unresolved:  []TypedRef{},
 		Unsupported: []TypedRef{},
 		Diagnostics: ResolverDiagnostics{
-			MissingRefs:     []TypedRef{},
-			UnsupportedRefs: []TypedRef{},
+			MissingRefs:      []TypedRef{},
+			UnsupportedRefs:  []TypedRef{},
 			ResolverWarnings: []string{},
-			PartialBundle:   false,
+			PartialBundle:    false,
 		},
 	}
 

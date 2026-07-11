@@ -674,7 +674,7 @@ type openAIEmbeddingsResponse struct {
 }
 
 type openAIEmbeddingData struct {
-	Index    int         `json:"index"`
+	Index     int         `json:"index"`
 	Embedding interface{} `json:"embedding"`
 }
 

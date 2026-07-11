@@ -7,7 +7,7 @@ import (
 	"log"
 	"strings"
 
-	"memx/api"
+	"github.com/RNA4219/memx-resolver/v2/api"
 )
 
 func cmdSummarize(args []string) {

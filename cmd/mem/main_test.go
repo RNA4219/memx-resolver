@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	"memx/db"
-	"memx/service"
+	"github.com/RNA4219/memx-resolver/v2/db"
+	"github.com/RNA4219/memx-resolver/v2/service"
 )
 
 func repoRoot(t *testing.T) string {
@@ -20,12 +20,12 @@ func repoRoot(t *testing.T) string {
 	if !ok {
 		t.Fatal("runtime.Caller failed")
 	}
-	return filepath.Clean(filepath.Join(filepath.Dir(file), "..", "..", "..", "..", ".."))
+	return filepath.Clean(filepath.Join(filepath.Dir(file), "..", ".."))
 }
 
 func moduleRoot(t *testing.T) string {
 	t.Helper()
-	return filepath.Join(repoRoot(t), "docs", "memx_spec_v3", "go")
+	return repoRoot(t)
 }
 
 func buildMemBinary(t *testing.T) string {

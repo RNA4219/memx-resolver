@@ -1,6 +1,6 @@
 package service
 
-import "memx/db"
+import "github.com/RNA4219/memx-resolver/v2/db"
 
 // ConfigureLLMsFromEnv は環境変数から OpenAI クライアントを読み込み、要約系 LLM と埋め込みクライアントを接続する。
 // OPENAI_API_KEY が未設定なら何もしない。

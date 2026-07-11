@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	"memx/service"
+	"github.com/RNA4219/memx-resolver/v2/service"
 )
 
 // HTTPServer は /v1/* の JSON API を提供する。
@@ -120,6 +120,7 @@ func writeErr(w http.ResponseWriter, e *Error) {
 
 func decodeJSON(w http.ResponseWriter, r *http.Request, v interface{}) *Error {
 	decoder := json.NewDecoder(r.Body)
+	decoder.DisallowUnknownFields()
 	if err := decoder.Decode(v); err != nil {
 		var maxBytesErr *http.MaxBytesError
 		if errors.As(err, &maxBytesErr) {

@@ -3,7 +3,7 @@ package api
 import (
 	"context"
 
-	"memx/service"
+	"github.com/RNA4219/memx-resolver/v2/service"
 )
 
 func (c *InProcClient) DocsIngest(ctx context.Context, req DocsIngestRequest) (DocsIngestResponse, *Error) {

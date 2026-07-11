@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"memx/api"
+	"github.com/RNA4219/memx-resolver/v2/api"
 )
 
 func cmdOutKnowledge(args []string) {

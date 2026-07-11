@@ -8,9 +8,9 @@ import (
 	"log"
 	"os"
 
-	"memx/api"
-	"memx/db"
-	"memx/service"
+	"github.com/RNA4219/memx-resolver/v2/api"
+	"github.com/RNA4219/memx-resolver/v2/db"
+	"github.com/RNA4219/memx-resolver/v2/service"
 )
 
 func cmdDocs(args []string) {

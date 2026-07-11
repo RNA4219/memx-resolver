@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"memx/db"
+	"github.com/RNA4219/memx-resolver/v2/db"
 )
 
 // JournalNote は journal ストアのノート。

@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"memx/db"
+	"github.com/RNA4219/memx-resolver/v2/db"
 )
 
 func newResolverServiceForTest(t *testing.T) *Service {

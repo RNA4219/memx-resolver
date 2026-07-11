@@ -19,10 +19,10 @@ func TestShortNoteResolver_ResolveRef(t *testing.T) {
 			name: "resolved evidence ref",
 			ref:  NewTypedRef(EntityTypeEvidence, "test-id-1"),
 			mockNote: &Note{
-				ID:       "test-id-1",
-				Title:    "Test Evidence",
-				Summary:  "Test summary",
-				Body:     "Test body",
+				ID:      "test-id-1",
+				Title:   "Test Evidence",
+				Summary: "Test summary",
+				Body:    "Test body",
 			},
 			wantStatus: RefStatusResolved,
 		},
@@ -30,9 +30,9 @@ func TestShortNoteResolver_ResolveRef(t *testing.T) {
 			name: "resolved knowledge ref",
 			ref:  NewTypedRef(EntityTypeKnowledge, "test-id-2"),
 			mockNote: &Note{
-				ID:       "test-id-2",
-				Title:    "Test Knowledge",
-				Summary:  "Knowledge summary",
+				ID:      "test-id-2",
+				Title:   "Test Knowledge",
+				Summary: "Knowledge summary",
 			},
 			wantStatus: RefStatusResolved,
 		},
@@ -280,7 +280,7 @@ func TestValidateTypedRefForResolve(t *testing.T) {
 
 func TestContextBundle_Build(t *testing.T) {
 	notes := map[string]*Note{
-		"ev-1": {ID: "ev-1", Title: "Evidence 1", Summary: "Evidence summary 1", Body: "Full evidence body"},
+		"ev-1":  {ID: "ev-1", Title: "Evidence 1", Summary: "Evidence summary 1", Body: "Full evidence body"},
 		"art-1": {ID: "art-1", Title: "Artifact 1", Summary: "Artifact summary 1"},
 	}
 
@@ -312,11 +312,11 @@ func TestContextBundle_Build(t *testing.T) {
 
 	// Verify bundle structure
 	bundle := ContextBundle{
-		ID:             "test-bundle",
-		Purpose:        "test",
-		Summary:        "Test bundle",
-		SourceRefs:     []BundleSourceRef{},
-		RawIncluded:    false,
+		ID:               "test-bundle",
+		Purpose:          "test",
+		Summary:          "Test bundle",
+		SourceRefs:       []BundleSourceRef{},
+		RawIncluded:      false,
 		GeneratorVersion: "test/v1",
 		Diagnostics: BundleDiagnostics{
 			PartialBundle: report.Diagnostics.PartialBundle,
@@ -333,10 +333,10 @@ func TestContextBundle_Build(t *testing.T) {
 
 func TestBundleDiagnostics_PartialBundle(t *testing.T) {
 	tests := []struct {
-		name          string
-		unresolved    int
-		unsupported   int
-		wantPartial   bool
+		name        string
+		unresolved  int
+		unsupported int
+		wantPartial bool
 	}{
 		{
 			name:        "complete bundle",
@@ -382,9 +382,9 @@ func TestBundleDiagnostics_PartialBundle(t *testing.T) {
 func TestBundleSourceRef_Structure(t *testing.T) {
 	ref := NewTypedRef(EntityTypeEvidence, "test-id")
 	sourceRef := BundleSourceRef{
-		Ref:         ref,
-		SourceKind:  "evidence",
-		SelectedRaw: true,
+		Ref:          ref,
+		SourceKind:   "evidence",
+		SelectedRaw:  true,
 		MetadataJSON: `{"key": "value"}`,
 	}
 

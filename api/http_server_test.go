@@ -7,10 +7,11 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
+	"strings"
 	"testing"
 
-	"memx/db"
-	"memx/service"
+	"github.com/RNA4219/memx-resolver/v2/db"
+	"github.com/RNA4219/memx-resolver/v2/service"
 )
 
 // setupHTTPTestServer はテスト用のHTTPサーバーを作成する。
@@ -824,5 +825,16 @@ func TestHTTP_RejectsMultipleJSONValues(t *testing.T) {
 
 	if rec.Code != http.StatusBadRequest {
 		t.Fatalf("expected status 400, got %d: %s", rec.Code, rec.Body.String())
+	}
+}
+
+func TestHTTPServerRejectsUnknownJSONFieldV2(t *testing.T) {
+	server, cleanup := setupHTTPTestServer(t)
+	defer cleanup()
+	req := httptest.NewRequest(http.MethodPost, "/v1/notes:search", strings.NewReader(`{"query":"x","unknown":true}`))
+	rec := httptest.NewRecorder()
+	server.Handler().ServeHTTP(rec, req)
+	if rec.Code != http.StatusBadRequest {
+		t.Fatalf("unknown field status=%d, want %d", rec.Code, http.StatusBadRequest)
 	}
 }

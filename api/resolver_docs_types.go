@@ -1,6 +1,6 @@
 package api
 
-import "memx/service"
+import "github.com/RNA4219/memx-resolver/v2/service"
 
 type ResolverDocument = service.ResolverDocument
 

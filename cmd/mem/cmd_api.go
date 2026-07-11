@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"flag"
+	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -13,8 +14,8 @@ import (
 	"syscall"
 	"time"
 
-	"memx/api"
-	"memx/service"
+	"github.com/RNA4219/memx-resolver/v2/api"
+	"github.com/RNA4219/memx-resolver/v2/service"
 )
 
 func cmdAPI(args []string) {
@@ -49,12 +50,13 @@ func cmdAPI(args []string) {
 		srv.MaxRequestBytes = *maxRequestBytes
 		h := srv.Handler()
 
+		if err := validateBindAddress(*addr, *allowNonLoopback); err != nil {
+			log.Print(err)
+			_ = svc.Close()
+			os.Exit(2)
+		}
 		if !isLoopbackAddress(*addr) {
-			if *allowNonLoopback {
-				log.Printf("WARNING: non-loopback API has no authentication or TLS: %s", *addr)
-			} else {
-				log.Printf("WARNING: non-loopback API is deprecated without --allow-non-loopback: %s", *addr)
-			}
+			log.Printf("WARNING: non-loopback API has no authentication or TLS: %s", *addr)
 		}
 
 		server := &http.Server{
@@ -96,4 +98,11 @@ func isLoopbackAddress(addr string) bool {
 	}
 	ip := net.ParseIP(host)
 	return ip != nil && ip.IsLoopback()
+}
+
+func validateBindAddress(addr string, allowNonLoopback bool) error {
+	if isLoopbackAddress(addr) || allowNonLoopback {
+		return nil
+	}
+	return fmt.Errorf("ERROR: non-loopback API requires --allow-non-loopback: %s", addr)
 }

@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 
-	"memx/api"
+	"github.com/RNA4219/memx-resolver/v2/api"
 )
 
 func cmdOutArchive(args []string) {

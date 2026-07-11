@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"memx/service"
+	"github.com/RNA4219/memx-resolver/v2/service"
 )
 
 // TestMapError_ErrorCodeMapping はエラーコードのマッピングをテストする。

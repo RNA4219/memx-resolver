@@ -12,23 +12,23 @@ func TestRecallQuery_Validation(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "valid query",
-			q:    RecallQuery{Text: "test query", Stores: []StoreKind{StoreShort}},
+			name:    "valid query",
+			q:       RecallQuery{Text: "test query", Stores: []StoreKind{StoreShort}},
 			wantErr: false,
 		},
 		{
-			name: "empty query",
-			q:    RecallQuery{Text: "", Stores: []StoreKind{StoreShort}},
+			name:    "empty query",
+			q:       RecallQuery{Text: "", Stores: []StoreKind{StoreShort}},
 			wantErr: true,
 		},
 		{
-			name: "whitespace only query",
-			q:    RecallQuery{Text: "   ", Stores: []StoreKind{StoreShort}},
+			name:    "whitespace only query",
+			q:       RecallQuery{Text: "   ", Stores: []StoreKind{StoreShort}},
 			wantErr: true,
 		},
 		{
-			name: "query too long",
-			q:    RecallQuery{Text: string(make([]byte, 1001)), Stores: []StoreKind{StoreShort}},
+			name:    "query too long",
+			q:       RecallQuery{Text: string(make([]byte, 1001)), Stores: []StoreKind{StoreShort}},
 			wantErr: true,
 		},
 	}

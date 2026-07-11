@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"memx/api"
+	"github.com/RNA4219/memx-resolver/v2/api"
 )
 
 func searchAcrossStores(ctx context.Context, client api.Client, query string, topK int) (api.NotesSearchResponse, *api.Error) {

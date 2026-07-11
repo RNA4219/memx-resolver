@@ -15,7 +15,7 @@ from jsonschema import Draft202012Validator
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-GO_ROOT = REPO_ROOT / "docs" / "memx_spec_v3" / "go"
+GO_ROOT = REPO_ROOT
 CLI_SCHEMA_PATH = REPO_ROOT / "docs" / "memx_spec_v3" / "docs" / "contracts" / "cli-json.schema.json"
 OPENAPI_PATH = REPO_ROOT / "docs" / "memx_spec_v3" / "docs" / "contracts" / "openapi.yaml"
 

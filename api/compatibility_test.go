@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"memx/db"
-	"memx/service"
+	"github.com/RNA4219/memx-resolver/v2/db"
+	"github.com/RNA4219/memx-resolver/v2/service"
 )
 
 // TestCLI_JSON_Ingest はCLI --json と API レスポンスの同型性をテストする。
@@ -23,7 +23,7 @@ func TestCLI_JSON_Ingest(t *testing.T) {
 			Summary:        "Test summary",
 			Body:           "Test body",
 			CreatedAt:      "2026-03-08T00:00:00Z",
-			UpdatedAt:       "2026-03-08T00:00:00Z",
+			UpdatedAt:      "2026-03-08T00:00:00Z",
 			LastAccessedAt: "2026-03-08T00:00:00Z",
 			AccessCount:    0,
 			SourceType:     "manual",
@@ -71,7 +71,7 @@ func TestCLI_JSON_Search(t *testing.T) {
 				Summary:        "Summary 1",
 				Body:           "Body 1",
 				CreatedAt:      "2026-03-08T00:00:00Z",
-				UpdatedAt:       "2026-03-08T00:00:00Z",
+				UpdatedAt:      "2026-03-08T00:00:00Z",
 				LastAccessedAt: "2026-03-08T00:00:00Z",
 				AccessCount:    1,
 				SourceType:     "manual",
@@ -109,7 +109,7 @@ func TestCLI_JSON_Show(t *testing.T) {
 		Summary:        "Summary",
 		Body:           "Body content",
 		CreatedAt:      "2026-03-08T00:00:00Z",
-		UpdatedAt:       "2026-03-08T00:00:00Z",
+		UpdatedAt:      "2026-03-08T00:00:00Z",
 		LastAccessedAt: "2026-03-08T00:00:00Z",
 		AccessCount:    5,
 		SourceType:     "manual",
@@ -193,7 +193,7 @@ func TestCLI_JSON_Summarize(t *testing.T) {
 			Summary:        "This is the generated summary.",
 			Body:           "Original body content",
 			CreatedAt:      "2026-03-08T00:00:00Z",
-			UpdatedAt:       "2026-03-08T00:00:01Z",
+			UpdatedAt:      "2026-03-08T00:00:01Z",
 			LastAccessedAt: "2026-03-08T00:00:00Z",
 			AccessCount:    2,
 			SourceType:     "manual",
@@ -231,7 +231,7 @@ func TestAPI_InProcClient_Integration(t *testing.T) {
 	tmpDir := t.TempDir()
 	paths := db.Paths{
 		Short:     filepath.Join(tmpDir, "short.db"),
-		Journal: filepath.Join(tmpDir, "journal.db"),
+		Journal:   filepath.Join(tmpDir, "journal.db"),
 		Knowledge: filepath.Join(tmpDir, "knowledge.db"),
 		Archive:   filepath.Join(tmpDir, "archive.db"),
 	}
