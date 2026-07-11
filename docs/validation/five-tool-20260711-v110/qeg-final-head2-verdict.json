@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:run-ctg-202607110910-local",
+    "createdAt": "2026-07-11T09:10:34.898Z",
+    "profile": "ipo_controlled",
+    "repoRoot": "../../../../tmp/memx-resolver-v110-gate",
+    "policyId": "qeg:policy-ctg-five-tool-001",
+    "policyHash": "sha256:ctg-qeg-policy-v1",
+    "inputArtifacts": [
+      {
+        "id": "ctg:artifact-findings.json",
+        "adapter": "code-to-gate",
+        "kind": "findings",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head2\\findings.json",
+        "contentHash": "sha256:91ec26e108d9dbd7fdc5192ec2f663f78538fb1bc61fb84e229534d20566d192"
+      },
+      {
+        "id": "ctg:artifact-release-readiness.json",
+        "adapter": "code-to-gate",
+        "kind": "release-readiness",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head2\\release-readiness.json",
+        "contentHash": "sha256:b37b361d7124f36a11aef177b4f2f280dd93a6b31807ba8588a96be1b097e7a8"
+      },
+      {
+        "id": "ctg:artifact-repo-graph.json",
+        "adapter": "code-to-gate",
+        "kind": "repo-graph",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head2\\repo-graph.json",
+        "contentHash": "sha256:be1a8713aee2947301c2461ea158a80d480489a3490eed7c06da2c3ade46db10"
+      },
+      {
+        "id": "ctg:artifact-audit.json",
+        "adapter": "code-to-gate",
+        "kind": "audit",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head2\\audit.json",
+        "contentHash": "sha256:6c2dd269b274d2f6a476f9677a9d520f5b9157a0d031006a3725487c8048f686"
+      },
+      {
+        "id": "ctg:artifact-risk-register.yaml",
+        "adapter": "code-to-gate",
+        "kind": "risk-register.yaml",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head2\\risk-register.yaml",
+        "contentHash": "sha256:8c030748e3a286273726ac4cf2abd01a4599d25d3e2c00a3ff987ab327c2d0f1"
+      },
+      {
+        "id": "ctg:artifact-test-seeds.json",
+        "adapter": "code-to-gate",
+        "kind": "test-seeds",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head2\\test-seeds.json",
+        "contentHash": "sha256:585ed613622dc33b92610433d0220dbeb845e8c0a8e6e1a52a71bafaaed080b8"
+      },
+      {
+        "id": "ctg:artifact-invariants.json",
+        "adapter": "code-to-gate",
+        "kind": "invariants",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head2\\invariants.json",
+        "contentHash": "sha256:50fe46f55160462d1866baa8d9ed81d5d98a9852fc86872064807352e74a7d30"
+      }
+    ],
+    "producerChecks": [
+      {
+        "id": "ctg:producer-check-readiness",
+        "producer": "code-to-gate",
+        "name": "release-readiness",
+        "conclusion": "success",
+        "readinessStatus": "passed",
+        "runId": "ctg:run-ctg-202607110910-local",
+        "sourceRefs": [
+          {
+            "id": "ctg:sr-readiness",
+            "path": "release-readiness.json",
+            "label": "readiness"
+          }
+        ]
+      }
+    ]
+  },
+  "verdict": "go",
+  "reasons": [
+    "All gate conditions satisfied"
+  ],
+  "disqualifications": [],
+  "blockers": [],
+  "residualRisks": [],
+  "requiredHumanReview": []
+}

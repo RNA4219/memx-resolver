@@ -1,0 +1,15 @@
+{
+  "schema_version": "ci-context/v1",
+  "provider": "generic-ci",
+  "repository": "memx-resolver",
+  "branch": "release/v1.1.0",
+  "revision": "ea87ad44f50a7989ff5e3ce69c00b5f004a67aa7",
+  "commit_sha": "ea87ad44f50a7989ff5e3ce69c00b5f004a67aa7",
+  "run_id": "memx-resolver-v1.1.0-20260711-final2",
+  "workflow": "five-tool-validation",
+  "job": "python-go-release-gate",
+  "run_attempt": 1,
+  "started_at": "2026-07-11T12:37:00+09:00",
+  "finished_at": "2026-07-11T12:42:22+09:00",
+  "created_at": "2026-07-11T12:42:22+09:00"
+}

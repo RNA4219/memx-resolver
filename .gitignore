@@ -19,6 +19,8 @@ go.work
 # Build artifacts
 /memx_spec_v3/go/mem
 .tmp/
+/dist/
+/memx_resolver_workflow_plugin/_version.py
 
 # External/local reference checkout
 /workflow-cookbook/

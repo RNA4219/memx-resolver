@@ -1,0 +1,2 @@
+ok  	memx/api	2.956s
+ok  	memx/cmd/mem	1.304s

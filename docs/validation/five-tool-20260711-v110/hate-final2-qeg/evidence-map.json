@@ -1,0 +1,3641 @@
+{
+  "schema_version": "HATE/v1",
+  "run_id": "memx-resolver-v1.1.0-20260711-final2",
+  "run_attempt": 1,
+  "requirements": [],
+  "risks": [],
+  "tests": [
+    {
+      "test_id": "test:7adb1f4f3fed1ac0",
+      "canonical_test_id": "junit:tests/test_cli_schema_contract.py::test_docs_cli_json_outputs_match_schema",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:a1c8a49963d66820",
+      "canonical_test_id": "junit:tests/test_cli_schema_contract.py::test_docs_http_outputs_match_openapi_schema",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:d2c9d0cc4daba938",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_three_segment_memx_evidence",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:76d2bcaa44fbbc8f",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_three_segment_memx_knowledge",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:770f00be7e11f32a",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_four_segment_canonical",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:5c79bd0546d559f8",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_four_segment_with_jira_provider",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:40f3d04e9531a2a6",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_string_raises_error",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:f654890b2cccfe76",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_invalid_segment_count_raises_error",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:5bb3367d9cbb4c17",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_invalid_domain_raises_error",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:ed2766031af41049",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_extensible_entity_type_for_memx",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:f1e948c85e5edfa9",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_id_raises_error",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:ac24ba2b22f2aac8",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_provider_raises_error",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:355504d212605027",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestTypedRef.py::test_str_returns_canonical_format",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:4a5e851051111c69",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestTypedRef.py::test_ref_alias",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:03e0b3dbcec1c2ae",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestTypedRef.py::test_is_zero",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:5f187e8351efcad3",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestTypedRef.py::test_is_valid",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:8f4c4d99fb83dad8",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestTypedRef.py::test_frozen",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:c456cae516ec81ff",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestHelperFunctions.py::test_new_typed_ref",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:46094fdf23110380",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestHelperFunctions.py::test_new_typed_ref_with_provider",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:3f99f0e9b1ecf4fc",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestHelperFunctions.py::test_must_parse_typed_ref",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:09ab5ce56bf75234",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestNormalization.py::test_three_segment_normalizes_to_local_provider",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:0e670c4d65ff4d2d",
+      "canonical_test_id": "junit:tests/test_typed_ref/TestNormalization.py::test_output_is_canonical",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:6d8bf813bd9f3b21",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_resolve_ack_and_stale_cycle",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:73ddd92e53710881",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_receipt_and_resolve_cache_stores_persist_payloads",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:9fa4ebc975127b0d",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_resolve_docs_uses_signature_cache_and_refreshes_when_inputs_change",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:12a0c1b26a966cab",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_selection_policy_can_override_core_docs",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:e4c5039eb3132d1a",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_linked_markdown_paths_resolves_markdown_links_with_fragments",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:b68816bcc3a088a6",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_paths_outside_repository[../outside.md]",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:5824efd3893e8010",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_paths_outside_repository[C:/outside.md]",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:6009252fcb18b49b",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_symlink_escape",
+      "status": "skipped"
+    },
+    {
+      "test_id": "test:fa4a07830b3db904",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_stale_check_reports_tampered_external_receipt",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:580ef6d2c82db691",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_resolve_docs_warns_for_external_markdown_link",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:f02544cd8001fba4",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_receipt_store_upsert_is_concurrency_safe",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:0caba5721ff2e455",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_json_store_rejects_corrupt_payload",
+      "status": "passed"
+    },
+    {
+      "test_id": "test:384ab3e0202e6df1",
+      "canonical_test_id": "junit:tests/test_workflow_plugin.py::test_json_store_lock_timeout_is_explicit",
+      "status": "passed"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:7adb1f4f3fed1ac0",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_cli_schema_contract.py::test_docs_cli_json_outputs_match_schema",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:a1c8a49963d66820",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_cli_schema_contract.py::test_docs_http_outputs_match_openapi_schema",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:d2c9d0cc4daba938",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_three_segment_memx_evidence",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:76d2bcaa44fbbc8f",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_three_segment_memx_knowledge",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:770f00be7e11f32a",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_four_segment_canonical",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:5c79bd0546d559f8",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_four_segment_with_jira_provider",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:40f3d04e9531a2a6",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_string_raises_error",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:f654890b2cccfe76",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_invalid_segment_count_raises_error",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:5bb3367d9cbb4c17",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_invalid_domain_raises_error",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:ed2766031af41049",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_extensible_entity_type_for_memx",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:f1e948c85e5edfa9",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_id_raises_error",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:ac24ba2b22f2aac8",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_provider_raises_error",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:355504d212605027",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestTypedRef.py::test_str_returns_canonical_format",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:4a5e851051111c69",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestTypedRef.py::test_ref_alias",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:03e0b3dbcec1c2ae",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestTypedRef.py::test_is_zero",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:5f187e8351efcad3",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestTypedRef.py::test_is_valid",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:8f4c4d99fb83dad8",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestTypedRef.py::test_frozen",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:c456cae516ec81ff",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestHelperFunctions.py::test_new_typed_ref",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:46094fdf23110380",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestHelperFunctions.py::test_new_typed_ref_with_provider",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:3f99f0e9b1ecf4fc",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestHelperFunctions.py::test_must_parse_typed_ref",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:09ab5ce56bf75234",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestNormalization.py::test_three_segment_normalizes_to_local_provider",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:0e670c4d65ff4d2d",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_typed_ref/TestNormalization.py::test_output_is_canonical",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:6d8bf813bd9f3b21",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_resolve_ack_and_stale_cycle",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:73ddd92e53710881",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_receipt_and_resolve_cache_stores_persist_payloads",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:9fa4ebc975127b0d",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_resolve_docs_uses_signature_cache_and_refreshes_when_inputs_change",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:12a0c1b26a966cab",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_selection_policy_can_override_core_docs",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:e4c5039eb3132d1a",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_linked_markdown_paths_resolves_markdown_links_with_fragments",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:b68816bcc3a088a6",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_paths_outside_repository[../outside.md]",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:5824efd3893e8010",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_paths_outside_repository[C:/outside.md]",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:6009252fcb18b49b",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_symlink_escape",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:fa4a07830b3db904",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_stale_check_reports_tampered_external_receipt",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:580ef6d2c82db691",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_resolve_docs_warns_for_external_markdown_link",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:f02544cd8001fba4",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_receipt_store_upsert_is_concurrency_safe",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:0caba5721ff2e455",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_json_store_rejects_corrupt_payload",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "execution:memx-resolver-v1.1.0-20260711-final2:384ab3e0202e6df1",
+      "kind": "execution_evidence",
+      "label": "Execution: junit:tests/test_workflow_plugin.py::test_json_store_lock_timeout_is_explicit",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-test-results.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:7adb1f4f3fed1ac0",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_cli_schema_contract.py::test_docs_cli_json_outputs_match_schema",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:a1c8a49963d66820",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_cli_schema_contract.py::test_docs_http_outputs_match_openapi_schema",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:3f99f0e9b1ecf4fc",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestHelperFunctions.py::test_must_parse_typed_ref",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:c456cae516ec81ff",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestHelperFunctions.py::test_new_typed_ref",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:46094fdf23110380",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestHelperFunctions.py::test_new_typed_ref_with_provider",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:0e670c4d65ff4d2d",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestNormalization.py::test_output_is_canonical",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:09ab5ce56bf75234",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestNormalization.py::test_three_segment_normalizes_to_local_provider",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:f1e948c85e5edfa9",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_id_raises_error",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:ac24ba2b22f2aac8",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_provider_raises_error",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:40f3d04e9531a2a6",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_string_raises_error",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:ed2766031af41049",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_extensible_entity_type_for_memx",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:770f00be7e11f32a",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_four_segment_canonical",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:5c79bd0546d559f8",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_four_segment_with_jira_provider",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:5bb3367d9cbb4c17",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_invalid_domain_raises_error",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:f654890b2cccfe76",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_invalid_segment_count_raises_error",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:d2c9d0cc4daba938",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_three_segment_memx_evidence",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:76d2bcaa44fbbc8f",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_three_segment_memx_knowledge",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:8f4c4d99fb83dad8",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestTypedRef.py::test_frozen",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:5f187e8351efcad3",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestTypedRef.py::test_is_valid",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:03e0b3dbcec1c2ae",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestTypedRef.py::test_is_zero",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:4a5e851051111c69",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestTypedRef.py::test_ref_alias",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:355504d212605027",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_typed_ref/TestTypedRef.py::test_str_returns_canonical_format",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:b68816bcc3a088a6",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_paths_outside_repository[../outside.md]",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:5824efd3893e8010",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_paths_outside_repository[C:/outside.md]",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:6009252fcb18b49b",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_symlink_escape",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:384ab3e0202e6df1",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_json_store_lock_timeout_is_explicit",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:0caba5721ff2e455",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_json_store_rejects_corrupt_payload",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:e4c5039eb3132d1a",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_linked_markdown_paths_resolves_markdown_links_with_fragments",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:73ddd92e53710881",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_receipt_and_resolve_cache_stores_persist_payloads",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:f02544cd8001fba4",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_receipt_store_upsert_is_concurrency_safe",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:6d8bf813bd9f3b21",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_resolve_ack_and_stale_cycle",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:9fa4ebc975127b0d",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_resolve_docs_uses_signature_cache_and_refreshes_when_inputs_change",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:580ef6d2c82db691",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_resolve_docs_warns_for_external_markdown_link",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:12a0c1b26a966cab",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_selection_policy_can_override_core_docs",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "evidence_strength:fa4a07830b3db904",
+      "kind": "evidence_strength",
+      "label": "Evidence strength: junit:tests/test_workflow_plugin.py::test_stale_check_reports_tampered_external_receipt",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "coverage:58f67f2f6d2ff66e",
+      "kind": "coverage",
+      "label": "Coverage: memx_resolver_workflow_plugin/__init__.py",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-coverage.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "coverage:3edc6e11ce638d92",
+      "kind": "coverage",
+      "label": "Coverage: memx_resolver_workflow_plugin/_version.py",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-coverage.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "coverage:3c7af8c756560345",
+      "kind": "coverage",
+      "label": "Coverage: memx_resolver_workflow_plugin/markdown.py",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-coverage.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "coverage:ad22e3ecddd1453e",
+      "kind": "coverage",
+      "label": "Coverage: memx_resolver_workflow_plugin/paths.py",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-coverage.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "coverage:dbd2757e7896f7c4",
+      "kind": "coverage",
+      "label": "Coverage: memx_resolver_workflow_plugin/plugin.py",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-coverage.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "coverage:d407d9b3b7a2a857",
+      "kind": "coverage",
+      "label": "Coverage: memx_resolver_workflow_plugin/policy.py",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-coverage.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "coverage:22d00bdcdbf855be",
+      "kind": "coverage",
+      "label": "Coverage: memx_resolver_workflow_plugin/results.py",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-coverage.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "coverage:cf5ae6ffc81ac99b",
+      "kind": "coverage",
+      "label": "Coverage: memx_resolver_workflow_plugin/store.py",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-coverage.ndjson"
+      ]
+    },
+    {
+      "evidence_id": "coverage:eb08159d041cffc9",
+      "kind": "coverage",
+      "label": "Coverage: memx_resolver_workflow_plugin/typed_ref.py",
+      "artifact_kind": "",
+      "adapter": "",
+      "artifact_role": "",
+      "path": "",
+      "sourceRefs": [
+        "fixture:/p0a/HATE-coverage.ndjson"
+      ]
+    }
+  ],
+  "findings": [],
+  "contracts": [],
+  "mutations": [],
+  "links": {
+    "requires_test": [],
+    "evidenced_by": [
+      {
+        "from": "test:7adb1f4f3fed1ac0",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:7adb1f4f3fed1ac0",
+        "confidence": "high"
+      },
+      {
+        "from": "test:a1c8a49963d66820",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:a1c8a49963d66820",
+        "confidence": "high"
+      },
+      {
+        "from": "test:d2c9d0cc4daba938",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:d2c9d0cc4daba938",
+        "confidence": "high"
+      },
+      {
+        "from": "test:76d2bcaa44fbbc8f",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:76d2bcaa44fbbc8f",
+        "confidence": "high"
+      },
+      {
+        "from": "test:770f00be7e11f32a",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:770f00be7e11f32a",
+        "confidence": "high"
+      },
+      {
+        "from": "test:5c79bd0546d559f8",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:5c79bd0546d559f8",
+        "confidence": "high"
+      },
+      {
+        "from": "test:40f3d04e9531a2a6",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:40f3d04e9531a2a6",
+        "confidence": "high"
+      },
+      {
+        "from": "test:f654890b2cccfe76",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:f654890b2cccfe76",
+        "confidence": "high"
+      },
+      {
+        "from": "test:5bb3367d9cbb4c17",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:5bb3367d9cbb4c17",
+        "confidence": "high"
+      },
+      {
+        "from": "test:ed2766031af41049",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:ed2766031af41049",
+        "confidence": "high"
+      },
+      {
+        "from": "test:f1e948c85e5edfa9",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:f1e948c85e5edfa9",
+        "confidence": "high"
+      },
+      {
+        "from": "test:ac24ba2b22f2aac8",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:ac24ba2b22f2aac8",
+        "confidence": "high"
+      },
+      {
+        "from": "test:355504d212605027",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:355504d212605027",
+        "confidence": "high"
+      },
+      {
+        "from": "test:4a5e851051111c69",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:4a5e851051111c69",
+        "confidence": "high"
+      },
+      {
+        "from": "test:03e0b3dbcec1c2ae",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:03e0b3dbcec1c2ae",
+        "confidence": "high"
+      },
+      {
+        "from": "test:5f187e8351efcad3",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:5f187e8351efcad3",
+        "confidence": "high"
+      },
+      {
+        "from": "test:8f4c4d99fb83dad8",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:8f4c4d99fb83dad8",
+        "confidence": "high"
+      },
+      {
+        "from": "test:c456cae516ec81ff",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:c456cae516ec81ff",
+        "confidence": "high"
+      },
+      {
+        "from": "test:46094fdf23110380",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:46094fdf23110380",
+        "confidence": "high"
+      },
+      {
+        "from": "test:3f99f0e9b1ecf4fc",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:3f99f0e9b1ecf4fc",
+        "confidence": "high"
+      },
+      {
+        "from": "test:09ab5ce56bf75234",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:09ab5ce56bf75234",
+        "confidence": "high"
+      },
+      {
+        "from": "test:0e670c4d65ff4d2d",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:0e670c4d65ff4d2d",
+        "confidence": "high"
+      },
+      {
+        "from": "test:6d8bf813bd9f3b21",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:6d8bf813bd9f3b21",
+        "confidence": "high"
+      },
+      {
+        "from": "test:73ddd92e53710881",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:73ddd92e53710881",
+        "confidence": "high"
+      },
+      {
+        "from": "test:9fa4ebc975127b0d",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:9fa4ebc975127b0d",
+        "confidence": "high"
+      },
+      {
+        "from": "test:12a0c1b26a966cab",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:12a0c1b26a966cab",
+        "confidence": "high"
+      },
+      {
+        "from": "test:e4c5039eb3132d1a",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:e4c5039eb3132d1a",
+        "confidence": "high"
+      },
+      {
+        "from": "test:b68816bcc3a088a6",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:b68816bcc3a088a6",
+        "confidence": "high"
+      },
+      {
+        "from": "test:5824efd3893e8010",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:5824efd3893e8010",
+        "confidence": "high"
+      },
+      {
+        "from": "test:6009252fcb18b49b",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:6009252fcb18b49b",
+        "confidence": "high"
+      },
+      {
+        "from": "test:fa4a07830b3db904",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:fa4a07830b3db904",
+        "confidence": "high"
+      },
+      {
+        "from": "test:580ef6d2c82db691",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:580ef6d2c82db691",
+        "confidence": "high"
+      },
+      {
+        "from": "test:f02544cd8001fba4",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:f02544cd8001fba4",
+        "confidence": "high"
+      },
+      {
+        "from": "test:0caba5721ff2e455",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:0caba5721ff2e455",
+        "confidence": "high"
+      },
+      {
+        "from": "test:384ab3e0202e6df1",
+        "to": "execution:memx-resolver-v1.1.0-20260711-final2:384ab3e0202e6df1",
+        "confidence": "high"
+      }
+    ],
+    "supports": [
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:7adb1f4f3fed1ac0",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:a1c8a49963d66820",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:d2c9d0cc4daba938",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:76d2bcaa44fbbc8f",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:770f00be7e11f32a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:5c79bd0546d559f8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:40f3d04e9531a2a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:f654890b2cccfe76",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:5bb3367d9cbb4c17",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:ed2766031af41049",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:f1e948c85e5edfa9",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:ac24ba2b22f2aac8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:355504d212605027",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:4a5e851051111c69",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:03e0b3dbcec1c2ae",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:5f187e8351efcad3",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:8f4c4d99fb83dad8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:c456cae516ec81ff",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:46094fdf23110380",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:3f99f0e9b1ecf4fc",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:09ab5ce56bf75234",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:0e670c4d65ff4d2d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:6d8bf813bd9f3b21",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:73ddd92e53710881",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:9fa4ebc975127b0d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:12a0c1b26a966cab",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:e4c5039eb3132d1a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:b68816bcc3a088a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:5824efd3893e8010",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:6009252fcb18b49b",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:fa4a07830b3db904",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:580ef6d2c82db691",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:f02544cd8001fba4",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:0caba5721ff2e455",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:58f67f2f6d2ff66e",
+        "to": "test:384ab3e0202e6df1",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:7adb1f4f3fed1ac0",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:a1c8a49963d66820",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:d2c9d0cc4daba938",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:76d2bcaa44fbbc8f",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:770f00be7e11f32a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:5c79bd0546d559f8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:40f3d04e9531a2a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:f654890b2cccfe76",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:5bb3367d9cbb4c17",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:ed2766031af41049",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:f1e948c85e5edfa9",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:ac24ba2b22f2aac8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:355504d212605027",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:4a5e851051111c69",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:03e0b3dbcec1c2ae",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:5f187e8351efcad3",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:8f4c4d99fb83dad8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:c456cae516ec81ff",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:46094fdf23110380",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:3f99f0e9b1ecf4fc",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:09ab5ce56bf75234",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:0e670c4d65ff4d2d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:6d8bf813bd9f3b21",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:73ddd92e53710881",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:9fa4ebc975127b0d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:12a0c1b26a966cab",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:e4c5039eb3132d1a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:b68816bcc3a088a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:5824efd3893e8010",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:6009252fcb18b49b",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:fa4a07830b3db904",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:580ef6d2c82db691",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:f02544cd8001fba4",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:0caba5721ff2e455",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3edc6e11ce638d92",
+        "to": "test:384ab3e0202e6df1",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:7adb1f4f3fed1ac0",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:a1c8a49963d66820",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:d2c9d0cc4daba938",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:76d2bcaa44fbbc8f",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:770f00be7e11f32a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:5c79bd0546d559f8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:40f3d04e9531a2a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:f654890b2cccfe76",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:5bb3367d9cbb4c17",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:ed2766031af41049",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:f1e948c85e5edfa9",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:ac24ba2b22f2aac8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:355504d212605027",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:4a5e851051111c69",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:03e0b3dbcec1c2ae",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:5f187e8351efcad3",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:8f4c4d99fb83dad8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:c456cae516ec81ff",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:46094fdf23110380",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:3f99f0e9b1ecf4fc",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:09ab5ce56bf75234",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:0e670c4d65ff4d2d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:6d8bf813bd9f3b21",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:73ddd92e53710881",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:9fa4ebc975127b0d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:12a0c1b26a966cab",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:e4c5039eb3132d1a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:b68816bcc3a088a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:5824efd3893e8010",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:6009252fcb18b49b",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:fa4a07830b3db904",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:580ef6d2c82db691",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:f02544cd8001fba4",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:0caba5721ff2e455",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:3c7af8c756560345",
+        "to": "test:384ab3e0202e6df1",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:7adb1f4f3fed1ac0",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:a1c8a49963d66820",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:d2c9d0cc4daba938",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:76d2bcaa44fbbc8f",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:770f00be7e11f32a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:5c79bd0546d559f8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:40f3d04e9531a2a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:f654890b2cccfe76",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:5bb3367d9cbb4c17",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:ed2766031af41049",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:f1e948c85e5edfa9",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:ac24ba2b22f2aac8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:355504d212605027",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:4a5e851051111c69",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:03e0b3dbcec1c2ae",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:5f187e8351efcad3",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:8f4c4d99fb83dad8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:c456cae516ec81ff",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:46094fdf23110380",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:3f99f0e9b1ecf4fc",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:09ab5ce56bf75234",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:0e670c4d65ff4d2d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:6d8bf813bd9f3b21",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:73ddd92e53710881",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:9fa4ebc975127b0d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:12a0c1b26a966cab",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:e4c5039eb3132d1a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:b68816bcc3a088a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:5824efd3893e8010",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:6009252fcb18b49b",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:fa4a07830b3db904",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:580ef6d2c82db691",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:f02544cd8001fba4",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:0caba5721ff2e455",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:ad22e3ecddd1453e",
+        "to": "test:384ab3e0202e6df1",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:7adb1f4f3fed1ac0",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:a1c8a49963d66820",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:d2c9d0cc4daba938",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:76d2bcaa44fbbc8f",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:770f00be7e11f32a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:5c79bd0546d559f8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:40f3d04e9531a2a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:f654890b2cccfe76",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:5bb3367d9cbb4c17",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:ed2766031af41049",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:f1e948c85e5edfa9",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:ac24ba2b22f2aac8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:355504d212605027",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:4a5e851051111c69",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:03e0b3dbcec1c2ae",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:5f187e8351efcad3",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:8f4c4d99fb83dad8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:c456cae516ec81ff",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:46094fdf23110380",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:3f99f0e9b1ecf4fc",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:09ab5ce56bf75234",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:0e670c4d65ff4d2d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:6d8bf813bd9f3b21",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:73ddd92e53710881",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:9fa4ebc975127b0d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:12a0c1b26a966cab",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:e4c5039eb3132d1a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:b68816bcc3a088a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:5824efd3893e8010",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:6009252fcb18b49b",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:fa4a07830b3db904",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:580ef6d2c82db691",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:f02544cd8001fba4",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:0caba5721ff2e455",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:dbd2757e7896f7c4",
+        "to": "test:384ab3e0202e6df1",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:7adb1f4f3fed1ac0",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:a1c8a49963d66820",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:d2c9d0cc4daba938",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:76d2bcaa44fbbc8f",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:770f00be7e11f32a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:5c79bd0546d559f8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:40f3d04e9531a2a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:f654890b2cccfe76",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:5bb3367d9cbb4c17",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:ed2766031af41049",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:f1e948c85e5edfa9",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:ac24ba2b22f2aac8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:355504d212605027",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:4a5e851051111c69",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:03e0b3dbcec1c2ae",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:5f187e8351efcad3",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:8f4c4d99fb83dad8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:c456cae516ec81ff",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:46094fdf23110380",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:3f99f0e9b1ecf4fc",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:09ab5ce56bf75234",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:0e670c4d65ff4d2d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:6d8bf813bd9f3b21",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:73ddd92e53710881",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:9fa4ebc975127b0d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:12a0c1b26a966cab",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:e4c5039eb3132d1a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:b68816bcc3a088a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:5824efd3893e8010",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:6009252fcb18b49b",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:fa4a07830b3db904",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:580ef6d2c82db691",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:f02544cd8001fba4",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:0caba5721ff2e455",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:d407d9b3b7a2a857",
+        "to": "test:384ab3e0202e6df1",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:7adb1f4f3fed1ac0",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:a1c8a49963d66820",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:d2c9d0cc4daba938",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:76d2bcaa44fbbc8f",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:770f00be7e11f32a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:5c79bd0546d559f8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:40f3d04e9531a2a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:f654890b2cccfe76",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:5bb3367d9cbb4c17",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:ed2766031af41049",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:f1e948c85e5edfa9",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:ac24ba2b22f2aac8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:355504d212605027",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:4a5e851051111c69",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:03e0b3dbcec1c2ae",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:5f187e8351efcad3",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:8f4c4d99fb83dad8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:c456cae516ec81ff",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:46094fdf23110380",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:3f99f0e9b1ecf4fc",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:09ab5ce56bf75234",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:0e670c4d65ff4d2d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:6d8bf813bd9f3b21",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:73ddd92e53710881",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:9fa4ebc975127b0d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:12a0c1b26a966cab",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:e4c5039eb3132d1a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:b68816bcc3a088a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:5824efd3893e8010",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:6009252fcb18b49b",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:fa4a07830b3db904",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:580ef6d2c82db691",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:f02544cd8001fba4",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:0caba5721ff2e455",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:22d00bdcdbf855be",
+        "to": "test:384ab3e0202e6df1",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:7adb1f4f3fed1ac0",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:a1c8a49963d66820",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:d2c9d0cc4daba938",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:76d2bcaa44fbbc8f",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:770f00be7e11f32a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:5c79bd0546d559f8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:40f3d04e9531a2a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:f654890b2cccfe76",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:5bb3367d9cbb4c17",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:ed2766031af41049",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:f1e948c85e5edfa9",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:ac24ba2b22f2aac8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:355504d212605027",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:4a5e851051111c69",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:03e0b3dbcec1c2ae",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:5f187e8351efcad3",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:8f4c4d99fb83dad8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:c456cae516ec81ff",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:46094fdf23110380",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:3f99f0e9b1ecf4fc",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:09ab5ce56bf75234",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:0e670c4d65ff4d2d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:6d8bf813bd9f3b21",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:73ddd92e53710881",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:9fa4ebc975127b0d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:12a0c1b26a966cab",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:e4c5039eb3132d1a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:b68816bcc3a088a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:5824efd3893e8010",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:6009252fcb18b49b",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:fa4a07830b3db904",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:580ef6d2c82db691",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:f02544cd8001fba4",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:0caba5721ff2e455",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:cf5ae6ffc81ac99b",
+        "to": "test:384ab3e0202e6df1",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:7adb1f4f3fed1ac0",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:a1c8a49963d66820",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:d2c9d0cc4daba938",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:76d2bcaa44fbbc8f",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:770f00be7e11f32a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:5c79bd0546d559f8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:40f3d04e9531a2a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:f654890b2cccfe76",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:5bb3367d9cbb4c17",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:ed2766031af41049",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:f1e948c85e5edfa9",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:ac24ba2b22f2aac8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:355504d212605027",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:4a5e851051111c69",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:03e0b3dbcec1c2ae",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:5f187e8351efcad3",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:8f4c4d99fb83dad8",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:c456cae516ec81ff",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:46094fdf23110380",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:3f99f0e9b1ecf4fc",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:09ab5ce56bf75234",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:0e670c4d65ff4d2d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:6d8bf813bd9f3b21",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:73ddd92e53710881",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:9fa4ebc975127b0d",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:12a0c1b26a966cab",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:e4c5039eb3132d1a",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:b68816bcc3a088a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:5824efd3893e8010",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:6009252fcb18b49b",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:fa4a07830b3db904",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:580ef6d2c82db691",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:f02544cd8001fba4",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:0caba5721ff2e455",
+        "confidence": "medium"
+      },
+      {
+        "from": "coverage:eb08159d041cffc9",
+        "to": "test:384ab3e0202e6df1",
+        "confidence": "medium"
+      }
+    ],
+    "touches": [],
+    "contradicts": [],
+    "has_strength": [
+      {
+        "from": "test:7adb1f4f3fed1ac0",
+        "to": "evidence_strength:7adb1f4f3fed1ac0",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:a1c8a49963d66820",
+        "to": "evidence_strength:a1c8a49963d66820",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:3f99f0e9b1ecf4fc",
+        "to": "evidence_strength:3f99f0e9b1ecf4fc",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:c456cae516ec81ff",
+        "to": "evidence_strength:c456cae516ec81ff",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:46094fdf23110380",
+        "to": "evidence_strength:46094fdf23110380",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:0e670c4d65ff4d2d",
+        "to": "evidence_strength:0e670c4d65ff4d2d",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:09ab5ce56bf75234",
+        "to": "evidence_strength:09ab5ce56bf75234",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:f1e948c85e5edfa9",
+        "to": "evidence_strength:f1e948c85e5edfa9",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:ac24ba2b22f2aac8",
+        "to": "evidence_strength:ac24ba2b22f2aac8",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:40f3d04e9531a2a6",
+        "to": "evidence_strength:40f3d04e9531a2a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:ed2766031af41049",
+        "to": "evidence_strength:ed2766031af41049",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:770f00be7e11f32a",
+        "to": "evidence_strength:770f00be7e11f32a",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:5c79bd0546d559f8",
+        "to": "evidence_strength:5c79bd0546d559f8",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:5bb3367d9cbb4c17",
+        "to": "evidence_strength:5bb3367d9cbb4c17",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:f654890b2cccfe76",
+        "to": "evidence_strength:f654890b2cccfe76",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:d2c9d0cc4daba938",
+        "to": "evidence_strength:d2c9d0cc4daba938",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:76d2bcaa44fbbc8f",
+        "to": "evidence_strength:76d2bcaa44fbbc8f",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:8f4c4d99fb83dad8",
+        "to": "evidence_strength:8f4c4d99fb83dad8",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:5f187e8351efcad3",
+        "to": "evidence_strength:5f187e8351efcad3",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:03e0b3dbcec1c2ae",
+        "to": "evidence_strength:03e0b3dbcec1c2ae",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:4a5e851051111c69",
+        "to": "evidence_strength:4a5e851051111c69",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:355504d212605027",
+        "to": "evidence_strength:355504d212605027",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:b68816bcc3a088a6",
+        "to": "evidence_strength:b68816bcc3a088a6",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:5824efd3893e8010",
+        "to": "evidence_strength:5824efd3893e8010",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:6009252fcb18b49b",
+        "to": "evidence_strength:6009252fcb18b49b",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:384ab3e0202e6df1",
+        "to": "evidence_strength:384ab3e0202e6df1",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:0caba5721ff2e455",
+        "to": "evidence_strength:0caba5721ff2e455",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:e4c5039eb3132d1a",
+        "to": "evidence_strength:e4c5039eb3132d1a",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:73ddd92e53710881",
+        "to": "evidence_strength:73ddd92e53710881",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:f02544cd8001fba4",
+        "to": "evidence_strength:f02544cd8001fba4",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:6d8bf813bd9f3b21",
+        "to": "evidence_strength:6d8bf813bd9f3b21",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:9fa4ebc975127b0d",
+        "to": "evidence_strength:9fa4ebc975127b0d",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:580ef6d2c82db691",
+        "to": "evidence_strength:580ef6d2c82db691",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:12a0c1b26a966cab",
+        "to": "evidence_strength:12a0c1b26a966cab",
+        "confidence": "medium"
+      },
+      {
+        "from": "test:fa4a07830b3db904",
+        "to": "evidence_strength:fa4a07830b3db904",
+        "confidence": "medium"
+      }
+    ]
+  },
+  "gaps": {
+    "unsupported_claims": [],
+    "missing_execution": [],
+    "missing_coverage": [],
+    "unsafe_artifacts": []
+  },
+  "evidence_strength": [
+    {
+      "test_id": "junit:tests/test_cli_schema_contract.py::test_docs_cli_json_outputs_match_schema",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_cli_schema_contract.py::test_docs_http_outputs_match_openapi_schema",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestHelperFunctions.py::test_must_parse_typed_ref",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestHelperFunctions.py::test_new_typed_ref",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestHelperFunctions.py::test_new_typed_ref_with_provider",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestNormalization.py::test_output_is_canonical",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestNormalization.py::test_three_segment_normalizes_to_local_provider",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_id_raises_error",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_provider_raises_error",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_empty_string_raises_error",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_extensible_entity_type_for_memx",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_four_segment_canonical",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_four_segment_with_jira_provider",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_invalid_domain_raises_error",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_invalid_segment_count_raises_error",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_three_segment_memx_evidence",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestParseTypedRef.py::test_parse_three_segment_memx_knowledge",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestTypedRef.py::test_frozen",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestTypedRef.py::test_is_valid",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestTypedRef.py::test_is_zero",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestTypedRef.py::test_ref_alias",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_typed_ref/TestTypedRef.py::test_str_returns_canonical_format",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_paths_outside_repository[../outside.md]",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_paths_outside_repository[C:/outside.md]",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_ack_docs_rejects_symlink_escape",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 0,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_json_store_lock_timeout_is_explicit",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_json_store_rejects_corrupt_payload",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_linked_markdown_paths_resolves_markdown_links_with_fragments",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_receipt_and_resolve_cache_stores_persist_payloads",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_receipt_store_upsert_is_concurrency_safe",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_resolve_ack_and_stale_cycle",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_resolve_docs_uses_signature_cache_and_refreshes_when_inputs_change",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_resolve_docs_warns_for_external_markdown_link",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_selection_policy_can_override_core_docs",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    },
+    {
+      "test_id": "junit:tests/test_workflow_plugin.py::test_stale_check_reports_tampered_external_receipt",
+      "flake_score": "unknown",
+      "mutation_score": "unknown",
+      "sample_size": 1,
+      "computed_at": "2026-07-11T12:42:22+09:00",
+      "inputs": [
+        {
+          "kind": "test_results",
+          "sourceRef": "HATE-test-results.ndjson"
+        }
+      ],
+      "sourceRefs": [
+        "fixture:/p0a/HATE-evidence-strength.ndjson"
+      ]
+    }
+  ]
+}

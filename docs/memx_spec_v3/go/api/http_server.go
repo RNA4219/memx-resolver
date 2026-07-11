@@ -2,6 +2,8 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
+	"io"
 	"net/http"
 	"strings"
 
@@ -9,12 +11,18 @@ import (
 )
 
 // HTTPServer は /v1/* の JSON API を提供する。
+const DefaultMaxRequestBytes int64 = 4 << 20
+
 type HTTPServer struct {
-	InProc *InProcClient
+	InProc          *InProcClient
+	MaxRequestBytes int64
 }
 
 func NewHTTPServer(svc *service.Service) *HTTPServer {
-	return &HTTPServer{InProc: NewInProcClient(svc)}
+	return &HTTPServer{
+		InProc:          NewInProcClient(svc),
+		MaxRequestBytes: DefaultMaxRequestBytes,
+	}
 }
 
 func (s *HTTPServer) Handler() http.Handler {
@@ -69,7 +77,11 @@ func (s *HTTPServer) Handler() http.Handler {
 	mux.HandleFunc("/v1/docs:stale-check", s.handleDocsStaleCheck)
 	mux.HandleFunc("/v1/contracts:resolve", s.handleContractsResolve)
 
-	return mux
+	limit := s.MaxRequestBytes
+	if limit <= 0 {
+		limit = DefaultMaxRequestBytes
+	}
+	return http.MaxBytesHandler(mux, limit)
 }
 
 // -------------------- Common Helpers --------------------
@@ -97,6 +109,9 @@ func writeErr(w http.ResponseWriter, e *Error) {
 		case CodeGatekeepDeny:
 			status = http.StatusForbidden
 		}
+		if e.HTTPStatus != 0 {
+			status = e.HTTPStatus
+		}
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
@@ -104,8 +119,17 @@ func writeErr(w http.ResponseWriter, e *Error) {
 }
 
 func decodeJSON(w http.ResponseWriter, r *http.Request, v interface{}) *Error {
-	if err := json.NewDecoder(r.Body).Decode(v); err != nil {
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(v); err != nil {
+		var maxBytesErr *http.MaxBytesError
+		if errors.As(err, &maxBytesErr) {
+			return &Error{Code: CodeInvalidArgument, Message: "request body too large", HTTPStatus: http.StatusRequestEntityTooLarge}
+		}
 		return &Error{Code: CodeInvalidArgument, Message: "invalid json"}
+	}
+	var extra interface{}
+	if err := decoder.Decode(&extra); err != io.EOF {
+		return &Error{Code: CodeInvalidArgument, Message: "request body must contain one json value"}
 	}
 	return nil
 }

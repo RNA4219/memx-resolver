@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import signal
 import socket
 import subprocess
 import time
@@ -19,13 +20,51 @@ CLI_SCHEMA_PATH = REPO_ROOT / "docs" / "memx_spec_v3" / "docs" / "contracts" / "
 OPENAPI_PATH = REPO_ROOT / "docs" / "memx_spec_v3" / "docs" / "contracts" / "openapi.yaml"
 
 
-def _run(args: list[str], *, cwd: Path, env: dict[str, str]) -> str:
-    completed = subprocess.run(args, cwd=cwd, env=env, text=True, capture_output=True, check=False)
-    if completed.returncode != 0:
-        raise AssertionError(
-            f"command failed: {' '.join(args)}\nstdout:\n{completed.stdout}\nstderr:\n{completed.stderr}"
+def _process_group_kwargs() -> dict[str, object]:
+    if os.name == "nt":
+        return {"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP}
+    return {"start_new_session": True}
+
+
+def _terminate_process_tree(proc: subprocess.Popen[str]) -> None:
+    if proc.poll() is not None:
+        return
+    if os.name == "nt":
+        subprocess.run(
+            ["taskkill", "/PID", str(proc.pid), "/T", "/F"],
+            capture_output=True,
+            text=True,
+            timeout=15,
+            check=False,
         )
-    return completed.stdout
+    else:
+        os.killpg(proc.pid, signal.SIGTERM)
+        try:
+            proc.wait(timeout=5)
+        except subprocess.TimeoutExpired:
+            os.killpg(proc.pid, signal.SIGKILL)
+
+def _run(args: list[str], *, cwd: Path, env: dict[str, str]) -> str:
+    proc = subprocess.Popen(
+        args,
+        cwd=cwd,
+        env=env,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        **_process_group_kwargs(),
+    )
+    try:
+        stdout, stderr = proc.communicate(timeout=180)
+    except subprocess.TimeoutExpired as exc:
+        _terminate_process_tree(proc)
+        stdout, stderr = proc.communicate()
+        raise AssertionError(f"command timed out after 180s: {' '.join(args)}; stdout: {stdout}; stderr: {stderr}") from exc
+    if proc.returncode != 0:
+        raise AssertionError(
+            f"command failed: {' '.join(args)}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+        )
+    return stdout
 
 
 def _build_mem(tmp_path: Path) -> tuple[Path, dict[str, str]]:
@@ -252,6 +291,7 @@ def test_docs_http_outputs_match_openapi_schema(tmp_path: Path) -> None:
         text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
+        **_process_group_kwargs(),
     )
     try:
         _wait_for_healthz(base_url, proc)
@@ -328,9 +368,5 @@ def test_docs_http_outputs_match_openapi_schema(tmp_path: Path) -> None:
             _post_json(base_url, "/v1/contracts:resolve", {"feature": "schema-contract"})
         )
     finally:
-        proc.terminate()
-        try:
-            proc.communicate(timeout=5)
-        except subprocess.TimeoutExpired:
-            proc.kill()
-            proc.communicate(timeout=5)
+        _terminate_process_tree(proc)
+        proc.communicate(timeout=5)

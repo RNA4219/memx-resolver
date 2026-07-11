@@ -1,10 +1,17 @@
 package main
 
 import (
+	"context"
+	"errors"
 	"flag"
 	"log"
+	"net"
 	"net/http"
 	"os"
+	"os/signal"
+	"strings"
+	"syscall"
+	"time"
 
 	"memx/api"
 	"memx/service"
@@ -21,6 +28,8 @@ func cmdAPI(args []string) {
 		cf := &commonFlags{}
 		cf.bind(fs)
 		addr := fs.String("addr", "127.0.0.1:7766", "listen address")
+		maxRequestBytes := fs.Int64("max-request-bytes", api.DefaultMaxRequestBytes, "maximum JSON request body size")
+		allowNonLoopback := fs.Bool("allow-non-loopback", false, "acknowledge unauthenticated non-loopback exposure")
 		_ = fs.Parse(args[1:])
 
 		svc, err := service.New(cf.paths())
@@ -33,13 +42,58 @@ func cmdAPI(args []string) {
 		}
 		defer func() { _ = svc.Close() }()
 
+		if *maxRequestBytes <= 0 {
+			log.Fatal("max-request-bytes must be greater than zero")
+		}
 		srv := api.NewHTTPServer(svc)
+		srv.MaxRequestBytes = *maxRequestBytes
 		h := srv.Handler()
 
+		if !isLoopbackAddress(*addr) {
+			if *allowNonLoopback {
+				log.Printf("WARNING: non-loopback API has no authentication or TLS: %s", *addr)
+			} else {
+				log.Printf("WARNING: non-loopback API is deprecated without --allow-non-loopback: %s", *addr)
+			}
+		}
+
+		server := &http.Server{
+			Addr:              *addr,
+			Handler:           h,
+			ReadHeaderTimeout: 5 * time.Second,
+			ReadTimeout:       30 * time.Second,
+			WriteTimeout:      60 * time.Second,
+			IdleTimeout:       120 * time.Second,
+		}
+		shutdownSignal, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+		defer stop()
+		go func() {
+			<-shutdownSignal.Done()
+			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			defer cancel()
+			if err := server.Shutdown(ctx); err != nil {
+				log.Printf("API shutdown failed: %v", err)
+			}
+		}()
+
 		log.Printf("memx API listening on http://%s", *addr)
-		log.Fatal(http.ListenAndServe(*addr, h))
+		if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+			log.Fatal(err)
+		}
 	default:
 		usage()
 		os.Exit(2)
 	}
+}
+func isLoopbackAddress(addr string) bool {
+	host, _, err := net.SplitHostPort(addr)
+	if err != nil {
+		return false
+	}
+	host = strings.Trim(host, "[]")
+	if strings.EqualFold(host, "localhost") {
+		return true
+	}
+	ip := net.ParseIP(host)
+	return ip != nil && ip.IsLoopback()
 }

@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from .markdown import linked_markdown_paths, read_markdown
 from .policy import DocsSelectionPolicy
+from .paths import PathBoundaryError, is_within_repository, resolve_repository_path
 from .results import DocsAckResult, DocsResolveResult, DocsStaleResult
 from .store import JsonReceiptStore, JsonResolveCacheStore, ReceiptStore, ResolveCacheStore
 
@@ -45,7 +46,7 @@ class MemxResolverWorkflowPlugin:
         text, _, _ = read_markdown(task_path)
         core_docs = self._selection_policy.core_paths(repo_root=repo_root)
         recommended_docs = self._selection_policy.recommended_paths(repo_root=repo_root)
-        linked_docs = self._linked_docs(task_path, text)
+        linked_docs, link_warnings = self._linked_docs(repo_root, task_path, text)
         acceptance_docs: list[Path] = []
         if intent_id:
             for acceptance_path in self._selection_policy.acceptance_paths(repo_root=repo_root):
@@ -86,7 +87,7 @@ class MemxResolverWorkflowPlugin:
             repo_root=repo_root,
             reason=self._selection_policy.recommended_reason,
         )
-        payload = DocsResolveResult(required=required, recommended=recommended, errors=[], warnings=[])
+        payload = DocsResolveResult(required=required, recommended=recommended, errors=[], warnings=link_warnings)
         if self._cache_enabled:
             self._resolve_cache_store.save(
                 repo_root=repo_root,
@@ -102,27 +103,41 @@ class MemxResolverWorkflowPlugin:
         return payload
 
     def ack_docs(self, *, repo_root: Path, task_id: str, doc_ids: list[str], reader: str) -> DocsAckResult:
-        receipts = self._receipt_store.load(repo_root=repo_root)
-        updated: list[dict] = []
+        root = repo_root.resolve(strict=True)
+        records: list[dict] = []
         for doc_id in doc_ids:
-            target = (repo_root / doc_id).resolve()
-            if not target.is_file():
-                continue
-            record = {
-                "task_id": task_id,
-                "doc_id": Path(doc_id).as_posix(),
-                "version": _version_for_path(target),
-                "reader": reader,
-            }
-            receipts = [
-                existing
-                for existing in receipts
-                if not (existing.get("task_id") == task_id and existing.get("doc_id") == record["doc_id"])
-            ]
-            receipts.append(record)
-            updated.append(record)
-        self._receipt_store.save(repo_root=repo_root, receipts=receipts)
-        return DocsAckResult(receipts=updated)
+            target = resolve_repository_path(
+                repo_root=root,
+                value=doc_id,
+                require_file=True,
+                reject_absolute=True,
+            )
+            records.append(
+                {
+                    "task_id": task_id,
+                    "doc_id": target.relative_to(root).as_posix(),
+                    "version": _version_for_path(target),
+                    "reader": reader,
+                }
+            )
+
+        upsert = getattr(self._receipt_store, "upsert", None)
+        if callable(upsert):
+            upsert(repo_root=root, records=records)
+        else:
+            receipts = self._receipt_store.load(repo_root=root)
+            for record in records:
+                receipts = [
+                    existing
+                    for existing in receipts
+                    if not (
+                        existing.get("task_id") == task_id
+                        and existing.get("doc_id") == record["doc_id"]
+                    )
+                ]
+                receipts.append(record)
+            self._receipt_store.save(repo_root=root, receipts=receipts)
+        return DocsAckResult(receipts=records)
 
     def stale_check(self, *, repo_root: Path, task_id: str) -> DocsStaleResult:
         stale: list[dict] = []
@@ -130,7 +145,24 @@ class MemxResolverWorkflowPlugin:
             if receipt.get("task_id") != task_id:
                 continue
             doc_id = str(receipt.get("doc_id", ""))
-            target = (repo_root / doc_id).resolve()
+            try:
+                target = resolve_repository_path(
+                    repo_root=repo_root,
+                    value=doc_id,
+                    require_file=False,
+                    reject_absolute=True,
+                )
+            except PathBoundaryError:
+                stale.append(
+                    {
+                        "task_id": task_id,
+                        "doc_id": doc_id,
+                        "previous_version": receipt.get("version", ""),
+                        "current_version": "",
+                        "reason": "path_outside_repo",
+                    }
+                )
+                continue
             if not target.is_file():
                 stale.append(
                     {
@@ -166,8 +198,17 @@ class MemxResolverWorkflowPlugin:
                 return path
         return None
 
-    def _linked_docs(self, source_path: Path, text: str) -> list[Path]:
-        return linked_markdown_paths(source_path, text)
+    def _linked_docs(self, repo_root: Path, source_path: Path, text: str) -> tuple[list[Path], list[str]]:
+        documents: list[Path] = []
+        warnings: list[str] = []
+        for path in linked_markdown_paths(source_path, text):
+            if is_within_repository(repo_root=repo_root, target=path):
+                documents.append(path)
+            else:
+                warnings.append(
+                    f"linked document is outside repository root and was ignored: {path}"
+                )
+        return documents, warnings
 
     def _build_resolve_signature(
         self,

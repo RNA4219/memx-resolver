@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling>=1.27", "hatch-vcs>=0.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "memx-resolver"
+dynamic = ["version"]
+description = "Agent-first local document resolver and workflow plugin"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+dependencies = ["filelock>=3.16,<4"]
+
+[project.optional-dependencies]
+test = [
+    "jsonschema>=4.0",
+    "PyYAML>=6.0",
+    "pytest>=8.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/RNA4219/memx-resolver"
+Repository = "https://github.com/RNA4219/memx-resolver"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+fallback_version = "1.1.0"
+tag_regex = "^v(?P<version>\\d+\\.\\d+\\.\\d+)$"
+git_describe_command = "git describe --dirty --tags --long --match v[0-9]*"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "memx_resolver_workflow_plugin/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["memx_resolver_workflow_plugin"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

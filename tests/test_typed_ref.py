@@ -68,10 +68,11 @@ class TestParseTypedRef:
         with pytest.raises(TypedRefParseError, match="invalid domain"):
             parse_typed_ref("unknown:evidence:local:id")
 
-    def test_parse_invalid_entity_type_for_memx_raises_error(self) -> None:
-        """Invalid entity type for memx domain should raise TypedRefParseError."""
-        with pytest.raises(TypedRefParseError, match="invalid entity type"):
-            parse_typed_ref("memx:unknown:local:id")
+    def test_parse_extensible_entity_type_for_memx(self) -> None:
+        """Memx entity types are extensible across resolver capabilities."""
+        ref = parse_typed_ref("memx:doc:custom-provider:id")
+        assert ref.entity_type == "doc"
+        assert str(ref) == "memx:doc:custom-provider:id"
 
     def test_parse_empty_id_raises_error(self) -> None:
         """Empty id should raise TypedRefParseError."""

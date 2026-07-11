@@ -1,14 +1,7 @@
 version: ctg/v1
 
 suppressions:
-  # workflow-cookbook embedded directory - should be excluded
-  # These findings are from embedded workflow-cookbook, not memx-resolver code
   - rule_id: UNSAFE_DELETE
-    path: workflow-cookbook/tools/audit/purge_logs.py
-    reason: "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config."
-    expiry: 2027-05-02
-
-  - rule_id: LARGE_MODULE
-    path: workflow-cookbook/**/*
-    reason: "Embedded workflow-cookbook directory. Findings belong to workflow-cookbook repo, not memx-resolver. Should exclude workflow-cookbook/ in config."
-    expiry: 2027-05-02
+    path: memx_resolver_workflow_plugin/store.py
+    reason: "Atomic JSON writer replaces the destination only after flush/fsync; unlink only removes its own guarded temporary file during cleanup."
+    expiry: 2026-10-01
