@@ -1,0 +1,54 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-11T09:10:33.809Z",
+  "run_id": "readiness-20260711091033",
+  "repo": {
+    "root": "C:\\tmp\\memx-resolver-v110-gate",
+    "revision": "ea87ad44f50a",
+    "dirty": false
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "policy_id": "default-policy",
+    "plugin_versions": []
+  },
+  "artifact": "release-readiness",
+  "schema": "release-readiness@v1",
+  "status": "passed",
+  "completeness": "complete",
+  "summary": "All policy conditions met, release ready",
+  "counts": {
+    "findings": 0,
+    "critical": 0,
+    "high": 0,
+    "risks": 0,
+    "testSeeds": 0,
+    "unsupportedClaims": 0
+  },
+  "selfAnalysis": {
+    "rawCritical": 0,
+    "rawHigh": 1,
+    "rawMedium": 0,
+    "rawLow": 0,
+    "suppressedCritical": 0,
+    "suppressedHigh": 1,
+    "suppressedMedium": 0,
+    "suppressedLow": 0,
+    "broadSuppressions": 0,
+    "acceptedExceptionsByClass": {
+      "self-reference": 0,
+      "fixture-intentional": 0,
+      "generated-artifact": 0,
+      "accepted-design": 0,
+      "temporary-debt": 1
+    }
+  },
+  "failedConditions": [],
+  "recommendedActions": [],
+  "artifactRefs": {
+    "findings": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head2\\findings.json",
+    "riskRegister": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head2\\risk-register.yaml",
+    "manualEvidence": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\manual-bb\\manual-bb.json"
+  }
+}

@@ -2,22 +2,23 @@
   "schema_version": "five-tool-validation-gate/v1",
   "release": "v1.1.0",
   "target_repo": "memx-resolver",
-  "target_head": "57ce98361e81c68e26cc9be3b030c29546e02d08",
+  "target_head": "ea87ad44f50a7989ff5e3ce69c00b5f004a67aa",
   "dirty": false,
   "verdict": "go",
   "chain_status": {"RanD":"degraded","Code-to-gate":"ran","HATE":"ran","manual-bb":"ran","QEG":"ran"},
   "artifacts": {
-    "ctg": "ctg-final-head/release-readiness.json",
-    "hate": "hate-final-head-verified/precheck-decision.json",
-    "hate_qeg": "hate-final-head-verified-qeg/qeg-bundle.json",
+    "ctg": "ctg-final-head2/release-readiness.json",
+    "hate": "hate-final2/precheck-decision.json",
+    "hate_qeg": "hate-final2-qeg/qeg-bundle.json",
     "manual_bb": "manual-bb/manual-bb.json",
-    "qeg_input": "qeg-final-head/gate-input.json",
-    "qeg_record": "qeg-final-head/output-record.json",
-    "qeg_verdict": "qeg-final-head-verdict.json"
+    "qeg_input": "qeg-final-head2/gate-input.json",
+    "qeg_record": "qeg-final-head2/output-record.json",
+    "qeg_verdict": "qeg-final-head2-verdict.json"
   },
   "summary": {"ctg_findings":0,"ctg_critical":0,"ctg_high":0,"hate_decision":"eligible","hate_completeness":1.0,"manual_p1_pass":"8/8","qeg_verdict":"go"},
   "go_files": ["docs/memx_spec_v3/go/api/http_server.go","docs/memx_spec_v3/go/api/types.go","docs/memx_spec_v3/go/cmd/mem/cmd_api.go"],
   "notes": ["No fresh RanD packet existed; repository requirements and approved plan were used.", "Code-to-gate qeg exporter v0.1 output was deterministically migrated to QEG v0.2 before validation."]
 }
+
 
 

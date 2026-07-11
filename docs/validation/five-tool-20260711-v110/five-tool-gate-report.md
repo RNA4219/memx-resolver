@@ -1,7 +1,7 @@
 # v1.1.0 Five-Tool Validation Gate Report
 
 - target: `memx-resolver`
-- target HEAD: `57ce98361e81c68e26cc9be3b030c29546e02d08`
+- target HEAD: `ea87ad44f50a7989ff5e3ce69c00b5f004a67aa`
 - clean worktree: `dirty=false`
 - verdict: `go`
 
@@ -10,18 +10,18 @@
 | Step | Status | Artifact | Result |
 | --- | --- | --- | --- |
 | RanD | degraded | repository requirements and approved implementation plan | fresh target-specific packet absent; assumptions recorded |
-| Code-to-gate | ran | `ctg-final-head/` | tree-sitter, findings 0, critical/high 0, readiness passed |
-| HATE | ran | `hate-final-head-verified/`, `hate-final-head-verified-qeg/` | release profile eligible, completeness 1.0, partial=false |
+| Code-to-gate | ran | `ctg-final-head2/` | tree-sitter, findings 0, critical/high 0, readiness passed |
+| HATE | ran | `hate-final2/`, `hate-final2-qeg/` | release profile eligible, completeness 1.0, partial=false |
 | manual-bb | ran | `manual-bb/` | P1 8/8 PASS, no waiver |
-| QEG | ran | `qeg-final-head/`, `qeg-final-head-verdict.json` | validate PASS, record serialization PASS, verdict GO |
+| QEG | ran | `qeg-final-head2/`, `qeg-final-head2-verdict.json` | validate PASS, record serialization PASS, verdict GO |
 
 ## Evidence Map
 
 - Requirements: implementation plan, `docs/requirements.md`, `docs/interfaces.md`, `docs/design.md`
-- Static: `ctg-final-head/findings.json`, `release-readiness.json`, `repo-graph.json`
-- Automated: `hate-input/junit.xml`, `lcov.info`, `go-test-final.json`, `go-vet-final.txt`, `hate-final-head-verified/`
+- Static: `ctg-final-head2/findings.json`, `release-readiness.json`, `repo-graph.json`
+- Automated: `hate-input/junit.xml`, `lcov.info`, `go-test-final2.json`, `go-vet-final2.txt`, `hate-final2/`
 - Manual: `manual-bb/report.md`, `manual-bb/manual-bb.json`, execution logs
-- Final gate: `qeg-final-head-verdict.json`, `qeg-final-head/output-record.json`
+- Final gate: `qeg-final-head2-verdict.json`, `qeg-final-head2/output-record.json`
 
 ## Findings And Risks
 
@@ -42,6 +42,7 @@ Grounded viewpoints, risks, priorities, eight executed P1 cases, effort, gate ju
 ## Verdict
 
 `go` for the local release candidate. Tagging remains blocked until GitHub Windows/Linux CI and the protected `pypi` environment approval complete.
+
 
 
 

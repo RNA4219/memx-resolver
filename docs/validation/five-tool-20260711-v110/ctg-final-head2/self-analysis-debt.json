@@ -1,0 +1,71 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-11T09:10:33.813Z",
+  "run_id": "readiness-20260711091033",
+  "repo": {
+    "root": "C:\\tmp\\memx-resolver-v110-gate"
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0"
+  },
+  "artifact": "self-analysis-debt",
+  "schema": "self-analysis-debt@v1",
+  "rawFindings": {
+    "total": 1,
+    "bySeverity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 0,
+      "low": 0
+    }
+  },
+  "effectiveFindings": {
+    "total": 0,
+    "bySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    }
+  },
+  "acceptedExceptions": {
+    "total": 1,
+    "bySeverity": {
+      "critical": 0,
+      "high": 1,
+      "medium": 0,
+      "low": 0
+    },
+    "byClass": {
+      "self-reference": 0,
+      "fixture-intentional": 0,
+      "generated-artifact": 0,
+      "accepted-design": 0,
+      "temporary-debt": 1
+    },
+    "details": [
+      {
+        "ruleId": "UNSAFE_DELETE",
+        "path": "memx_resolver_workflow_plugin/store.py",
+        "class": "temporary-debt",
+        "reason": "Atomic JSON writer replaces the destination only after flush/fsync; unlink only removes its own guarded temporary file during cleanup.",
+        "severity": "high"
+      }
+    ]
+  },
+  "broadSuppressions": {
+    "total": 0,
+    "items": [],
+    "reviewRequired": false
+  },
+  "debtCandidates": {
+    "unsafeDelete": 0,
+    "tryCatchSwallow": 0,
+    "rawSql": 0,
+    "largeModule": 0
+  },
+  "recommendedActions": [
+    "Plan repayment for 1 temporary debt item(s)"
+  ]
+}

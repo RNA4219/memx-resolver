@@ -1,0 +1,106 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-11T09:10:31.612Z",
+  "run_id": "ctg-202607110910-local",
+  "repo": {
+    "root": "../../../../tmp/memx-resolver-v110-gate",
+    "revision": "ea87ad44f50a",
+    "dirty": false
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "plugin_versions": [
+      {
+        "name": "CLIENT_TRUSTED_PRICE",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "WEAK_AUTH_GUARD",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "TRY_CATCH_SWALLOW",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "MISSING_SERVER_VALIDATION",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "UNTESTED_CRITICAL_PATH",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "RAW_SQL",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "ENV_DIRECT_ACCESS",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "UNSAFE_DELETE",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "LARGE_MODULE",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "DEBT_MARKER",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "SUPPRESSION_DEBT",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "HARDCODED_SECRET",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "MISSING_RATE_LIMIT",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "UNSAFE_REDIRECT",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "DEPRECATED_API_USAGE",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "CIRCULAR_DEPENDENCY",
+        "version": "1.5.0",
+        "visibility": "public"
+      },
+      {
+        "name": "MISSING_INPUT_SANITIZATION",
+        "version": "1.5.0",
+        "visibility": "public"
+      }
+    ]
+  },
+  "artifact": "findings",
+  "schema": "findings@v1",
+  "completeness": "complete",
+  "findings": [],
+  "unsupported_claims": []
+}
