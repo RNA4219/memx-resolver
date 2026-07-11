@@ -1,0 +1,19 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-11T08:53:45.643Z",
+  "run_id": "ctg-202607110853-local",
+  "repo": {
+    "root": "../../../../tmp/memx-resolver-v110-gate",
+    "revision": "57ce98361e81",
+    "dirty": false
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "plugin_versions": []
+  },
+  "artifact": "invariants",
+  "schema": "invariants@v1",
+  "completeness": "partial",
+  "invariants": []
+}

@@ -1,0 +1,1 @@
+residual_go_mem_count=0

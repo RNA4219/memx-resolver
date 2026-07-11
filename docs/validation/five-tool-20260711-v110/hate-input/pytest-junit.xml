@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="1" tests="35" time="288.770" timestamp="2026-07-11T12:32:40.435843+09:00" hostname="DESKTOP-HCPVLHM"><testcase classname="tests.test_cli_schema_contract" name="test_docs_cli_json_outputs_match_schema" time="181.708"><failure message="AssertionError: command timed out after 180s: go build -o C:\Users\ryo-n\AppData\Local\Temp\pytest-of-ryo-n\pytest-3117\test_docs_cli_json_outputs_mat0\mem.exe ./cmd/mem; stdout: ; stderr:">args = ['go', 'build', '-o', 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_docs_cli_json_outputs_mat0\\mem.exe', './cmd/mem']
+
+    def _run(args: list[str], *, cwd: Path, env: dict[str, str]) -&gt; str:
+        proc = subprocess.Popen(
+            args,
+            cwd=cwd,
+            env=env,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            **_process_group_kwargs(),
+        )
+        try:
+&gt;           stdout, stderr = proc.communicate(timeout=180)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+C:\tmp\memx-resolver-v110-gate\tests\test_cli_schema_contract.py:58: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\AppData\Local\Programs\Python\Python311\Lib\subprocess.py:1209: in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;Popen: returncode: 1 args: ['go', 'build', '-o', 'C:\\Users\\ryo-n\\AppData...&gt;
+input = None, endtime = 369010.968, orig_timeout = 180
+
+    def _communicate(self, input, endtime, orig_timeout):
+        # Start reader threads feeding into a list hanging off of this
+        # object, unless they've already been started.
+        if self.stdout and not hasattr(self, "_stdout_buff"):
+            self._stdout_buff = []
+            self.stdout_thread = \
+                    threading.Thread(target=self._readerthread,
+                                     args=(self.stdout, self._stdout_buff))
+            self.stdout_thread.daemon = True
+            self.stdout_thread.start()
+        if self.stderr and not hasattr(self, "_stderr_buff"):
+            self._stderr_buff = []
+            self.stderr_thread = \
+                    threading.Thread(target=self._readerthread,
+                                     args=(self.stderr, self._stderr_buff))
+            self.stderr_thread.daemon = True
+            self.stderr_thread.start()
+    
+        if self.stdin:
+            self._stdin_write(input)
+    
+        # Wait for the reader threads, or time out.  If we time out, the
+        # threads remain reading and the fds left open in case the user
+        # calls communicate again.
+        if self.stdout is not None:
+            self.stdout_thread.join(self._remaining_time(endtime))
+            if self.stdout_thread.is_alive():
+&gt;               raise TimeoutExpired(self.args, orig_timeout)
+E               subprocess.TimeoutExpired: Command '['go', 'build', '-o', 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_docs_cli_json_outputs_mat0\\mem.exe', './cmd/mem']' timed out after 180 seconds
+
+..\..\AppData\Local\Programs\Python\Python311\Lib\subprocess.py:1630: TimeoutExpired
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = WindowsPath('C:/Users/ryo-n/AppData/Local/Temp/pytest-of-ryo-n/pytest-3117/test_docs_cli_json_outputs_mat0')
+
+    def test_docs_cli_json_outputs_match_schema(tmp_path: Path) -&gt; None:
+        schema = json.loads(CLI_SCHEMA_PATH.read_text(encoding="utf-8"))
+        validator = Draft202012Validator(schema)
+&gt;       bin_path, env = _build_mem(tmp_path)
+                        ^^^^^^^^^^^^^^^^^^^^
+
+C:\tmp\memx-resolver-v110-gate\tests\test_cli_schema_contract.py:156: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\tmp\memx-resolver-v110-gate\tests\test_cli_schema_contract.py:84: in _build_mem
+    _run(["go", "build", "-o", str(bin_path), "./cmd/mem"], cwd=GO_ROOT, env=env)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+args = ['go', 'build', '-o', 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_docs_cli_json_outputs_mat0\\mem.exe', './cmd/mem']
+
+    def _run(args: list[str], *, cwd: Path, env: dict[str, str]) -&gt; str:
+        proc = subprocess.Popen(
+            args,
+            cwd=cwd,
+            env=env,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            **_process_group_kwargs(),
+        )
+        try:
+            stdout, stderr = proc.communicate(timeout=180)
+        except subprocess.TimeoutExpired as exc:
+            _terminate_process_tree(proc)
+            stdout, stderr = proc.communicate()
+&gt;           raise AssertionError(f"command timed out after 180s: {' '.join(args)}; stdout: {stdout}; stderr: {stderr}") from exc
+E           AssertionError: command timed out after 180s: go build -o C:\Users\ryo-n\AppData\Local\Temp\pytest-of-ryo-n\pytest-3117\test_docs_cli_json_outputs_mat0\mem.exe ./cmd/mem; stdout: ; stderr:
+
+C:\tmp\memx-resolver-v110-gate\tests\test_cli_schema_contract.py:62: AssertionError</failure></testcase><testcase classname="tests.test_cli_schema_contract" name="test_docs_http_outputs_match_openapi_schema" time="99.057" /><testcase classname="tests.test_typed_ref.TestParseTypedRef" name="test_parse_three_segment_memx_evidence" time="0.001" /><testcase classname="tests.test_typed_ref.TestParseTypedRef" name="test_parse_three_segment_memx_knowledge" time="0.001" /><testcase classname="tests.test_typed_ref.TestParseTypedRef" name="test_parse_four_segment_canonical" time="0.001" /><testcase classname="tests.test_typed_ref.TestParseTypedRef" name="test_parse_four_segment_with_jira_provider" time="0.001" /><testcase classname="tests.test_typed_ref.TestParseTypedRef" name="test_parse_empty_string_raises_error" time="0.001" /><testcase classname="tests.test_typed_ref.TestParseTypedRef" name="test_parse_invalid_segment_count_raises_error" time="0.001" /><testcase classname="tests.test_typed_ref.TestParseTypedRef" name="test_parse_invalid_domain_raises_error" time="0.001" /><testcase classname="tests.test_typed_ref.TestParseTypedRef" name="test_parse_extensible_entity_type_for_memx" time="0.001" /><testcase classname="tests.test_typed_ref.TestParseTypedRef" name="test_parse_empty_id_raises_error" time="0.001" /><testcase classname="tests.test_typed_ref.TestParseTypedRef" name="test_parse_empty_provider_raises_error" time="0.001" /><testcase classname="tests.test_typed_ref.TestTypedRef" name="test_str_returns_canonical_format" time="0.001" /><testcase classname="tests.test_typed_ref.TestTypedRef" name="test_ref_alias" time="0.002" /><testcase classname="tests.test_typed_ref.TestTypedRef" name="test_is_zero" time="0.001" /><testcase classname="tests.test_typed_ref.TestTypedRef" name="test_is_valid" time="0.001" /><testcase classname="tests.test_typed_ref.TestTypedRef" name="test_frozen" time="0.001" /><testcase classname="tests.test_typed_ref.TestHelperFunctions" name="test_new_typed_ref" time="0.001" /><testcase classname="tests.test_typed_ref.TestHelperFunctions" name="test_new_typed_ref_with_provider" time="0.001" /><testcase classname="tests.test_typed_ref.TestHelperFunctions" name="test_must_parse_typed_ref" time="0.001" /><testcase classname="tests.test_typed_ref.TestNormalization" name="test_three_segment_normalizes_to_local_provider" time="0.001" /><testcase classname="tests.test_typed_ref.TestNormalization" name="test_output_is_canonical" time="0.001" /><testcase classname="tests.test_workflow_plugin" name="test_resolve_ack_and_stale_cycle" time="0.609" /><testcase classname="tests.test_workflow_plugin" name="test_receipt_and_resolve_cache_stores_persist_payloads" time="0.232" /><testcase classname="tests.test_workflow_plugin" name="test_resolve_docs_uses_signature_cache_and_refreshes_when_inputs_change" time="0.424" /><testcase classname="tests.test_workflow_plugin" name="test_selection_policy_can_override_core_docs" time="0.061" /><testcase classname="tests.test_workflow_plugin" name="test_linked_markdown_paths_resolves_markdown_links_with_fragments" time="0.074" /><testcase classname="tests.test_workflow_plugin" name="test_ack_docs_rejects_paths_outside_repository[../outside.md]" time="0.015" /><testcase classname="tests.test_workflow_plugin" name="test_ack_docs_rejects_paths_outside_repository[C:/outside.md]" time="0.017" /><testcase classname="tests.test_workflow_plugin" name="test_ack_docs_rejects_symlink_escape" time="0.063"><skipped type="pytest.skip" message="symlinks are unavailable: [WinError 1314] クライアントは要求された特権を保有していません。: 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_ack_docs_rejects_symlink_0\\outside.md' -&gt; 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_ack_docs_rejects_symlink_0\\repo\\escape.md'">C:\tmp\memx-resolver-v110-gate\tests\test_workflow_plugin.py:183: symlinks are unavailable: [WinError 1314] クライアントは要求された特権を保有していません。: 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_ack_docs_rejects_symlink_0\\outside.md' -&gt; 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_ack_docs_rejects_symlink_0\\repo\\escape.md'</skipped></testcase><testcase classname="tests.test_workflow_plugin" name="test_stale_check_reports_tampered_external_receipt" time="0.110" /><testcase classname="tests.test_workflow_plugin" name="test_resolve_docs_warns_for_external_markdown_link" time="0.093" /><testcase classname="tests.test_workflow_plugin" name="test_receipt_store_upsert_is_concurrency_safe" time="1.017"><failure message="PermissionError: [WinError 5] アクセスが拒否されました。: 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_receipt_store_upsert_is_c0\\repo\\.workflow-cache\\.concurrent.json.0oy0l6vk.tmp' -&gt; 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_receipt_store_upsert_is_c0\\repo\\.workflow-cache\\concurrent.json'">tmp_path = WindowsPath('C:/Users/ryo-n/AppData/Local/Temp/pytest-of-ryo-n/pytest-3117/test_receipt_store_upsert_is_c0')
+
+    def test_receipt_store_upsert_is_concurrency_safe(tmp_path: Path) -&gt; None:
+        repo_root = tmp_path / "repo"
+        repo_root.mkdir()
+        store = JsonReceiptStore(path=".workflow-cache/concurrent.json")
+        records = [
+            {"task_id": "TASK.concurrent", "doc_id": f"docs/{index}.md", "version": str(index)}
+            for index in range(20)
+        ]
+    
+        with ThreadPoolExecutor(max_workers=8) as executor:
+&gt;           list(
+                executor.map(
+                    lambda record: store.upsert(repo_root=repo_root, records=[record]),
+                    records,
+                )
+            )
+
+C:\tmp\memx-resolver-v110-gate\tests\test_workflow_plugin.py:250: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py:619: in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py:317: in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+..\..\AppData\Local\Programs\Python\Python311\Lib\concurrent\futures\thread.py:58: in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\tmp\memx-resolver-v110-gate\tests\test_workflow_plugin.py:252: in &lt;lambda&gt;
+    lambda record: store.upsert(repo_root=repo_root, records=[record]),
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\tmp\memx-resolver-v110-gate\memx_resolver_workflow_plugin\store.py:130: in upsert
+    _atomic_write_json(path, receipts)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/ryo-n/AppData/Local/Temp/pytest-of-ryo-n/pytest-3117/test_receipt_store_upsert_is_c0/repo/.workflow-cache/concurrent.json')
+payload = [{'doc_id': 'docs/1.md', 'task_id': 'TASK.concurrent', 'version': '1'}, {'doc_id': 'docs/2.md', 'task_id': 'TASK.concu..., 'task_id': 'TASK.concurrent', 'version': '4'}, {'doc_id': 'docs/0.md', 'task_id': 'TASK.concurrent', 'version': '0'}]
+
+    def _atomic_write_json(path: Path, payload: Any) -&gt; None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temporary: Path | None = None
+        try:
+            with tempfile.NamedTemporaryFile(
+                mode="w",
+                encoding="utf-8",
+                newline="\n",
+                dir=path.parent,
+                prefix=f".{path.name}.",
+                suffix=".tmp",
+                delete=False,
+            ) as handle:
+                temporary = Path(handle.name)
+                json.dump(payload, handle, ensure_ascii=False, indent=2)
+                handle.write("\n")
+                handle.flush()
+                os.fsync(handle.fileno())
+&gt;           os.replace(temporary, path)
+E           PermissionError: [WinError 5] アクセスが拒否されました。: 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_receipt_store_upsert_is_c0\\repo\\.workflow-cache\\.concurrent.json.0oy0l6vk.tmp' -&gt; 'C:\\Users\\ryo-n\\AppData\\Local\\Temp\\pytest-of-ryo-n\\pytest-3117\\test_receipt_store_upsert_is_c0\\repo\\.workflow-cache\\concurrent.json'
+
+C:\tmp\memx-resolver-v110-gate\memx_resolver_workflow_plugin\store.py:67: PermissionError</failure></testcase><testcase classname="tests.test_workflow_plugin" name="test_json_store_rejects_corrupt_payload" time="0.079" /><testcase classname="tests.test_workflow_plugin" name="test_json_store_lock_timeout_is_explicit" time="0.101" /></testsuite></testsuites>

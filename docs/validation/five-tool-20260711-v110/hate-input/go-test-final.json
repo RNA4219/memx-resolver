@@ -1,0 +1,1065 @@
+{"Time":"2026-07-11T17:56:40.2588849+09:00","Action":"start","Package":"memx/api"}
+{"Time":"2026-07-11T17:56:40.2593998+09:00","Action":"start","Package":"memx/cmd/mem"}
+{"Time":"2026-07-11T17:56:40.5513912+09:00","Action":"start","Package":"memx/db"}
+{"Time":"2026-07-11T17:56:40.5536728+09:00","Action":"start","Package":"memx/recovery"}
+{"Time":"2026-07-11T17:56:40.5536728+09:00","Action":"start","Package":"memx/service"}
+{"Time":"2026-07-11T17:56:41.3533951+09:00","Action":"run","Package":"memx/recovery","Test":"TestRecoveryLogger_PreservesRequiredZeroValueEvidence"}
+{"Time":"2026-07-11T17:56:41.3533951+09:00","Action":"output","Package":"memx/recovery","Test":"TestRecoveryLogger_PreservesRequiredZeroValueEvidence","Output":"=== RUN   TestRecoveryLogger_PreservesRequiredZeroValueEvidence\n"}
+{"Time":"2026-07-11T17:56:41.3952759+09:00","Action":"output","Package":"memx/recovery","Test":"TestRecoveryLogger_PreservesRequiredZeroValueEvidence","Output":"--- PASS: TestRecoveryLogger_PreservesRequiredZeroValueEvidence (0.04s)\n"}
+{"Time":"2026-07-11T17:56:41.3952759+09:00","Action":"pass","Package":"memx/recovery","Test":"TestRecoveryLogger_PreservesRequiredZeroValueEvidence","Elapsed":0.04}
+{"Time":"2026-07-11T17:56:41.3952759+09:00","Action":"run","Package":"memx/recovery","Test":"TestRecoveryLogger_ReplanPersistsTicketID"}
+{"Time":"2026-07-11T17:56:41.3952759+09:00","Action":"output","Package":"memx/recovery","Test":"TestRecoveryLogger_ReplanPersistsTicketID","Output":"=== RUN   TestRecoveryLogger_ReplanPersistsTicketID\n"}
+{"Time":"2026-07-11T17:56:41.4306523+09:00","Action":"output","Package":"memx/recovery","Test":"TestRecoveryLogger_ReplanPersistsTicketID","Output":"--- PASS: TestRecoveryLogger_ReplanPersistsTicketID (0.04s)\n"}
+{"Time":"2026-07-11T17:56:41.4306523+09:00","Action":"pass","Package":"memx/recovery","Test":"TestRecoveryLogger_ReplanPersistsTicketID","Elapsed":0.04}
+{"Time":"2026-07-11T17:56:41.4311541+09:00","Action":"output","Package":"memx/recovery","Output":"PASS\n"}
+{"Time":"2026-07-11T17:56:41.4462129+09:00","Action":"output","Package":"memx/recovery","Output":"ok  \tmemx/recovery\t0.893s\n"}
+{"Time":"2026-07-11T17:56:41.4462129+09:00","Action":"pass","Package":"memx/recovery","Elapsed":0.893}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress"}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress","Output":"=== RUN   TestIsLoopbackAddress\n"}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/127.0.0.1:8080"}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/127.0.0.1:8080","Output":"=== RUN   TestIsLoopbackAddress/127.0.0.1:8080\n"}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/127.0.0.1:8080","Output":"--- PASS: TestIsLoopbackAddress/127.0.0.1:8080 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/127.0.0.1:8080","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/[::1]:8080"}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/[::1]:8080","Output":"=== RUN   TestIsLoopbackAddress/[::1]:8080\n"}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/[::1]:8080","Output":"--- PASS: TestIsLoopbackAddress/[::1]:8080 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/[::1]:8080","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/localhost:8080"}
+{"Time":"2026-07-11T17:56:41.4850954+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/localhost:8080","Output":"=== RUN   TestIsLoopbackAddress/localhost:8080\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/localhost:8080","Output":"--- PASS: TestIsLoopbackAddress/localhost:8080 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/localhost:8080","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/0.0.0.0:8080"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/0.0.0.0:8080","Output":"=== RUN   TestIsLoopbackAddress/0.0.0.0:8080\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/0.0.0.0:8080","Output":"--- PASS: TestIsLoopbackAddress/0.0.0.0:8080 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/0.0.0.0:8080","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/192.0.2.1:8080"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/192.0.2.1:8080","Output":"=== RUN   TestIsLoopbackAddress/192.0.2.1:8080\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/192.0.2.1:8080","Output":"--- PASS: TestIsLoopbackAddress/192.0.2.1:8080 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/192.0.2.1:8080","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/:8080"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/:8080","Output":"=== RUN   TestIsLoopbackAddress/:8080\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/:8080","Output":"--- PASS: TestIsLoopbackAddress/:8080 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/:8080","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/invalid"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/invalid","Output":"=== RUN   TestIsLoopbackAddress/invalid\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/invalid","Output":"--- PASS: TestIsLoopbackAddress/invalid (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress/invalid","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress","Output":"--- PASS: TestIsLoopbackAddress (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestIsLoopbackAddress","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestSkillDocsDescribeWorkingCommands"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestSkillDocsDescribeWorkingCommands","Output":"=== RUN   TestSkillDocsDescribeWorkingCommands\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestSkillDocsDescribeWorkingCommands","Output":"--- PASS: TestSkillDocsDescribeWorkingCommands (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestSkillDocsDescribeWorkingCommands","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestSkillCommandsUseDefaultStorePaths"}
+{"Time":"2026-07-11T17:56:41.4855987+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestSkillCommandsUseDefaultStorePaths","Output":"=== RUN   TestSkillCommandsUseDefaultStorePaths\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"run","Package":"memx/api","Test":"TestCLI_JSON_Ingest"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_Ingest","Output":"=== RUN   TestCLI_JSON_Ingest\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_Ingest","Output":"--- PASS: TestCLI_JSON_Ingest (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"pass","Package":"memx/api","Test":"TestCLI_JSON_Ingest","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"run","Package":"memx/api","Test":"TestCLI_JSON_Search"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_Search","Output":"=== RUN   TestCLI_JSON_Search\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_Search","Output":"--- PASS: TestCLI_JSON_Search (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"pass","Package":"memx/api","Test":"TestCLI_JSON_Search","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"run","Package":"memx/api","Test":"TestCLI_JSON_Show"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_Show","Output":"=== RUN   TestCLI_JSON_Show\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_Show","Output":"--- PASS: TestCLI_JSON_Show (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"pass","Package":"memx/api","Test":"TestCLI_JSON_Show","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"run","Package":"memx/api","Test":"TestCLI_JSON_GC"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_GC","Output":"=== RUN   TestCLI_JSON_GC\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_GC","Output":"--- PASS: TestCLI_JSON_GC (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"pass","Package":"memx/api","Test":"TestCLI_JSON_GC","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"run","Package":"memx/api","Test":"TestCLI_JSON_ErrorResponse"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_ErrorResponse","Output":"=== RUN   TestCLI_JSON_ErrorResponse\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_ErrorResponse","Output":"--- PASS: TestCLI_JSON_ErrorResponse (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"pass","Package":"memx/api","Test":"TestCLI_JSON_ErrorResponse","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"run","Package":"memx/api","Test":"TestCLI_JSON_Summarize"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_Summarize","Output":"=== RUN   TestCLI_JSON_Summarize\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestCLI_JSON_Summarize","Output":"--- PASS: TestCLI_JSON_Summarize (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"pass","Package":"memx/api","Test":"TestCLI_JSON_Summarize","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"run","Package":"memx/api","Test":"TestAPI_Client_Interface"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestAPI_Client_Interface","Output":"=== RUN   TestAPI_Client_Interface\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestAPI_Client_Interface","Output":"--- PASS: TestAPI_Client_Interface (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"pass","Package":"memx/api","Test":"TestAPI_Client_Interface","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"run","Package":"memx/api","Test":"TestAPI_InProcClient_Integration"}
+{"Time":"2026-07-11T17:56:41.5509311+09:00","Action":"output","Package":"memx/api","Test":"TestAPI_InProcClient_Integration","Output":"=== RUN   TestAPI_InProcClient_Integration\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestAPI_InProcClient_Integration","Output":"--- PASS: TestAPI_InProcClient_Integration (0.42s)\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"pass","Package":"memx/api","Test":"TestAPI_InProcClient_Integration","Elapsed":0.42}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"run","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping","Output":"=== RUN   TestMapError_ErrorCodeMapping\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"run","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrNotFound_maps_to_NOT_FOUND"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrNotFound_maps_to_NOT_FOUND","Output":"=== RUN   TestMapError_ErrorCodeMapping/ErrNotFound_maps_to_NOT_FOUND\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrNotFound_maps_to_NOT_FOUND","Output":"--- PASS: TestMapError_ErrorCodeMapping/ErrNotFound_maps_to_NOT_FOUND (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"pass","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrNotFound_maps_to_NOT_FOUND","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"run","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrInvalidArgument_maps_to_INVALID_ARGUMENT"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrInvalidArgument_maps_to_INVALID_ARGUMENT","Output":"=== RUN   TestMapError_ErrorCodeMapping/ErrInvalidArgument_maps_to_INVALID_ARGUMENT\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrInvalidArgument_maps_to_INVALID_ARGUMENT","Output":"--- PASS: TestMapError_ErrorCodeMapping/ErrInvalidArgument_maps_to_INVALID_ARGUMENT (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"pass","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrInvalidArgument_maps_to_INVALID_ARGUMENT","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"run","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrPolicyDenied_maps_to_GATEKEEP_DENY"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrPolicyDenied_maps_to_GATEKEEP_DENY","Output":"=== RUN   TestMapError_ErrorCodeMapping/ErrPolicyDenied_maps_to_GATEKEEP_DENY\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrPolicyDenied_maps_to_GATEKEEP_DENY","Output":"--- PASS: TestMapError_ErrorCodeMapping/ErrPolicyDenied_maps_to_GATEKEEP_DENY (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"pass","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrPolicyDenied_maps_to_GATEKEEP_DENY","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"run","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrNeedsHuman_maps_to_GATEKEEP_DENY"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrNeedsHuman_maps_to_GATEKEEP_DENY","Output":"=== RUN   TestMapError_ErrorCodeMapping/ErrNeedsHuman_maps_to_GATEKEEP_DENY\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrNeedsHuman_maps_to_GATEKEEP_DENY","Output":"--- PASS: TestMapError_ErrorCodeMapping/ErrNeedsHuman_maps_to_GATEKEEP_DENY (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"pass","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrNeedsHuman_maps_to_GATEKEEP_DENY","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"run","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrFeatureDisabled_maps_to_INTERNAL"}
+{"Time":"2026-07-11T17:56:41.9548465+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrFeatureDisabled_maps_to_INTERNAL","Output":"=== RUN   TestMapError_ErrorCodeMapping/ErrFeatureDisabled_maps_to_INTERNAL\n"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrFeatureDisabled_maps_to_INTERNAL","Output":"--- PASS: TestMapError_ErrorCodeMapping/ErrFeatureDisabled_maps_to_INTERNAL (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"pass","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/ErrFeatureDisabled_maps_to_INTERNAL","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"run","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/unknown_error_maps_to_INTERNAL"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/unknown_error_maps_to_INTERNAL","Output":"=== RUN   TestMapError_ErrorCodeMapping/unknown_error_maps_to_INTERNAL\n"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/unknown_error_maps_to_INTERNAL","Output":"--- PASS: TestMapError_ErrorCodeMapping/unknown_error_maps_to_INTERNAL (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"pass","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/unknown_error_maps_to_INTERNAL","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"run","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/error_containing_'invalid_argument'_maps_to_INVALID_ARGUMENT"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/error_containing_'invalid_argument'_maps_to_INVALID_ARGUMENT","Output":"=== RUN   TestMapError_ErrorCodeMapping/error_containing_'invalid_argument'_maps_to_INVALID_ARGUMENT\n"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/error_containing_'invalid_argument'_maps_to_INVALID_ARGUMENT","Output":"--- PASS: TestMapError_ErrorCodeMapping/error_containing_'invalid_argument'_maps_to_INVALID_ARGUMENT (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"pass","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/error_containing_'invalid_argument'_maps_to_INVALID_ARGUMENT","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"run","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/nil_error_returns_nil"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/nil_error_returns_nil","Output":"=== RUN   TestMapError_ErrorCodeMapping/nil_error_returns_nil\n"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/nil_error_returns_nil","Output":"--- PASS: TestMapError_ErrorCodeMapping/nil_error_returns_nil (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9559232+09:00","Action":"pass","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping/nil_error_returns_nil","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping","Output":"--- PASS: TestMapError_ErrorCodeMapping (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"pass","Package":"memx/api","Test":"TestMapError_ErrorCodeMapping","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes","Output":"=== RUN   TestHTTP_ErrorStatusCodes\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/INVALID_ARGUMENT_maps_to_400"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/INVALID_ARGUMENT_maps_to_400","Output":"=== RUN   TestHTTP_ErrorStatusCodes/INVALID_ARGUMENT_maps_to_400\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/INVALID_ARGUMENT_maps_to_400","Output":"--- PASS: TestHTTP_ErrorStatusCodes/INVALID_ARGUMENT_maps_to_400 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/INVALID_ARGUMENT_maps_to_400","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/NOT_FOUND_maps_to_404"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/NOT_FOUND_maps_to_404","Output":"=== RUN   TestHTTP_ErrorStatusCodes/NOT_FOUND_maps_to_404\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/NOT_FOUND_maps_to_404","Output":"--- PASS: TestHTTP_ErrorStatusCodes/NOT_FOUND_maps_to_404 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/NOT_FOUND_maps_to_404","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/CONFLICT_maps_to_409"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/CONFLICT_maps_to_409","Output":"=== RUN   TestHTTP_ErrorStatusCodes/CONFLICT_maps_to_409\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/CONFLICT_maps_to_409","Output":"--- PASS: TestHTTP_ErrorStatusCodes/CONFLICT_maps_to_409 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/CONFLICT_maps_to_409","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/GATEKEEP_DENY_maps_to_403"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/GATEKEEP_DENY_maps_to_403","Output":"=== RUN   TestHTTP_ErrorStatusCodes/GATEKEEP_DENY_maps_to_403\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/GATEKEEP_DENY_maps_to_403","Output":"--- PASS: TestHTTP_ErrorStatusCodes/GATEKEEP_DENY_maps_to_403 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/GATEKEEP_DENY_maps_to_403","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/INTERNAL_maps_to_500"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/INTERNAL_maps_to_500","Output":"=== RUN   TestHTTP_ErrorStatusCodes/INTERNAL_maps_to_500\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/INTERNAL_maps_to_500","Output":"--- PASS: TestHTTP_ErrorStatusCodes/INTERNAL_maps_to_500 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes/INTERNAL_maps_to_500","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes","Output":"--- PASS: TestHTTP_ErrorStatusCodes (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_ErrorStatusCodes","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_ErrorResponseFormat"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorResponseFormat","Output":"=== RUN   TestHTTP_ErrorResponseFormat\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_ErrorResponseFormat","Output":"--- PASS: TestHTTP_ErrorResponseFormat (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_ErrorResponseFormat","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NilErrorResponse"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NilErrorResponse","Output":"=== RUN   TestHTTP_NilErrorResponse\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NilErrorResponse","Output":"--- PASS: TestHTTP_NilErrorResponse (0.00s)\n"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NilErrorResponse","Elapsed":0}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_Healthz"}
+{"Time":"2026-07-11T17:56:41.9566379+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_Healthz","Output":"=== RUN   TestHTTP_Healthz\n"}
+{"Time":"2026-07-11T17:56:42.0169853+09:00","Action":"run","Package":"memx/service","Test":"TestService_GCShort_FeatureDisabled"}
+{"Time":"2026-07-11T17:56:42.0169853+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCShort_FeatureDisabled","Output":"=== RUN   TestService_GCShort_FeatureDisabled\n"}
+{"Time":"2026-07-11T17:56:42.3498797+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_Healthz","Output":"--- PASS: TestHTTP_Healthz (0.39s)\n"}
+{"Time":"2026-07-11T17:56:42.3498797+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_Healthz","Elapsed":0.39}
+{"Time":"2026-07-11T17:56:42.3498797+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_Success"}
+{"Time":"2026-07-11T17:56:42.3498797+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_Success","Output":"=== RUN   TestHTTP_NotesIngest_Success\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_SecretDeny"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_SecretDeny","Output":"=== RUN   TestDefaultGatekeeper_SecretDeny\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_SecretDeny","Output":"--- PASS: TestDefaultGatekeeper_SecretDeny (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_SecretDeny","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile","Output":"=== RUN   TestDefaultGatekeeper_DevProfile\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/secret_always_deny"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/secret_always_deny","Output":"=== RUN   TestDefaultGatekeeper_DevProfile/secret_always_deny\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/secret_always_deny","Output":"--- PASS: TestDefaultGatekeeper_DevProfile/secret_always_deny (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/secret_always_deny","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/public_allow"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/public_allow","Output":"=== RUN   TestDefaultGatekeeper_DevProfile/public_allow\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/public_allow","Output":"--- PASS: TestDefaultGatekeeper_DevProfile/public_allow (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/public_allow","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/internal_allow"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/internal_allow","Output":"=== RUN   TestDefaultGatekeeper_DevProfile/internal_allow\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/internal_allow","Output":"--- PASS: TestDefaultGatekeeper_DevProfile/internal_allow (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile/internal_allow","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile","Output":"--- PASS: TestDefaultGatekeeper_DevProfile (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_DevProfile","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile","Output":"=== RUN   TestDefaultGatekeeper_NormalProfile\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/secret_deny"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/secret_deny","Output":"=== RUN   TestDefaultGatekeeper_NormalProfile/secret_deny\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/secret_deny","Output":"--- PASS: TestDefaultGatekeeper_NormalProfile/secret_deny (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/secret_deny","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/untrusted_needs_human"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/untrusted_needs_human","Output":"=== RUN   TestDefaultGatekeeper_NormalProfile/untrusted_needs_human\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/untrusted_needs_human","Output":"--- PASS: TestDefaultGatekeeper_NormalProfile/untrusted_needs_human (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/untrusted_needs_human","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/user_input_allow"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/user_input_allow","Output":"=== RUN   TestDefaultGatekeeper_NormalProfile/user_input_allow\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/user_input_allow","Output":"--- PASS: TestDefaultGatekeeper_NormalProfile/user_input_allow (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/user_input_allow","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/trusted_allow"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/trusted_allow","Output":"=== RUN   TestDefaultGatekeeper_NormalProfile/trusted_allow\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/trusted_allow","Output":"--- PASS: TestDefaultGatekeeper_NormalProfile/trusted_allow (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile/trusted_allow","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile","Output":"--- PASS: TestDefaultGatekeeper_NormalProfile (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_NormalProfile","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile","Output":"=== RUN   TestDefaultGatekeeper_StrictProfile\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/secret_deny"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/secret_deny","Output":"=== RUN   TestDefaultGatekeeper_StrictProfile/secret_deny\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/secret_deny","Output":"--- PASS: TestDefaultGatekeeper_StrictProfile/secret_deny (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/secret_deny","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/untrusted_needs_human"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/untrusted_needs_human","Output":"=== RUN   TestDefaultGatekeeper_StrictProfile/untrusted_needs_human\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/untrusted_needs_human","Output":"--- PASS: TestDefaultGatekeeper_StrictProfile/untrusted_needs_human (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/untrusted_needs_human","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/user_input_needs_human"}
+{"Time":"2026-07-11T17:56:42.4514784+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/user_input_needs_human","Output":"=== RUN   TestDefaultGatekeeper_StrictProfile/user_input_needs_human\n"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/user_input_needs_human","Output":"--- PASS: TestDefaultGatekeeper_StrictProfile/user_input_needs_human (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/user_input_needs_human","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"run","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/trusted_allow"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/trusted_allow","Output":"=== RUN   TestDefaultGatekeeper_StrictProfile/trusted_allow\n"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/trusted_allow","Output":"--- PASS: TestDefaultGatekeeper_StrictProfile/trusted_allow (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile/trusted_allow","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"output","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile","Output":"--- PASS: TestDefaultGatekeeper_StrictProfile (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"pass","Package":"memx/db","Test":"TestDefaultGatekeeper_StrictProfile","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"run","Package":"memx/db","Test":"TestAllowAllGatekeeper"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"output","Package":"memx/db","Test":"TestAllowAllGatekeeper","Output":"=== RUN   TestAllowAllGatekeeper\n"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"output","Package":"memx/db","Test":"TestAllowAllGatekeeper","Output":"--- PASS: TestAllowAllGatekeeper (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"pass","Package":"memx/db","Test":"TestAllowAllGatekeeper","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"run","Package":"memx/db","Test":"TestDenyAllGatekeeper"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"output","Package":"memx/db","Test":"TestDenyAllGatekeeper","Output":"=== RUN   TestDenyAllGatekeeper\n"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"output","Package":"memx/db","Test":"TestDenyAllGatekeeper","Output":"--- PASS: TestDenyAllGatekeeper (0.00s)\n"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"pass","Package":"memx/db","Test":"TestDenyAllGatekeeper","Elapsed":0}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"run","Package":"memx/db","Test":"TestMigrateJournal"}
+{"Time":"2026-07-11T17:56:42.4521508+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateJournal","Output":"=== RUN   TestMigrateJournal\n"}
+{"Time":"2026-07-11T17:56:42.5089211+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCShort_FeatureDisabled","Output":"--- PASS: TestService_GCShort_FeatureDisabled (0.49s)\n"}
+{"Time":"2026-07-11T17:56:42.5089211+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GCShort_FeatureDisabled","Elapsed":0.49}
+{"Time":"2026-07-11T17:56:42.5089211+09:00","Action":"run","Package":"memx/service","Test":"TestService_GCShort_DryRun"}
+{"Time":"2026-07-11T17:56:42.5089211+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCShort_DryRun","Output":"=== RUN   TestService_GCShort_DryRun\n"}
+{"Time":"2026-07-11T17:56:42.6007295+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateJournal","Output":"--- PASS: TestMigrateJournal (0.15s)\n"}
+{"Time":"2026-07-11T17:56:42.6007295+09:00","Action":"pass","Package":"memx/db","Test":"TestMigrateJournal","Elapsed":0.15}
+{"Time":"2026-07-11T17:56:42.6007295+09:00","Action":"run","Package":"memx/db","Test":"TestMigrateJournal_Idempotent"}
+{"Time":"2026-07-11T17:56:42.6007295+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateJournal_Idempotent","Output":"=== RUN   TestMigrateJournal_Idempotent\n"}
+{"Time":"2026-07-11T17:56:42.971562+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateJournal_Idempotent","Output":"--- PASS: TestMigrateJournal_Idempotent (0.37s)\n"}
+{"Time":"2026-07-11T17:56:42.971562+09:00","Action":"pass","Package":"memx/db","Test":"TestMigrateJournal_Idempotent","Elapsed":0.37}
+{"Time":"2026-07-11T17:56:42.971562+09:00","Action":"run","Package":"memx/db","Test":"TestMigrateKnowledge"}
+{"Time":"2026-07-11T17:56:42.971562+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateKnowledge","Output":"=== RUN   TestMigrateKnowledge\n"}
+{"Time":"2026-07-11T17:56:43.0733964+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_Success","Output":"--- PASS: TestHTTP_NotesIngest_Success (0.72s)\n"}
+{"Time":"2026-07-11T17:56:43.0733964+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_Success","Elapsed":0.72}
+{"Time":"2026-07-11T17:56:43.0733964+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors"}
+{"Time":"2026-07-11T17:56:43.0733964+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors","Output":"=== RUN   TestHTTP_NotesIngest_ValidationErrors\n"}
+{"Time":"2026-07-11T17:56:43.0990664+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateKnowledge","Output":"--- PASS: TestMigrateKnowledge (0.13s)\n"}
+{"Time":"2026-07-11T17:56:43.0995762+09:00","Action":"pass","Package":"memx/db","Test":"TestMigrateKnowledge","Elapsed":0.13}
+{"Time":"2026-07-11T17:56:43.0995762+09:00","Action":"run","Package":"memx/db","Test":"TestMigrateKnowledge_Idempotent"}
+{"Time":"2026-07-11T17:56:43.0995762+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateKnowledge_Idempotent","Output":"=== RUN   TestMigrateKnowledge_Idempotent\n"}
+{"Time":"2026-07-11T17:56:43.2671819+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCShort_DryRun","Output":"--- PASS: TestService_GCShort_DryRun (0.76s)\n"}
+{"Time":"2026-07-11T17:56:43.2671819+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GCShort_DryRun","Elapsed":0.76}
+{"Time":"2026-07-11T17:56:43.2671819+09:00","Action":"run","Package":"memx/service","Test":"TestService_GCShort_SkippedUnderLimit"}
+{"Time":"2026-07-11T17:56:43.2671819+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCShort_SkippedUnderLimit","Output":"=== RUN   TestService_GCShort_SkippedUnderLimit\n"}
+{"Time":"2026-07-11T17:56:43.2671819+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateKnowledge_Idempotent","Output":"--- PASS: TestMigrateKnowledge_Idempotent (0.17s)\n"}
+{"Time":"2026-07-11T17:56:43.2671819+09:00","Action":"pass","Package":"memx/db","Test":"TestMigrateKnowledge_Idempotent","Elapsed":0.17}
+{"Time":"2026-07-11T17:56:43.2671819+09:00","Action":"run","Package":"memx/db","Test":"TestMigrateArchive"}
+{"Time":"2026-07-11T17:56:43.2671819+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateArchive","Output":"=== RUN   TestMigrateArchive\n"}
+{"Time":"2026-07-11T17:56:43.3652805+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateArchive","Output":"--- PASS: TestMigrateArchive (0.10s)\n"}
+{"Time":"2026-07-11T17:56:43.3652805+09:00","Action":"pass","Package":"memx/db","Test":"TestMigrateArchive","Elapsed":0.1}
+{"Time":"2026-07-11T17:56:43.3652805+09:00","Action":"run","Package":"memx/db","Test":"TestMigrateArchive_Idempotent"}
+{"Time":"2026-07-11T17:56:43.3652805+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateArchive_Idempotent","Output":"=== RUN   TestMigrateArchive_Idempotent\n"}
+{"Time":"2026-07-11T17:56:43.4533736+09:00","Action":"output","Package":"memx/db","Test":"TestMigrateArchive_Idempotent","Output":"--- PASS: TestMigrateArchive_Idempotent (0.09s)\n"}
+{"Time":"2026-07-11T17:56:43.4533736+09:00","Action":"pass","Package":"memx/db","Test":"TestMigrateArchive_Idempotent","Elapsed":0.09}
+{"Time":"2026-07-11T17:56:43.4533736+09:00","Action":"run","Package":"memx/db","Test":"TestOpenAll"}
+{"Time":"2026-07-11T17:56:43.4533736+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAll","Output":"=== RUN   TestOpenAll\n"}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/empty_title"}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/empty_title","Output":"=== RUN   TestHTTP_NotesIngest_ValidationErrors/empty_title\n"}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/empty_title","Output":"--- PASS: TestHTTP_NotesIngest_ValidationErrors/empty_title (0.00s)\n"}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/empty_title","Elapsed":0}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/empty_body"}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/empty_body","Output":"=== RUN   TestHTTP_NotesIngest_ValidationErrors/empty_body\n"}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/empty_body","Output":"--- PASS: TestHTTP_NotesIngest_ValidationErrors/empty_body (0.00s)\n"}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/empty_body","Elapsed":0}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_source_type"}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_source_type","Output":"=== RUN   TestHTTP_NotesIngest_ValidationErrors/invalid_source_type\n"}
+{"Time":"2026-07-11T17:56:43.4578742+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_source_type","Output":"--- PASS: TestHTTP_NotesIngest_ValidationErrors/invalid_source_type (0.00s)\n"}
+{"Time":"2026-07-11T17:56:43.4583895+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_source_type","Elapsed":0}
+{"Time":"2026-07-11T17:56:43.4583895+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_source_trust"}
+{"Time":"2026-07-11T17:56:43.4583895+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_source_trust","Output":"=== RUN   TestHTTP_NotesIngest_ValidationErrors/invalid_source_trust\n"}
+{"Time":"2026-07-11T17:56:43.4583895+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_source_trust","Output":"--- PASS: TestHTTP_NotesIngest_ValidationErrors/invalid_source_trust (0.00s)\n"}
+{"Time":"2026-07-11T17:56:43.4583895+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_source_trust","Elapsed":0}
+{"Time":"2026-07-11T17:56:43.4583895+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_sensitivity"}
+{"Time":"2026-07-11T17:56:43.4583895+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_sensitivity","Output":"=== RUN   TestHTTP_NotesIngest_ValidationErrors/invalid_sensitivity\n"}
+{"Time":"2026-07-11T17:56:43.4583895+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_sensitivity","Output":"--- PASS: TestHTTP_NotesIngest_ValidationErrors/invalid_sensitivity (0.00s)\n"}
+{"Time":"2026-07-11T17:56:43.4583895+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors/invalid_sensitivity","Elapsed":0}
+{"Time":"2026-07-11T17:56:43.4667548+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors","Output":"--- PASS: TestHTTP_NotesIngest_ValidationErrors (0.39s)\n"}
+{"Time":"2026-07-11T17:56:43.4667548+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_ValidationErrors","Elapsed":0.39}
+{"Time":"2026-07-11T17:56:43.4667548+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_PolicyDenied"}
+{"Time":"2026-07-11T17:56:43.4667548+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_PolicyDenied","Output":"=== RUN   TestHTTP_NotesIngest_PolicyDenied\n"}
+{"Time":"2026-07-11T17:56:43.7174585+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCShort_SkippedUnderLimit","Output":"--- PASS: TestService_GCShort_SkippedUnderLimit (0.45s)\n"}
+{"Time":"2026-07-11T17:56:43.7174585+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GCShort_SkippedUnderLimit","Elapsed":0.45}
+{"Time":"2026-07-11T17:56:43.7174585+09:00","Action":"run","Package":"memx/service","Test":"TestService_GCTriggerCheck"}
+{"Time":"2026-07-11T17:56:43.7174585+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCTriggerCheck","Output":"=== RUN   TestService_GCTriggerCheck\n"}
+{"Time":"2026-07-11T17:56:43.8799912+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAll","Output":"--- PASS: TestOpenAll (0.43s)\n"}
+{"Time":"2026-07-11T17:56:43.8799912+09:00","Action":"pass","Package":"memx/db","Test":"TestOpenAll","Elapsed":0.43}
+{"Time":"2026-07-11T17:56:43.8799912+09:00","Action":"run","Package":"memx/db","Test":"TestOpenAllWithSeparateResolverStore"}
+{"Time":"2026-07-11T17:56:43.8799912+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAllWithSeparateResolverStore","Output":"=== RUN   TestOpenAllWithSeparateResolverStore\n"}
+{"Time":"2026-07-11T17:56:43.9197785+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_PolicyDenied","Output":"--- PASS: TestHTTP_NotesIngest_PolicyDenied (0.45s)\n"}
+{"Time":"2026-07-11T17:56:43.9204283+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_PolicyDenied","Elapsed":0.45}
+{"Time":"2026-07-11T17:56:43.9204283+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_ConfidentialSensitivity"}
+{"Time":"2026-07-11T17:56:43.9204283+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ConfidentialSensitivity","Output":"=== RUN   TestHTTP_NotesIngest_ConfidentialSensitivity\n"}
+{"Time":"2026-07-11T17:56:44.1817831+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCTriggerCheck","Output":"--- PASS: TestService_GCTriggerCheck (0.46s)\n"}
+{"Time":"2026-07-11T17:56:44.1822858+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GCTriggerCheck","Elapsed":0.46}
+{"Time":"2026-07-11T17:56:44.1822858+09:00","Action":"run","Package":"memx/service","Test":"TestService_GCDryRunResult_Format"}
+{"Time":"2026-07-11T17:56:44.1822858+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCDryRunResult_Format","Output":"=== RUN   TestService_GCDryRunResult_Format\n"}
+{"Time":"2026-07-11T17:56:44.1822858+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCDryRunResult_Format","Output":"--- PASS: TestService_GCDryRunResult_Format (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.1822858+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GCDryRunResult_Format","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.1822858+09:00","Action":"run","Package":"memx/service","Test":"TestService_GCShort_ArchiveOldNotes"}
+{"Time":"2026-07-11T17:56:44.1822858+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCShort_ArchiveOldNotes","Output":"=== RUN   TestService_GCShort_ArchiveOldNotes\n"}
+{"Time":"2026-07-11T17:56:44.3426372+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_ConfidentialSensitivity","Output":"--- PASS: TestHTTP_NotesIngest_ConfidentialSensitivity (0.42s)\n"}
+{"Time":"2026-07-11T17:56:44.3426372+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_ConfidentialSensitivity","Elapsed":0.42}
+{"Time":"2026-07-11T17:56:44.3426372+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities"}
+{"Time":"2026-07-11T17:56:44.3426372+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities","Output":"=== RUN   TestHTTP_NotesIngest_AllValidSensitivities\n"}
+{"Time":"2026-07-11T17:56:44.3431571+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAllWithSeparateResolverStore","Output":"--- PASS: TestOpenAllWithSeparateResolverStore (0.46s)\n"}
+{"Time":"2026-07-11T17:56:44.3436679+09:00","Action":"pass","Package":"memx/db","Test":"TestOpenAllWithSeparateResolverStore","Elapsed":0.46}
+{"Time":"2026-07-11T17:56:44.3436679+09:00","Action":"run","Package":"memx/db","Test":"TestLoadOpenAIConfigFromEnv"}
+{"Time":"2026-07-11T17:56:44.3436679+09:00","Action":"output","Package":"memx/db","Test":"TestLoadOpenAIConfigFromEnv","Output":"=== RUN   TestLoadOpenAIConfigFromEnv\n"}
+{"Time":"2026-07-11T17:56:44.3436679+09:00","Action":"output","Package":"memx/db","Test":"TestLoadOpenAIConfigFromEnv","Output":"--- PASS: TestLoadOpenAIConfigFromEnv (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3436679+09:00","Action":"pass","Package":"memx/db","Test":"TestLoadOpenAIConfigFromEnv","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3436679+09:00","Action":"run","Package":"memx/db","Test":"TestLoadAlibabaConfigFromEnv"}
+{"Time":"2026-07-11T17:56:44.3436679+09:00","Action":"output","Package":"memx/db","Test":"TestLoadAlibabaConfigFromEnv","Output":"=== RUN   TestLoadAlibabaConfigFromEnv\n"}
+{"Time":"2026-07-11T17:56:44.3441978+09:00","Action":"output","Package":"memx/db","Test":"TestLoadAlibabaConfigFromEnv","Output":"--- PASS: TestLoadAlibabaConfigFromEnv (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3441978+09:00","Action":"pass","Package":"memx/db","Test":"TestLoadAlibabaConfigFromEnv","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3441978+09:00","Action":"run","Package":"memx/db","Test":"TestLoadAlibabaConfigEnablesInlineInstructions"}
+{"Time":"2026-07-11T17:56:44.3441978+09:00","Action":"output","Package":"memx/db","Test":"TestLoadAlibabaConfigEnablesInlineInstructions","Output":"=== RUN   TestLoadAlibabaConfigEnablesInlineInstructions\n"}
+{"Time":"2026-07-11T17:56:44.3441978+09:00","Action":"output","Package":"memx/db","Test":"TestLoadAlibabaConfigEnablesInlineInstructions","Output":"--- PASS: TestLoadAlibabaConfigEnablesInlineInstructions (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3441978+09:00","Action":"pass","Package":"memx/db","Test":"TestLoadAlibabaConfigEnablesInlineInstructions","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3441978+09:00","Action":"run","Package":"memx/db","Test":"TestOpenAIClientSummarize"}
+{"Time":"2026-07-11T17:56:44.3441978+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAIClientSummarize","Output":"=== RUN   TestOpenAIClientSummarize\n"}
+{"Time":"2026-07-11T17:56:44.3478308+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAIClientSummarize","Output":"--- PASS: TestOpenAIClientSummarize (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3478308+09:00","Action":"pass","Package":"memx/db","Test":"TestOpenAIClientSummarize","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3478308+09:00","Action":"run","Package":"memx/db","Test":"TestOpenAIClientSummarizeClusterUsesReflectModel"}
+{"Time":"2026-07-11T17:56:44.3478308+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAIClientSummarizeClusterUsesReflectModel","Output":"=== RUN   TestOpenAIClientSummarizeClusterUsesReflectModel\n"}
+{"Time":"2026-07-11T17:56:44.3493785+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAIClientSummarizeClusterUsesReflectModel","Output":"--- PASS: TestOpenAIClientSummarizeClusterUsesReflectModel (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3493785+09:00","Action":"pass","Package":"memx/db","Test":"TestOpenAIClientSummarizeClusterUsesReflectModel","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3493785+09:00","Action":"run","Package":"memx/db","Test":"TestOpenAIClientErrorIncludesAPIMessage"}
+{"Time":"2026-07-11T17:56:44.3493785+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAIClientErrorIncludesAPIMessage","Output":"=== RUN   TestOpenAIClientErrorIncludesAPIMessage\n"}
+{"Time":"2026-07-11T17:56:44.3509254+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAIClientErrorIncludesAPIMessage","Output":"--- PASS: TestOpenAIClientErrorIncludesAPIMessage (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3509254+09:00","Action":"pass","Package":"memx/db","Test":"TestOpenAIClientErrorIncludesAPIMessage","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3509254+09:00","Action":"run","Package":"memx/db","Test":"TestOpenAIClientAlibabaUsesChatCompletions"}
+{"Time":"2026-07-11T17:56:44.3509254+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAIClientAlibabaUsesChatCompletions","Output":"=== RUN   TestOpenAIClientAlibabaUsesChatCompletions\n"}
+{"Time":"2026-07-11T17:56:44.3524813+09:00","Action":"output","Package":"memx/db","Test":"TestOpenAIClientAlibabaUsesChatCompletions","Output":"--- PASS: TestOpenAIClientAlibabaUsesChatCompletions (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3524813+09:00","Action":"pass","Package":"memx/db","Test":"TestOpenAIClientAlibabaUsesChatCompletions","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3524813+09:00","Action":"run","Package":"memx/db","Test":"TestRecallQuery_Validation"}
+{"Time":"2026-07-11T17:56:44.3524813+09:00","Action":"output","Package":"memx/db","Test":"TestRecallQuery_Validation","Output":"=== RUN   TestRecallQuery_Validation\n"}
+{"Time":"2026-07-11T17:56:44.3524813+09:00","Action":"run","Package":"memx/db","Test":"TestRecallQuery_Validation/valid_query"}
+{"Time":"2026-07-11T17:56:44.3524813+09:00","Action":"output","Package":"memx/db","Test":"TestRecallQuery_Validation/valid_query","Output":"=== RUN   TestRecallQuery_Validation/valid_query\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestRecallQuery_Validation/valid_query","Output":"--- PASS: TestRecallQuery_Validation/valid_query (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"pass","Package":"memx/db","Test":"TestRecallQuery_Validation/valid_query","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"run","Package":"memx/db","Test":"TestRecallQuery_Validation/empty_query"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestRecallQuery_Validation/empty_query","Output":"=== RUN   TestRecallQuery_Validation/empty_query\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestRecallQuery_Validation/empty_query","Output":"--- PASS: TestRecallQuery_Validation/empty_query (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"pass","Package":"memx/db","Test":"TestRecallQuery_Validation/empty_query","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"run","Package":"memx/db","Test":"TestRecallQuery_Validation/whitespace_only_query"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestRecallQuery_Validation/whitespace_only_query","Output":"=== RUN   TestRecallQuery_Validation/whitespace_only_query\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestRecallQuery_Validation/whitespace_only_query","Output":"--- PASS: TestRecallQuery_Validation/whitespace_only_query (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"pass","Package":"memx/db","Test":"TestRecallQuery_Validation/whitespace_only_query","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"run","Package":"memx/db","Test":"TestRecallQuery_Validation/query_too_long"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestRecallQuery_Validation/query_too_long","Output":"=== RUN   TestRecallQuery_Validation/query_too_long\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestRecallQuery_Validation/query_too_long","Output":"--- PASS: TestRecallQuery_Validation/query_too_long (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"pass","Package":"memx/db","Test":"TestRecallQuery_Validation/query_too_long","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestRecallQuery_Validation","Output":"--- PASS: TestRecallQuery_Validation (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"pass","Package":"memx/db","Test":"TestRecallQuery_Validation","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"run","Package":"memx/db","Test":"TestNormalizeStores"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores","Output":"=== RUN   TestNormalizeStores\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"run","Package":"memx/db","Test":"TestNormalizeStores/empty_stores_defaults_to_short"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores/empty_stores_defaults_to_short","Output":"=== RUN   TestNormalizeStores/empty_stores_defaults_to_short\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores/empty_stores_defaults_to_short","Output":"--- PASS: TestNormalizeStores/empty_stores_defaults_to_short (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"pass","Package":"memx/db","Test":"TestNormalizeStores/empty_stores_defaults_to_short","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"run","Package":"memx/db","Test":"TestNormalizeStores/nil_stores_defaults_to_short"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores/nil_stores_defaults_to_short","Output":"=== RUN   TestNormalizeStores/nil_stores_defaults_to_short\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores/nil_stores_defaults_to_short","Output":"--- PASS: TestNormalizeStores/nil_stores_defaults_to_short (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"pass","Package":"memx/db","Test":"TestNormalizeStores/nil_stores_defaults_to_short","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"run","Package":"memx/db","Test":"TestNormalizeStores/single_valid_store"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores/single_valid_store","Output":"=== RUN   TestNormalizeStores/single_valid_store\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores/single_valid_store","Output":"--- PASS: TestNormalizeStores/single_valid_store (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"pass","Package":"memx/db","Test":"TestNormalizeStores/single_valid_store","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"run","Package":"memx/db","Test":"TestNormalizeStores/multiple_valid_stores"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores/multiple_valid_stores","Output":"=== RUN   TestNormalizeStores/multiple_valid_stores\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores/multiple_valid_stores","Output":"--- PASS: TestNormalizeStores/multiple_valid_stores (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"pass","Package":"memx/db","Test":"TestNormalizeStores/multiple_valid_stores","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"run","Package":"memx/db","Test":"TestNormalizeStores/archive_is_filtered_out"}
+{"Time":"2026-07-11T17:56:44.3529984+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores/archive_is_filtered_out","Output":"=== RUN   TestNormalizeStores/archive_is_filtered_out\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores/archive_is_filtered_out","Output":"--- PASS: TestNormalizeStores/archive_is_filtered_out (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"pass","Package":"memx/db","Test":"TestNormalizeStores/archive_is_filtered_out","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestNormalizeStores","Output":"--- PASS: TestNormalizeStores (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"pass","Package":"memx/db","Test":"TestNormalizeStores","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"run","Package":"memx/db","Test":"TestEmbeddingToJSON"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestEmbeddingToJSON","Output":"=== RUN   TestEmbeddingToJSON\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"run","Package":"memx/db","Test":"TestEmbeddingToJSON/empty_embedding"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestEmbeddingToJSON/empty_embedding","Output":"=== RUN   TestEmbeddingToJSON/empty_embedding\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestEmbeddingToJSON/empty_embedding","Output":"--- PASS: TestEmbeddingToJSON/empty_embedding (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"pass","Package":"memx/db","Test":"TestEmbeddingToJSON/empty_embedding","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"run","Package":"memx/db","Test":"TestEmbeddingToJSON/single_value"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestEmbeddingToJSON/single_value","Output":"=== RUN   TestEmbeddingToJSON/single_value\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestEmbeddingToJSON/single_value","Output":"--- PASS: TestEmbeddingToJSON/single_value (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"pass","Package":"memx/db","Test":"TestEmbeddingToJSON/single_value","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"run","Package":"memx/db","Test":"TestEmbeddingToJSON/multiple_values"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestEmbeddingToJSON/multiple_values","Output":"=== RUN   TestEmbeddingToJSON/multiple_values\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestEmbeddingToJSON/multiple_values","Output":"--- PASS: TestEmbeddingToJSON/multiple_values (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"pass","Package":"memx/db","Test":"TestEmbeddingToJSON/multiple_values","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestEmbeddingToJSON","Output":"--- PASS: TestEmbeddingToJSON (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"pass","Package":"memx/db","Test":"TestEmbeddingToJSON","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"run","Package":"memx/db","Test":"TestSortByScore"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestSortByScore","Output":"=== RUN   TestSortByScore\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestSortByScore","Output":"--- PASS: TestSortByScore (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"pass","Package":"memx/db","Test":"TestSortByScore","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"run","Package":"memx/db","Test":"TestFloat32To64"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestFloat32To64","Output":"=== RUN   TestFloat32To64\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Test":"TestFloat32To64","Output":"--- PASS: TestFloat32To64 (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"pass","Package":"memx/db","Test":"TestFloat32To64","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.3535684+09:00","Action":"output","Package":"memx/db","Output":"PASS\n"}
+{"Time":"2026-07-11T17:56:44.357556+09:00","Action":"output","Package":"memx/db","Output":"ok  \tmemx/db\t3.806s\n"}
+{"Time":"2026-07-11T17:56:44.357556+09:00","Action":"pass","Package":"memx/db","Elapsed":3.806}
+{"Time":"2026-07-11T17:56:44.6118325+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCShort_ArchiveOldNotes","Output":"--- PASS: TestService_GCShort_ArchiveOldNotes (0.43s)\n"}
+{"Time":"2026-07-11T17:56:44.6118325+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GCShort_ArchiveOldNotes","Elapsed":0.43}
+{"Time":"2026-07-11T17:56:44.6118325+09:00","Action":"run","Package":"memx/service","Test":"TestGCConfig_Defaults"}
+{"Time":"2026-07-11T17:56:44.6118325+09:00","Action":"output","Package":"memx/service","Test":"TestGCConfig_Defaults","Output":"=== RUN   TestGCConfig_Defaults\n"}
+{"Time":"2026-07-11T17:56:44.6118325+09:00","Action":"output","Package":"memx/service","Test":"TestGCConfig_Defaults","Output":"--- PASS: TestGCConfig_Defaults (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.6118325+09:00","Action":"pass","Package":"memx/service","Test":"TestGCConfig_Defaults","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.6118325+09:00","Action":"run","Package":"memx/service","Test":"TestService_GCShort_WithArchiveStore"}
+{"Time":"2026-07-11T17:56:44.6123472+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCShort_WithArchiveStore","Output":"=== RUN   TestService_GCShort_WithArchiveStore\n"}
+{"Time":"2026-07-11T17:56:44.7111831+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/public"}
+{"Time":"2026-07-11T17:56:44.7111831+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/public","Output":"=== RUN   TestHTTP_NotesIngest_AllValidSensitivities/public\n"}
+{"Time":"2026-07-11T17:56:44.7122401+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/public","Output":"--- PASS: TestHTTP_NotesIngest_AllValidSensitivities/public (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.7122401+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/public","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.7122401+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/internal"}
+{"Time":"2026-07-11T17:56:44.7122401+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/internal","Output":"=== RUN   TestHTTP_NotesIngest_AllValidSensitivities/internal\n"}
+{"Time":"2026-07-11T17:56:44.7137867+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/internal","Output":"--- PASS: TestHTTP_NotesIngest_AllValidSensitivities/internal (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.7137867+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/internal","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.7137867+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/confidential"}
+{"Time":"2026-07-11T17:56:44.7137867+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/confidential","Output":"=== RUN   TestHTTP_NotesIngest_AllValidSensitivities/confidential\n"}
+{"Time":"2026-07-11T17:56:44.7153744+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/confidential","Output":"--- PASS: TestHTTP_NotesIngest_AllValidSensitivities/confidential (0.00s)\n"}
+{"Time":"2026-07-11T17:56:44.7153744+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities/confidential","Elapsed":0}
+{"Time":"2026-07-11T17:56:44.7235932+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities","Output":"--- PASS: TestHTTP_NotesIngest_AllValidSensitivities (0.38s)\n"}
+{"Time":"2026-07-11T17:56:44.7235932+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_AllValidSensitivities","Elapsed":0.38}
+{"Time":"2026-07-11T17:56:44.7235932+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesSearch_Success"}
+{"Time":"2026-07-11T17:56:44.7235932+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_Success","Output":"=== RUN   TestHTTP_NotesSearch_Success\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestService_GCShort_WithArchiveStore","Output":"--- PASS: TestService_GCShort_WithArchiveStore (0.83s)\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GCShort_WithArchiveStore","Elapsed":0.83}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"run","Package":"memx/service","Test":"TestNormalizeRecallStores"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores","Output":"=== RUN   TestNormalizeRecallStores\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"run","Package":"memx/service","Test":"TestNormalizeRecallStores/empty_defaults_to_short"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/empty_defaults_to_short","Output":"=== RUN   TestNormalizeRecallStores/empty_defaults_to_short\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/empty_defaults_to_short","Output":"--- PASS: TestNormalizeRecallStores/empty_defaults_to_short (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"pass","Package":"memx/service","Test":"TestNormalizeRecallStores/empty_defaults_to_short","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"run","Package":"memx/service","Test":"TestNormalizeRecallStores/nil_defaults_to_short"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/nil_defaults_to_short","Output":"=== RUN   TestNormalizeRecallStores/nil_defaults_to_short\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/nil_defaults_to_short","Output":"--- PASS: TestNormalizeRecallStores/nil_defaults_to_short (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"pass","Package":"memx/service","Test":"TestNormalizeRecallStores/nil_defaults_to_short","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"run","Package":"memx/service","Test":"TestNormalizeRecallStores/single_valid_store"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/single_valid_store","Output":"=== RUN   TestNormalizeRecallStores/single_valid_store\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/single_valid_store","Output":"--- PASS: TestNormalizeRecallStores/single_valid_store (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"pass","Package":"memx/service","Test":"TestNormalizeRecallStores/single_valid_store","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"run","Package":"memx/service","Test":"TestNormalizeRecallStores/multiple_valid_stores"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/multiple_valid_stores","Output":"=== RUN   TestNormalizeRecallStores/multiple_valid_stores\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/multiple_valid_stores","Output":"--- PASS: TestNormalizeRecallStores/multiple_valid_stores (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"pass","Package":"memx/service","Test":"TestNormalizeRecallStores/multiple_valid_stores","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"run","Package":"memx/service","Test":"TestNormalizeRecallStores/invalid_store_filtered"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/invalid_store_filtered","Output":"=== RUN   TestNormalizeRecallStores/invalid_store_filtered\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/invalid_store_filtered","Output":"--- PASS: TestNormalizeRecallStores/invalid_store_filtered (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"pass","Package":"memx/service","Test":"TestNormalizeRecallStores/invalid_store_filtered","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"run","Package":"memx/service","Test":"TestNormalizeRecallStores/case_insensitive"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/case_insensitive","Output":"=== RUN   TestNormalizeRecallStores/case_insensitive\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/case_insensitive","Output":"--- PASS: TestNormalizeRecallStores/case_insensitive (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"pass","Package":"memx/service","Test":"TestNormalizeRecallStores/case_insensitive","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"run","Package":"memx/service","Test":"TestNormalizeRecallStores/whitespace_trimmed"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/whitespace_trimmed","Output":"=== RUN   TestNormalizeRecallStores/whitespace_trimmed\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/whitespace_trimmed","Output":"--- PASS: TestNormalizeRecallStores/whitespace_trimmed (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.4410584+09:00","Action":"pass","Package":"memx/service","Test":"TestNormalizeRecallStores/whitespace_trimmed","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.4415762+09:00","Action":"run","Package":"memx/service","Test":"TestNormalizeRecallStores/all_invalid_defaults_to_short"}
+{"Time":"2026-07-11T17:56:45.4415762+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/all_invalid_defaults_to_short","Output":"=== RUN   TestNormalizeRecallStores/all_invalid_defaults_to_short\n"}
+{"Time":"2026-07-11T17:56:45.4415762+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores/all_invalid_defaults_to_short","Output":"--- PASS: TestNormalizeRecallStores/all_invalid_defaults_to_short (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.4415762+09:00","Action":"pass","Package":"memx/service","Test":"TestNormalizeRecallStores/all_invalid_defaults_to_short","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.4415762+09:00","Action":"output","Package":"memx/service","Test":"TestNormalizeRecallStores","Output":"--- PASS: TestNormalizeRecallStores (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.4415762+09:00","Action":"pass","Package":"memx/service","Test":"TestNormalizeRecallStores","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.4415762+09:00","Action":"run","Package":"memx/service","Test":"TestResolverDocsLifecycle"}
+{"Time":"2026-07-11T17:56:45.4415762+09:00","Action":"output","Package":"memx/service","Test":"TestResolverDocsLifecycle","Output":"=== RUN   TestResolverDocsLifecycle\n"}
+{"Time":"2026-07-11T17:56:45.5267935+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_Success","Output":"--- PASS: TestHTTP_NotesSearch_Success (0.80s)\n"}
+{"Time":"2026-07-11T17:56:45.5267935+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesSearch_Success","Elapsed":0.8}
+{"Time":"2026-07-11T17:56:45.5267935+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError"}
+{"Time":"2026-07-11T17:56:45.5267935+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError","Output":"=== RUN   TestHTTP_NotesSearch_ValidationError\n"}
+{"Time":"2026-07-11T17:56:45.8931079+09:00","Action":"output","Package":"memx/service","Test":"TestResolverDocsLifecycle","Output":"--- PASS: TestResolverDocsLifecycle (0.45s)\n"}
+{"Time":"2026-07-11T17:56:45.8931079+09:00","Action":"pass","Package":"memx/service","Test":"TestResolverDocsLifecycle","Elapsed":0.45}
+{"Time":"2026-07-11T17:56:45.8931079+09:00","Action":"run","Package":"memx/service","Test":"TestDocsSearchSupportsStructuredFilters"}
+{"Time":"2026-07-11T17:56:45.8931079+09:00","Action":"output","Package":"memx/service","Test":"TestDocsSearchSupportsStructuredFilters","Output":"=== RUN   TestDocsSearchSupportsStructuredFilters\n"}
+{"Time":"2026-07-11T17:56:45.9392702+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError/empty_query"}
+{"Time":"2026-07-11T17:56:45.9392702+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError/empty_query","Output":"=== RUN   TestHTTP_NotesSearch_ValidationError/empty_query\n"}
+{"Time":"2026-07-11T17:56:45.9412802+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError/empty_query","Output":"--- PASS: TestHTTP_NotesSearch_ValidationError/empty_query (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.9412802+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError/empty_query","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.9412802+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError/query_too_long_(over_1000_chars)"}
+{"Time":"2026-07-11T17:56:45.9412802+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError/query_too_long_(over_1000_chars)","Output":"=== RUN   TestHTTP_NotesSearch_ValidationError/query_too_long_(over_1000_chars)\n"}
+{"Time":"2026-07-11T17:56:45.9412802+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError/query_too_long_(over_1000_chars)","Output":"--- PASS: TestHTTP_NotesSearch_ValidationError/query_too_long_(over_1000_chars) (0.00s)\n"}
+{"Time":"2026-07-11T17:56:45.9412802+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError/query_too_long_(over_1000_chars)","Elapsed":0}
+{"Time":"2026-07-11T17:56:45.9491907+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError","Output":"--- PASS: TestHTTP_NotesSearch_ValidationError (0.42s)\n"}
+{"Time":"2026-07-11T17:56:45.9499483+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesSearch_ValidationError","Elapsed":0.42}
+{"Time":"2026-07-11T17:56:45.9499483+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit"}
+{"Time":"2026-07-11T17:56:45.9499483+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit","Output":"=== RUN   TestHTTP_NotesSearch_TopKLimit\n"}
+{"Time":"2026-07-11T17:56:46.28483+09:00","Action":"output","Package":"memx/service","Test":"TestDocsSearchSupportsStructuredFilters","Output":"--- PASS: TestDocsSearchSupportsStructuredFilters (0.39s)\n"}
+{"Time":"2026-07-11T17:56:46.28483+09:00","Action":"pass","Package":"memx/service","Test":"TestDocsSearchSupportsStructuredFilters","Elapsed":0.39}
+{"Time":"2026-07-11T17:56:46.28483+09:00","Action":"run","Package":"memx/service","Test":"TestDocsSearchUsesResolverFTSAcrossDocumentFields"}
+{"Time":"2026-07-11T17:56:46.28483+09:00","Action":"output","Package":"memx/service","Test":"TestDocsSearchUsesResolverFTSAcrossDocumentFields","Output":"=== RUN   TestDocsSearchUsesResolverFTSAcrossDocumentFields\n"}
+{"Time":"2026-07-11T17:56:46.3484123+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_default_(0_should_become_20)"}
+{"Time":"2026-07-11T17:56:46.3484123+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_default_(0_should_become_20)","Output":"=== RUN   TestHTTP_NotesSearch_TopKLimit/top_k_default_(0_should_become_20)\n"}
+{"Time":"2026-07-11T17:56:46.3489264+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_default_(0_should_become_20)","Output":"--- PASS: TestHTTP_NotesSearch_TopKLimit/top_k_default_(0_should_become_20) (0.00s)\n"}
+{"Time":"2026-07-11T17:56:46.3489264+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_default_(0_should_become_20)","Elapsed":0}
+{"Time":"2026-07-11T17:56:46.3494364+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_within_limit"}
+{"Time":"2026-07-11T17:56:46.3494364+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_within_limit","Output":"=== RUN   TestHTTP_NotesSearch_TopKLimit/top_k_within_limit\n"}
+{"Time":"2026-07-11T17:56:46.3499507+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_within_limit","Output":"--- PASS: TestHTTP_NotesSearch_TopKLimit/top_k_within_limit (0.00s)\n"}
+{"Time":"2026-07-11T17:56:46.3499507+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_within_limit","Elapsed":0}
+{"Time":"2026-07-11T17:56:46.3499507+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_at_limit_(100)"}
+{"Time":"2026-07-11T17:56:46.3499507+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_at_limit_(100)","Output":"=== RUN   TestHTTP_NotesSearch_TopKLimit/top_k_at_limit_(100)\n"}
+{"Time":"2026-07-11T17:56:46.3504636+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_at_limit_(100)","Output":"--- PASS: TestHTTP_NotesSearch_TopKLimit/top_k_at_limit_(100) (0.00s)\n"}
+{"Time":"2026-07-11T17:56:46.3513628+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_at_limit_(100)","Elapsed":0}
+{"Time":"2026-07-11T17:56:46.3513628+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_over_limit_(150_should_be_capped_to_100)"}
+{"Time":"2026-07-11T17:56:46.3513628+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_over_limit_(150_should_be_capped_to_100)","Output":"=== RUN   TestHTTP_NotesSearch_TopKLimit/top_k_over_limit_(150_should_be_capped_to_100)\n"}
+{"Time":"2026-07-11T17:56:46.3513628+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_over_limit_(150_should_be_capped_to_100)","Output":"--- PASS: TestHTTP_NotesSearch_TopKLimit/top_k_over_limit_(150_should_be_capped_to_100) (0.00s)\n"}
+{"Time":"2026-07-11T17:56:46.3513628+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/top_k_over_limit_(150_should_be_capped_to_100)","Elapsed":0}
+{"Time":"2026-07-11T17:56:46.3513628+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/negative_top_k_should_become_default_(20)"}
+{"Time":"2026-07-11T17:56:46.3513628+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/negative_top_k_should_become_default_(20)","Output":"=== RUN   TestHTTP_NotesSearch_TopKLimit/negative_top_k_should_become_default_(20)\n"}
+{"Time":"2026-07-11T17:56:46.3539278+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/negative_top_k_should_become_default_(20)","Output":"--- PASS: TestHTTP_NotesSearch_TopKLimit/negative_top_k_should_become_default_(20) (0.00s)\n"}
+{"Time":"2026-07-11T17:56:46.3539278+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit/negative_top_k_should_become_default_(20)","Elapsed":0}
+{"Time":"2026-07-11T17:56:46.3620463+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit","Output":"--- PASS: TestHTTP_NotesSearch_TopKLimit (0.41s)\n"}
+{"Time":"2026-07-11T17:56:46.3620463+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesSearch_TopKLimit","Elapsed":0.41}
+{"Time":"2026-07-11T17:56:46.3620463+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesGet_Success"}
+{"Time":"2026-07-11T17:56:46.3620463+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesGet_Success","Output":"=== RUN   TestHTTP_NotesGet_Success\n"}
+{"Time":"2026-07-11T17:56:46.6938336+09:00","Action":"output","Package":"memx/service","Test":"TestDocsSearchUsesResolverFTSAcrossDocumentFields","Output":"--- PASS: TestDocsSearchUsesResolverFTSAcrossDocumentFields (0.41s)\n"}
+{"Time":"2026-07-11T17:56:46.6938336+09:00","Action":"pass","Package":"memx/service","Test":"TestDocsSearchUsesResolverFTSAcrossDocumentFields","Elapsed":0.41}
+{"Time":"2026-07-11T17:56:46.6938336+09:00","Action":"run","Package":"memx/service","Test":"TestCardsSearchUsesResolverChunkFTSAcrossHeadingAndBody"}
+{"Time":"2026-07-11T17:56:46.6938336+09:00","Action":"output","Package":"memx/service","Test":"TestCardsSearchUsesResolverChunkFTSAcrossHeadingAndBody","Output":"=== RUN   TestCardsSearchUsesResolverChunkFTSAcrossHeadingAndBody\n"}
+{"Time":"2026-07-11T17:56:46.7417635+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesGet_Success","Output":"--- PASS: TestHTTP_NotesGet_Success (0.38s)\n"}
+{"Time":"2026-07-11T17:56:46.7417635+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesGet_Success","Elapsed":0.38}
+{"Time":"2026-07-11T17:56:46.7417635+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesGet_NotFound"}
+{"Time":"2026-07-11T17:56:46.7417635+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesGet_NotFound","Output":"=== RUN   TestHTTP_NotesGet_NotFound\n"}
+{"Time":"2026-07-11T17:56:47.0839489+09:00","Action":"output","Package":"memx/service","Test":"TestCardsSearchUsesResolverChunkFTSAcrossHeadingAndBody","Output":"--- PASS: TestCardsSearchUsesResolverChunkFTSAcrossHeadingAndBody (0.39s)\n"}
+{"Time":"2026-07-11T17:56:47.0839489+09:00","Action":"pass","Package":"memx/service","Test":"TestCardsSearchUsesResolverChunkFTSAcrossHeadingAndBody","Elapsed":0.39}
+{"Time":"2026-07-11T17:56:47.0839489+09:00","Action":"run","Package":"memx/service","Test":"TestDocsStaleCheckReportsSemanticDiffImpact"}
+{"Time":"2026-07-11T17:56:47.0839489+09:00","Action":"output","Package":"memx/service","Test":"TestDocsStaleCheckReportsSemanticDiffImpact","Output":"=== RUN   TestDocsStaleCheckReportsSemanticDiffImpact\n"}
+{"Time":"2026-07-11T17:56:47.1366216+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesGet_NotFound","Output":"--- PASS: TestHTTP_NotesGet_NotFound (0.40s)\n"}
+{"Time":"2026-07-11T17:56:47.1366216+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesGet_NotFound","Elapsed":0.4}
+{"Time":"2026-07-11T17:56:47.1366216+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError"}
+{"Time":"2026-07-11T17:56:47.1366216+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError","Output":"=== RUN   TestHTTP_NotesGet_ValidationError\n"}
+{"Time":"2026-07-11T17:56:47.4962011+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError/empty_id"}
+{"Time":"2026-07-11T17:56:47.4962011+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError/empty_id","Output":"=== RUN   TestHTTP_NotesGet_ValidationError/empty_id\n"}
+{"Time":"2026-07-11T17:56:47.4962011+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError/empty_id","Output":"--- PASS: TestHTTP_NotesGet_ValidationError/empty_id (0.00s)\n"}
+{"Time":"2026-07-11T17:56:47.4962011+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError/empty_id","Elapsed":0}
+{"Time":"2026-07-11T17:56:47.4962011+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError/invalid_id_format"}
+{"Time":"2026-07-11T17:56:47.4962011+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError/invalid_id_format","Output":"=== RUN   TestHTTP_NotesGet_ValidationError/invalid_id_format\n"}
+{"Time":"2026-07-11T17:56:47.4962011+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError/invalid_id_format","Output":"--- PASS: TestHTTP_NotesGet_ValidationError/invalid_id_format (0.00s)\n"}
+{"Time":"2026-07-11T17:56:47.4962011+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError/invalid_id_format","Elapsed":0}
+{"Time":"2026-07-11T17:56:47.5009016+09:00","Action":"output","Package":"memx/service","Test":"TestDocsStaleCheckReportsSemanticDiffImpact","Output":"--- PASS: TestDocsStaleCheckReportsSemanticDiffImpact (0.42s)\n"}
+{"Time":"2026-07-11T17:56:47.5009016+09:00","Action":"pass","Package":"memx/service","Test":"TestDocsStaleCheckReportsSemanticDiffImpact","Elapsed":0.42}
+{"Time":"2026-07-11T17:56:47.5009016+09:00","Action":"run","Package":"memx/service","Test":"TestReadsAckStoresHashChainAndAuditLog"}
+{"Time":"2026-07-11T17:56:47.5009016+09:00","Action":"output","Package":"memx/service","Test":"TestReadsAckStoresHashChainAndAuditLog","Output":"=== RUN   TestReadsAckStoresHashChainAndAuditLog\n"}
+{"Time":"2026-07-11T17:56:47.5024371+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError","Output":"--- PASS: TestHTTP_NotesGet_ValidationError (0.37s)\n"}
+{"Time":"2026-07-11T17:56:47.5024371+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesGet_ValidationError","Elapsed":0.37}
+{"Time":"2026-07-11T17:56:47.5024371+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_GCRun_DryRun"}
+{"Time":"2026-07-11T17:56:47.5024371+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_GCRun_DryRun","Output":"=== RUN   TestHTTP_GCRun_DryRun\n"}
+{"Time":"2026-07-11T17:56:48.1736766+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_GCRun_DryRun","Output":"--- PASS: TestHTTP_GCRun_DryRun (0.67s)\n"}
+{"Time":"2026-07-11T17:56:48.1736766+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_GCRun_DryRun","Elapsed":0.67}
+{"Time":"2026-07-11T17:56:48.1736766+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_GCRun_FeatureDisabled"}
+{"Time":"2026-07-11T17:56:48.1736766+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_GCRun_FeatureDisabled","Output":"=== RUN   TestHTTP_GCRun_FeatureDisabled\n"}
+{"Time":"2026-07-11T17:56:48.1809351+09:00","Action":"output","Package":"memx/service","Test":"TestReadsAckStoresHashChainAndAuditLog","Output":"--- PASS: TestReadsAckStoresHashChainAndAuditLog (0.68s)\n"}
+{"Time":"2026-07-11T17:56:48.1809351+09:00","Action":"pass","Package":"memx/service","Test":"TestReadsAckStoresHashChainAndAuditLog","Elapsed":0.68}
+{"Time":"2026-07-11T17:56:48.1809351+09:00","Action":"run","Package":"memx/service","Test":"TestChunksExposePromptReadyMemoryCards"}
+{"Time":"2026-07-11T17:56:48.1809351+09:00","Action":"output","Package":"memx/service","Test":"TestChunksExposePromptReadyMemoryCards","Output":"=== RUN   TestChunksExposePromptReadyMemoryCards\n"}
+{"Time":"2026-07-11T17:56:48.6039415+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_GCRun_FeatureDisabled","Output":"--- PASS: TestHTTP_GCRun_FeatureDisabled (0.43s)\n"}
+{"Time":"2026-07-11T17:56:48.6039415+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_GCRun_FeatureDisabled","Elapsed":0.43}
+{"Time":"2026-07-11T17:56:48.6039415+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed"}
+{"Time":"2026-07-11T17:56:48.6039415+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed","Output":"=== RUN   TestHTTP_MethodNotAllowed\n"}
+{"Time":"2026-07-11T17:56:48.6054958+09:00","Action":"output","Package":"memx/service","Test":"TestChunksExposePromptReadyMemoryCards","Output":"--- PASS: TestChunksExposePromptReadyMemoryCards (0.42s)\n"}
+{"Time":"2026-07-11T17:56:48.6054958+09:00","Action":"pass","Package":"memx/service","Test":"TestChunksExposePromptReadyMemoryCards","Elapsed":0.42}
+{"Time":"2026-07-11T17:56:48.6054958+09:00","Action":"run","Package":"memx/service","Test":"TestMemoryCardsRankByTypeQueryAndBudget"}
+{"Time":"2026-07-11T17:56:48.6054958+09:00","Action":"output","Package":"memx/service","Test":"TestMemoryCardsRankByTypeQueryAndBudget","Output":"=== RUN   TestMemoryCardsRankByTypeQueryAndBudget\n"}
+{"Time":"2026-07-11T17:56:48.6065361+09:00","Action":"output","Package":"memx/service","Test":"TestMemoryCardsRankByTypeQueryAndBudget","Output":"--- PASS: TestMemoryCardsRankByTypeQueryAndBudget (0.00s)\n"}
+{"Time":"2026-07-11T17:56:48.6065361+09:00","Action":"pass","Package":"memx/service","Test":"TestMemoryCardsRankByTypeQueryAndBudget","Elapsed":0}
+{"Time":"2026-07-11T17:56:48.6065361+09:00","Action":"run","Package":"memx/service","Test":"TestMemoryCardsRankingWeightsCanOverrideQueryDominance"}
+{"Time":"2026-07-11T17:56:48.6070581+09:00","Action":"output","Package":"memx/service","Test":"TestMemoryCardsRankingWeightsCanOverrideQueryDominance","Output":"=== RUN   TestMemoryCardsRankingWeightsCanOverrideQueryDominance\n"}
+{"Time":"2026-07-11T17:56:48.6070581+09:00","Action":"output","Package":"memx/service","Test":"TestMemoryCardsRankingWeightsCanOverrideQueryDominance","Output":"--- PASS: TestMemoryCardsRankingWeightsCanOverrideQueryDominance (0.00s)\n"}
+{"Time":"2026-07-11T17:56:48.6070581+09:00","Action":"pass","Package":"memx/service","Test":"TestMemoryCardsRankingWeightsCanOverrideQueryDominance","Elapsed":0}
+{"Time":"2026-07-11T17:56:48.6070581+09:00","Action":"run","Package":"memx/service","Test":"TestCardsSearchReturnsRankedFilteredCards"}
+{"Time":"2026-07-11T17:56:48.6070581+09:00","Action":"output","Package":"memx/service","Test":"TestCardsSearchReturnsRankedFilteredCards","Output":"=== RUN   TestCardsSearchReturnsRankedFilteredCards\n"}
+{"Time":"2026-07-11T17:56:48.99203+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/GET_ingest"}
+{"Time":"2026-07-11T17:56:48.99203+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/GET_ingest","Output":"=== RUN   TestHTTP_MethodNotAllowed/GET_ingest\n"}
+{"Time":"2026-07-11T17:56:48.99203+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/GET_ingest","Output":"--- PASS: TestHTTP_MethodNotAllowed/GET_ingest (0.00s)\n"}
+{"Time":"2026-07-11T17:56:48.99203+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/GET_ingest","Elapsed":0}
+{"Time":"2026-07-11T17:56:48.99203+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/GET_search"}
+{"Time":"2026-07-11T17:56:48.99203+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/GET_search","Output":"=== RUN   TestHTTP_MethodNotAllowed/GET_search\n"}
+{"Time":"2026-07-11T17:56:48.9925445+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/GET_search","Output":"--- PASS: TestHTTP_MethodNotAllowed/GET_search (0.00s)\n"}
+{"Time":"2026-07-11T17:56:48.9925445+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/GET_search","Elapsed":0}
+{"Time":"2026-07-11T17:56:48.9925445+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/POST_get"}
+{"Time":"2026-07-11T17:56:48.9925445+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/POST_get","Output":"=== RUN   TestHTTP_MethodNotAllowed/POST_get\n"}
+{"Time":"2026-07-11T17:56:48.9925445+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/POST_get","Output":"--- PASS: TestHTTP_MethodNotAllowed/POST_get (0.00s)\n"}
+{"Time":"2026-07-11T17:56:48.9925445+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed/POST_get","Elapsed":0}
+{"Time":"2026-07-11T17:56:49.0008805+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed","Output":"--- PASS: TestHTTP_MethodNotAllowed (0.40s)\n"}
+{"Time":"2026-07-11T17:56:49.0008805+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_MethodNotAllowed","Elapsed":0.4}
+{"Time":"2026-07-11T17:56:49.0008805+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesIngest_NoLLMSkipsAutoSummary"}
+{"Time":"2026-07-11T17:56:49.0008805+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_NoLLMSkipsAutoSummary","Output":"=== RUN   TestHTTP_NotesIngest_NoLLMSkipsAutoSummary\n"}
+{"Time":"2026-07-11T17:56:49.0428845+09:00","Action":"output","Package":"memx/service","Test":"TestCardsSearchReturnsRankedFilteredCards","Output":"--- PASS: TestCardsSearchReturnsRankedFilteredCards (0.44s)\n"}
+{"Time":"2026-07-11T17:56:49.0434098+09:00","Action":"pass","Package":"memx/service","Test":"TestCardsSearchReturnsRankedFilteredCards","Elapsed":0.44}
+{"Time":"2026-07-11T17:56:49.0434098+09:00","Action":"run","Package":"memx/service","Test":"TestMemoryCardFeedbackAdjustsRanking"}
+{"Time":"2026-07-11T17:56:49.0434098+09:00","Action":"output","Package":"memx/service","Test":"TestMemoryCardFeedbackAdjustsRanking","Output":"=== RUN   TestMemoryCardFeedbackAdjustsRanking\n"}
+{"Time":"2026-07-11T17:56:49.1770214+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestSkillCommandsUseDefaultStorePaths","Output":"--- PASS: TestSkillCommandsUseDefaultStorePaths (7.70s)\n"}
+{"Time":"2026-07-11T17:56:49.1775387+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestSkillCommandsUseDefaultStorePaths","Elapsed":7.7}
+{"Time":"2026-07-11T17:56:49.1775387+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestRecallSkillSearchesAcrossStores"}
+{"Time":"2026-07-11T17:56:49.1780577+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestRecallSkillSearchesAcrossStores","Output":"=== RUN   TestRecallSkillSearchesAcrossStores\n"}
+{"Time":"2026-07-11T17:56:49.3978079+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesIngest_NoLLMSkipsAutoSummary","Output":"--- PASS: TestHTTP_NotesIngest_NoLLMSkipsAutoSummary (0.40s)\n"}
+{"Time":"2026-07-11T17:56:49.3981522+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesIngest_NoLLMSkipsAutoSummary","Elapsed":0.4}
+{"Time":"2026-07-11T17:56:49.3981522+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_NotesRecall_Success"}
+{"Time":"2026-07-11T17:56:49.3981522+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesRecall_Success","Output":"=== RUN   TestHTTP_NotesRecall_Success\n"}
+{"Time":"2026-07-11T17:56:49.4736465+09:00","Action":"output","Package":"memx/service","Test":"TestMemoryCardFeedbackAdjustsRanking","Output":"--- PASS: TestMemoryCardFeedbackAdjustsRanking (0.43s)\n"}
+{"Time":"2026-07-11T17:56:49.4736465+09:00","Action":"pass","Package":"memx/service","Test":"TestMemoryCardFeedbackAdjustsRanking","Elapsed":0.43}
+{"Time":"2026-07-11T17:56:49.4736465+09:00","Action":"run","Package":"memx/service","Test":"TestPromptBundleAndTaskStateExport"}
+{"Time":"2026-07-11T17:56:49.4736465+09:00","Action":"output","Package":"memx/service","Test":"TestPromptBundleAndTaskStateExport","Output":"=== RUN   TestPromptBundleAndTaskStateExport\n"}
+{"Time":"2026-07-11T17:56:50.0741967+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_NotesRecall_Success","Output":"--- PASS: TestHTTP_NotesRecall_Success (0.68s)\n"}
+{"Time":"2026-07-11T17:56:50.0747551+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_NotesRecall_Success","Elapsed":0.68}
+{"Time":"2026-07-11T17:56:50.0747551+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_BuildBundle_Success"}
+{"Time":"2026-07-11T17:56:50.0747551+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_BuildBundle_Success","Output":"=== RUN   TestHTTP_BuildBundle_Success\n"}
+{"Time":"2026-07-11T17:56:50.1729598+09:00","Action":"output","Package":"memx/service","Test":"TestPromptBundleAndTaskStateExport","Output":"--- PASS: TestPromptBundleAndTaskStateExport (0.70s)\n"}
+{"Time":"2026-07-11T17:56:50.1729598+09:00","Action":"pass","Package":"memx/service","Test":"TestPromptBundleAndTaskStateExport","Elapsed":0.7}
+{"Time":"2026-07-11T17:56:50.1729598+09:00","Action":"run","Package":"memx/service","Test":"TestDocsIngestRejectsOlderVersion"}
+{"Time":"2026-07-11T17:56:50.1729598+09:00","Action":"output","Package":"memx/service","Test":"TestDocsIngestRejectsOlderVersion","Output":"=== RUN   TestDocsIngestRejectsOlderVersion\n"}
+{"Time":"2026-07-11T17:56:50.5491718+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_BuildBundle_Success","Output":"--- PASS: TestHTTP_BuildBundle_Success (0.47s)\n"}
+{"Time":"2026-07-11T17:56:50.5491718+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_BuildBundle_Success","Elapsed":0.47}
+{"Time":"2026-07-11T17:56:50.5491718+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_RequestBodyLimit"}
+{"Time":"2026-07-11T17:56:50.5491718+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_RequestBodyLimit","Output":"=== RUN   TestHTTP_RequestBodyLimit\n"}
+{"Time":"2026-07-11T17:56:50.6206548+09:00","Action":"output","Package":"memx/service","Test":"TestDocsIngestRejectsOlderVersion","Output":"--- PASS: TestDocsIngestRejectsOlderVersion (0.45s)\n"}
+{"Time":"2026-07-11T17:56:50.6206548+09:00","Action":"pass","Package":"memx/service","Test":"TestDocsIngestRejectsOlderVersion","Elapsed":0.45}
+{"Time":"2026-07-11T17:56:50.6206548+09:00","Action":"run","Package":"memx/service","Test":"TestDocsIngestUsesSemverVersionScheme"}
+{"Time":"2026-07-11T17:56:50.6206548+09:00","Action":"output","Package":"memx/service","Test":"TestDocsIngestUsesSemverVersionScheme","Output":"=== RUN   TestDocsIngestUsesSemverVersionScheme\n"}
+{"Time":"2026-07-11T17:56:50.9308577+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_RequestBodyLimit","Output":"--- PASS: TestHTTP_RequestBodyLimit (0.38s)\n"}
+{"Time":"2026-07-11T17:56:50.9308577+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_RequestBodyLimit","Elapsed":0.38}
+{"Time":"2026-07-11T17:56:50.9308577+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_RejectsMultipleJSONValues"}
+{"Time":"2026-07-11T17:56:50.9308577+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_RejectsMultipleJSONValues","Output":"=== RUN   TestHTTP_RejectsMultipleJSONValues\n"}
+{"Time":"2026-07-11T17:56:51.0649835+09:00","Action":"output","Package":"memx/service","Test":"TestDocsIngestUsesSemverVersionScheme","Output":"--- PASS: TestDocsIngestUsesSemverVersionScheme (0.45s)\n"}
+{"Time":"2026-07-11T17:56:51.0663417+09:00","Action":"pass","Package":"memx/service","Test":"TestDocsIngestUsesSemverVersionScheme","Elapsed":0.45}
+{"Time":"2026-07-11T17:56:51.0663417+09:00","Action":"run","Package":"memx/service","Test":"TestDocsStaleCheckUsesLatestReceiptPerDoc"}
+{"Time":"2026-07-11T17:56:51.0663417+09:00","Action":"output","Package":"memx/service","Test":"TestDocsStaleCheckUsesLatestReceiptPerDoc","Output":"=== RUN   TestDocsStaleCheckUsesLatestReceiptPerDoc\n"}
+{"Time":"2026-07-11T17:56:51.4719003+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_RejectsMultipleJSONValues","Output":"--- PASS: TestHTTP_RejectsMultipleJSONValues (0.54s)\n"}
+{"Time":"2026-07-11T17:56:51.4719003+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_RejectsMultipleJSONValues","Elapsed":0.54}
+{"Time":"2026-07-11T17:56:51.4719003+09:00","Action":"run","Package":"memx/api","Test":"TestHTTP_DocsEndpoints"}
+{"Time":"2026-07-11T17:56:51.4719003+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_DocsEndpoints","Output":"=== RUN   TestHTTP_DocsEndpoints\n"}
+{"Time":"2026-07-11T17:56:51.6053647+09:00","Action":"output","Package":"memx/service","Test":"TestDocsStaleCheckUsesLatestReceiptPerDoc","Output":"--- PASS: TestDocsStaleCheckUsesLatestReceiptPerDoc (0.54s)\n"}
+{"Time":"2026-07-11T17:56:51.6058833+09:00","Action":"pass","Package":"memx/service","Test":"TestDocsStaleCheckUsesLatestReceiptPerDoc","Elapsed":0.54}
+{"Time":"2026-07-11T17:56:51.6058833+09:00","Action":"run","Package":"memx/service","Test":"TestDocsIngestFixedChunking"}
+{"Time":"2026-07-11T17:56:51.6058833+09:00","Action":"output","Package":"memx/service","Test":"TestDocsIngestFixedChunking","Output":"=== RUN   TestDocsIngestFixedChunking\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestHTTP_DocsEndpoints","Output":"--- PASS: TestHTTP_DocsEndpoints (0.40s)\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"pass","Package":"memx/api","Test":"TestHTTP_DocsEndpoints","Elapsed":0.4}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef","Output":"=== RUN   TestMultiStoreResolver_ResolveRef\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_short_store"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_short_store","Output":"=== RUN   TestMultiStoreResolver_ResolveRef/resolve_evidence_from_short_store\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_short_store","Output":"--- PASS: TestMultiStoreResolver_ResolveRef/resolve_evidence_from_short_store (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_short_store","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_journal_store"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_journal_store","Output":"=== RUN   TestMultiStoreResolver_ResolveRef/resolve_evidence_from_journal_store\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_journal_store","Output":"--- PASS: TestMultiStoreResolver_ResolveRef/resolve_evidence_from_journal_store (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_journal_store","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_archive_(not_in_short_or_journal)"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_archive_(not_in_short_or_journal)","Output":"=== RUN   TestMultiStoreResolver_ResolveRef/resolve_evidence_from_archive_(not_in_short_or_journal)\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_archive_(not_in_short_or_journal)","Output":"--- PASS: TestMultiStoreResolver_ResolveRef/resolve_evidence_from_archive_(not_in_short_or_journal) (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_evidence_from_archive_(not_in_short_or_journal)","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_knowledge_from_knowledge_store"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_knowledge_from_knowledge_store","Output":"=== RUN   TestMultiStoreResolver_ResolveRef/resolve_knowledge_from_knowledge_store\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_knowledge_from_knowledge_store","Output":"--- PASS: TestMultiStoreResolver_ResolveRef/resolve_knowledge_from_knowledge_store (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_knowledge_from_knowledge_store","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_artifact_from_knowledge_store"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_artifact_from_knowledge_store","Output":"=== RUN   TestMultiStoreResolver_ResolveRef/resolve_artifact_from_knowledge_store\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_artifact_from_knowledge_store","Output":"--- PASS: TestMultiStoreResolver_ResolveRef/resolve_artifact_from_knowledge_store (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/resolve_artifact_from_knowledge_store","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/unresolved_evidence_(not_found)"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/unresolved_evidence_(not_found)","Output":"=== RUN   TestMultiStoreResolver_ResolveRef/unresolved_evidence_(not_found)\n"}
+{"Time":"2026-07-11T17:56:51.8699006+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/unresolved_evidence_(not_found)","Output":"--- PASS: TestMultiStoreResolver_ResolveRef/unresolved_evidence_(not_found) (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/unresolved_evidence_(not_found)","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/unsupported_domain"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/unsupported_domain","Output":"=== RUN   TestMultiStoreResolver_ResolveRef/unsupported_domain\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/unsupported_domain","Output":"--- PASS: TestMultiStoreResolver_ResolveRef/unsupported_domain (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef/unsupported_domain","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef","Output":"--- PASS: TestMultiStoreResolver_ResolveRef (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveRef","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveMany"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveMany","Output":"=== RUN   TestMultiStoreResolver_ResolveMany\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveMany","Output":"--- PASS: TestMultiStoreResolver_ResolveMany (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_ResolveMany","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary","Output":"=== RUN   TestMultiStoreResolver_LoadSummary\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary/existing_ref"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary/existing_ref","Output":"=== RUN   TestMultiStoreResolver_LoadSummary/existing_ref\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary/existing_ref","Output":"--- PASS: TestMultiStoreResolver_LoadSummary/existing_ref (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary/existing_ref","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary/non-existing_ref"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary/non-existing_ref","Output":"=== RUN   TestMultiStoreResolver_LoadSummary/non-existing_ref\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary/non-existing_ref","Output":"--- PASS: TestMultiStoreResolver_LoadSummary/non-existing_ref (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary/non-existing_ref","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary","Output":"--- PASS: TestMultiStoreResolver_LoadSummary (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSummary","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw","Output":"=== RUN   TestMultiStoreResolver_LoadSelectedRaw\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/with_body"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/with_body","Output":"=== RUN   TestMultiStoreResolver_LoadSelectedRaw/with_body\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/with_body","Output":"--- PASS: TestMultiStoreResolver_LoadSelectedRaw/with_body (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/with_body","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/without_body_(summary_only)"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/without_body_(summary_only)","Output":"=== RUN   TestMultiStoreResolver_LoadSelectedRaw/without_body_(summary_only)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/without_body_(summary_only)","Output":"--- PASS: TestMultiStoreResolver_LoadSelectedRaw/without_body_(summary_only) (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/without_body_(summary_only)","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/journal_fallback"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/journal_fallback","Output":"=== RUN   TestMultiStoreResolver_LoadSelectedRaw/journal_fallback\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/journal_fallback","Output":"--- PASS: TestMultiStoreResolver_LoadSelectedRaw/journal_fallback (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw/journal_fallback","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw","Output":"--- PASS: TestMultiStoreResolver_LoadSelectedRaw (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"pass","Package":"memx/api","Test":"TestMultiStoreResolver_LoadSelectedRaw","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef","Output":"=== RUN   TestShortNoteResolver_ResolveRef\n"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/resolved_evidence_ref"}
+{"Time":"2026-07-11T17:56:51.8704567+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/resolved_evidence_ref","Output":"=== RUN   TestShortNoteResolver_ResolveRef/resolved_evidence_ref\n"}
+{"Time":"2026-07-11T17:56:51.8709568+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/resolved_evidence_ref","Output":"--- PASS: TestShortNoteResolver_ResolveRef/resolved_evidence_ref (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8709568+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/resolved_evidence_ref","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.871459+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/resolved_knowledge_ref"}
+{"Time":"2026-07-11T17:56:51.871459+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/resolved_knowledge_ref","Output":"=== RUN   TestShortNoteResolver_ResolveRef/resolved_knowledge_ref\n"}
+{"Time":"2026-07-11T17:56:51.8719727+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/resolved_knowledge_ref","Output":"--- PASS: TestShortNoteResolver_ResolveRef/resolved_knowledge_ref (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8719727+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/resolved_knowledge_ref","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8719727+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unresolved_ref"}
+{"Time":"2026-07-11T17:56:51.8719727+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unresolved_ref","Output":"=== RUN   TestShortNoteResolver_ResolveRef/unresolved_ref\n"}
+{"Time":"2026-07-11T17:56:51.8719727+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unresolved_ref","Output":"--- PASS: TestShortNoteResolver_ResolveRef/unresolved_ref (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8719727+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unresolved_ref","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8719727+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unsupported_domain"}
+{"Time":"2026-07-11T17:56:51.8719727+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unsupported_domain","Output":"=== RUN   TestShortNoteResolver_ResolveRef/unsupported_domain\n"}
+{"Time":"2026-07-11T17:56:51.8719727+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unsupported_domain","Output":"--- PASS: TestShortNoteResolver_ResolveRef/unsupported_domain (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8719727+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unsupported_domain","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8727196+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unsupported_type"}
+{"Time":"2026-07-11T17:56:51.873231+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unsupported_type","Output":"=== RUN   TestShortNoteResolver_ResolveRef/unsupported_type\n"}
+{"Time":"2026-07-11T17:56:51.873231+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unsupported_type","Output":"--- PASS: TestShortNoteResolver_ResolveRef/unsupported_type (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.873231+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef/unsupported_type","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.873231+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef","Output":"--- PASS: TestShortNoteResolver_ResolveRef (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8739873+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_ResolveRef","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8739873+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_ResolveMany"}
+{"Time":"2026-07-11T17:56:51.8739873+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveMany","Output":"=== RUN   TestShortNoteResolver_ResolveMany\n"}
+{"Time":"2026-07-11T17:56:51.8739873+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_ResolveMany","Output":"--- PASS: TestShortNoteResolver_ResolveMany (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8746519+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_ResolveMany","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8746519+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary"}
+{"Time":"2026-07-11T17:56:51.8753972+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary","Output":"=== RUN   TestShortNoteResolver_LoadSummary\n"}
+{"Time":"2026-07-11T17:56:51.8753972+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary/existing_ref"}
+{"Time":"2026-07-11T17:56:51.8753972+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary/existing_ref","Output":"=== RUN   TestShortNoteResolver_LoadSummary/existing_ref\n"}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary/existing_ref","Output":"--- PASS: TestShortNoteResolver_LoadSummary/existing_ref (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary/existing_ref","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary/non-existing_ref"}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary/non-existing_ref","Output":"=== RUN   TestShortNoteResolver_LoadSummary/non-existing_ref\n"}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary/non-existing_ref","Output":"--- PASS: TestShortNoteResolver_LoadSummary/non-existing_ref (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary/non-existing_ref","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary","Output":"--- PASS: TestShortNoteResolver_LoadSummary (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_LoadSummary","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw"}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw","Output":"=== RUN   TestShortNoteResolver_LoadSelectedRaw\n"}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw/with_body"}
+{"Time":"2026-07-11T17:56:51.8759801+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw/with_body","Output":"=== RUN   TestShortNoteResolver_LoadSelectedRaw/with_body\n"}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw/with_body","Output":"--- PASS: TestShortNoteResolver_LoadSelectedRaw/with_body (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw/with_body","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"run","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw/without_body"}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw/without_body","Output":"=== RUN   TestShortNoteResolver_LoadSelectedRaw/without_body\n"}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw/without_body","Output":"--- PASS: TestShortNoteResolver_LoadSelectedRaw/without_body (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw/without_body","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"output","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw","Output":"--- PASS: TestShortNoteResolver_LoadSelectedRaw (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"pass","Package":"memx/api","Test":"TestShortNoteResolver_LoadSelectedRaw","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"run","Package":"memx/api","Test":"TestValidateTypedRefForResolve"}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"output","Package":"memx/api","Test":"TestValidateTypedRefForResolve","Output":"=== RUN   TestValidateTypedRefForResolve\n"}
+{"Time":"2026-07-11T17:56:51.8765302+09:00","Action":"run","Package":"memx/api","Test":"TestValidateTypedRefForResolve/valid_memx_local_ref"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestValidateTypedRefForResolve/valid_memx_local_ref","Output":"=== RUN   TestValidateTypedRefForResolve/valid_memx_local_ref\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestValidateTypedRefForResolve/valid_memx_local_ref","Output":"--- PASS: TestValidateTypedRefForResolve/valid_memx_local_ref (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"pass","Package":"memx/api","Test":"TestValidateTypedRefForResolve/valid_memx_local_ref","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"run","Package":"memx/api","Test":"TestValidateTypedRefForResolve/invalid_empty_ref"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestValidateTypedRefForResolve/invalid_empty_ref","Output":"=== RUN   TestValidateTypedRefForResolve/invalid_empty_ref\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestValidateTypedRefForResolve/invalid_empty_ref","Output":"--- PASS: TestValidateTypedRefForResolve/invalid_empty_ref (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"pass","Package":"memx/api","Test":"TestValidateTypedRefForResolve/invalid_empty_ref","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"run","Package":"memx/api","Test":"TestValidateTypedRefForResolve/unsupported_agent-taskstate_domain"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestValidateTypedRefForResolve/unsupported_agent-taskstate_domain","Output":"=== RUN   TestValidateTypedRefForResolve/unsupported_agent-taskstate_domain\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestValidateTypedRefForResolve/unsupported_agent-taskstate_domain","Output":"--- PASS: TestValidateTypedRefForResolve/unsupported_agent-taskstate_domain (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"pass","Package":"memx/api","Test":"TestValidateTypedRefForResolve/unsupported_agent-taskstate_domain","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"run","Package":"memx/api","Test":"TestValidateTypedRefForResolve/unsupported_non-local_provider"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestValidateTypedRefForResolve/unsupported_non-local_provider","Output":"=== RUN   TestValidateTypedRefForResolve/unsupported_non-local_provider\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestValidateTypedRefForResolve/unsupported_non-local_provider","Output":"--- PASS: TestValidateTypedRefForResolve/unsupported_non-local_provider (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"pass","Package":"memx/api","Test":"TestValidateTypedRefForResolve/unsupported_non-local_provider","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestValidateTypedRefForResolve","Output":"--- PASS: TestValidateTypedRefForResolve (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"pass","Package":"memx/api","Test":"TestValidateTypedRefForResolve","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"run","Package":"memx/api","Test":"TestContextBundle_Build"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestContextBundle_Build","Output":"=== RUN   TestContextBundle_Build\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"output","Package":"memx/api","Test":"TestContextBundle_Build","Output":"--- PASS: TestContextBundle_Build (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"pass","Package":"memx/api","Test":"TestContextBundle_Build","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8770835+09:00","Action":"run","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle","Output":"=== RUN   TestBundleDiagnostics_PartialBundle\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"run","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/complete_bundle"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/complete_bundle","Output":"=== RUN   TestBundleDiagnostics_PartialBundle/complete_bundle\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/complete_bundle","Output":"--- PASS: TestBundleDiagnostics_PartialBundle/complete_bundle (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"pass","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/complete_bundle","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"run","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_unresolved"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_unresolved","Output":"=== RUN   TestBundleDiagnostics_PartialBundle/partial_with_unresolved\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_unresolved","Output":"--- PASS: TestBundleDiagnostics_PartialBundle/partial_with_unresolved (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"pass","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_unresolved","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"run","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_unsupported"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_unsupported","Output":"=== RUN   TestBundleDiagnostics_PartialBundle/partial_with_unsupported\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_unsupported","Output":"--- PASS: TestBundleDiagnostics_PartialBundle/partial_with_unsupported (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"pass","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_unsupported","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"run","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_both"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_both","Output":"=== RUN   TestBundleDiagnostics_PartialBundle/partial_with_both\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_both","Output":"--- PASS: TestBundleDiagnostics_PartialBundle/partial_with_both (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"pass","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle/partial_with_both","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle","Output":"--- PASS: TestBundleDiagnostics_PartialBundle (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"pass","Package":"memx/api","Test":"TestBundleDiagnostics_PartialBundle","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"run","Package":"memx/api","Test":"TestBundleSourceRef_Structure"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleSourceRef_Structure","Output":"=== RUN   TestBundleSourceRef_Structure\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestBundleSourceRef_Structure","Output":"--- PASS: TestBundleSourceRef_Structure (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"pass","Package":"memx/api","Test":"TestBundleSourceRef_Structure","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"run","Package":"memx/api","Test":"TestResolveRefRequest_Response"}
+{"Time":"2026-07-11T17:56:51.8774137+09:00","Action":"output","Package":"memx/api","Test":"TestResolveRefRequest_Response","Output":"=== RUN   TestResolveRefRequest_Response\n"}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"output","Package":"memx/api","Test":"TestResolveRefRequest_Response","Output":"--- PASS: TestResolveRefRequest_Response (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"pass","Package":"memx/api","Test":"TestResolveRefRequest_Response","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"run","Package":"memx/api","Test":"TestResolveManyRequest_Response"}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"output","Package":"memx/api","Test":"TestResolveManyRequest_Response","Output":"=== RUN   TestResolveManyRequest_Response\n"}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"output","Package":"memx/api","Test":"TestResolveManyRequest_Response","Output":"--- PASS: TestResolveManyRequest_Response (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"pass","Package":"memx/api","Test":"TestResolveManyRequest_Response","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"run","Package":"memx/api","Test":"TestBuildBundleRequest_Response"}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"output","Package":"memx/api","Test":"TestBuildBundleRequest_Response","Output":"=== RUN   TestBuildBundleRequest_Response\n"}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"output","Package":"memx/api","Test":"TestBuildBundleRequest_Response","Output":"--- PASS: TestBuildBundleRequest_Response (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"pass","Package":"memx/api","Test":"TestBuildBundleRequest_Response","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8779163+09:00","Action":"run","Package":"memx/api","Test":"TestTypedRef_String"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_String","Output":"=== RUN   TestTypedRef_String\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_String","Output":"--- PASS: TestTypedRef_String (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"pass","Package":"memx/api","Test":"TestTypedRef_String","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"run","Package":"memx/api","Test":"TestParseTypedRef"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestParseTypedRef","Output":"=== RUN   TestParseTypedRef\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestParseTypedRef","Output":"--- PASS: TestParseTypedRef (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"pass","Package":"memx/api","Test":"TestParseTypedRef","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"run","Package":"memx/api","Test":"TestTypedRef_RoundTrip"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_RoundTrip","Output":"=== RUN   TestTypedRef_RoundTrip\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_RoundTrip","Output":"--- PASS: TestTypedRef_RoundTrip (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"pass","Package":"memx/api","Test":"TestTypedRef_RoundTrip","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"run","Package":"memx/api","Test":"TestTypedRef_ThreeToFourSegmentMigration"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_ThreeToFourSegmentMigration","Output":"=== RUN   TestTypedRef_ThreeToFourSegmentMigration\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_ThreeToFourSegmentMigration","Output":"--- PASS: TestTypedRef_ThreeToFourSegmentMigration (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"pass","Package":"memx/api","Test":"TestTypedRef_ThreeToFourSegmentMigration","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"run","Package":"memx/api","Test":"TestNewTypedRef"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestNewTypedRef","Output":"=== RUN   TestNewTypedRef\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestNewTypedRef","Output":"--- PASS: TestNewTypedRef (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"pass","Package":"memx/api","Test":"TestNewTypedRef","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"run","Package":"memx/api","Test":"TestNewTypedRefWithProvider"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestNewTypedRefWithProvider","Output":"=== RUN   TestNewTypedRefWithProvider\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestNewTypedRefWithProvider","Output":"--- PASS: TestNewTypedRefWithProvider (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"pass","Package":"memx/api","Test":"TestNewTypedRefWithProvider","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"run","Package":"memx/api","Test":"TestTypedRef_IsZero_IsValid"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_IsZero_IsValid","Output":"=== RUN   TestTypedRef_IsZero_IsValid\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_IsZero_IsValid","Output":"--- PASS: TestTypedRef_IsZero_IsValid (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"pass","Package":"memx/api","Test":"TestTypedRef_IsZero_IsValid","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"run","Package":"memx/api","Test":"TestTypedRef_MarshalUnmarshal"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_MarshalUnmarshal","Output":"=== RUN   TestTypedRef_MarshalUnmarshal\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_MarshalUnmarshal","Output":"--- PASS: TestTypedRef_MarshalUnmarshal (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8788443+09:00","Action":"pass","Package":"memx/api","Test":"TestTypedRef_MarshalUnmarshal","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8793473+09:00","Action":"run","Package":"memx/api","Test":"TestTypedRef_MarshalUnmarshal_LegacyInput"}
+{"Time":"2026-07-11T17:56:51.8793473+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_MarshalUnmarshal_LegacyInput","Output":"=== RUN   TestTypedRef_MarshalUnmarshal_LegacyInput\n"}
+{"Time":"2026-07-11T17:56:51.8793473+09:00","Action":"output","Package":"memx/api","Test":"TestTypedRef_MarshalUnmarshal_LegacyInput","Output":"--- PASS: TestTypedRef_MarshalUnmarshal_LegacyInput (0.00s)\n"}
+{"Time":"2026-07-11T17:56:51.8793473+09:00","Action":"pass","Package":"memx/api","Test":"TestTypedRef_MarshalUnmarshal_LegacyInput","Elapsed":0}
+{"Time":"2026-07-11T17:56:51.8793473+09:00","Action":"output","Package":"memx/api","Output":"PASS\n"}
+{"Time":"2026-07-11T17:56:51.8793473+09:00","Action":"output","Package":"memx/api","Output":"ok  \tmemx/api\t11.620s\n"}
+{"Time":"2026-07-11T17:56:51.8793473+09:00","Action":"pass","Package":"memx/api","Elapsed":11.62}
+{"Time":"2026-07-11T17:56:52.0498744+09:00","Action":"output","Package":"memx/service","Test":"TestDocsIngestFixedChunking","Output":"--- PASS: TestDocsIngestFixedChunking (0.44s)\n"}
+{"Time":"2026-07-11T17:56:52.0498744+09:00","Action":"pass","Package":"memx/service","Test":"TestDocsIngestFixedChunking","Elapsed":0.44}
+{"Time":"2026-07-11T17:56:52.0498744+09:00","Action":"run","Package":"memx/service","Test":"TestResolverDocsCanUseSeparateResolverStore"}
+{"Time":"2026-07-11T17:56:52.0498744+09:00","Action":"output","Package":"memx/service","Test":"TestResolverDocsCanUseSeparateResolverStore","Output":"=== RUN   TestResolverDocsCanUseSeparateResolverStore\n"}
+{"Time":"2026-07-11T17:56:52.4321849+09:00","Action":"output","Package":"memx/service","Test":"TestResolverDocsCanUseSeparateResolverStore","Output":"--- PASS: TestResolverDocsCanUseSeparateResolverStore (0.39s)\n"}
+{"Time":"2026-07-11T17:56:52.4321849+09:00","Action":"pass","Package":"memx/service","Test":"TestResolverDocsCanUseSeparateResolverStore","Elapsed":0.39}
+{"Time":"2026-07-11T17:56:52.4321849+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_Validation"}
+{"Time":"2026-07-11T17:56:52.4321849+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation","Output":"=== RUN   TestService_IngestShort_Validation\n"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_Validation/empty_title"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/empty_title","Output":"=== RUN   TestService_IngestShort_Validation/empty_title\n"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/empty_title","Output":"--- PASS: TestService_IngestShort_Validation/empty_title (0.00s)\n"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_Validation/empty_title","Elapsed":0}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_Validation/empty_body"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/empty_body","Output":"=== RUN   TestService_IngestShort_Validation/empty_body\n"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/empty_body","Output":"--- PASS: TestService_IngestShort_Validation/empty_body (0.00s)\n"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_Validation/empty_body","Elapsed":0}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_Validation/title_too_long"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/title_too_long","Output":"=== RUN   TestService_IngestShort_Validation/title_too_long\n"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/title_too_long","Output":"--- PASS: TestService_IngestShort_Validation/title_too_long (0.00s)\n"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_Validation/title_too_long","Elapsed":0}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_Validation/body_too_long"}
+{"Time":"2026-07-11T17:56:52.7928844+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/body_too_long","Output":"=== RUN   TestService_IngestShort_Validation/body_too_long\n"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/body_too_long","Output":"--- PASS: TestService_IngestShort_Validation/body_too_long (0.00s)\n"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_Validation/body_too_long","Elapsed":0}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_source_type"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_source_type","Output":"=== RUN   TestService_IngestShort_Validation/invalid_source_type\n"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_source_type","Output":"--- PASS: TestService_IngestShort_Validation/invalid_source_type (0.00s)\n"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_source_type","Elapsed":0}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_source_trust"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_source_trust","Output":"=== RUN   TestService_IngestShort_Validation/invalid_source_trust\n"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_source_trust","Output":"--- PASS: TestService_IngestShort_Validation/invalid_source_trust (0.00s)\n"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_source_trust","Elapsed":0}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_sensitivity"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_sensitivity","Output":"=== RUN   TestService_IngestShort_Validation/invalid_sensitivity\n"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_sensitivity","Output":"--- PASS: TestService_IngestShort_Validation/invalid_sensitivity (0.00s)\n"}
+{"Time":"2026-07-11T17:56:52.7934277+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_Validation/invalid_sensitivity","Elapsed":0}
+{"Time":"2026-07-11T17:56:52.8011285+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Validation","Output":"--- PASS: TestService_IngestShort_Validation (0.37s)\n"}
+{"Time":"2026-07-11T17:56:52.8011285+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_Validation","Elapsed":0.37}
+{"Time":"2026-07-11T17:56:52.8011285+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_PolicyDenied"}
+{"Time":"2026-07-11T17:56:52.8011285+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_PolicyDenied","Output":"=== RUN   TestService_IngestShort_PolicyDenied\n"}
+{"Time":"2026-07-11T17:56:52.8594696+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_PolicyDenied","Output":"--- PASS: TestService_IngestShort_PolicyDenied (0.06s)\n"}
+{"Time":"2026-07-11T17:56:52.8594696+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_PolicyDenied","Elapsed":0.06}
+{"Time":"2026-07-11T17:56:52.8594696+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_Success"}
+{"Time":"2026-07-11T17:56:52.8594696+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Success","Output":"=== RUN   TestService_IngestShort_Success\n"}
+{"Time":"2026-07-11T17:56:52.9153953+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_Success","Output":"--- PASS: TestService_IngestShort_Success (0.06s)\n"}
+{"Time":"2026-07-11T17:56:52.9153953+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_Success","Elapsed":0.06}
+{"Time":"2026-07-11T17:56:52.9153953+09:00","Action":"run","Package":"memx/service","Test":"TestService_SearchShort_Validation"}
+{"Time":"2026-07-11T17:56:52.9153953+09:00","Action":"output","Package":"memx/service","Test":"TestService_SearchShort_Validation","Output":"=== RUN   TestService_SearchShort_Validation\n"}
+{"Time":"2026-07-11T17:56:52.9753418+09:00","Action":"output","Package":"memx/service","Test":"TestService_SearchShort_Validation","Output":"--- PASS: TestService_SearchShort_Validation (0.06s)\n"}
+{"Time":"2026-07-11T17:56:52.9753418+09:00","Action":"pass","Package":"memx/service","Test":"TestService_SearchShort_Validation","Elapsed":0.06}
+{"Time":"2026-07-11T17:56:52.9753418+09:00","Action":"run","Package":"memx/service","Test":"TestService_GetShort_Validation"}
+{"Time":"2026-07-11T17:56:52.9753418+09:00","Action":"output","Package":"memx/service","Test":"TestService_GetShort_Validation","Output":"=== RUN   TestService_GetShort_Validation\n"}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"run","Package":"memx/service","Test":"TestService_GetShort_Validation/empty_id"}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"output","Package":"memx/service","Test":"TestService_GetShort_Validation/empty_id","Output":"=== RUN   TestService_GetShort_Validation/empty_id\n"}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"output","Package":"memx/service","Test":"TestService_GetShort_Validation/empty_id","Output":"--- PASS: TestService_GetShort_Validation/empty_id (0.00s)\n"}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GetShort_Validation/empty_id","Elapsed":0}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"run","Package":"memx/service","Test":"TestService_GetShort_Validation/wrong_length"}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"output","Package":"memx/service","Test":"TestService_GetShort_Validation/wrong_length","Output":"=== RUN   TestService_GetShort_Validation/wrong_length\n"}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"output","Package":"memx/service","Test":"TestService_GetShort_Validation/wrong_length","Output":"--- PASS: TestService_GetShort_Validation/wrong_length (0.00s)\n"}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GetShort_Validation/wrong_length","Elapsed":0}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"run","Package":"memx/service","Test":"TestService_GetShort_Validation/non-hex"}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"output","Package":"memx/service","Test":"TestService_GetShort_Validation/non-hex","Output":"=== RUN   TestService_GetShort_Validation/non-hex\n"}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"output","Package":"memx/service","Test":"TestService_GetShort_Validation/non-hex","Output":"--- PASS: TestService_GetShort_Validation/non-hex (0.00s)\n"}
+{"Time":"2026-07-11T17:56:53.0363393+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GetShort_Validation/non-hex","Elapsed":0}
+{"Time":"2026-07-11T17:56:53.0491921+09:00","Action":"output","Package":"memx/service","Test":"TestService_GetShort_Validation","Output":"--- PASS: TestService_GetShort_Validation (0.08s)\n"}
+{"Time":"2026-07-11T17:56:53.0498979+09:00","Action":"pass","Package":"memx/service","Test":"TestService_GetShort_Validation","Elapsed":0.08}
+{"Time":"2026-07-11T17:56:53.0498979+09:00","Action":"run","Package":"memx/service","Test":"TestService_SummarizeNote_NoLLM"}
+{"Time":"2026-07-11T17:56:53.0498979+09:00","Action":"output","Package":"memx/service","Test":"TestService_SummarizeNote_NoLLM","Output":"=== RUN   TestService_SummarizeNote_NoLLM\n"}
+{"Time":"2026-07-11T17:56:53.124376+09:00","Action":"output","Package":"memx/service","Test":"TestService_SummarizeNote_NoLLM","Output":"--- PASS: TestService_SummarizeNote_NoLLM (0.07s)\n"}
+{"Time":"2026-07-11T17:56:53.1258819+09:00","Action":"pass","Package":"memx/service","Test":"TestService_SummarizeNote_NoLLM","Elapsed":0.07}
+{"Time":"2026-07-11T17:56:53.1258819+09:00","Action":"run","Package":"memx/service","Test":"TestService_SummarizeNotes_NoLLM"}
+{"Time":"2026-07-11T17:56:53.1258819+09:00","Action":"output","Package":"memx/service","Test":"TestService_SummarizeNotes_NoLLM","Output":"=== RUN   TestService_SummarizeNotes_NoLLM\n"}
+{"Time":"2026-07-11T17:56:53.1865806+09:00","Action":"output","Package":"memx/service","Test":"TestService_SummarizeNotes_NoLLM","Output":"--- PASS: TestService_SummarizeNotes_NoLLM (0.06s)\n"}
+{"Time":"2026-07-11T17:56:53.1865806+09:00","Action":"pass","Package":"memx/service","Test":"TestService_SummarizeNotes_NoLLM","Elapsed":0.06}
+{"Time":"2026-07-11T17:56:53.1865806+09:00","Action":"run","Package":"memx/service","Test":"TestService_SummarizeNote_WithMockLLM"}
+{"Time":"2026-07-11T17:56:53.1865806+09:00","Action":"output","Package":"memx/service","Test":"TestService_SummarizeNote_WithMockLLM","Output":"=== RUN   TestService_SummarizeNote_WithMockLLM\n"}
+{"Time":"2026-07-11T17:56:53.2603841+09:00","Action":"output","Package":"memx/service","Test":"TestService_SummarizeNote_WithMockLLM","Output":"--- PASS: TestService_SummarizeNote_WithMockLLM (0.06s)\n"}
+{"Time":"2026-07-11T17:56:53.2606967+09:00","Action":"pass","Package":"memx/service","Test":"TestService_SummarizeNote_WithMockLLM","Elapsed":0.06}
+{"Time":"2026-07-11T17:56:53.2606967+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_WithAutoSummary"}
+{"Time":"2026-07-11T17:56:53.2606967+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_WithAutoSummary","Output":"=== RUN   TestService_IngestShort_WithAutoSummary\n"}
+{"Time":"2026-07-11T17:56:53.308152+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_WithAutoSummary","Output":"--- PASS: TestService_IngestShort_WithAutoSummary (0.06s)\n"}
+{"Time":"2026-07-11T17:56:53.3087167+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_WithAutoSummary","Elapsed":0.06}
+{"Time":"2026-07-11T17:56:53.3087167+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_AutoSummaryFailureLogsWarning"}
+{"Time":"2026-07-11T17:56:53.3087167+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_AutoSummaryFailureLogsWarning","Output":"=== RUN   TestService_IngestShort_AutoSummaryFailureLogsWarning\n"}
+{"Time":"2026-07-11T17:56:53.3785671+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_AutoSummaryFailureLogsWarning","Output":"--- PASS: TestService_IngestShort_AutoSummaryFailureLogsWarning (0.06s)\n"}
+{"Time":"2026-07-11T17:56:53.4194651+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_AutoSummaryFailureLogsWarning","Elapsed":0.06}
+{"Time":"2026-07-11T17:56:53.4194651+09:00","Action":"run","Package":"memx/service","Test":"TestService_IngestShort_NoLLMFlag"}
+{"Time":"2026-07-11T17:56:53.4199675+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_NoLLMFlag","Output":"=== RUN   TestService_IngestShort_NoLLMFlag\n"}
+{"Time":"2026-07-11T17:56:53.4199675+09:00","Action":"output","Package":"memx/service","Test":"TestService_IngestShort_NoLLMFlag","Output":"--- PASS: TestService_IngestShort_NoLLMFlag (0.06s)\n"}
+{"Time":"2026-07-11T17:56:53.4199675+09:00","Action":"pass","Package":"memx/service","Test":"TestService_IngestShort_NoLLMFlag","Elapsed":0.06}
+{"Time":"2026-07-11T17:56:53.4199675+09:00","Action":"run","Package":"memx/service","Test":"TestArchiveNoteFromShort"}
+{"Time":"2026-07-11T17:56:53.4199675+09:00","Action":"output","Package":"memx/service","Test":"TestArchiveNoteFromShort","Output":"=== RUN   TestArchiveNoteFromShort\n"}
+{"Time":"2026-07-11T17:56:54.0183603+09:00","Action":"output","Package":"memx/service","Test":"TestArchiveNoteFromShort","Output":"--- PASS: TestArchiveNoteFromShort (0.60s)\n"}
+{"Time":"2026-07-11T17:56:54.0183603+09:00","Action":"pass","Package":"memx/service","Test":"TestArchiveNoteFromShort","Elapsed":0.6}
+{"Time":"2026-07-11T17:56:54.0183603+09:00","Action":"run","Package":"memx/service","Test":"TestRestoreFromArchive"}
+{"Time":"2026-07-11T17:56:54.0183603+09:00","Action":"output","Package":"memx/service","Test":"TestRestoreFromArchive","Output":"=== RUN   TestRestoreFromArchive\n"}
+{"Time":"2026-07-11T17:56:54.4191921+09:00","Action":"output","Package":"memx/service","Test":"TestRestoreFromArchive","Output":"--- PASS: TestRestoreFromArchive (0.40s)\n"}
+{"Time":"2026-07-11T17:56:54.4197051+09:00","Action":"pass","Package":"memx/service","Test":"TestRestoreFromArchive","Elapsed":0.4}
+{"Time":"2026-07-11T17:56:54.4197051+09:00","Action":"run","Package":"memx/service","Test":"TestGetArchive"}
+{"Time":"2026-07-11T17:56:54.4202182+09:00","Action":"output","Package":"memx/service","Test":"TestGetArchive","Output":"=== RUN   TestGetArchive\n"}
+{"Time":"2026-07-11T17:56:54.8584257+09:00","Action":"output","Package":"memx/service","Test":"TestGetArchive","Output":"--- PASS: TestGetArchive (0.44s)\n"}
+{"Time":"2026-07-11T17:56:54.8589374+09:00","Action":"pass","Package":"memx/service","Test":"TestGetArchive","Elapsed":0.44}
+{"Time":"2026-07-11T17:56:54.8589374+09:00","Action":"run","Package":"memx/service","Test":"TestListArchive"}
+{"Time":"2026-07-11T17:56:54.8589374+09:00","Action":"output","Package":"memx/service","Test":"TestListArchive","Output":"=== RUN   TestListArchive\n"}
+{"Time":"2026-07-11T17:56:55.2556594+09:00","Action":"output","Package":"memx/service","Test":"TestListArchive","Output":"--- PASS: TestListArchive (0.40s)\n"}
+{"Time":"2026-07-11T17:56:55.2556594+09:00","Action":"pass","Package":"memx/service","Test":"TestListArchive","Elapsed":0.4}
+{"Time":"2026-07-11T17:56:55.2556594+09:00","Action":"run","Package":"memx/service","Test":"TestGetArchiveLineage"}
+{"Time":"2026-07-11T17:56:55.2556594+09:00","Action":"output","Package":"memx/service","Test":"TestGetArchiveLineage","Output":"=== RUN   TestGetArchiveLineage\n"}
+{"Time":"2026-07-11T17:56:55.713579+09:00","Action":"output","Package":"memx/service","Test":"TestGetArchiveLineage","Output":"--- PASS: TestGetArchiveLineage (0.46s)\n"}
+{"Time":"2026-07-11T17:56:55.713579+09:00","Action":"pass","Package":"memx/service","Test":"TestGetArchiveLineage","Elapsed":0.46}
+{"Time":"2026-07-11T17:56:55.713579+09:00","Action":"run","Package":"memx/service","Test":"TestIngestJournal"}
+{"Time":"2026-07-11T17:56:55.714607+09:00","Action":"output","Package":"memx/service","Test":"TestIngestJournal","Output":"=== RUN   TestIngestJournal\n"}
+{"Time":"2026-07-11T17:56:56.339249+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestRecallSkillSearchesAcrossStores","Output":"--- PASS: TestRecallSkillSearchesAcrossStores (7.16s)\n"}
+{"Time":"2026-07-11T17:56:56.339249+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestRecallSkillSearchesAcrossStores","Elapsed":7.16}
+{"Time":"2026-07-11T17:56:56.339249+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestShowSkillFindsNotesAcrossStoresIncludingArchive"}
+{"Time":"2026-07-11T17:56:56.339249+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestShowSkillFindsNotesAcrossStoresIncludingArchive","Output":"=== RUN   TestShowSkillFindsNotesAcrossStoresIncludingArchive\n"}
+{"Time":"2026-07-11T17:56:56.3461989+09:00","Action":"output","Package":"memx/service","Test":"TestIngestJournal","Output":"--- PASS: TestIngestJournal (0.63s)\n"}
+{"Time":"2026-07-11T17:56:56.3461989+09:00","Action":"pass","Package":"memx/service","Test":"TestIngestJournal","Elapsed":0.63}
+{"Time":"2026-07-11T17:56:56.3461989+09:00","Action":"run","Package":"memx/service","Test":"TestIngestJournal_AutoSummaryFailureLogsWarning"}
+{"Time":"2026-07-11T17:56:56.3461989+09:00","Action":"output","Package":"memx/service","Test":"TestIngestJournal_AutoSummaryFailureLogsWarning","Output":"=== RUN   TestIngestJournal_AutoSummaryFailureLogsWarning\n"}
+{"Time":"2026-07-11T17:56:56.6856482+09:00","Action":"output","Package":"memx/service","Test":"TestIngestJournal_AutoSummaryFailureLogsWarning","Output":"--- PASS: TestIngestJournal_AutoSummaryFailureLogsWarning (0.34s)\n"}
+{"Time":"2026-07-11T17:56:56.6856482+09:00","Action":"pass","Package":"memx/service","Test":"TestIngestJournal_AutoSummaryFailureLogsWarning","Elapsed":0.34}
+{"Time":"2026-07-11T17:56:56.6856482+09:00","Action":"run","Package":"memx/service","Test":"TestIngestJournal_SecretDeny"}
+{"Time":"2026-07-11T17:56:56.6856482+09:00","Action":"output","Package":"memx/service","Test":"TestIngestJournal_SecretDeny","Output":"=== RUN   TestIngestJournal_SecretDeny\n"}
+{"Time":"2026-07-11T17:56:57.0421855+09:00","Action":"output","Package":"memx/service","Test":"TestIngestJournal_SecretDeny","Output":"--- PASS: TestIngestJournal_SecretDeny (0.36s)\n"}
+{"Time":"2026-07-11T17:56:57.0421855+09:00","Action":"pass","Package":"memx/service","Test":"TestIngestJournal_SecretDeny","Elapsed":0.36}
+{"Time":"2026-07-11T17:56:57.0421855+09:00","Action":"run","Package":"memx/service","Test":"TestGetJournal"}
+{"Time":"2026-07-11T17:56:57.0421855+09:00","Action":"output","Package":"memx/service","Test":"TestGetJournal","Output":"=== RUN   TestGetJournal\n"}
+{"Time":"2026-07-11T17:56:57.4692398+09:00","Action":"output","Package":"memx/service","Test":"TestGetJournal","Output":"--- PASS: TestGetJournal (0.43s)\n"}
+{"Time":"2026-07-11T17:56:57.4692398+09:00","Action":"pass","Package":"memx/service","Test":"TestGetJournal","Elapsed":0.43}
+{"Time":"2026-07-11T17:56:57.4692398+09:00","Action":"run","Package":"memx/service","Test":"TestSearchJournal"}
+{"Time":"2026-07-11T17:56:57.4692398+09:00","Action":"output","Package":"memx/service","Test":"TestSearchJournal","Output":"=== RUN   TestSearchJournal\n"}
+{"Time":"2026-07-11T17:56:57.8487482+09:00","Action":"output","Package":"memx/service","Test":"TestSearchJournal","Output":"--- PASS: TestSearchJournal (0.38s)\n"}
+{"Time":"2026-07-11T17:56:57.8487482+09:00","Action":"pass","Package":"memx/service","Test":"TestSearchJournal","Elapsed":0.38}
+{"Time":"2026-07-11T17:56:57.8487482+09:00","Action":"run","Package":"memx/service","Test":"TestFTSExistence"}
+{"Time":"2026-07-11T17:56:57.8487482+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"=== RUN   TestFTSExistence\n"}
+{"Time":"2026-07-11T17:56:58.4690301+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:240: FTS table exists: notes_fts\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: notes (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: notes_fts (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: notes_fts_data (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: notes_fts_idx (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: notes_fts_docsize (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: notes_fts_config (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: tags (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: sqlite_sequence (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: note_tags (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: note_embeddings (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: journal_meta (table)\n"}
+{"Time":"2026-07-11T17:56:58.4695934+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"    store_journal_test.go:256: journal table: lineage (table)\n"}
+{"Time":"2026-07-11T17:56:58.4778739+09:00","Action":"output","Package":"memx/service","Test":"TestFTSExistence","Output":"--- PASS: TestFTSExistence (0.63s)\n"}
+{"Time":"2026-07-11T17:56:58.4778739+09:00","Action":"pass","Package":"memx/service","Test":"TestFTSExistence","Elapsed":0.63}
+{"Time":"2026-07-11T17:56:58.4778739+09:00","Action":"run","Package":"memx/service","Test":"TestListJournalByScope"}
+{"Time":"2026-07-11T17:56:58.4778739+09:00","Action":"output","Package":"memx/service","Test":"TestListJournalByScope","Output":"=== RUN   TestListJournalByScope\n"}
+{"Time":"2026-07-11T17:56:58.8380071+09:00","Action":"output","Package":"memx/service","Test":"TestListJournalByScope","Output":"--- PASS: TestListJournalByScope (0.36s)\n"}
+{"Time":"2026-07-11T17:56:58.8380071+09:00","Action":"pass","Package":"memx/service","Test":"TestListJournalByScope","Elapsed":0.36}
+{"Time":"2026-07-11T17:56:58.8380071+09:00","Action":"run","Package":"memx/service","Test":"TestIngestKnowledge"}
+{"Time":"2026-07-11T17:56:58.8380071+09:00","Action":"output","Package":"memx/service","Test":"TestIngestKnowledge","Output":"=== RUN   TestIngestKnowledge\n"}
+{"Time":"2026-07-11T17:56:59.1994824+09:00","Action":"output","Package":"memx/service","Test":"TestIngestKnowledge","Output":"--- PASS: TestIngestKnowledge (0.36s)\n"}
+{"Time":"2026-07-11T17:56:59.1994824+09:00","Action":"pass","Package":"memx/service","Test":"TestIngestKnowledge","Elapsed":0.36}
+{"Time":"2026-07-11T17:56:59.1994824+09:00","Action":"run","Package":"memx/service","Test":"TestIngestKnowledge_AutoSummaryFailureLogsWarning"}
+{"Time":"2026-07-11T17:56:59.1994824+09:00","Action":"output","Package":"memx/service","Test":"TestIngestKnowledge_AutoSummaryFailureLogsWarning","Output":"=== RUN   TestIngestKnowledge_AutoSummaryFailureLogsWarning\n"}
+{"Time":"2026-07-11T17:56:59.5540396+09:00","Action":"output","Package":"memx/service","Test":"TestIngestKnowledge_AutoSummaryFailureLogsWarning","Output":"--- PASS: TestIngestKnowledge_AutoSummaryFailureLogsWarning (0.35s)\n"}
+{"Time":"2026-07-11T17:56:59.5540396+09:00","Action":"pass","Package":"memx/service","Test":"TestIngestKnowledge_AutoSummaryFailureLogsWarning","Elapsed":0.35}
+{"Time":"2026-07-11T17:56:59.5540396+09:00","Action":"run","Package":"memx/service","Test":"TestGetKnowledge"}
+{"Time":"2026-07-11T17:56:59.5540396+09:00","Action":"output","Package":"memx/service","Test":"TestGetKnowledge","Output":"=== RUN   TestGetKnowledge\n"}
+{"Time":"2026-07-11T17:56:59.9276688+09:00","Action":"output","Package":"memx/service","Test":"TestGetKnowledge","Output":"--- PASS: TestGetKnowledge (0.37s)\n"}
+{"Time":"2026-07-11T17:56:59.9276688+09:00","Action":"pass","Package":"memx/service","Test":"TestGetKnowledge","Elapsed":0.37}
+{"Time":"2026-07-11T17:56:59.9276688+09:00","Action":"run","Package":"memx/service","Test":"TestPinUnpinKnowledge"}
+{"Time":"2026-07-11T17:56:59.9276688+09:00","Action":"output","Package":"memx/service","Test":"TestPinUnpinKnowledge","Output":"=== RUN   TestPinUnpinKnowledge\n"}
+{"Time":"2026-07-11T17:57:00.3442334+09:00","Action":"output","Package":"memx/service","Test":"TestPinUnpinKnowledge","Output":"--- PASS: TestPinUnpinKnowledge (0.42s)\n"}
+{"Time":"2026-07-11T17:57:00.3442334+09:00","Action":"pass","Package":"memx/service","Test":"TestPinUnpinKnowledge","Elapsed":0.42}
+{"Time":"2026-07-11T17:57:00.3442334+09:00","Action":"run","Package":"memx/service","Test":"TestListPinnedKnowledge"}
+{"Time":"2026-07-11T17:57:00.3442334+09:00","Action":"output","Package":"memx/service","Test":"TestListPinnedKnowledge","Output":"=== RUN   TestListPinnedKnowledge\n"}
+{"Time":"2026-07-11T17:57:00.7908977+09:00","Action":"output","Package":"memx/service","Test":"TestListPinnedKnowledge","Output":"--- PASS: TestListPinnedKnowledge (0.45s)\n"}
+{"Time":"2026-07-11T17:57:00.7914184+09:00","Action":"pass","Package":"memx/service","Test":"TestListPinnedKnowledge","Elapsed":0.45}
+{"Time":"2026-07-11T17:57:00.7914184+09:00","Action":"run","Package":"memx/service","Test":"TestSearchKnowledge"}
+{"Time":"2026-07-11T17:57:00.7914184+09:00","Action":"output","Package":"memx/service","Test":"TestSearchKnowledge","Output":"=== RUN   TestSearchKnowledge\n"}
+{"Time":"2026-07-11T17:57:01.1442819+09:00","Action":"output","Package":"memx/service","Test":"TestSearchKnowledge","Output":"--- PASS: TestSearchKnowledge (0.35s)\n"}
+{"Time":"2026-07-11T17:57:01.1442819+09:00","Action":"pass","Package":"memx/service","Test":"TestSearchKnowledge","Elapsed":0.35}
+{"Time":"2026-07-11T17:57:01.1442819+09:00","Action":"output","Package":"memx/service","Output":"PASS\n"}
+{"Time":"2026-07-11T17:57:01.1492776+09:00","Action":"output","Package":"memx/service","Output":"ok  \tmemx/service\t20.596s\n"}
+{"Time":"2026-07-11T17:57:01.1492776+09:00","Action":"pass","Package":"memx/service","Elapsed":20.596}
+{"Time":"2026-07-11T17:57:03.5243079+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestShowSkillFindsNotesAcrossStoresIncludingArchive","Output":"--- PASS: TestShowSkillFindsNotesAcrossStoresIncludingArchive (7.19s)\n"}
+{"Time":"2026-07-11T17:57:03.5243079+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestShowSkillFindsNotesAcrossStoresIncludingArchive","Elapsed":7.19}
+{"Time":"2026-07-11T17:57:03.5243079+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestIngestCommandsAcceptNoLLMFlag"}
+{"Time":"2026-07-11T17:57:03.5243079+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIngestCommandsAcceptNoLLMFlag","Output":"=== RUN   TestIngestCommandsAcceptNoLLMFlag\n"}
+{"Time":"2026-07-11T17:57:10.3634222+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestIngestCommandsAcceptNoLLMFlag","Output":"--- PASS: TestIngestCommandsAcceptNoLLMFlag (6.84s)\n"}
+{"Time":"2026-07-11T17:57:10.3634222+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestIngestCommandsAcceptNoLLMFlag","Elapsed":6.84}
+{"Time":"2026-07-11T17:57:10.3634222+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestDocsCommandsCanUseSeparateResolverStore"}
+{"Time":"2026-07-11T17:57:10.3634222+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestDocsCommandsCanUseSeparateResolverStore","Output":"=== RUN   TestDocsCommandsCanUseSeparateResolverStore\n"}
+{"Time":"2026-07-11T17:57:17.2099029+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestDocsCommandsCanUseSeparateResolverStore","Output":"--- PASS: TestDocsCommandsCanUseSeparateResolverStore (6.85s)\n"}
+{"Time":"2026-07-11T17:57:17.2099029+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestDocsCommandsCanUseSeparateResolverStore","Elapsed":6.85}
+{"Time":"2026-07-11T17:57:17.2099029+09:00","Action":"run","Package":"memx/cmd/mem","Test":"TestDocsMigrateResolverStoreCommand"}
+{"Time":"2026-07-11T17:57:17.2099029+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestDocsMigrateResolverStoreCommand","Output":"=== RUN   TestDocsMigrateResolverStoreCommand\n"}
+{"Time":"2026-07-11T17:57:24.5499244+09:00","Action":"output","Package":"memx/cmd/mem","Test":"TestDocsMigrateResolverStoreCommand","Output":"--- PASS: TestDocsMigrateResolverStoreCommand (7.34s)\n"}
+{"Time":"2026-07-11T17:57:24.5499244+09:00","Action":"pass","Package":"memx/cmd/mem","Test":"TestDocsMigrateResolverStoreCommand","Elapsed":7.34}
+{"Time":"2026-07-11T17:57:24.5499244+09:00","Action":"output","Package":"memx/cmd/mem","Output":"PASS\n"}
+{"Time":"2026-07-11T17:57:24.5542368+09:00","Action":"output","Package":"memx/cmd/mem","Output":"ok  \tmemx/cmd/mem\t44.295s\n"}
+{"Time":"2026-07-11T17:57:24.5542368+09:00","Action":"pass","Package":"memx/cmd/mem","Elapsed":44.295}

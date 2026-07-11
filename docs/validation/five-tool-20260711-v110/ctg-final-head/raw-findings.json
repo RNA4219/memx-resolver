@@ -1,0 +1,59 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-11T08:53:45.576Z",
+  "run_id": "ctg-202607110853-local",
+  "repo": {
+    "root": "../../../../tmp/memx-resolver-v110-gate",
+    "revision": "57ce98361e81",
+    "dirty": false
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "plugin_versions": []
+  },
+  "artifact": "raw-findings",
+  "schema": "raw-findings@v1",
+  "completeness": "complete",
+  "findings": [
+    {
+      "id": "finding-UNSAFE_DELETE-000",
+      "ruleId": "UNSAFE_DELETE",
+      "category": "data",
+      "severity": "high",
+      "confidence": 0.8,
+      "title": "Unsafe delete operation detected",
+      "summary": "A delete operation is detected without proper safety checks. Add WHERE clauses, filters, soft-delete, or confirmation to prevent accidental data loss.",
+      "evidence": [
+        {
+          "id": "evidence-finding-UNSAFE_DELETE-000-00",
+          "path": "memx_resolver_workflow_plugin/store.py",
+          "startLine": 87,
+          "endLine": 93,
+          "kind": "text",
+          "excerptHash": "1eec6e58"
+        }
+      ],
+      "tags": [
+        "data-loss",
+        "delete",
+        "domain:data-access",
+        "safety"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "8da96ac37ccad3c7"
+    }
+  ],
+  "unsupported_claims": [],
+  "bySeverity": {
+    "critical": 0,
+    "high": 1,
+    "medium": 0,
+    "low": 0
+  },
+  "byRule": {
+    "UNSAFE_DELETE": 1
+  }
+}

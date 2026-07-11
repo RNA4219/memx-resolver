@@ -1,0 +1,24 @@
+# code-to-gate risk-register
+# Generated: 2026-07-11T08:53:45.576Z
+# Run ID: ctg-202607110853-local
+
+version: ctg/v1
+generated_at: 2026-07-11T08:53:45.576Z
+run_id: ctg-202607110853-local
+artifact: risk-register
+schema: risk-register@v1
+completeness: partial
+
+repo:
+  root: "../../../../tmp/memx-resolver-v110-gate"
+
+tool:
+  name: "code-to-gate"
+  version: "1.5.0"
+  plugin_versions: []
+
+risks:
+  []
+
+packageSummary:
+  []

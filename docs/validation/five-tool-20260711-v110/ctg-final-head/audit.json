@@ -1,0 +1,1678 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-11T08:53:45.659Z",
+  "run_id": "ctg-202607110853-local",
+  "repo": {
+    "root": "../../../../tmp/memx-resolver-v110-gate",
+    "revision": "57ce98361e81",
+    "dirty": false
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "config_hash": "53840941c91decd3cf00e831c22d1d94433d164ed84eb5e97bcd1c248683efd3",
+    "plugin_versions": []
+  },
+  "artifact": "audit",
+  "schema": "audit@v1",
+  "inputs": [
+    {
+      "path": ".claude/commands/ack-docs.md",
+      "hash": "26baa459f40c6ef69b0cea09ec8bece9d25770c8e471503d9c32319c02c96d27",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/journal.md",
+      "hash": "227f98f19d7e1f6db0cdaf5fc369b327979f2d0dca0c8bd9a40cf6a6139a9af2",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/knowledge.md",
+      "hash": "b090f04123125bbbc3b141f9248d13aa887a167c2b545c1bbb43761c0d9eeedb",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/memx-help.md",
+      "hash": "84f6430230d5006773e7629aa7ece3d0c238a2c2018ba0ed640c1f5f218fc86b",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/read-chunks.md",
+      "hash": "f30edfa131d91071bc5ddd4fd30e69af472d574338f86c9a4b77e301962a1ff9",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/recall.md",
+      "hash": "00277a0041291f84f02b8cc1d6982207ae1e6b63fc5cdef44455a757b712ea49",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/remember.md",
+      "hash": "617518689d6691ff4930b97021cc5a39b13fad641a9d4ae1886da0e725e71a24",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/resolve-contract.md",
+      "hash": "b9577c837f3b4f80680ddb97d5d192397eed2229ea6e7a47c5afe8c57de58f62",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/resolve-docs.md",
+      "hash": "cb6c7d6777eae1a9c9a041d8cd3f944ecba43674bb1d52589490f76949629553",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/show.md",
+      "hash": "fab8dc7a104ffa20af93f0352629d3639e94d3e4af82fc3bf68dede9b4489fa3",
+      "kind": "source"
+    },
+    {
+      "path": ".claude/commands/stale-check.md",
+      "hash": "0a672092a9847d2139f54f089163202dd7fbca563678697026002e5400ae272e",
+      "kind": "source"
+    },
+    {
+      "path": ".ctg/policy.yaml",
+      "hash": "56b181fbbdd2fcb343c334e0a29ec332c77e3741857c4d865d836c0fac6b5ef6",
+      "kind": "config"
+    },
+    {
+      "path": ".ctg/suppressions.yaml",
+      "hash": "008da5330d2abb94f865222fc2fe57b4fc70edd80e8b3ccf8c86238b46b76fc9",
+      "kind": "config"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug.yml",
+      "hash": "360605f5ce9e3eb131aaf2e82762996363f597c27ffb568f64ef73d553f6d087",
+      "kind": "config"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "hash": "4a7640dd242b054708e90e23c9aad0e634c65c3fe88c231518e737debd49141e",
+      "kind": "source"
+    },
+    {
+      "path": ".github/release-drafter.yml",
+      "hash": "102a0891f3c9efe7a341869cc4e573cce6d17c7e9f080dd7411ec10f02333d5f",
+      "kind": "config"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "hash": "62e319a0ecd1bb6ff3ab43b199ca91b1102b10234302d3c44dfae7f7f185ca33",
+      "kind": "config"
+    },
+    {
+      "path": ".github/workflows/release-drafter.yml",
+      "hash": "c1eebb022798c8def0fd1a59b27e0b92c510aa6da4c0e28d476834bffc32f5cd",
+      "kind": "config"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "hash": "535883f014cd1ff5b210d881dce2b6f32a4e3ee6c165cfb8b7a5604ecf39242b",
+      "kind": "config"
+    },
+    {
+      "path": ".pytest_cache/README.md",
+      "hash": "420e808d79a6c25d3cda0af33bc4782314a14949866682c68ce8149e89b66b70",
+      "kind": "source"
+    },
+    {
+      "path": ".tmp/go-build/trim.txt",
+      "hash": "51703c563bda9b6b50ffccfc69b12963c9ffdb6dfbbf6aca907c82e1ca9b9adf",
+      "kind": "source"
+    },
+    {
+      "path": "artifacts/ops/incident-summary.schema.json",
+      "hash": "a3f8718e8c44faf60d7c0c05ab7b9c117f82b7630d1f1e1d3bb899cc836feb3d",
+      "kind": "source"
+    },
+    {
+      "path": "artifacts/perf/formal_bench.py",
+      "hash": "36c119097521f25d56e1b19b3169962285279139ebc978173091a3620afb28bc",
+      "kind": "source"
+    },
+    {
+      "path": "artifacts/perf/perf-result.json",
+      "hash": "cb58b40a53d7887541e802780f16b3fdc19f9bf7418d68743d6079edd4fe039f",
+      "kind": "source"
+    },
+    {
+      "path": "artifacts/perf/seed-result.json",
+      "hash": "758e1513e02f88f8f7f422034e2af66f269f5a965ed055a6f39c38eb4603400e",
+      "kind": "source"
+    },
+    {
+      "path": "artifacts/perf/warmup-result.json",
+      "hash": "d7f584036f4b85cdbd56c276059b5df44569b094bdafb0c9691b4e8520f0b125",
+      "kind": "source"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "hash": "b23bb0eb7f83a96a1ca92d600c8a27e687e08bda6d8211f44b03311707c69f36",
+      "kind": "source"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "hash": "df17026a1a15fc744462a994727d334be394e970882ac93a1bce07797ce483cf",
+      "kind": "source"
+    },
+    {
+      "path": "ctg.config.yaml",
+      "hash": "5a55ce53bb595181a65343a317ffc5531d9213de5a3af284bf92fbb0c010e70c",
+      "kind": "config"
+    },
+    {
+      "path": "datasets/README.md",
+      "hash": "7e66787668aa52f04ad058b3e0a872f5daddcd134d0d68762b8a696001b6668f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/AC-20260701-01.md",
+      "hash": "05b41d7b241a3a3b804d71d25e62441ddcaf7de13b9c33f8e9a8ad06c3bc26b8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/AC-20260702-01.md",
+      "hash": "9043947268b4fafb008389e8034fae94265272734e1bb56f28ff549b74e7d708",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/AC-20260703-01.md",
+      "hash": "ad0c0342c94ae3a51cf76d206b672740e5a2b100f9e41907a2ce46356362480d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/ACCEPTANCE_TEMPLATE.md",
+      "hash": "e7c97a475638fe1b9804a6b24a2df6b9b2ec43cef949750bf94672f8916fe2da",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/INDEX.md",
+      "hash": "a3d1fd96410588e483645f898b8a04678e21d9c6219d095b3b44c471a2461401",
+      "kind": "source"
+    },
+    {
+      "path": "docs/acceptance/README.md",
+      "hash": "d4cceee7ec733099d7348b36f8a4c3c91689cec470e49ef49ff6bc609280441b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.design.md.json",
+      "hash": "465adf60465ae7479ab00525a5ca27e5f081c7be67e87d089023e29b8d6e8d27",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.interfaces.md.json",
+      "hash": "663880cf5ac0ef83bb92e7abbec1f507ac9983241c46664bfe7ba0bed0f527d8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.requirements.md.json",
+      "hash": "e229c7ba0dde70b3a2ce3671d612434efe2744ad4fd2c5b635d91a3a6fba27d7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/memx_spec_v3.go.json",
+      "hash": "6817bd0f01a0f855d3dbd982e588b15b3eef020e1f93c714babb1a90f61056c1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/README.md.json",
+      "hash": "a06900c8a685024f44943f2749b7251584455584d848237a62a1b7ccae28e218",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/USER_GUIDE.md.json",
+      "hash": "4f2bacd1ab69b220912890d91f1c5f2c4de8858f339b9a30353815dad5725156",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/hot.json",
+      "hash": "76a373f54a92ece283170212ed370f0232aed5103cb8bf63f5cd52fdeb11d582",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/index.json",
+      "hash": "251beb2807f4e648b86bc0073f54823738057fa5121cd40e020dbea73efc7389",
+      "kind": "source"
+    },
+    {
+      "path": "docs/BLUEPRINT.md",
+      "hash": "63df066cae38e182eee2f00aafaeb50cc22c78de57d46451a91fcc4dabadc698",
+      "kind": "source"
+    },
+    {
+      "path": "docs/CHECKLISTS.md",
+      "hash": "79200ec752c56ebdd348000f1f7f07a9837f4baa582ba5390ebb809081e973df",
+      "kind": "source"
+    },
+    {
+      "path": "docs/design.md",
+      "hash": "65e31f11947969927a4407b3ca4d80556a95097210c97a1cc87961b2665018ed",
+      "kind": "source"
+    },
+    {
+      "path": "docs/EVALUATION.md",
+      "hash": "48e0bf3cb5aa21d28630408c49b0c053d605e016ffe8a5417f1172bd3c19eb0a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/GUARDRAILS.md",
+      "hash": "f9c2892a779db9e2f808f16d5e362d2def4e9b626c805adc72d59ab3674fb9ca",
+      "kind": "source"
+    },
+    {
+      "path": "docs/HUB.codex.md",
+      "hash": "aa5daa1f34d904a2d7ee0eec94296d20890b0297320bdeb4ff4a36a039081340",
+      "kind": "source"
+    },
+    {
+      "path": "docs/IMPLEMENTATION-PLAN.md",
+      "hash": "ef1c880b32b5efbadf70ce9b41a42c47487f77c1aa46709fd0d27110cb679c67",
+      "kind": "source"
+    },
+    {
+      "path": "docs/interfaces.md",
+      "hash": "fa810743d4772bba78384c2f7fb4c3ecfd70df1b69c8e6eca7d2c226b10bf1b6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/CHANGES.md",
+      "hash": "982b5ff6079149707d5b97bb0481b9263928b2cecffd04bc11f98ffc68d70775",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/contracts/cli-json.schema.json",
+      "hash": "faf11fb5ffb2de60896b034f24215046058d28f5272284bc81108949683f9854",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/contracts/openapi.yaml",
+      "hash": "c7dda620a3437b59c526c402553bdc93f1ad761809a4fca90946023f7084de34",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/contracts/reports/CONTRACT-ALIGN-20260304-001.md",
+      "hash": "e06d7fb4ec6d54f2513d2bf618f5f10a5126bbd4a86c8fb2ca45a76a12f3fc00",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/contracts/reports/LATEST.md",
+      "hash": "907969fe19fbc012f00f55e5099f3ab04c1d2c9493d744389bd690c6c924311d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/contracts/reports/README.md",
+      "hash": "b8441f18c50ac27fa31c6f499d46d951e101a4164ce64a147454aa30ff600a37",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/CONTRACTS.md",
+      "hash": "26da2ff7f1ce38826cfcc12bb832ba462109af12a0d703f6c9cc5ee333da9d1b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/design-template.md",
+      "hash": "ce62213f3c876d7bdf6f064251383fa289e3bfaaa076f077fef604b558b843e3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/design.md",
+      "hash": "fb0b2722f3907a30380c48707a58da8c617edac2d7f7d6402ec7f67b6f298b4c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/error-contract.md",
+      "hash": "92c95aa2b06f3ee754aa8e620751dafa41397b0342c1c1528de12d24462a903a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/interfaces.md",
+      "hash": "1673536f9583a5e365cf9dea7cb4b7cddbc512ba83f6e993cc19644e4e2ea8ec",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/quickstart.md",
+      "hash": "689cc0325845070af0f3ffd29cd6dd0956dec6769b52bb4ba669d61df3b02c60",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-api.md",
+      "hash": "b3540c58dc6a6471ccb136477fab3b8a1c8d9851deca1bbff965a2bcfb65c470",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-architecture.md",
+      "hash": "33e51d24492072f3565e9f64b80a8f870f8374397720d4e992f74b7598d3789a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-cli.md",
+      "hash": "ac21914f34bec3145bd2b779907f7f2a280dcb2959f3a485dd58b3c62d853890",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-data-model.md",
+      "hash": "32f02d70471ebed4fb7b6c7b878d51d88dca3be3a3525b854ee682d1a8c541df",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-incident.md",
+      "hash": "631396de387b917795dc8cecc1e89163e77f164b51371222dbb739c250b20ba6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-llm.md",
+      "hash": "f9d604bf60b252b99b82ee85f926f4659620fb88bdd1aea47463eca694e2fd70",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-nfr.md",
+      "hash": "0a9e8c10aba562fd6de03f6ba1f7fd232093ba054df6eaae522b68fa0d764329",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements/requirements-release.md",
+      "hash": "951c123b447a2095a373efd2ece1b4953182e331f6e8539191150ba489ab8b54",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/requirements.md",
+      "hash": "9ed3b6d4ce15f483ede44e2316bebec0d7e4b8144a107a74a1c5dc712c0a2aab",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/CONTRACT-ALIGN-20260304.md",
+      "hash": "70c2bf2055763dbb92fd9bb0c467ab75949a3e1fafafa8ca8295c7f650e8f01d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-20260304.md",
+      "hash": "1107a0b2db3886477541ab8036a713b616079ccb20c2ba5c62d1a7cb9ecec80c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-ACCEPTANCE-YYYYMMDD.md",
+      "hash": "363caafc9ea137b131ffa4d2b41b1f7ed21b5adeb715bdabd027ce1bb7f35858",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-20260304-002.md",
+      "hash": "8619c5edfe131261762077b45503cf2302fb8350586975149d9d2905c0702e9f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-20260304-003.md",
+      "hash": "e5a2446a26b276d4727f52cf022be62f4f031b9340b7fc2345284885bdba1262",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-CHAPTER-VALIDATION-20260304.md",
+      "hash": "2708432befd7344450df24191cf2d5714f154d006d4debf3de1a1d41041f4367",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-GATE-EVIDENCE-INDEX.md",
+      "hash": "faa8e4b5dc5407d1d9a51af6c633fd8184de05af09869cc585d658d92286536c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/DESIGN-REVIEW-20260304-001.md",
+      "hash": "9a7a2f7caef6a4494c82db2aee432cdeec6e092d1a4e6a9cabd8a9c27e1967d8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/GO-LOCK-AUDIT-20260304.md",
+      "hash": "518e69074f249347804f1aced6b33498e2128c76e6b04c22c7ed250f70e18d30",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/inventory/DESIGN-SOURCE-INVENTORY-20260304.md",
+      "hash": "574c3d1c4e5c68e477d30a477472784104603a17ef4551f4d3f2b655fa425a7a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/README.md",
+      "hash": "3bd7097370cf397c5dfe97934ff95f21b2a76d480eb70cd8dc91bdd10831ac07",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/reviews/TEMPLATE.md",
+      "hash": "3b8c02d0edab6f93976a5d560f6d98c1230a993366cc77602b7accf4410cf91e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/spec.md",
+      "hash": "467c2eb2e3e71f9cb46bf8f5326affa596d6a523d480eb26e1ce54443710674f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/contract-alignment-lifecycle-spec.md",
+      "hash": "ad3613ce3658231380b3a36e4d7dd30a456534faaa820a8a4ddbe2cc238df72f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/contract-alignment-report-spec.md",
+      "hash": "2a4857d108f1909c662c20e31f8b964bcc0d2caf078566896d3b42ab8a1d8f8d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/contract-alignment-spec.md",
+      "hash": "0b351f21363cb6ff61dc6c5825d122a04039dfc0192797402f463df173ecd07d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-acceptance-lifecycle-spec.md",
+      "hash": "6f04aca685b2084399a6f78ba0aafdafc1086f8816cb057cef1f6421c4b9a5b6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-acceptance-operations-spec.md",
+      "hash": "32f8e96c9e7aa75d89a570e81a37e66636b289776d332b84b8f99360ce1a663d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-acceptance-report-spec.md",
+      "hash": "b0ce6266d4e133cdce7e1d64492ed2b75ee5da9de0cadb79173e0a5e0992d699",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-chapter-node-mapping-spec.md",
+      "hash": "6d0b59b389a82faa76eaf7d32b9f49d99b312d0461123d1cf1a700cf70f87d63",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-chapter-validation-calculation-spec.md",
+      "hash": "a803bfa02abd10bed1016c18f014d11cff4c84b27b662236cd177206893b6b0b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-chapter-validation-spec.md",
+      "hash": "8606f8118247b5439b8cb19b60c088bc96aad72de2eef011f6f3e5fde5e68617",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-deliverables-package-spec.md",
+      "hash": "83ff7f4513d88cb63dd14f483faba9d7959cd9721abe3abb2b78b38e0641cef3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-doc-dod-spec.md",
+      "hash": "302968cc9e090b040930d1e7741797ae41885911be2cf518ce9f98670528dc41",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-doc-ia-spec.md",
+      "hash": "71e995b1e30da7fff9d5455755505b4ab721dc56bf0ff4bebbfa1022a7bb82c4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-entrypoint-navigation-spec.md",
+      "hash": "24da97e321b24db75f3acbb28b608de2292d24d1e6d8f9a571ced2c6dfe1219d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-evidence-schema-spec.md",
+      "hash": "8a6959945390e7ee7f73c735d700cadf53d501babae997f96dd18302f1fab651",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-evidence-template-spec.md",
+      "hash": "561d750df13619b8579274ea51f162f5d37eb13153fb22cad46a5aed3da360a8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-gate-evidence-spec.md",
+      "hash": "0b5c2d3a1065a32b268800247c6f9c07f776695c0f5e3f4d5f45a08c3131c25e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-hub-source-coverage-spec.md",
+      "hash": "e2ebbb88c4cfbc81c0b0ffcc98698c9a3bc71ab2cd91051650c440cff8477ac2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-phase-gate-spec.md",
+      "hash": "826311979c94ea9c7653d02ab5e97c70975de1dfa9d0abc023a4ed355b19bb4e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-reference-alias-spec.md",
+      "hash": "40c912efed011ae303ed20f9b29d2dbc9dc69fd87a4772631298ebac2719c31f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-reference-conformance-spec.md",
+      "hash": "a34553186c789559a84384f5545de5cabfebe35c57a404fbd451c13a0b3512e2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-reference-resolution-spec.md",
+      "hash": "a82db394ffb87d5949aa6498654ca03b8206d943af1eba60e10a9d0e209c7dea",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-reference-validation-automation-spec.md",
+      "hash": "ff313fb2046670fa17daf04bb5161dcf4b39b9fe28797fc64712923ecf730898",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-review-artifact-sla-spec.md",
+      "hash": "f88443a14013f5ceeef20ce0c5637822d62e31b718b4ea1f972344426f502129",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-review-remediation-spec.md",
+      "hash": "21d96a3c170eae971d49006714d3be4b755e02782c25c37b01c70444a0e3b9d6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-review-spec.md",
+      "hash": "3bc707ab537ee70b510cde043b00bbcde00670dce3db35c3608442696baf3044",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-source-inventory-operations-spec.md",
+      "hash": "01a58ebf75ea9a85c60fa516c93f544ebd43376403438f73c3145ff8f2f7bc71",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-source-inventory-spec.md",
+      "hash": "cf4d335fb43f32dc5805be8280ec2e21bb8376132b902df4a5a5f6542bcb08d8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/design-update-trigger-spec.md",
+      "hash": "4a367c901a0ea59934d710b63ef89b0a051b41d476c063b8523558497f33f69b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/hub-source-coverage-operations-spec.md",
+      "hash": "a701cb889721a52f73657745870f8e2b7e6759c2afbfb522c52b234af5e3d361",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/incident-to-task-traceability-spec.md",
+      "hash": "9884613fe2228c40eed24e1c8a052098a367938f28363ece93cb19501dac33ce",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/link-integrity-spec.md",
+      "hash": "0315927f647537f9c6caaa74e5b79d5c89928a51a37fec7d7fe92741a54b08f8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/operations-spec.md",
+      "hash": "274b7f257721741c60107efc46e5c6d6e13e89ac68904ce50dc06875fa485baa",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/req-id-lifecycle-spec.md",
+      "hash": "6d01e0e059927f49352f2d5b0ab2dd0b05e49d510fda5a2ea8619594c65bf41b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/requirements-authoring-structure-spec.md",
+      "hash": "3da68ee72883d1e48dfc0e2cfe6f05a2da759c6f0802a383240a4cf05c2309db",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/requirements-coverage-spec.md",
+      "hash": "cb08bdac5844c77b7a8e8e40c9f1eb82290c10e0b7d26bc8fe3e9dda610634fe",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/specs/requirements-structure-spec.md",
+      "hash": "d612ebdaee9a18fd1fd69f993641e5e9bce12184b33e472929a05d1db048d798",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/docs/traceability.md",
+      "hash": "4b8d31c630353baef82010d9e751d42c51bfa554b6c868378a4de1c110027e49",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/client.go",
+      "hash": "6e01dc70b3e96232fdfe377e2dd094fcaf99eb8cc0a4320b338439a16a70f18a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/compatibility_test.go",
+      "hash": "f46f6fd6978e5664ce87f8928eed4e1428c2b0a36146e600931ba896d0347d75",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/errors.go",
+      "hash": "641b86767f33aea3f540ef9edfb87d95f2fb667c0035a20cf4c3efdc73f09dc5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/errors_test.go",
+      "hash": "cd20b2f5c95e3d79cb791c1fb2340d280b81458c018374b952249788b76e6d98",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/http_client.go",
+      "hash": "b4f4c28db333c4e03445c2f43bb41bc363d75f7b6e541ace8a3e3f887be26e06",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/http_server.go",
+      "hash": "aa4d02efdd61c559aeaba90842f5da172b9f7d71d9ba61b401567a6ce79b5c1d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/http_server_test.go",
+      "hash": "ce39aecbd48d54062f7c425267811eee451a4533e31ac876260ae1762f8951ed",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/inproc_client.go",
+      "hash": "ad893af80d66c493dc190a7b80cb1245cd225c85ba3686d12666b49aed6ccd43",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver.go",
+      "hash": "bf7e4fdbb2357a3fbec15f1ea6a4a0a8284cc84eafa07159c639a8a9df7c430b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_docs_http_client.go",
+      "hash": "63a8a41a75c31dcd49ba1f187d607959fb293b566e50019dd4d93d26f8dc1177",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_docs_http_server.go",
+      "hash": "3509c14ae5427ac6a33c9a66198f2f8a4a10d726ec1ea1cc9c167749d909ec12",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_docs_http_test.go",
+      "hash": "f4a600f68b4ee87bb0e5399430b557b98e3a249cc658178d4fce45723042f535",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_docs_inproc.go",
+      "hash": "e10d7b4c194723c1e34091e539f9f77f511a8bcab2c719086afc600e1e8b7da7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_docs_types.go",
+      "hash": "3f6e7b70894ca100dd1c477775f6b92d65821e4e5386d646896f0ed7ec05b188",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_multi.go",
+      "hash": "7e32d410618dd8b2a63359572a51a85383cda9b09cf4b028d554631a72ca1f59",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_multi_test.go",
+      "hash": "fa1d8218f3856740583eeff16a10eb1275874c9db942d97ef289a4acd6bcca8e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/resolver_test.go",
+      "hash": "874fdd93130d5137820a3519f0bab024ef5af1cfc58993991c9f8d8aef579484",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/typed_ref.go",
+      "hash": "3a98240d9f3bf4de2de22a0506d163079ffb37dc624d933fd29a450360394448",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/typed_ref_test.go",
+      "hash": "9dff7b4b9428659dc65afe794f11d2b240aa20233c88accaa7dfd088611dc99a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/api/types.go",
+      "hash": "56d68c755b1290b3deae9a16da10a72dcd71d0346b9987c3bf3c7444daa1156c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_api.go",
+      "hash": "63517651681f8f59915065d3f8ece6dedb001733f845b3158af695ba28d8a378",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_api_test.go",
+      "hash": "92d1c19c44eceecb85d258da78a6d9d94499da28440c477a9c04a20ed37370c8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_archive.go",
+      "hash": "5b4e89be90be7a34d151fb4d5b14d76b8c83ceb3d796f018a15beff593c72148",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_common.go",
+      "hash": "d5c69b51c68b512567b729768de404a5a1d4815ca8e84790f74d4b6de34ff91d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_docs.go",
+      "hash": "a651a84b707f4e97e7203d39d467920c508090c5ba28f09052ba1f39592ee52b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_gc.go",
+      "hash": "57d5a5c82b0ae6797cdb423b885b60873c8f8c35770d99b864d7fbf5cae98188",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_in.go",
+      "hash": "3e98e4d9d37980bb14ec8ead03865dc9ce7a20b9d1563c7a482dae03795b2d40",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_journal.go",
+      "hash": "a2cb4c0e424f1829bf6d8ea1ce7534af0a3874738eb2e730915552fb3c2cca5d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_knowledge.go",
+      "hash": "5253f87cde23820e2a5b6ee5a702f29a7eb9f5209aff7ea1909522f0c9bb4164",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_out.go",
+      "hash": "40c5415014d23fd1768e4f3744103c76bdb57fab6dd62ababb8c67448af2c8d0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_recall.go",
+      "hash": "6a73d681ced649a96db2e232a3acb2eecaac62a94f158ba4e83802b3feefe186",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/cmd_summarize.go",
+      "hash": "a639280b4ed255d6cfda5b301e840b20983cb214964c395de4ebc09499d10121",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/main.go",
+      "hash": "7189136555b049b9f7e89b986062aa7434bb14959c00567284b2d501d58948af",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/main_test.go",
+      "hash": "0ec39d7a8926d8872656d583201330ef3bb1fbd953b07445034eb30a7679bc61",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/cmd/mem/store_resolution.go",
+      "hash": "2d2cf30b99a8f70698349523d44634b2d0dd26cd3598ca93ce61343f20193b1d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/gatekeeper.go",
+      "hash": "d30bef5631ed5903d8ba657aa3bef8fa0dbc690d0651fa86b6184e4402464e8d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/gatekeeper_impl.go",
+      "hash": "0f15b812da2cb6de8edaa938e60e07bca164f76e498bf6a93caa2e9cee8e9e38",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/gatekeeper_impl_test.go",
+      "hash": "43475f82915b333020985392439dbfa8c3e208db6d23dcdbdd48def5f7b2b71c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/gc.go",
+      "hash": "b1aed720621ce2b9aeabd5c00c7bc3fe0c0ab465fd2d4863b3f1dcadfeb987e2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/llm_client.go",
+      "hash": "7f73453b00dd72cd2befbca566378e382e4a66b60d3fdf3a5f46c2232ced2ba7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/migrate_other.go",
+      "hash": "8edcf8f6ec9bb1354463ac6f92a6f8e233b76b2a7b14de6b2599afc7639c2a41",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/migrate_other_test.go",
+      "hash": "a04d2f4f42c46d9ee10f732c902cf8849285be9cbcde61a300473200017ba70a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/migrate_resolver.go",
+      "hash": "b3509dd538d972e2205a399138d9eb14765efb959514dfe0d2feb5f5aac3a3f2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/migrate_short.go",
+      "hash": "14ab0d539a8e0e84119a8c68f32d6fd7afa37375dbf5a9db520c92d063b4d45e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/open.go",
+      "hash": "9ba064fc46795d5002c899e4dc65f8b75900c061cf2426e47866c04ff14139d9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/openai_client.go",
+      "hash": "b212779c249bdfdeb522a2fec323c1e97131d343c77ef3e94f5a7f75579e3423",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/openai_client_test.go",
+      "hash": "a9c91d33068b2eb2a7894aef299983179df9a5f16134a59f56164dd0b3faf61d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/recall.go",
+      "hash": "e5de4496e04f97dc0dc5fbebdeafab8515af1c0f188a8b2943eb372458c8eaf9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/recall_test.go",
+      "hash": "874fa9f87bb0546c83eb17892a03623c2b8eb7a6af7097f4767ccdb6a7df6579",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/db/types.go",
+      "hash": "1225088a00c590f64c5d21b6590069ead0f04a439296dabc3b3c40d63116156c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/recovery/recovery.go",
+      "hash": "db48d37ca0a3257bad5cbd204a6bcf8fbf7ccdcd2dc859d64d97fc22e5188486",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/recovery/recovery_test.go",
+      "hash": "b58f5d1ecc6d4fea5f0dd1d599fa7477370c187237f3d8349ec94822bbdfa774",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/errors.go",
+      "hash": "79d811efd33a7c6015aaf32f209419277995fcea686ceb55736fa2b1fff8a39b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/gc.go",
+      "hash": "b89a4abaabb0b6928fd873d97a8faa5a8cd8286f7d910c04ff335562bb6202a2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/gc_test.go",
+      "hash": "e2a05e66d2ced309cb4aa28c3b66ee2b2192082cac741154abf480b0585cac1d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/llm_config.go",
+      "hash": "85e91162ce3537d1fa1cba9148f40afcc271fe949d27414a054419a356c67ebc",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/logger.go",
+      "hash": "2fcbc2363f4af7472a9d91fb77488e4c982eb450d4263070a358a2722ab5d104",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/logger_test.go",
+      "hash": "81a35735d8e953a66a5f4c4db687a2b5044f85b510f0f9afed077a32d962130d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/models.go",
+      "hash": "ffba10f4898b8f89bce1575b496c6c57b63890a70b97dd78b91fc211ec0cb230",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/recall_test.go",
+      "hash": "48f49bbf34b48e1e4cbb52da393accdf2f3bf1acb73bb9deb24c3fe6b085cc5b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver.go",
+      "hash": "4617ccbd59cd4e4cf905c4464c60b01640884c7e716c7ea62ed30132c86f1441",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs.go",
+      "hash": "2ed207ce43bba235127d4e454699246cc44b92aca810e85a2c76c17517b32894",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_chunking.go",
+      "hash": "dfc91da2d416b03395b47c3ba8a0085388670a2b861ca20c861b426f653d7d32",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_parsing.go",
+      "hash": "ebe31f18e13769ea7074d234b7c7c89ba93d9369ad45603c16de5d1f4be1785b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_scoring.go",
+      "hash": "0d99871cd33a0ba145a248268c94ba03ab5deb747fb86e50ff822ff788368701",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_test.go",
+      "hash": "4478f62df8938aafebbf97ea3f031d10b1ca05846e8c8a96c739fb91c864f008",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_types.go",
+      "hash": "1a6421253d3bf95d320e9affb13b1a3ed9d1fe3c2d5cb619234ca06c3f41e0d7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_docs_utils.go",
+      "hash": "3f7e2c2f80cfa82b26f656cb3258d0e2c3d8b5ebcec3b10f068eb893a95bc236",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/resolver_memory_cards.go",
+      "hash": "2ee87be50b6ae950ecfc8ddd217b33442e5c641538847a8de0d21f880756358f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/search_fallback.go",
+      "hash": "a8235b4353376888f921f6c71ee68c8fb480d06e29c0460e4e8304a2b0063bce",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/service.go",
+      "hash": "d25c34b4bcbdae5004b7a41e148d5fc43d173de890cf7352ed1c98eb487cd79d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/service_test.go",
+      "hash": "117254525fd441f3e07bbd08f00fb07394ffa9a55207fff76aae9724e8e1ff25",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_archive.go",
+      "hash": "163c3f4c922e711d73e08185968d56acbffb0ec235bdb201333f0a1645caea71",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_archive_test.go",
+      "hash": "e388ba93f76411c5ab66d877ae7f67b113d9e0d75591305eb56f3ecab5bfb9a8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_journal.go",
+      "hash": "3b97a6f4ca8b8b138eeaf134ec4eb50bba731e7ee47223a9240548f3d1b925a3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_journal_test.go",
+      "hash": "fb3859721668f1137aadcc46d76004606bba7c98474198fcd0d46777a59e3e31",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_knowledge.go",
+      "hash": "186d539d3979f3cb80ecb370d5ed252fe49416d32a953012ac2589babd5a134e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/go/service/store_knowledge_test.go",
+      "hash": "b8097607216092b9b68b8a738c2c45b938502ae209454156f21cb34e41ff1889",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/memory_policy.yaml",
+      "hash": "1770071955c33fb1f04b08de3bc6aed33434a29e0f4bf7ea8daa120e05966a06",
+      "kind": "source"
+    },
+    {
+      "path": "docs/memx_spec_v3/README.md",
+      "hash": "e4b46352dea3dfabef51af0640863e1cfd3cbfc55995370733fb840d6a852e35",
+      "kind": "source"
+    },
+    {
+      "path": "docs/requirements.md",
+      "hash": "7831070d28450049713fe25bb5886cad01cfd521bae64b532cd73952c908a6b4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/RUNBOOK.md",
+      "hash": "6816b356ea8898f392c94647b6bc9281b7e6d7e03623833b650ac807a578571c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/TASKS.md",
+      "hash": "12697bba8b5c1676516b99487aa55bc0bbc67b365f97c6703d63ef2e3f3dbd09",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/ctg/analysis-report.md",
+      "hash": "6902e1dd78b4620349bc0bbe1ece6165d288dd3bdf2a81dff130acf3c082c12f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/ctg/audit.json",
+      "hash": "db3514b84c39c752b9b48250d0cb1e6c6f63d67e954845dda7178b825876c2f2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/ctg/findings.json",
+      "hash": "204bfcd6fcffaecf345c63ae06feb0e5253720ebca8bd3fcda581565b076279b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/ctg/invariants.json",
+      "hash": "be1c4a4676b1cab2c79e151b9598b2986100211a4d766bc0fb22e5632e5268c4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/ctg/raw-findings.json",
+      "hash": "06f88b1f9604d334f87eb1e95c9152395e7b0ac7d8c7fa806315ab467d7b62f0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/ctg/release-readiness.json",
+      "hash": "6da477585a0c71d3ad0a81a8064401ce31ea4ac5714146b8139f2abe4130d0bc",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/ctg/repo-graph.json",
+      "hash": "eba4360e0fe12470ce0693c255a5abbe90e30ac6fea84a8ab0ddf6fbe1d2507b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/ctg/risk-register.yaml",
+      "hash": "938a62a9a7a01c55b69386c74394131d7cae0e235c4c966067b2c1c8f19842d5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/ctg/self-analysis-debt.json",
+      "hash": "12f369ceccee7a9a56d903ef20b063eecc2e3649c1c61751d317d28581e8017c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/ctg/test-seeds.json",
+      "hash": "24cf090efaedb552dff9da4e1bd35497dfd32c2537f4d14f8ec19a7cb3380612",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/five-tool-gate-report.md",
+      "hash": "0a87b2d4a3586d29c01f30e5b9b18231f928543124b74c34e3646f1d7c899d9d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/gate-manifest.json",
+      "hash": "f0317a7f5bfd1bfe5c7d57827f894abd91909c986a45afe93a4110f061ce4dd1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate/artifact-manifest.json",
+      "hash": "82a201bde4008d483f5b80a4b8ec239b374d414ec708fffb558cba382bb7d437",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate/HATE-run.json",
+      "hash": "7cce4c682ea463450f219772ed726f69fb49fe375fba9d2f8b2914a1c1a82394",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate/precheck-decision.json",
+      "hash": "ce250b5b509984f893c7d043f5189931bdc5b8d193f6fcd7548e5e3232052c0f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate/profile-report.json",
+      "hash": "e64b7677e3d824fbff3e52f74a2f998e74a8c08de406869c0b371ff44ec862bb",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate/quarantine-report.json",
+      "hash": "ca43e0924ca9da1c76068ccca383d3935a2912ef9202eeac53454adedb28bd58",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate/record.json",
+      "hash": "78701a2412752eef6f723a0c050b62af252e5543170e6ff329f241d81c1adb79",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate/summary.md",
+      "hash": "3555f9f1f6165e6a7b8b781dec8f9be1609eaf6fb3ec47d6e3204b076468ba7b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-fixture/diff-risk-test.json",
+      "hash": "5bfb36db4adad031366351927734bc9bffd3ccc9ee4365581664c9fc745f0d5a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-fixture/p0a/artifact-manifest.json",
+      "hash": "82a201bde4008d483f5b80a4b8ec239b374d414ec708fffb558cba382bb7d437",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-fixture/p0a/HATE-run.json",
+      "hash": "7cce4c682ea463450f219772ed726f69fb49fe375fba9d2f8b2914a1c1a82394",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-fixture/p0a/precheck-decision.json",
+      "hash": "ce250b5b509984f893c7d043f5189931bdc5b8d193f6fcd7548e5e3232052c0f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-fixture/p0a/profile-report.json",
+      "hash": "e64b7677e3d824fbff3e52f74a2f998e74a8c08de406869c0b371ff44ec862bb",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-fixture/p0a/quarantine-report.json",
+      "hash": "ca43e0924ca9da1c76068ccca383d3935a2912ef9202eeac53454adedb28bd58",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-fixture/p0a/record.json",
+      "hash": "78701a2412752eef6f723a0c050b62af252e5543170e6ff329f241d81c1adb79",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-fixture/p0a/summary.md",
+      "hash": "3555f9f1f6165e6a7b8b781dec8f9be1609eaf6fb3ec47d6e3204b076468ba7b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-input/ci-context.json",
+      "hash": "ed2e46bee6c0acbdce1816974c4f885006a4e08aaafd04378a8c394a95496266",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-qeg/diff-risk-test.json",
+      "hash": "5bfb36db4adad031366351927734bc9bffd3ccc9ee4365581664c9fc745f0d5a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-qeg/evidence-map.json",
+      "hash": "2cc3071e838ae7b9f8c43783692fa45ae95d4a5840d6ef7027419d4ce501cf15",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-qeg/qeg-bundle.json",
+      "hash": "0e2a0ca723fb7962891df4e24173675c6c995b1ec159e62f0335811c46478ea6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-qeg/qeg-export-report.json",
+      "hash": "5d054e6a5e7764978fe1c494b2b01997064bac63b135033b109ca43f326030d3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/validation/five-tool-20260702/hate-qeg/qeg-export-summary.md",
+      "hash": "04a90f36e51417991608de73ceb7f5c8dd8b98904500125d8f7335ff0f17f7bc",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/addenda/A_Glossary.md",
+      "hash": "5573aa1b956ca207f2b666d500b85e881706859593f29d0636a3768f89c72b42",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/addenda/D_Context_Trimming.md",
+      "hash": "46bdb31313d8a3f172fced077c66040abf84ce9164bf068c359f64dfd16a705a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/addenda/G_Security_Privacy.md",
+      "hash": "056b6b117a5e6b752f3960018419aa9f4c60107e2842d5d9b0f66b3ba1355906",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/ADR/ADR-0001-4db-boundary.md",
+      "hash": "ac673ef76c092eea5ea07e98736fb17bd5bcdeef17a18a0cc8fb29eeb5f0be93",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/ADR/ADR-0002-v1-required-endpoints.md",
+      "hash": "fa2f63ab74ce00ffb34a9462eda8fa6a40d6a5bb347680c6a0f1131cf03be7b6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/ADR/ADR-0003-errorcode-retryable-boundary.md",
+      "hash": "9b916c7b7dff55dd4f54ceaa5b3d7d162b0c17a8e1be4d88c394e3b75c8ce96c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/ADR/README.md",
+      "hash": "bfc6600a4cb9e1be30e438b031f2ec87d9953055ea0bf9be34f7a9128f70fe11",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/api.json",
+      "hash": "22aee0802ae8395da3caacae3c08991f0494bf6b239c2ae5956e183e08c62c73",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/CHECKLISTS.md.json",
+      "hash": "408eab95e5af7cd7cbe4b961e23edacbf494e5fd8f29850bc4c6a3d8be465020",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/design.json",
+      "hash": "75a442e3ae200f54d0e4a2d24741d291cd96697d64076eb0093f724a268027ab",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/EVALUATION.md.json",
+      "hash": "daa532b6090d4c36d1e16903d843108eec1b7b291b4ef9a28f45c2f2da1ca204",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/governance.policy.yaml.json",
+      "hash": "75f904ea91ab620905f91bf86d914891f0e9346c507076a06a26ed29dafe7749",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/governance.prioritization.yaml.json",
+      "hash": "e9bbf92e593918064935786be0f41c8ef0590887ceed842188b862378bc8c27c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/GUARDRAILS.md.json",
+      "hash": "0a0bdcc53263db1ebdc7f6dbe37a4c186314b4fecf0da6bd2a81f9b97ed662b1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/memx_spec_v3__docs__interfaces.md.json",
+      "hash": "8682f2c32bcbe98743d91267f3a07685e755b4f03ab80d45337dff2c1145a5dd",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/memx_spec_v3__docs__quickstart.md.json",
+      "hash": "d1df15b3f6c3f7ae143ff7ce9906826df91c484c743fd5b9d9dc373e957bb6ed",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/memx_spec_v3__docs__requirements.md.json",
+      "hash": "90a74d99f2f45573311a8c86c19f8eb59596e5a4c9f420dbacdac527eea35bce",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/memx_spec_v3__go__api__http_server.go.json",
+      "hash": "e95ab34526b6e8fc31e8b660483bd8edc21e877d2eb0dc1726b9c8c074f14357",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/memx_spec_v3__go__service__service.go.json",
+      "hash": "297dc99998f6c9d2a3d78be8b70dbae7e16c52b80f2af39602874287865fb387",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/quickstart.json",
+      "hash": "6c68a96b205e26ad9ce5465ca104b2ac8ac1a580e2f19204d85004134faa150e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/requirements.json",
+      "hash": "85872cbc25949812a408fe28dac4d5d67a2d718b3ee26bd1b311c722630a3cea",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/RUNBOOK.md.json",
+      "hash": "bcf62d4e346ba9731b2fea35fb41cb15c001a4cc80ce2df53d5f27bcd518830e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/caps/service.json",
+      "hash": "b02809e4a78111c40d338df4d9d8db628035957a005ae00021e838a28dba0cb2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/hot.json",
+      "hash": "001791d3b3262f90d663a8602e4d2b7636fa9f1b7b9634c99e51295329619399",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/index.json",
+      "hash": "fd2d11334ca8de9d96d783a6510b10efe1a01ad255ad5fddd1b70a1673927f30",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/memx-birdseye-validation-spec.md",
+      "hash": "64d04d80d77da209fe062346d03246063d67500815c4f7da9f6c0a3ce839dc6e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/birdseye/README.md",
+      "hash": "02a78711c46f604d03a0c042e0460fe36949d52e411d017f62c9b352d8981cd7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/BLUEPRINT.md",
+      "hash": "944b758f1ee998d70fb3fe4f0997c05789b1e5302051026c6a21a942d4466a5c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/CHECKLISTS.md",
+      "hash": "50a6a409aa89dcde8f08701fdc81e9d99a012cf95a975502c4b7035017a1d97f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/design-docs-prioritization-spec.md",
+      "hash": "f82de56aed18c3a8cb3774180b8520d44a49f1ea74eca0f29d28d38c84b31a5e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/EVALUATION.md",
+      "hash": "eb57961df304df97dbb9d4ce05cad5af02843ceb402d3eb242518aee9747812b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/GUARDRAILS.md",
+      "hash": "57b736b8266fa52d44b9ab542bdcc3179acc8ef999f7b69289c207767f8a2a86",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/HUB.codex.md",
+      "hash": "b97300313a6e46e38ac60207c725281a248937af10231c207667eb9c736fbb08",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/IN-20260303-002.md",
+      "hash": "c904650dfcf5779645589cb8e573d661f06d78a2788ccce0d54dc343bb00985f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/IN-BASELINE.md",
+      "hash": "a984a06df879a5d502cd0709fe1912bcafb6e4cae90ecac7d00f8cd4e5c4d232",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/IN-YYYYMMDD-001.md",
+      "hash": "3e1c53370228004db9885dad3841b175321e35132d3883b7b23c18ee1d0d6309",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/incident-record-operations-spec.md",
+      "hash": "dff7c44baed2208c283257995b6c42a23c33dedd55cef9a199e10879fdd907aa",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/INCIDENT_TEMPLATE.md",
+      "hash": "bf3da465c1b9fa3bcacb70944000a1496e1ed980950f621ee99de0235a04299e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/01-typed-ref-unification.md",
+      "hash": "49ae85ce20005e356c59111bf12839ba7794f6e86cf44fcca9df56c58ca78140",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/02-agent-taskstate-state-history-and-bundle-audit.md",
+      "hash": "90d6ffda92d544f2d86d58460daabefdea7ddb6d46d705d0a840c7bda67dffc5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/03-agent-taskstate-memx-context-rebuild-resolver.md",
+      "hash": "e96b729e0ef8bc8e2401d0311f9e06232587e666f5af3bf779e4fc6c5ae5bfab",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/04-tracker-bridge-minimum-integration.md",
+      "hash": "f80714c4e0a063b4b09943556a3b66e5ff92baabe914193541a65d5d4e8873bf",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/kv-cache-independence-amendments.md",
+      "hash": "b570aba04c84900a5a5fd9da6cfce3777615bcc962ea62c328bece1d47e3b49f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/kv-priority-roadmap/プライオリティ.md",
+      "hash": "74bcadca5fea8af53212d0afaff837509a5e34ac07a37bea31d5d658a66ca151",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/memx-core/interfaces.md",
+      "hash": "1b764107dfee5218cfa5a9ec0e498ae4c1cbd7efd2c95c784cc97adaea8d0810",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/memx-core/memx-core-requirements.md",
+      "hash": "8a117d036d0099f52766f12004c041e8f42cba45242559c691453c2774f0bb42",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/memx-core/scope.md",
+      "hash": "ce708c428fbea25b0a2b2a8005125490ea6b89bb7a92569dcbbd401ce347e975",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/memx_specification_analysis.md",
+      "hash": "98f84832ab5053a2dd59899f325e95eb3b735cbb4ac180cd031bc10d47c2695b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/orchestration/memx-design-docs-authoring.md",
+      "hash": "0b711e5fc383621b0afdc9c208e00dbe884e424de664882865e1119247e5fb30",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/orchestration/memx-v1-bootstrap.md",
+      "hash": "ef3d2d4e75c7988971fd00b86a90b12abe1be8bd99b837ba499b39b74c81f3bf",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/QUALITY_GATES.md",
+      "hash": "b0903ff69937318a8145d4ea464eae18b40d0e42dbf035c81057c05d444849d4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/RUNBOOK.md",
+      "hash": "87e66f303e133fedd2b979812ff9bbc8351cf436e39ab2602af144fbeaf2de69",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/security/minimal_operations.md",
+      "hash": "ea09fe37586a16032a79de7299717ad9bc4f1aa6759a3c18310978f174767513",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.chapter-validation-03-04-2026.md",
+      "hash": "ebb85b0750ce9f4d15f3b5a55728f8770d0775d28b13131fd487be7f9d66bde4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.gc-trigger-dryrun-03-03-2026.md",
+      "hash": "c80538d395a2bc0404e13b62f96b42a6f8151d1f78b83b98495709a16fb0be1d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.memx-bootstrap-03-03-2026.md",
+      "hash": "911d236c57e686e8f0b4aa2e345fcdffa18195f8bfa20f36fe7be8226a7ea990",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.migrate-other-ddl-order-03-03-2026.md",
+      "hash": "d3e84309a08bfa749a489acf900560ec54bde50c8176ebae5c9c6786657824c5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.phase3-4-artifacts-03-04-2026.md",
+      "hash": "6147319ce6d685d83d52daeb938fdcc05ae25228f57002ae923f1af91db0b008",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.reassess-design-docs-priority-03-03-2026.md",
+      "hash": "ed083c8a316b07e00e542974e86ef711936557b6e7d61ccdac1420b9de48c36f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.recall-query-normalization-03-03-2026.md",
+      "hash": "5d978ed77553ef8a0271801c655a6bd77e9f583e81779a90dceb0caa9416b91f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/tasks/TASK.replace-incident-placeholder-ids-03-03-2026.md",
+      "hash": "ac8cd95a55e13e54e71561b53cdd71558bf862b07fb95c136f6339f0f9e2f871",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/TASKS.md",
+      "hash": "956777ab70f4af66ca3add6f77b2c193be1b752989f626d56a99dd13d484ae8c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/UPSTREAM.md",
+      "hash": "72c9a45145d0beb345c74567b93a7f4b0f86e91ad9b672b1e90a14ed01f0acd9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/_old_docs/UPSTREAM_WEEKLY_LOG.md",
+      "hash": "7c4671df5be6e8414ad348de8a9a6649ee51ed698554e930cd10e27f8b94d4b1",
+      "kind": "source"
+    },
+    {
+      "path": "governance/metrics.yaml",
+      "hash": "be6e7618d7b9a9467946144de170cfe39b4f578e06a5200deaedda82394c5a64",
+      "kind": "config"
+    },
+    {
+      "path": "governance/policy.yaml",
+      "hash": "cd59e75d9f6c977d45995530d95928a55f7c7afade850c17fd43acdaaa341fd8",
+      "kind": "config"
+    },
+    {
+      "path": "governance/prioritization.yaml",
+      "hash": "a4428c370ad0e097fc7ddaf63179b6ab93af8dafa89f6199e5f5af1962d4e33a",
+      "kind": "config"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/markdown.py",
+      "hash": "6993f0c8de297103e79afeb5a4640c9f3ed9014f89d0f187f0df33ef5defdec3",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/paths.py",
+      "hash": "19bf33e10142d8e5bfb3034ef84a93d5af1f3e4de4d29fa835042d500a1c4f1d",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/plugin.py",
+      "hash": "27ecc8a7a99e31bd13d2f69f7e7641bebc317d752d993192e484335882245914",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/policy.py",
+      "hash": "e02c7a2424e3f060ab7a626d6851e6c0629e8defceb8b3fae11b48a4d6d1717a",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/results.py",
+      "hash": "36b55a58a05c97f3255001f1a96bf57ca92749b3f28e1c96a21637662cc84f9b",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/store.py",
+      "hash": "3fb5b9958a6aa49c93e98b4a953d5c4d6eb5273c6f3ec44a221bb07fc217267b",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/typed_ref.py",
+      "hash": "2185967d50338f20e7d7ad82ec0ef0d5ef8e15a1e72d9b9baed7c25fd695cd43",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/_version.py",
+      "hash": "edb520b9a8b1f5eed048d59a2037b83784c73f608549c58fbcf49de93bf42fc3",
+      "kind": "source"
+    },
+    {
+      "path": "memx_resolver_workflow_plugin/__init__.py",
+      "hash": "b776dca142330a47e396ea148bca81467795c698001097f90ae9573e72aec7e1",
+      "kind": "source"
+    },
+    {
+      "path": "README.md",
+      "hash": "d1818d881bbe9f612365901507536b60e95661a06b29b81414672e5d6c203945",
+      "kind": "source"
+    },
+    {
+      "path": "SECURITY.md",
+      "hash": "09d0bf55f1eb7e995bb15a8c3e76a77e835ec9c17e56f59b262dcf1b46d98c70",
+      "kind": "source"
+    },
+    {
+      "path": "tests/test_cli_schema_contract.py",
+      "hash": "8d5002b52e23f4555b37d7214eb8ee9eda0c1d506adb1be68925c09bfd678eed",
+      "kind": "source"
+    },
+    {
+      "path": "tests/test_typed_ref.py",
+      "hash": "56effcfcf2ba693808a120d90991eaf6dc789892e022264870615516be815ffc",
+      "kind": "source"
+    },
+    {
+      "path": "tests/test_workflow_plugin.py",
+      "hash": "2ac61f80f7ae849a34e6e314ca70d26241cb357070f654ec8d07c6a86fb27b83",
+      "kind": "source"
+    },
+    {
+      "path": "USER_GUIDE.md",
+      "hash": "e63af14a71650fb3c6a9a66cb14479274c0fafaba47d4df660e937e21c15d481",
+      "kind": "source"
+    }
+  ],
+  "policy": {
+    "id": "default",
+    "hash": "none"
+  },
+  "exit": {
+    "code": 0,
+    "status": "passed",
+    "reason": "Analysis complete"
+  },
+  "artifacts": [
+    {
+      "path": "..\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\raw-findings.json",
+      "hash": "sha256:970041da2734d876972dffea0dfd022607fc1bbbff97fd8eb7ad20f31389847a",
+      "stable_hash": "sha256:6cfe75b5106d87a216880f5ca8f5ad17db6c46a5d7437214c07197128826d335",
+      "kind": "json"
+    },
+    {
+      "path": "..\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\findings.json",
+      "hash": "sha256:0c391cf5bb67574d8cdb91a83c76e46b06d0d46c5459d78066a1e389a239a839",
+      "stable_hash": "sha256:841350603903f10de406c155c54f1da7248d4ff31776cf63e620933216e9ee52",
+      "kind": "json"
+    },
+    {
+      "path": "..\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\risk-register.yaml",
+      "hash": "sha256:24d45bef8249e1369c4b9eec2979ca0d5c64357b90407b37acf6ff157a99bae4",
+      "stable_hash": "sha256:a9c3310d05c910ca80e41a15e6c4029e03a2ab202beac5822db1eb103b874f95",
+      "kind": "yaml"
+    },
+    {
+      "path": "..\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\analysis-report.md",
+      "hash": "sha256:97ba19d847253130ca57a25f6aa2866666631a9c41f55a3d7f599eae2b235d73",
+      "stable_hash": "sha256:8db17af7c3fb919e732ad1e53ab1b8b99da7a01b17627ac63f069363d6467ce3",
+      "kind": "markdown"
+    },
+    {
+      "path": "..\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\test-seeds.json",
+      "hash": "sha256:7b43696bb6b1821b50162e05b3f08f42628c53410d6dd768b9c271c50eb6e784",
+      "stable_hash": "sha256:294c9e64fef2138c43a5645c9381e2565f384241d6c2d777af2258c7ea15bfff",
+      "kind": "test-seeds"
+    },
+    {
+      "path": "..\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\invariants.json",
+      "hash": "sha256:a5baacb88da09fa8e36efb0b4e2ef37646d1f584481a0acd50ce0f075aece529",
+      "stable_hash": "sha256:476ecfb50423fc2bf2f6540d99c5758289351077fa8446439698946bdfeaeaf5",
+      "kind": "invariants"
+    },
+    {
+      "path": "..\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\repo-graph.json",
+      "hash": "sha256:035d7db36f4668f756c0340730c38f5d4641b85da7f30ebf4865a4b6c61bb2dc",
+      "stable_hash": "sha256:dcca91858fee1dae740f5fe8b23ffe953ad71a1e9bfaee6ec144e8cd991b8f2f",
+      "kind": "graph"
+    }
+  ]
+}

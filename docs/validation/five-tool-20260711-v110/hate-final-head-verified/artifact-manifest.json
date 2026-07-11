@@ -1,0 +1,8 @@
+{
+  "schema_version": "HATE/v1",
+  "run_id": "memx-resolver-v1.1.0-20260711-final",
+  "run_attempt": 1,
+  "commit_sha": "57ce98361e81c68e26cc9be3b030c29546e02d08",
+  "created_at": "2026-07-11T12:42:22+09:00",
+  "artifacts": []
+}

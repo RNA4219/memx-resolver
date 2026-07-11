@@ -1,0 +1,29 @@
+{
+  "feature_spec": {
+    "feature_id": "memx-resolver-v1.1.0",
+    "title": "memx-resolver v1.1.0 safety release",
+    "summary": "typed_ref compatibility, repository boundary, atomic stores, HTTP hardening and Python packaging",
+    "actors": ["CLI user", "workflow plugin consumer", "release operator"],
+    "acceptance_criteria": ["P1 manual cases pass", "no residual go/mem process", "wheel factory import succeeds"],
+    "changed_areas": ["typed_ref", "workflow paths", "JSON stores", "HTTP server", "distribution"],
+    "source_refs": [{"id": "PLAN-v1.1", "kind": "spec"}],
+    "assumptions": []
+  },
+  "manual_case_set": [
+    {"tc_id":"TC-REF-01","priority":"P1","result":"pass","oracle":{"type":"specified","refs":["PLAN-v1.1"]},"trace_to":["OBS-REF-01"]},
+    {"tc_id":"TC-PATH-01","priority":"P1","result":"pass","oracle":{"type":"specified","refs":["PLAN-v1.1"]},"trace_to":["OBS-PATH-01","RISK-01"]},
+    {"tc_id":"TC-STORE-01","priority":"P1","result":"pass","oracle":{"type":"specified","refs":["PLAN-v1.1"]},"trace_to":["OBS-STORE-01","RISK-02"]},
+    {"tc_id":"TC-HTTP-01","priority":"P1","result":"pass","oracle":{"type":"specified","refs":["PLAN-v1.1"]},"trace_to":["OBS-HTTP-01","RISK-03"]},
+    {"tc_id":"TC-BIND-01","priority":"P1","result":"pass","oracle":{"type":"specified","refs":["PLAN-v1.1"]},"trace_to":["OBS-BIND-01"]},
+    {"tc_id":"TC-CONTRACT-01","priority":"P1","result":"pass","oracle":{"type":"specified","refs":["OpenAPI"]},"trace_to":["OBS-CONTRACT-01"]},
+    {"tc_id":"TC-PACKAGE-01","priority":"P1","result":"pass","oracle":{"type":"specified","refs":["factory-path"]},"trace_to":["OBS-PACKAGE-01","RISK-04"]},
+    {"tc_id":"TC-PROC-01","priority":"P1","result":"pass","oracle":{"type":"specified","refs":["no-residual-process"]},"trace_to":["RISK-03"]}
+  ],
+  "gate_decision": {
+    "feature_id": "memx-resolver-v1.1.0",
+    "status": "go",
+    "reasons": ["All eight P1 manual cases passed", "No blocker or high defect is open"],
+    "blocking_risks": [],
+    "waivers": []
+  }
+}

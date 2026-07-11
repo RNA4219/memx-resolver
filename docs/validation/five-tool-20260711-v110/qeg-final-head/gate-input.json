@@ -1,0 +1,640 @@
+{
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:run-ctg-202607110853-local",
+    "createdAt": "2026-07-11T08:53:58.242Z",
+    "profile": "ipo_controlled",
+    "repoRoot": "../../../../tmp/memx-resolver-v110-gate",
+    "policyId": "qeg:policy-ctg-five-tool-001",
+    "policyHash": "sha256:ctg-qeg-policy-v1",
+    "inputArtifacts": [
+      {
+        "id": "ctg:artifact-findings.json",
+        "adapter": "code-to-gate",
+        "kind": "findings",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\findings.json",
+        "contentHash": "sha256:0c391cf5bb67574d8cdb91a83c76e46b06d0d46c5459d78066a1e389a239a839"
+      },
+      {
+        "id": "ctg:artifact-release-readiness.json",
+        "adapter": "code-to-gate",
+        "kind": "release-readiness",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\release-readiness.json",
+        "contentHash": "sha256:1c6f570bddd41b942c2dac0c020744d1bc9c0616d62e9310d6fd1e1a3abafe33"
+      },
+      {
+        "id": "ctg:artifact-repo-graph.json",
+        "adapter": "code-to-gate",
+        "kind": "repo-graph",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\repo-graph.json",
+        "contentHash": "sha256:035d7db36f4668f756c0340730c38f5d4641b85da7f30ebf4865a4b6c61bb2dc"
+      },
+      {
+        "id": "ctg:artifact-audit.json",
+        "adapter": "code-to-gate",
+        "kind": "audit",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\audit.json",
+        "contentHash": "sha256:8888817585e306d43621ea67d2eefea4ad97edcb159a0d55c01695dad5a47a2e"
+      },
+      {
+        "id": "ctg:artifact-risk-register.yaml",
+        "adapter": "code-to-gate",
+        "kind": "risk-register.yaml",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\risk-register.yaml",
+        "contentHash": "sha256:24d45bef8249e1369c4b9eec2979ca0d5c64357b90407b37acf6ff157a99bae4"
+      },
+      {
+        "id": "ctg:artifact-test-seeds.json",
+        "adapter": "code-to-gate",
+        "kind": "test-seeds",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\test-seeds.json",
+        "contentHash": "sha256:7b43696bb6b1821b50162e05b3f08f42628c53410d6dd768b9c271c50eb6e784"
+      },
+      {
+        "id": "ctg:artifact-invariants.json",
+        "adapter": "code-to-gate",
+        "kind": "invariants",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\invariants.json",
+        "contentHash": "sha256:a5baacb88da09fa8e36efb0b4e2ef37646d1f584481a0acd50ce0f075aece529"
+      }
+    ],
+    "producerChecks": [
+      {
+        "id": "ctg:producer-check-readiness",
+        "producer": "code-to-gate",
+        "name": "release-readiness",
+        "conclusion": "success",
+        "readinessStatus": "passed",
+        "runId": "ctg:run-ctg-202607110853-local",
+        "sourceRefs": [
+          {
+            "id": "ctg:sr-readiness",
+            "path": "release-readiness.json",
+            "label": "readiness"
+          }
+        ]
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-ctg-202607110853-local",
+      "createdAt": "2026-07-11T08:53:58.242Z",
+      "profile": "ipo_controlled",
+      "repoRoot": "../../../../tmp/memx-resolver-v110-gate",
+      "policyId": "qeg:policy-ctg-five-tool-001",
+      "policyHash": "sha256:ctg-qeg-policy-v1",
+      "inputArtifacts": [
+        {
+          "id": "ctg:artifact-findings.json",
+          "adapter": "code-to-gate",
+          "kind": "findings",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\findings.json",
+          "contentHash": "sha256:0c391cf5bb67574d8cdb91a83c76e46b06d0d46c5459d78066a1e389a239a839"
+        },
+        {
+          "id": "ctg:artifact-release-readiness.json",
+          "adapter": "code-to-gate",
+          "kind": "release-readiness",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\release-readiness.json",
+          "contentHash": "sha256:1c6f570bddd41b942c2dac0c020744d1bc9c0616d62e9310d6fd1e1a3abafe33"
+        },
+        {
+          "id": "ctg:artifact-repo-graph.json",
+          "adapter": "code-to-gate",
+          "kind": "repo-graph",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\repo-graph.json",
+          "contentHash": "sha256:035d7db36f4668f756c0340730c38f5d4641b85da7f30ebf4865a4b6c61bb2dc"
+        },
+        {
+          "id": "ctg:artifact-audit.json",
+          "adapter": "code-to-gate",
+          "kind": "audit",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\audit.json",
+          "contentHash": "sha256:8888817585e306d43621ea67d2eefea4ad97edcb159a0d55c01695dad5a47a2e"
+        },
+        {
+          "id": "ctg:artifact-risk-register.yaml",
+          "adapter": "code-to-gate",
+          "kind": "risk-register.yaml",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\risk-register.yaml",
+          "contentHash": "sha256:24d45bef8249e1369c4b9eec2979ca0d5c64357b90407b37acf6ff157a99bae4"
+        },
+        {
+          "id": "ctg:artifact-test-seeds.json",
+          "adapter": "code-to-gate",
+          "kind": "test-seeds",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\test-seeds.json",
+          "contentHash": "sha256:7b43696bb6b1821b50162e05b3f08f42628c53410d6dd768b9c271c50eb6e784"
+        },
+        {
+          "id": "ctg:artifact-invariants.json",
+          "adapter": "code-to-gate",
+          "kind": "invariants",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\invariants.json",
+          "contentHash": "sha256:a5baacb88da09fa8e36efb0b4e2ef37646d1f584481a0acd50ce0f075aece529"
+        }
+      ],
+      "producerChecks": [
+        {
+          "id": "ctg:producer-check-readiness",
+          "producer": "code-to-gate",
+          "name": "release-readiness",
+          "conclusion": "success",
+          "readinessStatus": "passed",
+          "runId": "ctg:run-ctg-202607110853-local",
+          "sourceRefs": [
+            {
+              "id": "ctg:sr-readiness",
+              "path": "release-readiness.json",
+              "label": "readiness"
+            }
+          ]
+        }
+      ]
+    },
+    "nodes": [
+      {
+        "id": "ctg:req-five-tool-gate",
+        "kind": "requirement",
+        "title": "Five-tool evidence chain has source-backed QEG handoff",
+        "priority": "P1",
+        "acceptanceCriteriaIds": [
+          "ctg:ac-qeg-gate-input"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "ctg:sr-spec-30",
+              "path": "docs/specs/SPEC-30-five-tool-qeg-gate.md",
+              "label": "SPEC-30"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "ctg:artifact-findings.json",
+          "ctg:artifact-release-readiness.json",
+          "ctg:artifact-repo-graph.json",
+          "ctg:artifact-audit.json",
+          "ctg:artifact-risk-register.yaml",
+          "ctg:artifact-test-seeds.json",
+          "ctg:artifact-invariants.json"
+        ]
+      },
+      {
+        "id": "ctg:ac-qeg-gate-input",
+        "kind": "acceptance_criteria",
+        "title": "QEG gate input is generated from code-to-gate artifacts",
+        "requirementIds": [
+          "ctg:req-five-tool-gate"
+        ],
+        "oracleRefs": [
+          {
+            "id": "ctg:ev-qeg-gate-input",
+            "path": "qeg-gate/gate-input.json",
+            "evidenceKind": "audit",
+            "capturedAt": "2026-07-11T08:53:58.242Z"
+          }
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "ctg:sr-qeg-export",
+              "path": "qeg-code-to-gate.json",
+              "label": "QEG input"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "ctg:artifact-findings.json",
+          "ctg:artifact-release-readiness.json",
+          "ctg:artifact-repo-graph.json",
+          "ctg:artifact-audit.json",
+          "ctg:artifact-risk-register.yaml",
+          "ctg:artifact-test-seeds.json",
+          "ctg:artifact-invariants.json"
+        ]
+      },
+      {
+        "id": "ctg:finding-debt-summary",
+        "kind": "finding",
+        "title": "Raw finding debt visible: critical=0, high=0, medium=0, low=0",
+        "severity": "low",
+        "ruleId": "RAW_FINDING_DEBT_VISIBLE",
+        "changedCodeIds": [],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "ctg:sr-readiness",
+              "path": "release-readiness.json",
+              "label": "readiness"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "ctg:artifact-findings.json",
+          "ctg:artifact-release-readiness.json",
+          "ctg:artifact-repo-graph.json",
+          "ctg:artifact-audit.json",
+          "ctg:artifact-risk-register.yaml",
+          "ctg:artifact-test-seeds.json",
+          "ctg:artifact-invariants.json"
+        ]
+      },
+      {
+        "id": "ctg:evidence-readiness",
+        "kind": "execution_evidence",
+        "title": "code-to-gate readiness status: passed",
+        "evidenceRefs": [
+          {
+            "id": "ctg:ev-release-readiness",
+            "path": "release-readiness.json",
+            "evidenceKind": "audit",
+            "capturedAt": "2026-07-11T08:53:58.242Z",
+            "label": "release readiness"
+          }
+        ],
+        "passed": true,
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "ctg:sr-readiness",
+              "path": "release-readiness.json",
+              "label": "readiness"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "ctg:artifact-findings.json",
+          "ctg:artifact-release-readiness.json",
+          "ctg:artifact-repo-graph.json",
+          "ctg:artifact-audit.json",
+          "ctg:artifact-risk-register.yaml",
+          "ctg:artifact-test-seeds.json",
+          "ctg:artifact-invariants.json"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "ctg:edge-ac-supports-requirement",
+        "kind": "satisfies",
+        "from": "ctg:ac-qeg-gate-input",
+        "to": "ctg:req-five-tool-gate",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "ctg:sr-spec-30",
+              "path": "docs/specs/SPEC-30-five-tool-qeg-gate.md",
+              "label": "SPEC-30"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "ctg:edge-readiness-supports-ac",
+        "kind": "supports",
+        "from": "ctg:evidence-readiness",
+        "to": "ctg:ac-qeg-gate-input",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "ctg:sr-readiness",
+              "path": "release-readiness.json",
+              "label": "readiness"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        }
+      }
+    ],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "policy": {
+    "policyId": "qeg:policy-ctg-five-tool-001",
+    "policyHash": "sha256:ctg-qeg-policy-v1",
+    "profile": "ipo_controlled",
+    "effectiveDate": "2026-07-05T00:00:00Z",
+    "approver": "code-to-gate-maintainer",
+    "sourceRefs": [
+      {
+        "id": "ctg:sr-spec-30",
+        "path": "docs/specs/SPEC-30-five-tool-qeg-gate.md",
+        "label": "SPEC-30"
+      }
+    ],
+    "dqScope": [
+      "DQ-01",
+      "DQ-02",
+      "DQ-03",
+      "DQ-04",
+      "DQ-05",
+      "DQ-06",
+      "DQ-07",
+      "DQ-08",
+      "DQ-09",
+      "DQ-10",
+      "DQ-11",
+      "DQ-12",
+      "DQ-13",
+      "DQ-14",
+      "DQ-15",
+      "DQ-16",
+      "DQ-17"
+    ],
+    "exitCodePolicy": {
+      "go": 0,
+      "conditional_go": 2,
+      "no_go": 2,
+      "disqualified": 2
+    }
+  },
+  "waivers": [],
+  "evidencePackage": {
+    "id": "qeg:ep-ctg-five-tool",
+    "createdAt": "2026-07-11T08:53:58.242Z",
+    "createdBy": "code-to-gate",
+    "inputArtifactHashes": [
+      {
+        "id": "ctg:artifact-findings.json",
+        "adapter": "code-to-gate",
+        "kind": "findings",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\findings.json",
+        "contentHash": "sha256:0c391cf5bb67574d8cdb91a83c76e46b06d0d46c5459d78066a1e389a239a839"
+      },
+      {
+        "id": "ctg:artifact-release-readiness.json",
+        "adapter": "code-to-gate",
+        "kind": "release-readiness",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\release-readiness.json",
+        "contentHash": "sha256:1c6f570bddd41b942c2dac0c020744d1bc9c0616d62e9310d6fd1e1a3abafe33"
+      },
+      {
+        "id": "ctg:artifact-repo-graph.json",
+        "adapter": "code-to-gate",
+        "kind": "repo-graph",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\repo-graph.json",
+        "contentHash": "sha256:035d7db36f4668f756c0340730c38f5d4641b85da7f30ebf4865a4b6c61bb2dc"
+      },
+      {
+        "id": "ctg:artifact-audit.json",
+        "adapter": "code-to-gate",
+        "kind": "audit",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\audit.json",
+        "contentHash": "sha256:8888817585e306d43621ea67d2eefea4ad97edcb159a0d55c01695dad5a47a2e"
+      },
+      {
+        "id": "ctg:artifact-risk-register.yaml",
+        "adapter": "code-to-gate",
+        "kind": "risk-register.yaml",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\risk-register.yaml",
+        "contentHash": "sha256:24d45bef8249e1369c4b9eec2979ca0d5c64357b90407b37acf6ff157a99bae4"
+      },
+      {
+        "id": "ctg:artifact-test-seeds.json",
+        "adapter": "code-to-gate",
+        "kind": "test-seeds",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\test-seeds.json",
+        "contentHash": "sha256:7b43696bb6b1821b50162e05b3f08f42628c53410d6dd768b9c271c50eb6e784"
+      },
+      {
+        "id": "ctg:artifact-invariants.json",
+        "adapter": "code-to-gate",
+        "kind": "invariants",
+        "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\invariants.json",
+        "contentHash": "sha256:a5baacb88da09fa8e36efb0b4e2ef37646d1f584481a0acd50ce0f075aece529"
+      }
+    ],
+    "qegOutputs": {
+      "qegBundle": {
+        "id": "qeg:qeg-ctg-five-tool",
+        "adapter": "qeg-native",
+        "kind": "quality_evidence_record",
+        "path": "output-record.json",
+        "contentHash": "sha256:15bc443134a771c647c5edd05bbebb78c39235aa976a16960d274b9237ea7c27"
+      },
+      "testPlacementPlan": {
+        "id": "qeg:tpp-ctg-five-tool",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "placement-plan.json",
+        "contentHash": "sha256:ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+      },
+      "gateVerdict": {
+        "id": "qeg:gv-ctg-five-tool",
+        "adapter": "qeg-native",
+        "kind": "gate_decision",
+        "path": "gate-verdict.json",
+        "contentHash": "sha256:e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f"
+      },
+      "qualityEvidenceRecord": {
+        "id": "qeg:qer-ctg-five-tool",
+        "adapter": "qeg-native",
+        "kind": "quality_evidence_record",
+        "path": "output-record.json",
+        "contentHash": "sha256:15bc443134a771c647c5edd05bbebb78c39235aa976a16960d274b9237ea7c27"
+      }
+    },
+    "gatePolicy": {
+      "policyId": "qeg:policy-ctg-five-tool-001",
+      "policyHash": "sha256:ctg-qeg-policy-v1",
+      "profile": "ipo_controlled",
+      "effectiveDate": "2026-07-05T00:00:00Z",
+      "approver": "code-to-gate-maintainer",
+      "sourceRefs": [
+        {
+          "id": "ctg:sr-spec-30",
+          "path": "docs/specs/SPEC-30-five-tool-qeg-gate.md",
+          "label": "SPEC-30"
+        }
+      ],
+      "dqScope": [
+        "DQ-01",
+        "DQ-02",
+        "DQ-03",
+        "DQ-04",
+        "DQ-05",
+        "DQ-06",
+        "DQ-07",
+        "DQ-08",
+        "DQ-09",
+        "DQ-10",
+        "DQ-11",
+        "DQ-12",
+        "DQ-13",
+        "DQ-14",
+        "DQ-15",
+        "DQ-16",
+        "DQ-17"
+      ],
+      "exitCodePolicy": {
+        "go": 0,
+        "conditional_go": 2,
+        "no_go": 2,
+        "disqualified": 2
+      }
+    },
+    "waivers": [],
+    "approvalEvidence": [
+      {
+        "id": "qeg:approval-ctg-five-tool",
+        "policyId": "qeg:policy-ctg-five-tool-001",
+        "policyHash": "sha256:ctg-qeg-policy-v1",
+        "evidencePackageHash": "sha256:ctg-evidence-package-ctg-202607110853-local",
+        "approvedAt": "2026-07-11T08:53:58.242Z",
+        "sourceRefs": [
+          {
+            "id": "ctg:sr-spec-30",
+            "path": "docs/specs/SPEC-30-five-tool-qeg-gate.md",
+            "label": "SPEC-30"
+          }
+        ],
+        "approver": "code-to-gate-maintainer",
+        "roleOrAuthority": "release-approver",
+        "approvedDecision": "go"
+      }
+    ],
+    "manualEvidence": [],
+    "retention": {
+      "retentionPeriod": "30 days",
+      "retentionOwner": "code-to-gate-maintainer",
+      "storageLocation": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head",
+      "contentHash": "sha256:ctg-evidence-package-ctg-202607110853-local",
+      "capturedAt": "2026-07-11T08:53:58.242Z",
+      "tamperEvidence": "sha256:ctg-evidence-package-ctg-202607110853-local",
+      "reverificationMethod": "hash verification and QEG validate/gate",
+      "sourceRefs": [
+        {
+          "id": "ctg:sr-spec-30",
+          "path": "docs/specs/SPEC-30-five-tool-qeg-gate.md",
+          "label": "SPEC-30"
+        }
+      ],
+      "storageClassification": "versioned"
+    },
+    "sourceRefs": [
+      {
+        "id": "ctg:sr-spec-30",
+        "path": "docs/specs/SPEC-30-five-tool-qeg-gate.md",
+        "label": "SPEC-30"
+      },
+      {
+        "id": "ctg:sr-readiness",
+        "path": "release-readiness.json",
+        "label": "readiness"
+      },
+      {
+        "id": "ctg:sr-qeg-export",
+        "path": "qeg-code-to-gate.json",
+        "label": "QEG input"
+      }
+    ],
+    "phase": "release_decision",
+    "evidencePackageHash": "sha256:ctg-evidence-package-ctg-202607110853-local",
+    "controlRoles": {
+      "producer": "code-to-gate",
+      "reviewer": "code-to-gate-reviewer",
+      "approver": "code-to-gate-maintainer",
+      "waiverApprover": "qeg-waiver-approver",
+      "releaseOwner": "qeg-release-owner"
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-ctg-202607110853-local",
+      "createdAt": "2026-07-11T08:53:58.242Z",
+      "profile": "ipo_controlled",
+      "repoRoot": "../../../../tmp/memx-resolver-v110-gate",
+      "policyId": "qeg:policy-ctg-five-tool-001",
+      "policyHash": "sha256:ctg-qeg-policy-v1",
+      "inputArtifacts": [
+        {
+          "id": "ctg:artifact-findings.json",
+          "adapter": "code-to-gate",
+          "kind": "findings",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\findings.json",
+          "contentHash": "sha256:0c391cf5bb67574d8cdb91a83c76e46b06d0d46c5459d78066a1e389a239a839"
+        },
+        {
+          "id": "ctg:artifact-release-readiness.json",
+          "adapter": "code-to-gate",
+          "kind": "release-readiness",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\release-readiness.json",
+          "contentHash": "sha256:1c6f570bddd41b942c2dac0c020744d1bc9c0616d62e9310d6fd1e1a3abafe33"
+        },
+        {
+          "id": "ctg:artifact-repo-graph.json",
+          "adapter": "code-to-gate",
+          "kind": "repo-graph",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\repo-graph.json",
+          "contentHash": "sha256:035d7db36f4668f756c0340730c38f5d4641b85da7f30ebf4865a4b6c61bb2dc"
+        },
+        {
+          "id": "ctg:artifact-audit.json",
+          "adapter": "code-to-gate",
+          "kind": "audit",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\audit.json",
+          "contentHash": "sha256:8888817585e306d43621ea67d2eefea4ad97edcb159a0d55c01695dad5a47a2e"
+        },
+        {
+          "id": "ctg:artifact-risk-register.yaml",
+          "adapter": "code-to-gate",
+          "kind": "risk-register.yaml",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\risk-register.yaml",
+          "contentHash": "sha256:24d45bef8249e1369c4b9eec2979ca0d5c64357b90407b37acf6ff157a99bae4"
+        },
+        {
+          "id": "ctg:artifact-test-seeds.json",
+          "adapter": "code-to-gate",
+          "kind": "test-seeds",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\test-seeds.json",
+          "contentHash": "sha256:7b43696bb6b1821b50162e05b3f08f42628c53410d6dd768b9c271c50eb6e784"
+        },
+        {
+          "id": "ctg:artifact-invariants.json",
+          "adapter": "code-to-gate",
+          "kind": "invariants",
+          "path": "C:\\Users\\ryo-n\\Codex_dev\\memx-resolver\\docs\\validation\\five-tool-20260711-v110\\ctg-final-head\\invariants.json",
+          "contentHash": "sha256:a5baacb88da09fa8e36efb0b4e2ef37646d1f584481a0acd50ce0f075aece529"
+        }
+      ],
+      "producerChecks": [
+        {
+          "id": "ctg:producer-check-readiness",
+          "producer": "code-to-gate",
+          "name": "release-readiness",
+          "conclusion": "success",
+          "readinessStatus": "passed",
+          "runId": "ctg:run-ctg-202607110853-local",
+          "sourceRefs": [
+            {
+              "id": "ctg:sr-readiness",
+              "path": "release-readiness.json",
+              "label": "readiness"
+            }
+          ]
+        }
+      ]
+    },
+    "obligations": [],
+    "placements": []
+  }
+}
