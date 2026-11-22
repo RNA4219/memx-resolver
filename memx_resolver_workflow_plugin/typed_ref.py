@@ -182,6 +182,8 @@ def _validate_domain(domain: str) -> None:
 def _validate_entity_type(domain: str, entity_type: str) -> None:
     if not entity_type:
         raise TypedRefParseError("empty entity type")
+    if ":" in entity_type:
+        raise TypedRefParseError("entity type must not contain ':'")
     if "%" in entity_type:
         raise TypedRefParseError("percent encoding is only allowed in id")
 
@@ -189,12 +191,18 @@ def _validate_entity_type(domain: str, entity_type: str) -> None:
 def _validate_provider(provider: str) -> None:
     if not provider:
         raise TypedRefParseError("empty provider")
+    if ":" in provider:
+        raise TypedRefParseError("provider must not contain ':'")
     if "%" in provider:
         raise TypedRefParseError("percent encoding is only allowed in id")
 
 
 def _validate_id(entity_id: str) -> None:
-    _decode_entity_id(entity_id)
+    # TypedRef.id holds the DECODED id (parse decodes, __str__ encodes), so
+    # it must not be validated as wire format: any non-empty string is a
+    # valid id, including ones containing '%' such as "100%".
+    if not isinstance(entity_id, str) or not entity_id:
+        raise TypedRefParseError("empty id")
 
 
 def _known_entity_type_or_string(value: str) -> Union[EntityType, str]:
